@@ -1,0 +1,1016 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <title>Contact FESTRONIX 2.0 | GIFT Autonomous, Bhubaneswar</title>
+    
+    <!-- Bootstrap 5 + Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Orbitron:wght@400;500;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* ===== BOOTSTRAP THEME OVERRIDES & CUSTOM STYLES ===== */
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+        :root {
+            --ember: #ff2a00;
+            --fire: #ff6600;
+            --spark: #ffcc33;
+            --deep-space: #0a0a1a72;
+            --star-dust: #1a1a2e;
+            --neon-blue: #3366ff;
+            --neon-purple: #9933ff;
+            --electric-green: #33ff66;
+            --plasma-pink: #ff33cc;
+        }
+
+        html, body {
+            max-width: 100%;
+            overflow-x: hidden;
+            background: #000000bb;
+            font-family: 'Rajdhani', sans-serif;
+            color: white;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            cursor: none;
+        }
+
+        /* ----- Video Background ----- */
+        .video-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            overflow: hidden;
+        }
+        .video-background video {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            min-width: 100%;
+            min-height: 100%;
+            transform: translate(-50%, -50%);
+            object-fit: cover;
+        }
+        .video-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0);
+        }
+
+        /* ----- Particles (static effect) ----- */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        /* ----- CUSTOM CURSOR ----- */
+        .cursor {
+            width: 20px;
+            height: 20px;
+            border: 2px solid #ff4733;
+            border-radius: 50%;
+            position: fixed;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+            z-index: 10000;
+            mix-blend-mode: difference;
+            transition: all 0.1s ease;
+            transition-property: background, transform, border;
+            transform-origin: 100% 100%;
+        }
+        .cursor-dot {
+            width: 8px;
+            height: 8px;
+            background-color: #ffcc33;
+            border-radius: 50%;
+            position: fixed;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+            z-index: 10001;
+            mix-blend-mode: difference;
+            transition: all 0.05s ease;
+        }
+        .cursor-click { transform: translate(-50%, -50%) scale(0.7); background-color: #ff4733; }
+        .cursor-hover { transform: translate(-50%, -50%) scale(1.5); background-color: rgba(255,71,51,0.5); border-color: #ffcc33; }
+        .cursor-hidden, .cursor-dot-hidden { opacity: 0; }
+        @media (hover: none) and (pointer: coarse) {
+            .cursor, .cursor-dot { display: none !important; }
+            body { cursor: default; }
+        }
+
+        /* ----- LOADER ANIMATION ----- */
+        .loader-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #000;
+            z-index: 99999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 0.5s;
+        }
+        .loader-hidden { opacity: 0; pointer-events: none; visibility: hidden; }
+        .loader-wrapper { display: flex; justify-content: center; align-items: center; flex-wrap: wrap; }
+        .loader-letter {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 4rem;
+            font-weight: 900;
+            color: #ff4733;
+            text-shadow: 0 0 15px rgba(255,71,51,0.7);
+            margin: 0 3px;
+            opacity: 0;
+            animation: letterReveal 0.3s forwards;
+            display: inline-block;
+        }
+        .loader-letter:nth-child(1) { animation-delay: 0.1s; }
+        .loader-letter:nth-child(2) { animation-delay: 0.2s; }
+        .loader-letter:nth-child(3) { animation-delay: 0.3s; }
+        .loader-letter:nth-child(4) { animation-delay: 0.4s; }
+        @keyframes letterReveal { to { opacity: 1; text-shadow: 0 0 20px rgba(255,71,51,1); } }
+        .loader {
+            position: absolute;
+            bottom: -30px;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, transparent, #ffcc33, transparent);
+            animation: loadingBar 2.5s ease-in-out forwards;
+        }
+        @keyframes loadingBar { 0% { transform: translateX(-100%); } 100% { transform: translateX(100%); } }
+        .loader-subtitle {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 1.2rem;
+            color: #ff9966;
+            letter-spacing: 2px;
+            margin-top: 20px;
+            opacity: 0;
+            animation: fadeIn 0.5s ease forwards 1.5s;
+        }
+        @keyframes fadeIn { to { opacity: 1; } }
+        /* ----- Scroll Indicator ----- */
+        .scroll-indicator {
+            position: fixed;
+            top: 70px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, #ff4733, #ffcc33, #ff4733);
+            transform-origin: left;
+            transform: scaleX(0);
+            z-index: 1031;
+        }
+
+        /* ===== UPDATED NAVBAR STYLES - MATCHING INDEX.HTML ===== */
+        .navbar {
+            background: transparent;
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border-bottom: 2px solid #ff4733;
+            min-height: 70px;
+            z-index: 100;
+            padding: 0 1rem;
+        }
+
+        /* Desktop: Center Nav Items */
+        @media (min-width: 992px) {
+            .navbar-nav {
+                width: 100%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                gap: 40px;
+            }
+        }
+
+        .nav-link {
+            color: white !important;
+            font-weight: 700;
+            letter-spacing: 2px;
+            padding: 1rem 2rem !important;
+            font-size: 1.25rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            text-transform: uppercase;
+            white-space: nowrap;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-link i {
+            margin-right: 8px;
+            font-size: 1.1rem;
+        }
+
+        .nav-link:hover { 
+            color: #ffcc33 !important; 
+            background: rgba(255, 71, 51, 0.15); 
+            transform: translateY(-5px); 
+            box-shadow: 0 5px 15px rgba(255, 71, 51, 0.3); 
+        }
+
+        .nav-link.active { 
+            color: #ffcc33 !important; 
+            border-bottom: 4px solid #ffcc33;
+        }
+
+        .user-auth-container {
+            margin-left: 20px;
+        }
+
+        /* Navbar Toggler Style */
+        .navbar-toggler {
+            border: 2px solid #ff4733 !important;
+            background: rgba(255, 71, 51, 0.2) !important;
+            padding: 0.5rem 0.75rem;
+        }
+        
+        .navbar-toggler-icon {
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(255, 71, 51, 0.9)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") !important;
+        }
+
+        .navbar-toggler:focus {
+            box-shadow: 0 0 0 0.25rem rgba(255, 71, 51, 0.25);
+        }
+
+        /* Mobile menu transparency */
+        @media (max-width: 991px) {
+            .navbar-collapse {
+                background: rgba(0, 0, 0, 0.856) !important;
+                position: absolute;
+                top: 70px;
+                left: 0;
+                right: 0;
+                padding: 1rem;
+                backdrop-filter: blur(8px);
+                -webkit-backdrop-filter: blur(8px);
+                border-bottom: 2px solid #ff4733;
+            }
+            
+            .navbar-nav {
+                background: rgba(0, 0, 0, 0);
+                margin: 0;
+            }
+            
+            .nav-link {
+                min-height: 50px;
+                padding: 0.8rem 1rem !important;
+                text-align: center;
+                background: rgba(0, 0, 0, 0.484);
+                margin: 4px 0;
+                border-radius: 8px;
+                border: 1px solid rgba(255, 71, 51, 0.3);
+                font-size: 1rem;
+            }
+            
+            .nav-link:hover {
+                background: rgba(255, 71, 51, 0.3);
+            }
+            
+            .nav-link.active {
+                background: rgba(255, 71, 51, 0.4);
+                border-bottom: 4px solid #ffcc33 !important;
+            }
+
+            .user-auth-container {
+                margin-left: 0;
+                margin-top: 5px;
+            }
+        }
+
+        /* ----- User Auth Button (Desktop) ----- */
+        .user-auth-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255,71,51,0.3);
+            border: 2px solid #ff4733;
+            color: white;
+            font-weight: 700;
+            padding: 0 20px;
+            min-height: 50px;
+            text-decoration: none;
+            transition: all 0.3s;
+            border-radius: 10px;
+            white-space: nowrap;
+        }
+        .user-auth-btn:hover {
+            color: #ffcc33;
+            background: rgba(255,71,51,0.4);
+            transform: translateY(-2px);
+        }
+        .user-auth-btn i { margin-right: 8px; }
+
+
+        /* ----- Notification (for logout) ----- */
+        .notification {
+            position: fixed;
+            top: 100px;
+            right: 30px;
+            background: linear-gradient(145deg, #ff4733, #ff9966);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 10px;
+            font-family: 'Rajdhani', sans-serif;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            box-shadow: 0 10px 30px rgba(255,71,51,0.4);
+            z-index: 10002;
+            animation: slideIn 0.3s ease;
+            border-left: 5px solid #ffcc33;
+        }
+        .notification i { font-size: 1.2rem; }
+        .notification-success { background: linear-gradient(145deg, #00cc66, #009933); }
+        .notification-error { background: linear-gradient(145deg, #ff3333, #cc0000); }
+        @keyframes slideIn { from { transform: translateX(100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+        @keyframes slideOut { from { transform: translateX(0); opacity: 1; } to { transform: translateX(100%); opacity: 0; } }
+
+        /* ----- Hero Section (Contact) ----- */
+        .contact-hero {
+            margin-top: 70px;
+            padding: 100px 20px 60px;
+            text-align: center;
+            background: linear-gradient(135deg, rgba(10,10,26,0.9), rgba(26,26,46,0.9));
+            position: relative;
+            overflow: hidden;
+        }
+        .hero-logo {
+            width: 180px;
+            margin-bottom: 20px;
+            filter: drop-shadow(0 0 20px rgba(255,71,51,0.7));
+            animation: float 3s ease-in-out infinite;
+        }
+        @keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+        .hero-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 4rem;
+            background: linear-gradient(135deg, #ff4733, #ffcc33, #ff9966);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 30px rgba(255,71,51,0.5);
+            margin-bottom: 10px;
+            letter-spacing: 3px;
+        }
+        .hero-subtitle {
+            font-family: 'Cinzel', serif;
+            font-size: 1.5rem;
+            color: #ffcc33;
+            margin-bottom: 30px;
+            letter-spacing: 2px;
+        }
+        .hero-tagline {
+            color: #ff9966;
+            font-size: 1.1rem;
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        /* ----- Contact Cards ----- */
+        .contact-card {
+            background: rgba(0,0,0,0.6);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px 30px;
+            border: 2px solid rgba(255,71,51,0.3);
+            transition: all 0.3s ease;
+            height: 100%;
+            text-align: center;
+        }
+        .contact-card:hover {
+            border-color: #ff4733;
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(255,71,51,0.15);
+        }
+        .contact-icon {
+            font-size: 3rem;
+            color: #ff4733;
+            margin-bottom: 20px;
+        }
+        .contact-card h3 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.5rem;
+            color: #ffcc33;
+            margin-bottom: 15px;
+        }
+        .contact-card p, .contact-card a {
+            color: #ccc;
+            font-size: 1rem;
+            line-height: 1.6;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        .contact-card a:hover { color: #ff9966; }
+
+        /* ----- ROUTE PLANNER SECTION ----- */
+        .route-planner-wrapper {
+            background: rgba(0,0,0,0.6);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            border: 2px solid rgba(255,71,51,0.3);
+        }
+        .route-title {
+            font-family: 'Orbitron', sans-serif;
+            color: #ffcc33;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .route-input-group {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        .route-input {
+            flex: 1;
+            min-width: 250px;
+        }
+        .route-btn {
+            position: relative;
+            padding: 12px 30px;
+            background: linear-gradient(145deg, #ff6600, #cc5200);
+            border: none;
+            border-radius: 10px;
+            color: white;
+            font-weight: 600;
+            transform-style: preserve-3d;
+            transition: all 0.3s cubic-bezier(0.175,0.885,0.32,1.275);
+            box-shadow: 0 6px 0 0 #993d00, 0 10px 20px rgba(255,102,0,0.3), inset 0 2px 0 rgba(255,255,255,0.2);
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            white-space: nowrap;
+        }
+        .route-btn:hover {
+            transform: translateY(-3px) translateZ(8px);
+            box-shadow: 0 8px 0 0 #993d00, 0 15px 30px rgba(255,102,0,0.4), inset 0 2px 0 rgba(255,255,255,0.3);
+            color: white;
+        }
+
+        /* ----- Map Container ----- */
+        .map-container {
+            border-radius: 20px;
+            overflow: hidden;
+            border: 2px solid rgba(255,71,51,0.3);
+            transition: all 0.3s;
+            height: 500px;
+        }
+        .map-container:hover { border-color: #ff4733; box-shadow: 0 10px 30px rgba(255,71,51,0.15); }
+        .map-container iframe {
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        /* ----- Footer (match sponsors/about) ----- */
+        .footer-3d {
+            background: rgba(0,0,0,0.9);
+            padding: 40px 20px 20px;
+            border-top: 2px solid #ff4733;
+            margin-top: 50px;
+        }
+        .college-logo-footer {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+        .college-name-footer {
+            font-family: 'Orbitron', sans-serif;
+            color: #ffcc33;
+            font-size: 1.5rem;
+            font-weight: 700;
+            line-height: 1.2;
+        }
+        .footer-tagline {
+            color: #ff9966;
+            font-size: 1.2rem;
+            font-style: italic;
+            margin-bottom: 15px;
+        }
+        .social-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: rgba(255,71,51,0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ffcc33;
+            font-size: 1.5rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        .social-icon:hover {
+            background: rgba(255,71,51,0.4);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(255,71,51,0.3);
+            color: #ffcc33;
+        }
+
+        /* ----- Back to Top ----- */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #ff4733, #ff9966);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            box-shadow: 0 0 20px rgba(255,71,51,0.5);
+            transition: all 0.3s ease;
+        }
+        .back-to-top:hover { transform: translateY(-5px); box-shadow: 0 0 30px rgba(255,71,51,0.8); }
+
+        /* ----- Responsive ----- */
+        @media (max-width: 991px) {
+            .scroll-indicator { top: 0; }
+            .loader-letter { font-size: 3rem; }
+            .route-input-group { flex-direction: column; }
+            .route-btn { width: 100%; justify-content: center; }
+            .navbar-nav {
+                gap: 0;
+            }
+        }
+        @media (max-width: 767px) {
+            .hero-title { font-size: 2.5rem; }
+            .route-planner-wrapper { padding: 30px 20px; }
+            .loader-letter { font-size: 2.5rem; }
+            .map-container { height: 400px; }
+        }
+        @media (max-width: 599px) {
+            .hero-title { font-size: 2rem; }
+            .hero-subtitle { font-size: 1.2rem; }
+            .loader-letter { font-size: 2rem; }
+            .map-container { height: 350px; }
+        }
+        @media (max-width: 380px) {
+            .loader-letter { font-size: 1.5rem; }
+            .map-container { height: 300px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- LOADER (login page style) -->
+    <div class="loader-container" id="loader">
+        <div class="loader-wrapper">
+            <span class="loader-letter" style="animation-delay: 0s">C</span>
+            <span class="loader-letter" style="animation-delay: 0.1s">O</span>
+            <span class="loader-letter" style="animation-delay: 0.2s">N</span>
+            <span class="loader-letter" style="animation-delay: 0.3s">T</span>
+            <span class="loader-letter" style="animation-delay: 0.4s">A</span>
+            <span class="loader-letter" style="animation-delay: 0.5s">C</span>
+            <span class="loader-letter" style="animation-delay: 0.6s">T</span>
+            <div class="loader"></div>
+        </div>
+    </div>
+
+    <!-- VIDEO BACKGROUND -->
+    <div class="video-background">
+        <video autoplay muted loop playsinline>
+            <source src="https://res.cloudinary.com/dpc4l1hic/video/upload/v1770814312/light_gzuewo.mp4" type="video/mp4">
+        </video>
+        <div class="video-overlay"></div>
+    </div>
+
+    <!-- PARTICLES (static placeholder) -->
+    <div class="particles" id="particles"></div>
+
+    <!-- CUSTOM CURSOR -->
+    <div class="cursor"></div>
+    <div class="cursor-dot"></div>
+
+    <!-- SCROLL INDICATOR -->
+    <div class="scroll-indicator"></div>
+
+    <!-- ========== UPDATED NAVIGATION - MATCHING INDEX.HTML STYLE ========== -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container-fluid px-lg-4">
+            <a class="navbar-brand d-lg-none text-warning fw-bold" href="#"></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#festronixNavbar" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="festronixNavbar">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0 w-100 justify-content-center">
+                    <li class="nav-item"><a class="nav-link" href="index.html"><i class="fas fa-home"></i> Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="previous.html"><i class="fas fa-history"></i> Previous</a></li>
+                    <li class="nav-item"><a class="nav-link" href="gallery.html"><i class="fas fa-images"></i> Gallery</a></li>
+                    <li class="nav-item"><a class="nav-link" href="events.html"><i class="fas fa-calendar-alt"></i> Events</a></li>
+                    <li class="nav-item"><a class="nav-link" href="sponsors.html"><i class="fas fa-handshake"></i> Sponsors</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.html"><i class="fas fa-info-circle"></i> About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="team.html"><i class="fas fa-users"></i> Team</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="contact.html"><i class="fas fa-envelope"></i> Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Auth Extra (will be moved inside collapse via JS) -->
+    <div class="d-lg-none mobile-auth-extra" id="mobileAuthExtra">
+        <div class="mobile-auth-buttons" id="mobileAuthButtons"></div>
+    </div>
+
+    <!-- BACK TO TOP BUTTON -->
+    <button class="back-to-top" id="backToTop">
+        <i class="fas fa-chevron-up"></i>
+    </button>
+
+    <!-- HERO SECTION -->
+    <section class="contact-hero">
+        <div class="container">
+            <img src="Fest4.png" alt="FESTRONIX 2.0 Logo" class="hero-logo img-fluid" onerror="this.style.display='none'">
+            <h1 class="hero-title">CONTACT US</h1>
+            <h2 class="hero-subtitle">Get In Touch</h2>
+            <p class="hero-tagline">
+                Have questions about FESTRONIX 2.0? Want to participate, sponsor, or volunteer? 
+                Reach out to us! Our team is ready to assist you with all your queries.
+            </p>
+        </div>
+    </section>
+
+    <!-- MAIN CONTENT -->
+    <div class="main-content container my-5">
+        
+        <!-- Contact Cards -->
+        <div class="row g-4 mb-5">
+            <div class="col-md-4">
+                <div class="contact-card">
+                    <div class="contact-icon"><i class="fas fa-map-marker-alt"></i></div>
+                    <h3>Visit Us</h3>
+                    <p>GIFT Autonomous College<br>Bhubaneswar, Odisha<br>India - 752054</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="contact-card">
+                    <div class="contact-icon"><i class="fas fa-phone-alt"></i></div>
+                    <h3>Call Us</h3>
+                    <p>+91 6372745082<br>+91 6370799765</p>
+                    <p class="mt-2"><small>Mon-Fri: 9:00 AM - 6:00 PM</small></p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="contact-card">
+                    <div class="contact-icon"><i class="fas fa-envelope"></i></div>
+                    <h3>Email Us</h3>
+                    <p><a href="mailto:festronix@gift.edu.in">festronix@gift.edu.in</a><br><a href="mailto:info@gift.edu.in"></a></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Route Planner & Map Section -->
+        <div class="row g-5">
+            <div class="col-12">
+                <div class="route-planner-wrapper">
+                    <h3 class="route-title">
+                        <i class="fas fa-route"></i> Plan Your Route to GIFT Autonomous, Bhubaneswar
+                    </h3>
+                    <div class="route-input-group">
+                        <input 
+                            type="text" 
+                            class="form-control route-input" 
+                            id="startLocation" 
+                            placeholder="Enter your starting point (e.g., Bhubaneswar Railway Station)"
+                            value="Bhubaneswar"
+                        >
+                        <button class="route-btn" id="getRouteBtn">
+                            <i class="fas fa-map-signs"></i> Get Route
+                        </button>
+                    </div>
+                    <p class="text-warning mt-3 mb-0 small">
+                        <i class="fas fa-info-circle"></i> Enter your starting location and click "Get Route" to see the directions on Google Maps.
+                    </p>
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="map-container" id="mapContainer">
+                    <iframe 
+                        id="gmapIframe"
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3742.789888888888!2d85.8245398!3d20.2767109!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a19a7f1b1b1b1b1%3A0xccb84948b4b2bdf6!2sGIFT%20Autonomous%20College!5e0!3m2!1sen!2sin!4v1620000000000!5m2!1sen!2sin" 
+                        allowfullscreen="" 
+                        loading="lazy">
+                    </iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="footer-3d">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-lg-6">
+                    <div class="d-flex align-items-center gap-3 mb-3">
+                        <img src="gift logo.png" alt="GIFT Autonomous Logo" class="college-logo-footer" onerror="this.style.display='none'">
+                        <div class="college-name-footer">GIFT AUTONOMOUS<br><span class="fs-6">BHUBANESWAR</span></div>
+                    </div>
+                    <p class="footer-tagline">Igniting Minds, Empowering Futures</p>
+                    <p class="text-warning">GIFT Autonomous College is committed to providing quality education and fostering innovation through events like FESTRONIX.</p>
+                </div>
+                <div class="col-lg-6">
+                    <h4 style="font-family: 'Orbitron'; color: #ffcc33;">Connect With Us</h4>
+                    <div class="d-flex gap-3 mb-3 flex-wrap">
+                        <a href="https://www.instagram.com/gift.autonomous.bhubaneswar?igsh=MXFiN205c2hwZ2RtYQ==" class="social-icon" target="_blank"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                        <a href="https://youtube.com/@giftautonomousbbsr?si=dFAnDeP5MOyLS7I6" class="social-icon" target="_blank"><i class="fab fa-youtube"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                    <p class="text-warning" style="font-size: 0.9rem;">
+                        Follow us on social media for latest updates and event information!
+                    </p>
+                </div>
+            </div>
+            <div class="footer-bottom text-center mt-4 pt-3" style="border-top: 1px solid rgba(255,71,51,0.3);">
+                <p class="text-white-50 small">© 2026 FESTRONIX 2.0 - GIFT Autonomous College. All Rights Reserved.</p>
+                <p class="text-warning small">Pioneering Technical Education Since 1997</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- jQuery (optional, for compatibility) -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- UPDATED SCRIPT - MATCHING INDEX.HTML FUNCTIONALITY -->
+    <script>
+        (function() {
+            'use strict';
+
+            // ==================== DOM CACHE ====================
+            const DOM = {
+                loader: document.getElementById('loader'),
+                userAuthContainer: document.getElementById('userAuthContainer'),
+                promoVideo: document.getElementById('promoVideo'),
+                promoMuteBtn: document.getElementById('promoMuteBtn')
+            };
+
+            // ==================== LOADER ====================
+            window.addEventListener('load', function() {
+                setTimeout(function() {
+                    if (DOM.loader) DOM.loader.classList.add('loader-hidden');
+                }, 3000);
+            });
+
+            // ==================== USER SESSION MANAGEMENT ====================
+            function removeUserData() {
+                localStorage.removeItem('festronix_user_data');
+                localStorage.removeItem('festronix_remember_me');
+                localStorage.removeItem('festronix_user_email');
+                localStorage.removeItem('isLoggedIn');
+                localStorage.removeItem('userData');
+            }
+
+            function showNotification(message, type = 'success') {
+                $('.notification').remove();
+                const notification = document.createElement('div');
+                notification.className = `notification notification-${type}`;
+                notification.innerHTML = `
+                    <i class="fas ${type === 'success' ? 'fa-check-circle' : 'fa-exclamation-circle'}"></i>
+                    <span>${message}</span>
+                `;
+                document.body.appendChild(notification);
+                setTimeout(() => {
+                    notification.style.animation = 'slideOut 0.3s ease forwards';
+                    setTimeout(() => {
+                        if (notification.parentNode) notification.remove();
+                    }, 300);
+                }, 3000);
+            }
+
+
+            // ==================== MOBILE MENU + AUTH POSITION ====================
+            function arrangeMobileAuth() {
+                const collapse = document.getElementById('festronixNavbar');
+                const extra = document.getElementById('mobileAuthExtra');
+                if (collapse && extra) collapse.appendChild(extra);
+            }
+
+            // ==================== CURSOR ANIMATION ====================
+            const cursor = document.querySelector('.cursor');
+            const cursorDot = document.querySelector('.cursor-dot');
+            let mouseX = 0, mouseY = 0, cursorX = 0, cursorY = 0, cursorDotX = 0, cursorDotY = 0;
+            let isTouchDevice = false;
+
+            function checkTouchDevice() {
+                isTouchDevice = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0) || (navigator.msMaxTouchPoints > 0);
+                if (isTouchDevice && cursor && cursorDot) {
+                    cursor.style.display = 'none';
+                    cursorDot.style.display = 'none';
+                    document.body.style.cursor = 'default';
+                }
+            }
+
+            function updateCursor() {
+                if (!cursor || !cursorDot) return;
+                cursorX += (mouseX - cursorX) * 0.1;
+                cursorY += (mouseY - cursorY) * 0.1;
+                cursorDotX += (mouseX - cursorDotX) * 0.2;
+                cursorDotY += (mouseY - cursorDotY) * 0.2;
+                cursor.style.left = cursorX + 'px';
+                cursor.style.top = cursorY + 'px';
+                cursorDot.style.left = cursorDotX + 'px';
+                cursorDot.style.top = cursorDotY + 'px';
+                requestAnimationFrame(updateCursor);
+            }
+
+            function trackMouse(e) {
+                mouseX = e.clientX;
+                mouseY = e.clientY;
+            }
+
+            function addCursorEffects() {
+                if (isTouchDevice || !cursor || !cursorDot) return;
+                const hoverElements = 'a, button, .social-icon, .nav-link, .mobile-nav-item, .user-auth-btn, .back-to-top, .route-btn';
+                document.addEventListener('mouseover', (e) => {
+                    if (e.target.matches(hoverElements) || e.target.closest(hoverElements)) {
+                        cursor.classList.add('cursor-hover');
+                        cursorDot.classList.add('cursor-hidden');
+                    }
+                });
+                document.addEventListener('mouseout', (e) => {
+                    if (e.target.matches(hoverElements) || e.target.closest(hoverElements)) {
+                        cursor.classList.remove('cursor-hover');
+                        cursorDot.classList.remove('cursor-hidden');
+                    }
+                });
+                document.addEventListener('mousedown', () => {
+                    cursor.classList.add('cursor-click');
+                });
+                document.addEventListener('mouseup', () => {
+                    cursor.classList.remove('cursor-click');
+                });
+                document.addEventListener('mouseleave', () => {
+                    cursor.classList.add('cursor-hidden');
+                    cursorDot.classList.add('cursor-dot-hidden');
+                });
+                document.addEventListener('mouseenter', () => {
+                    cursor.classList.remove('cursor-hidden');
+                    cursorDot.classList.remove('cursor-dot-hidden');
+                });
+            }
+
+            function initCursor() {
+                checkTouchDevice();
+                if (!isTouchDevice && cursor && cursorDot) {
+                    document.addEventListener('mousemove', trackMouse);
+                    addCursorEffects();
+                    updateCursor();
+                }
+            }
+
+            // ==================== ROUTE PLANNER (Google Maps Directions) ====================
+            function initRoutePlanner() {
+                const getRouteBtn = document.getElementById('getRouteBtn');
+                const startLocation = document.getElementById('startLocation');
+                const mapIframe = document.getElementById('gmapIframe');
+                
+                // College destination coordinates (GIFT Autonomous College)
+                const destination = 'GIFT+Autonomous+College,+Bhubaneswar,+Odisha';
+                const destinationLat = '20.2767109';
+                const destinationLng = '85.8245398';
+                
+                if (getRouteBtn && startLocation && mapIframe) {
+                    getRouteBtn.addEventListener('click', function() {
+                        let start = startLocation.value.trim();
+                        
+                        if (start === '') {
+                            showNotification('Please enter a starting location', 'error');
+                            return;
+                        }
+                        
+                        // Encode the start location for URL
+                        const encodedStart = encodeURIComponent(start);
+                        
+                        // Show notification that route is loading
+                        showNotification(`Finding route from "${start}" to GIFT Autonomous College...`, 'success');
+                        
+                        // Update iframe to show directions - using the working format
+                        mapIframe.src = `https://www.google.com/maps/embed/v1/directions?key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8&origin=${encodedStart}&destination=${destination}&mode=driving`;
+                        
+                        // Fallback if API key doesn't work - open in new tab
+                        setTimeout(() => {
+                            const directionsUrl = `https://www.google.com/maps/dir/?api=1&origin=${encodedStart}&destination=${destination}&travelmode=driving`;
+                            window.open(directionsUrl, '_blank');
+                        }, 2000);
+                    });
+                }
+            }
+
+            // ==================== BACK TO TOP & SCROLL INDICATOR ====================
+            function initScrollFeatures() {
+                const topBtn = document.getElementById('backToTop');
+                const indicator = document.querySelector('.scroll-indicator');
+                window.addEventListener('scroll', () => {
+                    if (topBtn) topBtn.style.display = window.scrollY > 300 ? 'flex' : 'none';
+                    if (indicator) {
+                        const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+                        const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                        indicator.style.transform = `scaleX(${winScroll / height})`;
+                    }
+                });
+                if (topBtn) topBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+            }
+
+            // ==================== SCROLL ANIMATION ====================
+            function initAnimations() {
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.style.opacity = 1;
+                            entry.target.style.transform = 'translateY(0)';
+                        }
+                    });
+                }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+                document.querySelectorAll('.contact-card').forEach(el => {
+                    if (el) {
+                        el.style.opacity = '0';
+                        el.style.transform = 'translateY(30px)';
+                        el.style.transition = 'all 0.6s ease-out';
+                        observer.observe(el);
+                    }
+                });
+            }
+
+            // ==================== SET ACTIVE NAVIGATION ====================
+            function setActiveNavItem() {
+                const currentPage = window.location.pathname.split('/').pop() || 'contact.html';
+                document.querySelectorAll('.nav-link').forEach(link => {
+                    const href = link.getAttribute('href');
+                    if (href === currentPage) link.classList.add('active');
+                    else link.classList.remove('active');
+                });
+                document.querySelectorAll('.mobile-nav-item').forEach(link => {
+                    const href = link.getAttribute('href');
+                    if (href === currentPage) link.classList.add('active');
+                    else link.classList.remove('active');
+                });
+            }
+
+            // ==================== VIDEO PLAY FALLBACK ====================
+            function initVideo() {
+                const video = document.querySelector('.video-background video');
+                if (video) video.play().catch(e => console.log('Autoplay blocked'));
+            }
+
+            // ==================== ENSURE MOBILE USER ELEMENTS ====================
+            function ensureMobileUserElements() {
+                if (!document.getElementById('mobileUserName')) {
+                    const nameSpan = document.createElement('span');
+                    nameSpan.id = 'mobileUserName';
+                    nameSpan.style.display = 'none';
+                    document.body.appendChild(nameSpan);
+                    const emailSpan = document.createElement('span');
+                    emailSpan.id = 'mobileUserEmail';
+                    emailSpan.style.display = 'none';
+                    document.body.appendChild(emailSpan);
+                }
+            }
+
+            // ==================== DOM READY ====================
+            document.addEventListener('DOMContentLoaded', () => {
+                ensureMobileUserElements();
+                initCursor();
+                updateUserAuthDisplay();
+                setActiveNavItem();
+                arrangeMobileAuth();
+                initScrollFeatures();
+                initAnimations();
+                initVideo();
+                initRoutePlanner();
+            });
+        })();
+    </script>
+</body>
+</html>

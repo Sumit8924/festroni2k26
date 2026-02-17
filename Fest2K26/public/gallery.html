@@ -1,0 +1,919 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <title>FESTRONIX 2.0 - Picture Gallery (Bootstrap)</title>
+    
+    <!-- Bootstrap 5 + Icons + Fonts -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Orbitron:wght@400;600;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome 6 (optional) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* ===== BOOTSTRAP THEME OVERRIDES & CUSTOM STYLES ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        html, body {
+            max-width: 100%;
+            overflow-x: hidden;
+        }
+
+        body {
+            background: #0000009a;
+            font-family: 'Rajdhani', sans-serif;
+            overflow-x: hidden;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            padding-top: 70px;
+            font-size: 0.95rem;
+            cursor: none; /* custom cursor active */
+        }
+
+        /* ----- Video Background ----- */
+        .video-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            overflow: hidden;
+        }
+
+        .video-background video {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            transform: translate(-50%, -50%);
+            object-fit: cover;
+            opacity: 0.4;
+        }
+
+        .video-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: transparent;
+        }
+
+        .glass-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(0,0,0,0.4), rgba(0,0,0,0.8));
+            backdrop-filter: blur(5px);
+            z-index: -1;
+        }
+
+        /* ----- Custom Cursor (unchanged) ----- */
+        .cursor-dot, .cursor-outline {
+            position: fixed; top: 0; left: 0; transform: translate(-50%, -50%);
+            border-radius: 50%; z-index: 9999; pointer-events: none;
+        }
+        .cursor-dot { width: 8px; height: 8px; background-color: #ffcc33; }
+        .cursor-outline {
+            width: 40px; height: 40px; border: 2px solid rgba(255,71,51,0.8);
+            transition: width 0.2s, height 0.2s;
+        }
+        @media (hover: none) and (pointer: coarse) {
+            .cursor-dot, .cursor-outline { display: none; }
+            body { cursor: auto; }
+        }
+
+        /* ===== UPDATED NAVBAR STYLES - MATCHING INDEX.HTML ===== */
+        .navbar {
+            background: transparent;
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border-bottom: 2px solid #ff4733;
+            min-height: 70px;
+            z-index: 100;
+            padding: 0 1rem;
+        }
+
+        /* Desktop: Center Nav Items */
+        @media (min-width: 992px) {
+            .navbar-nav {
+                width: 100%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                gap: 40px;
+            }
+        }
+
+        .nav-link {
+            color: white !important;
+            font-weight: 700;
+            letter-spacing: 2px;
+            padding: 1rem 2rem !important;
+            font-size: 1.25rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            text-transform: uppercase;
+            white-space: nowrap;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-link i {
+            margin-right: 8px;
+            font-size: 1.1rem;
+        }
+
+        .nav-link:hover { 
+            color: #ffcc33 !important; 
+            background: rgba(255, 71, 51, 0.15); 
+            transform: translateY(-5px); 
+            box-shadow: 0 5px 15px rgba(255, 71, 51, 0.3); 
+        }
+
+        .nav-link.active { 
+            color: #ffcc33 !important; 
+            border-bottom: 4px solid #ffcc33;
+        }
+
+        .user-auth-container {
+            margin-left: 20px;
+        }
+
+        /* Navbar Toggler Style */
+        .navbar-toggler {
+            border: 2px solid #ff4733 !important;
+            background: rgba(255, 71, 51, 0.2) !important;
+            padding: 0.5rem 0.75rem;
+        }
+        
+        .navbar-toggler-icon {
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(255, 71, 51, 0.9)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") !important;
+        }
+
+        .navbar-toggler:focus {
+            box-shadow: 0 0 0 0.25rem rgba(255, 71, 51, 0.25);
+        }
+
+        /* Mobile menu transparency */
+        @media (max-width: 991px) {
+            .navbar-collapse {
+                background: transparent !important;
+                position: absolute;
+                top: 70px;
+                left: 0;
+                right: 0;
+                padding: 1rem;
+                backdrop-filter: blur(8px);
+                -webkit-backdrop-filter: blur(8px);
+                border-bottom: 2px solid #ff4733;
+            }
+            
+            .navbar-nav {
+                background: black;
+                margin: 0;
+            }
+            
+            .nav-link {
+                min-height: 50px;
+                padding: 0.8rem 1rem !important;
+                text-align: center;
+                background: rgb(0, 0, 0);
+                margin: 4px 0;
+                border-radius: 8px;
+                border: 1px solid rgba(255, 71, 51, 0.3);
+                font-size: 1rem;
+            }
+            
+            .nav-link:hover {
+                background: rgba(255, 71, 51, 0.3);
+            }
+            
+            .nav-link.active {
+                background: rgba(255, 71, 51, 0.4);
+                border-bottom: 4px solid #ffcc33 !important;
+            }
+
+            .user-auth-container {
+                margin-left: 0;
+                margin-top: 5px;
+            }
+        }
+
+        /* ----- User Auth Button (Desktop) ----- */
+        .user-auth-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255,71,51,0.3);
+            border: 2px solid #ff4733;
+            color: white;
+            font-weight: 700;
+            padding: 0 20px;
+            min-height: 50px;
+            text-decoration: none;
+            transition: all 0.3s;
+            border-radius: 10px;
+            white-space: nowrap;
+        }
+        .user-auth-btn:hover {
+            color: #ffcc33;
+            background: rgba(255,71,51,0.4);
+            transform: translateY(-2px);
+        }
+        .user-auth-btn i { margin-right: 8px; }
+
+
+        /* ----- Scroll Indicator ----- */
+        .scroll-indicator {
+            position: fixed;
+            top: 70px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, #ff4733, #ffcc33, #ff4733);
+            transform-origin: left;
+            transform: scaleX(0);
+            z-index: 1031;
+        }
+
+        /* ----- LOADER ANIMATION - OPTIMIZED FOR FAST LOADING ----- */
+        .loader-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #000;
+            z-index: 99999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 0.3s ease;
+        }
+        .loader-hidden { 
+            opacity: 0; 
+            pointer-events: none; 
+            visibility: hidden; 
+        }
+        .loader-wrapper { 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            flex-wrap: wrap; 
+        }
+        .loader-letter {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 4rem;
+            font-weight: 900;
+            color: #ff4733;
+            text-shadow: 0 0 15px rgba(255,71,51,0.7);
+            margin: 0 3px;
+            opacity: 0;
+            animation: letterReveal 0.2s forwards;
+            display: inline-block;
+        }
+        .loader-letter:nth-child(1) { animation-delay: 0.1s; }
+        .loader-letter:nth-child(2) { animation-delay: 0.15s; }
+        .loader-letter:nth-child(3) { animation-delay: 0.2s; }
+        .loader-letter:nth-child(4) { animation-delay: 0.25s; }
+        .loader-letter:nth-child(5) { animation-delay: 0.3s; }
+        .loader-letter:nth-child(6) { animation-delay: 0.35s; }
+        .loader-letter:nth-child(7) { animation-delay: 0.4s; }
+        @keyframes letterReveal { 
+            to { 
+                opacity: 1; 
+                text-shadow: 0 0 20px rgba(255,71,51,1); 
+            } 
+        }
+        .loader {
+            position: absolute;
+            bottom: -30px;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, transparent, #ffcc33, transparent);
+            animation: loadingBar 1.5s ease-in-out forwards;
+        }
+        @keyframes loadingBar { 
+            0% { transform: translateX(-100%); } 
+            100% { transform: translateX(100%); } 
+        }
+        .loader-subtitle {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 1.2rem;
+            color: #ff9966;
+            letter-spacing: 2px;
+            margin-top: 20px;
+            opacity: 0;
+            animation: fadeIn 0.5s ease forwards 0.8s;
+        }
+        @keyframes fadeIn { to { opacity: 1; } }        
+
+        @media (max-width: 991px) {
+            .scroll-indicator { top: 0; }
+            .loader-letter { font-size: 3rem; }
+            .navbar-nav {
+                gap: 0;
+            }
+        }
+        @media (max-width: 767px) {
+            .loader-letter { font-size: 2.5rem; }
+        }
+        @media (max-width: 599px) {
+            .loader-letter { font-size: 2rem; }
+        }
+        @media (max-width: 380px) {
+            .loader-letter { font-size: 1.5rem; }
+        }
+
+        /* ----- GALLERY CONTENT (Bootstrap enhanced) ----- */
+        .main-content {
+            position: relative;
+            z-index: 2;
+            background: transparent;
+            flex: 1;
+        }
+
+        .gallery-container {
+            padding: 40px 20px;
+            max-width: 1400px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .gallery-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .gallery-logo {
+            width: 350px;
+            margin-bottom: 20px;
+            filter: drop-shadow(0 0 15px rgba(255,71,51,0.5));
+        }
+
+        .gallery-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.5rem;
+            color: #ffcc33;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 15px;
+            text-shadow: 0 0 15px rgba(255,204,51,0.5);
+            background: linear-gradient(135deg, #ff4733, #ffcc33, #ff9966);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .gallery-subtitle {
+            color: #ff9966;
+            font-size: 1.1rem;
+            letter-spacing: 1px;
+            max-width: 800px;
+            margin: 0 auto 30px;
+            line-height: 1.5;
+        }
+
+        /* Gallery Grid - Bootstrap card style */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+            margin-bottom: 50px;
+        }
+
+        .gallery-item {
+            position: relative;
+            border-radius: 12px;
+            overflow: hidden;
+            cursor: pointer;
+            transform: translateY(0);
+            transition: all 0.4s cubic-bezier(0.175,0.885,0.32,1.275);
+            border: 2px solid transparent;
+            background: #000;
+            aspect-ratio: 4/3;
+        }
+        .gallery-item:hover {
+            transform: translateY(-8px);
+            border-color: #ff4733;
+            box-shadow: 0 10px 25px rgba(255,71,51,0.3);
+        }
+        .gallery-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+        .gallery-item:hover .gallery-img {
+            transform: scale(1.05);
+        }
+
+        /* Lightbox Modal (Bootstrap modal style) - Simplified */
+        .lightbox-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.95);
+            z-index: 10000;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+        .lightbox-modal.active {
+            display: flex;
+            opacity: 1;
+        }
+        .lightbox-content {
+            max-width: 95%;
+            max-height: 95%;
+            position: relative;
+            margin: 20px;
+        }
+        .lightbox-img {
+            max-width: 100%;
+            max-height: 85vh;
+            border-radius: 10px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            border: 2px solid #ff4733;
+            transition: opacity 0.3s ease;
+        }
+        .lightbox-close {
+            position: absolute;
+            top: -45px;
+            right: 0;
+            background: #ff4733;
+            color: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            font-size: 1.3rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+        .lightbox-close:hover { background: #ff6655; transform: rotate(90deg); }
+        .lightbox-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255,71,51,0.8);
+            color: white;
+            border: none;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            font-size: 1.3rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+        .lightbox-nav:hover { background: rgba(255,71,51,1); transform: translateY(-50%) scale(1.1); }
+        .lightbox-prev { left: 10px; }
+        .lightbox-next { right: 10px; }
+
+        /* Footer - Bootstrap grid */
+        .footer-3d {
+            background: rgba(0,0,0,0.9);
+            padding: 40px 20px 20px;
+            border-top: 2px solid #ff4733;
+            margin-top: auto;
+        }
+        .college-logo {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+        .college-name {
+            font-family: 'Orbitron', sans-serif;
+            color: #ffcc33;
+            font-size: 1.2rem;
+            font-weight: 700;
+            line-height: 1.2;
+        }
+        .footer-tagline { color: #ff9966; font-size: 1rem; font-style: italic; }
+        .social-icon {
+            width: 40px; height: 40px; border-radius: 50%;
+            background: rgba(255,71,51,0.2);
+            display: flex; align-items: center; justify-content: center;
+            color: #ffcc33; font-size: 1.2rem; text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        .social-icon:hover {
+            background: rgba(255,71,51,0.4);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(255,71,51,0.3);
+        }
+
+        /* Back to Top Button */
+        .back-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: linear-gradient(135deg, #ff4733, #ff9966);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: none;
+            cursor: pointer;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 999;
+            box-shadow: 0 0 20px rgba(255,71,51,0.5);
+            transition: all 0.3s ease;
+        }
+        .back-to-top:hover { transform: translateY(-3px); box-shadow: 0 0 30px rgba(255,71,51,0.8); }
+
+        /* Responsive */
+        @media (max-width: 991px) {
+            .scroll-indicator { top: 0; }
+            .navbar-nav {
+                gap: 0;
+            }
+        }
+        @media (max-width: 768px) {
+            body { padding-top: 60px; }
+            .gallery-title { font-size: 1.8rem; }
+            .gallery-subtitle { font-size: 1rem; }
+            .gallery-grid { grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 12px; }
+        }
+        @media (max-width: 480px) {
+            .gallery-title { font-size: 1.6rem; }
+            .gallery-grid { grid-template-columns: 1fr; }
+            .lightbox-nav { width: 35px; height: 35px; }
+        }
+        /* Touch targets */
+        button, .nav-link, .gallery-item, .user-auth-btn {
+            min-height: 44px;
+            min-width: 44px;
+        }
+    </style>
+</head>
+<body>
+
+<!-- LOADER (gallery page style) -->
+<div class="loader-container" id="loader">
+    <div class="loader-wrapper">
+        <span class="loader-letter">G</span>
+        <span class="loader-letter">A</span>
+        <span class="loader-letter">L</span>
+        <span class="loader-letter">L</span>
+        <span class="loader-letter">E</span>
+        <span class="loader-letter">R</span>
+        <span class="loader-letter">Y</span>
+        <div class="loader"></div>
+    </div>
+</div>
+
+    <!-- VIDEO BACKGROUND -->
+    <div class="video-background">
+        <video autoplay muted loop playsinline>
+            <source src="https://res.cloudinary.com/dpc4l1hic/video/upload/v1770814312/light_gzuewo.mp4" type="video/mp4">
+        </video>
+        <div class="video-overlay"></div>
+    </div>
+    <div class="glass-overlay"></div>
+
+    <!-- CUSTOM CURSOR -->
+    <div class="cursor-dot" data-cursor-dot></div>
+    <div class="cursor-outline" data-cursor-outline></div>
+
+    <!-- SCROLL INDICATOR -->
+    <div class="scroll-indicator"></div>
+
+    <!-- ========== UPDATED NAVIGATION - MATCHING INDEX.HTML STYLE ========== -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container-fluid px-lg-4">
+            <a class="navbar-brand d-lg-none text-warning fw-bold" href="#"></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#festronixNavbar" aria-controls="festronixNavbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="festronixNavbar">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0 w-100 justify-content-center">
+                    <li class="nav-item"><a class="nav-link" href="index.html"><i class="fas fa-home"></i> Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="previous.html"><i class="fas fa-history"></i> Previous</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="gallery.html"><i class="fas fa-images"></i> Gallery</a></li>
+                    <li class="nav-item"><a class="nav-link" href="events.html"><i class="fas fa-calendar-alt"></i> Events</a></li>
+                    <li class="nav-item"><a class="nav-link" href="sponsors.html"><i class="fas fa-handshake"></i> Sponsors</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.html"><i class="fas fa-info-circle"></i> About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="team.html"><i class="fas fa-users"></i> Team</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contact.html"><i class="fas fa-envelope"></i> Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content">
+        <div class="gallery-container">
+            <!-- Header -->
+            <div class="gallery-header">
+                <img src="https://res.cloudinary.com/dpc4l1hic/image/upload/v1771088331/Untitled_design_1_kwxvjb.png" alt="FESTRONIX 2.0 Logo" class="gallery-logo img-fluid">
+                <h1 class="gallery-title">Picture Gallery</h1>
+                <p class="gallery-subtitle">Relive the spectacular moments, electrifying performances, and unforgettable memories from FESTRONIX 2.0. Browse through our curated collection of photos capturing the essence of innovation and celebration.</p>
+            </div>
+
+            <!-- Gallery Grid -->
+            <div class="gallery-grid" id="galleryGrid"></div>
+        </div>
+    </main>
+
+    <!-- LIGHTBOX MODAL - Simplified -->
+    <div class="lightbox-modal" id="lightboxModal">
+        <button class="lightbox-close" id="lightboxClose"><i class="fas fa-times"></i></button>
+        <button class="lightbox-nav lightbox-prev" id="lightboxPrev"><i class="fas fa-chevron-left"></i></button>
+        <button class="lightbox-nav lightbox-next" id="lightboxNext"><i class="fas fa-chevron-right"></i></button>
+        <div class="lightbox-content">
+            <img class="lightbox-img" id="lightboxImage" src="" alt="Gallery Image">
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="footer-3d">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-lg-6">
+                    <div class="d-flex align-items-center gap-3 mb-3">
+                        <img src="https://res.cloudinary.com/dpc4l1hic/image/upload/v1770814304/gift_logo_rzl4tf.png" alt="GIFT Autonomous College Logo" class="college-logo" loading="lazy">
+                        <div class="college-name">GIFT AUTONOMOUS<br><span style="font-size: 0.9rem;">BHUBANESWAR</span></div>
+                    </div>
+                    <p class="footer-tagline">Igniting Minds, Empowering Futures</p>
+                    <p style="color: #ff9966; font-size: 0.9rem;">GIFT Autonomous College is committed to providing quality education and fostering innovation through events like FESTRONIX.</p>
+                </div>
+                <div class="col-lg-6">
+                    <h4 style="font-family: 'Orbitron'; color: #ffcc33; font-size: 1.2rem; margin-bottom: 15px;">Connect With Us</h4>
+                    <div class="d-flex gap-3 mb-3">
+                        <a href="https://www.instagram.com/gift.autonomous.bhubaneswar?igsh=MXFiN205c2hwZ2RtYQ==" class="social-icon" target="_blank"><i class="fab fa-instagram"></i></a>
+                        <a href="https://youtube.com/@giftautonomousbbsr?si=dFAnDeP5MOyLS7I6" class="social-icon" target="_blank"><i class="fab fa-youtube"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                    <p style="color: #ff9966; font-size: 0.85rem;">Follow us on social media for latest updates and event information!</p>
+                </div>
+            </div>
+            <div class="footer-bottom text-center mt-4 pt-3" style="border-top: 1px solid rgba(255,71,51,0.3);">
+                <p style="color: #888; font-size: 0.8rem;">© 2026 FESTRONIX 2.0 - GIFT Autonomous College. All Rights Reserved.</p>
+                <p style="color: #ffcc33; font-size: 0.9rem;">Pioneering Technical Education Since 1997</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- BACK TO TOP -->
+    <button class="back-to-top" id="backToTop"><i class="fas fa-chevron-up"></i></button>
+
+    <!-- Bootstrap JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- UPDATED SCRIPT - SIMPLIFIED GALLERY -->
+    <script>
+        (function() {
+            'use strict';
+
+            // ==================== LOADER - FAST LOADING ====================
+            // Hide loader after 1.5 seconds (matches animation duration)
+            setTimeout(function() {
+                const loader = document.getElementById('loader');
+                if (loader) {
+                    loader.classList.add('loader-hidden');
+                }
+            }, 1500);
+
+            // Also hide on DOM ready (faster)
+            document.addEventListener('DOMContentLoaded', function() {
+                setTimeout(function() {
+                    const loader = document.getElementById('loader');
+                    if (loader) {
+                        loader.classList.add('loader-hidden');
+                    }
+                }, 800);
+            });
+
+            // ==================== SIMPLIFIED GALLERY DATA - ONLY IMAGE URLS ====================
+            const galleryImages = [
+                // All images without titles or descriptions
+                'https://res.cloudinary.com/dpc4l1hic/image/upload/v1770814181/img17_ulwi5t.jpg',
+                'https://res.cloudinary.com/dpc4l1hic/image/upload/v1770814179/img16_pg2tn8.jpg',
+                'https://res.cloudinary.com/dpc4l1hic/image/upload/v1770814169/img11_b9cdkk.jpg',
+                'https://res.cloudinary.com/dpc4l1hic/image/upload/v1771248410/IMG_0041_dgyqd1.jpg',
+                'https://res.cloudinary.com/dpc4l1hic/image/upload/v1770814162/img22_ejbuiv.jpg',
+                'https://res.cloudinary.com/dpc4l1hic/image/upload/v1770814169/img24_lkatt1.jpg',
+                'https://res.cloudinary.com/dpc4l1hic/image/upload/v1770814172/img13_td70sk.jpg',
+                'https://res.cloudinary.com/dpc4l1hic/image/upload/v1770814173/img14_gmtrar.jpg',
+                'https://res.cloudinary.com/dpc4l1hic/image/upload/v1770814174/img27_qjbnvd.jpg',
+                'https://res.cloudinary.com/dpc4l1hic/image/upload/v1770814182/img26_esn1xs.jpg',
+                'https://res.cloudinary.com/dpc4l1hic/image/upload/v1770814257/img29_haddwu.jpg',
+                'https://res.cloudinary.com/dpc4l1hic/image/upload/v1770814259/img31_k9auny.jpg',
+                'https://res.cloudinary.com/dpc4l1hic/image/upload/v1770814257/img30_hih1uz.jpg',
+                'https://res.cloudinary.com/dpc4l1hic/image/upload/v1770814246/img3_kekpzl.jpg',
+                'https://res.cloudinary.com/dpc4l1hic/image/upload/v1770814171/img12_xxhzxp.jpg',
+                'https://res.cloudinary.com/dpc4l1hic/image/upload/v1770814166/img4_kczij5.jpg',
+                'https://res.cloudinary.com/dpc4l1hic/image/upload/v1770814165/img9_cilnvs.jpg',
+                'https://res.cloudinary.com/dpc4l1hic/image/upload/v1770814256/img28_zhn9ia.jpg',
+                'https://res.cloudinary.com/dpc4l1hic/image/upload/v1770814161/img6_wcmwrg.jpg',
+                'https://res.cloudinary.com/dpc4l1hic/image/upload/v1770814161/img7_zk6ozl.jpg',
+                'https://res.cloudinary.com/dpc4l1hic/image/upload/v1771249118/IMG_0562_zkatou.jpg',
+                'https://res.cloudinary.com/dpc4l1hic/image/upload/v1771249060/IMG_0380_uytzs1.jpg',
+                'https://res.cloudinary.com/dpc4l1hic/image/upload/v1771249176/IMG_0012_gsxdkc.jpg',
+                'https://res.cloudinary.com/dpc4l1hic/image/upload/v1771249139/IMG_0445_n9wm1o.jpg',
+                'https://res.cloudinary.com/dpc4l1hic/image/upload/v1771249078/IMG_0317_tuydai.jpg',
+                'https://res.cloudinary.com/dpc4l1hic/image/upload/v1771249102/IMG_0175_w9w61r.jpg',
+                'https://res.cloudinary.com/dpc4l1hic/image/upload/v1771249082/IMG_0216_zbikhb.jpg',
+                'https://res.cloudinary.com/dpc4l1hic/image/upload/v1771249176/IMG_0012_gsxdkc.jpg',
+                'https://res.cloudinary.com/dpc4l1hic/image/upload/v1771249074/IMG_0355_s8d5o9.jpg'
+            ];
+
+            // ----- CURSOR ANIMATION -----
+            const cursorDot = document.querySelector("[data-cursor-dot]");
+            const cursorOutline = document.querySelector("[data-cursor-outline]");
+            if (cursorDot && cursorOutline) {
+                let mouseX = 0, mouseY = 0, cursorX = 0, cursorY = 0;
+                
+                document.addEventListener("mousemove", (e) => {
+                    mouseX = e.clientX;
+                    mouseY = e.clientY;
+                    cursorDot.style.left = mouseX + "px";
+                    cursorDot.style.top = mouseY + "px";
+                });
+
+                function animateCursor() {
+                    cursorX += (mouseX - cursorX) * 0.15;
+                    cursorY += (mouseY - cursorY) * 0.15;
+                    cursorOutline.style.left = cursorX + "px";
+                    cursorOutline.style.top = cursorY + "px";
+                    requestAnimationFrame(animateCursor);
+                }
+                animateCursor();
+
+                // Hover effect
+                document.querySelectorAll('a, button, .gallery-item').forEach(el => {
+                    el.addEventListener('mouseenter', () => {
+                        cursorOutline.style.width = '50px';
+                        cursorOutline.style.height = '50px';
+                        cursorOutline.style.borderColor = '#ffcc33';
+                    });
+                    el.addEventListener('mouseleave', () => {
+                        cursorOutline.style.width = '40px';
+                        cursorOutline.style.height = '40px';
+                        cursorOutline.style.borderColor = 'rgba(255,71,51,0.8)';
+                    });
+                });
+            }
+
+            // ----- SET ACTIVE NAVIGATION -----
+            function setActiveNavItem() {
+                const currentPage = window.location.pathname.split('/').pop() || 'gallery.html';
+                document.querySelectorAll('.nav-link').forEach(link => {
+                    const href = link.getAttribute('href');
+                    if (href === currentPage) link.classList.add('active');
+                    else link.classList.remove('active');
+                });
+            }
+
+            // ----- RENDER GALLERY - SIMPLIFIED -----
+            function renderGallery() {
+                const galleryGrid = document.getElementById('galleryGrid');
+                if (!galleryGrid) return;
+                galleryGrid.innerHTML = '';
+                
+                galleryImages.forEach((imageUrl, index) => {
+                    const galleryItem = document.createElement('div');
+                    galleryItem.className = 'gallery-item';
+                    galleryItem.dataset.index = index;
+                    
+                    galleryItem.innerHTML = `
+                        <img src="${imageUrl}" alt="Gallery Image ${index + 1}" class="gallery-img" loading="lazy">
+                    `;
+                    galleryGrid.appendChild(galleryItem);
+                });
+                
+                // Attach click events to new items
+                document.querySelectorAll('.gallery-item').forEach(item => {
+                    item.addEventListener('click', () => {
+                        const index = parseInt(item.dataset.index);
+                        openLightbox(index);
+                    });
+                });
+            }
+
+            // ----- LIGHTBOX - SIMPLIFIED -----
+            let currentImageIndex = 0;
+
+            function openLightbox(index) {
+                currentImageIndex = index;
+                updateLightbox();
+                document.getElementById('lightboxModal')?.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+
+            function updateLightbox() {
+                const imageUrl = galleryImages[currentImageIndex];
+                const lbImg = document.getElementById('lightboxImage');
+                
+                if (lbImg && imageUrl) {
+                    lbImg.style.opacity = 0;
+                    setTimeout(() => {
+                        lbImg.src = imageUrl;
+                        lbImg.alt = `Gallery Image ${currentImageIndex + 1}`;
+                        lbImg.style.opacity = 1;
+                    }, 200);
+                }
+            }
+
+            function closeLightbox() {
+                document.getElementById('lightboxModal')?.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            }
+
+            function navigateLightbox(direction) {
+                currentImageIndex = (currentImageIndex + direction + galleryImages.length) % galleryImages.length;
+                updateLightbox();
+            }
+
+            // ----- EVENT LISTENERS SETUP -----
+            function setupEventListeners() {
+                // Lightbox controls
+                const closeBtn = document.getElementById('lightboxClose');
+                const prevBtn = document.getElementById('lightboxPrev');
+                const nextBtn = document.getElementById('lightboxNext');
+                const modal = document.getElementById('lightboxModal');
+                
+                if (closeBtn) closeBtn.addEventListener('click', closeLightbox);
+                if (prevBtn) prevBtn.addEventListener('click', () => navigateLightbox(-1));
+                if (nextBtn) nextBtn.addEventListener('click', () => navigateLightbox(1));
+                
+                if (modal) {
+                    modal.addEventListener('click', (e) => {
+                        if (e.target === modal) {
+                            closeLightbox();
+                        }
+                    });
+                }
+
+                // Keyboard navigation
+                document.addEventListener('keydown', (e) => {
+                    if (modal?.classList.contains('active')) {
+                        if (e.key === 'Escape') closeLightbox();
+                        if (e.key === 'ArrowLeft') navigateLightbox(-1);
+                        if (e.key === 'ArrowRight') navigateLightbox(1);
+                    }
+                });
+
+                // Back to top
+                const topBtn = document.getElementById('backToTop');
+                if (topBtn) {
+                    window.addEventListener('scroll', () => {
+                        topBtn.style.display = window.scrollY > 300 ? 'flex' : 'none';
+                        
+                        // Scroll indicator
+                        const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+                        const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                        const indicator = document.querySelector('.scroll-indicator');
+                        if (indicator) indicator.style.transform = `scaleX(${winScroll / height})`;
+                    });
+                    topBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+                }
+
+                // Video play fallback
+                const video = document.querySelector('video');
+                if (video) video.play().catch(e => console.log("Autoplay blocked"));
+            }
+
+            // ----- INITIALIZATION -----
+            document.addEventListener('DOMContentLoaded', function() {
+                renderGallery();
+                setupEventListeners();
+                setActiveNavItem();
+            });
+        })();
+    </script>
+</body>
+</html>

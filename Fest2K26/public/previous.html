@@ -1,0 +1,1135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <title>FESTRONIX 2.0 - Previous Years (Bootstrap)</title>
+    <!-- Bootstrap 5 + Icons + Fonts -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Orbitron:wght@400;600;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome 6 (optional, but keep for consistency) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* ===== BOOTSTRAP THEME OVERRIDES & CUSTOM STYLES ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background: #000;
+            font-family: 'Rajdhani', sans-serif;
+            overflow-x: hidden;
+            color: white;
+            cursor: none; /* custom cursor active */
+            font-size: 0.95rem;
+        }
+
+        /* ----- Video Background ----- */
+        .video-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            overflow: hidden;
+        }
+        .video-background video {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            transform: translate(-50%, -50%);
+            object-fit: cover;
+            opacity: 0.4;
+        }
+        .video-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.3) 50%, rgba(0,0,0,0.8) 100%);
+        }
+        .glass-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(0,0,0,0.4), rgba(0,0,0,0.8));
+            backdrop-filter: blur(5px);
+            z-index: -1;
+        }
+
+        /* ----- Custom Cursor (unchanged) ----- */
+        .cursor-dot, .cursor-outline {
+            position: fixed; top: 0; left: 0; transform: translate(-50%, -50%);
+            border-radius: 50%; z-index: 9999; pointer-events: none;
+        }
+        .cursor-dot { width: 8px; height: 8px; background-color: #ffcc33; }
+        .cursor-outline {
+            width: 40px; height: 40px; border: 2px solid rgba(255,71,51,0.8);
+            transition: width 0.2s, height 0.2s;
+        }
+        @media (hover: none) and (pointer: coarse) {
+            .cursor-dot, .cursor-outline { display: none; }
+            body { cursor: auto; }
+        }
+
+        /* ===== UPDATED NAVBAR STYLES - MATCHING INDEX.HTML ===== */
+        .navbar {
+            background: transparent;
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border-bottom: 2px solid #ff4733;
+            min-height: 70px;
+            z-index: 100;
+            padding: 0 1rem;
+        }
+
+        /* Desktop: Center Nav Items */
+        @media (min-width: 992px) {
+            .navbar-nav {
+                width: 100%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                gap: 40px;
+            }
+        }
+
+        .nav-link {
+            color: white !important;
+            font-weight: 700;
+            letter-spacing: 2px;
+            padding: 1rem 2rem !important;
+            font-size: 1.25rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            text-transform: uppercase;
+            white-space: nowrap;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-link i {
+            margin-right: 8px;
+            font-size: 1.1rem;
+        }
+
+        .nav-link:hover { 
+            color: #ffcc33 !important; 
+            background: rgba(255, 71, 51, 0.15); 
+            transform: translateY(-5px); 
+            box-shadow: 0 5px 15px rgba(255, 71, 51, 0.3); 
+        }
+
+        .nav-link.active { 
+            color: #ffcc33 !important; 
+            border-bottom: 4px solid #ffcc33;
+        }
+
+        .user-auth-container {
+            margin-left: 20px;
+        }
+
+        /* Navbar Toggler Style */
+        .navbar-toggler {
+            border: 2px solid #ff4733 !important;
+            background: rgba(255, 71, 51, 0.2) !important;
+            padding: 0.5rem 0.75rem;
+        }
+        
+        .navbar-toggler-icon {
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(255, 71, 51, 0.9)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") !important;
+        }
+
+        .navbar-toggler:focus {
+            box-shadow: 0 0 0 0.25rem rgba(255, 71, 51, 0.25);
+        }
+
+        /* Mobile menu transparency */
+        @media (max-width: 991px) {
+            .navbar-collapse {
+                background: transparent !important;
+                position: absolute;
+                top: 70px;
+                left: 0;
+                right: 0;
+                padding: 1rem;
+                backdrop-filter: blur(8px);
+                -webkit-backdrop-filter: blur(8px);
+                border-bottom: 2px solid #ff4733;
+            }
+            
+            .navbar-nav {
+                background: black;
+                margin: 0;
+            }
+            
+            .nav-link {
+                min-height: 50px;
+                padding: 0.8rem 1rem !important;
+                text-align: center;
+                background: rgb(0, 0, 0);
+                margin: 4px 0;
+                border-radius: 8px;
+                border: 1px solid rgba(255, 71, 51, 0.3);
+                font-size: 1rem;
+            }
+            
+            .nav-link:hover {
+                background: rgba(255, 71, 51, 0.3);
+            }
+            
+            .nav-link.active {
+                background: rgba(255, 71, 51, 0.4);
+                border-bottom: 4px solid #ffcc33 !important;
+            }
+
+            .user-auth-container {
+                margin-left: 0;
+                margin-top: 5px;
+            }
+        }
+
+        /* ----- User Auth Button (Desktop) ----- */
+        .user-auth-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255,71,51,0.3);
+            border: 2px solid #ff4733;
+            color: white;
+            font-weight: 700;
+            padding: 0 20px;
+            min-height: 50px;
+            text-decoration: none;
+            transition: all 0.3s;
+            border-radius: 10px;
+            white-space: nowrap;
+        }
+        .user-auth-btn:hover {
+            color: #ffcc33;
+            background: rgba(255,71,51,0.4);
+            transform: translateY(-2px);
+        }
+        .user-auth-btn i { margin-right: 8px; }
+
+
+
+        .mobile-login-btn:hover { background: rgba(255,71,51,0.3); color: #ffcc33; border-color: #ff4733; transform: translateY(-2px); }
+        .mobile-signup-btn {
+            border: 2px solid transparent;
+            background: linear-gradient(135deg, #ff4733, #ff9966);
+            color: white;
+            box-shadow: 0 4px 15px rgba(255,71,51,0.3);
+        }
+        .mobile-signup-btn:hover { background: linear-gradient(135deg, #ff3366, #ffcc33); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(255,71,51,0.5); }
+
+        /* ----- Scroll Indicator ----- */
+        .scroll-indicator {
+            position: fixed;
+            top: 70px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, #ff4733, #ffcc33, #ff4733);
+            transform-origin: left;
+            transform: scaleX(0);
+            z-index: 1031;
+        }
+
+        /* ----- Hero Section ----- */
+        .previous-hero {
+            min-height: 60vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 100px 20px 60px;
+            margin-top: 70px;
+        }
+        .hero-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3rem;
+            font-weight: 900;
+            color: #ff9966;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 15px;
+            text-shadow: 0 0 20px rgba(255,153,102,0.5);
+        }
+        .hero-subtitle {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 1.2rem;
+            color: #fff;
+            max-width: 800px;
+            margin: 0 auto 30px;
+            line-height: 1.5;
+        }
+        /* 3D Gallery Buttons */
+        .gallery-btn {
+            position: relative;
+            padding: 10px 20px;
+            background: linear-gradient(145deg, #ff6600, #cc5200);
+            border: none;
+            border-radius: 8px;
+            color: white;
+            font-family: 'Rajdhani', sans-serif;
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transform-style: preserve-3d;
+            transition: all 0.3s cubic-bezier(0.175,0.885,0.32,1.275);
+            overflow: hidden;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+            box-shadow: 0 6px 0 0 #993d00, 0 10px 20px rgba(255,102,0,0.3), inset 0 2px 0 rgba(255,255,255,0.2);
+        }
+        .gallery-btn.outline {
+            background: transparent;
+            border: 2px solid #ff9966;
+            color: #ff9966;
+            box-shadow: none;
+        }
+        .gallery-btn.outline:hover {
+            background: linear-gradient(145deg, #ff9966, #ff6600);
+            color: white;
+            border-color: transparent;
+        }
+        .gallery-btn:hover {
+            transform: translateY(-3px) translateZ(8px);
+            box-shadow: 0 8px 0 0 #993d00, 0 15px 30px rgba(255,102,0,0.4), inset 0 2px 0 rgba(255,255,255,0.3);
+        }
+
+        /* ----- Timeline (Bootstrap responsive) ----- */
+        .timeline-section {
+            padding: 60px 20px;
+        }
+        .timeline {
+            position: relative;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 4px;
+            background: linear-gradient(to bottom, #ff4733, #ffcc33);
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -2px;
+            border-radius: 2px;
+            box-shadow: 0 0 20px rgba(255,71,51,0.5);
+        }
+        .timeline-year {
+            padding: 10px 40px;
+            position: relative;
+            width: 50%;
+            box-sizing: border-box;
+            margin-bottom: 60px;
+        }
+        .timeline-year:nth-child(odd) {
+            left: 0;
+            text-align: right;
+        }
+        .timeline-year:nth-child(even) {
+            left: 50%;
+            text-align: left;
+        }
+        .timeline-year::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: #ff4733;
+            border: 4px solid #000;
+            border-radius: 50%;
+            top: 30px;
+            z-index: 1;
+            box-shadow: 0 0 10px rgba(255,71,51,0.8);
+        }
+        .timeline-year:nth-child(odd)::after { right: -12px; }
+        .timeline-year:nth-child(even)::after { left: -12px; }
+        .year-card {
+            background: rgba(0,0,0,0.6);
+            backdrop-filter: blur(10px);
+            border-radius: 12px;
+            padding: 20px;
+            border: 1px solid rgba(255,71,51,0.3);
+            transition: all 0.3s;
+        }
+        .year-card:hover {
+            transform: translateY(-5px);
+            border-color: #ff9966;
+            box-shadow: 0 10px 20px rgba(255,153,102,0.2);
+        }
+        .year-header { font-family: 'Orbitron'; font-size: 1.8rem; color: #ff9966; margin-bottom: 5px; }
+        .year-theme { color: #ffcc33; font-style: italic; margin-bottom: 15px; }
+        .year-stats { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-bottom: 15px; }
+        .stat-item { background: rgba(255,255,255,0.05); padding: 8px 12px; border-radius: 6px; min-width: 70px; }
+        .stat-number { display: block; font-size: 1.2rem; font-weight: bold; color: #ff4733; }
+        .stat-label { font-size: 0.75rem; color: #ccc; }
+        .highlight-list { list-style: none; padding: 0; margin-bottom: 15px; text-align: left; }
+        .highlight-list li { margin-bottom: 6px; padding-left: 20px; position: relative; color: #ddd; font-size: 0.9rem; }
+        .highlight-list li::before { content: '▸'; position: absolute; left: 0; color: #ff9966; }
+        .year-media {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+            margin-top: 15px;
+        }
+        .media-item {
+            height: 90px;
+            border-radius: 6px;
+            overflow: hidden;
+            position: relative;
+            cursor: pointer;
+        }
+        .media-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s;
+        }
+        .media-item:hover img { transform: scale(1.1); }
+        .media-overlay {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        .media-item:hover .media-overlay { opacity: 1; }
+        .view-more { color: #ffcc33; cursor: pointer; font-weight: bold; font-size: 0.9rem; margin-top: 10px; }
+
+        /* ----- Milestones & Legacy (Bootstrap cards enhanced) ----- */
+        .milestones-section {
+            padding: 50px 20px;
+            background: linear-gradient(135deg, rgba(255,153,102,0.1), rgba(0,102,204,0.1));
+            border-top: 2px solid #ff9966;
+            border-bottom: 2px solid #ff9966;
+        }
+        .milestone-card {
+            background: rgba(0,0,0,0.6);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            transition: all 0.4s;
+        }
+        .milestone-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(255,153,102,0.6);
+            box-shadow: 0 15px 30px rgba(255,153,102,0.2);
+        }
+        .milestone-icon { font-size: 2rem; color: #ff9966; margin-bottom: 10px; }
+        .milestone-year {
+            background: #ff4733;
+            color: white;
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 8px;
+            font-size: 0.8rem;
+            margin-bottom: 8px;
+        }
+        .milestone-title { font-family: 'Orbitron'; font-size: 1.2rem; color: #ffcc33; margin-bottom: 10px; }
+
+        .legacy-stat {
+            background: rgba(0,0,0,0.4);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,153,102,0.3);
+            border-radius: 10px;
+            padding: 15px;
+            transition: all 0.3s;
+        }
+        .legacy-stat:hover {
+            transform: translateY(-5px);
+            border-color: rgba(255,153,102,0.6);
+            box-shadow: 0 10px 20px rgba(255,153,102,0.2);
+        }
+        .legacy-number { font-size: 2rem; font-weight: bold; color: #ffcc33; font-family: 'Orbitron'; margin-bottom: 5px; }
+        .legacy-label { color: #ff9966; font-size: 0.9rem; font-weight: 600; }
+
+        /* ----- Footer (Bootstrap grid) ----- */
+        .footer-3d {
+            background: rgba(0,0,0,0.9);
+            padding: 40px 20px 20px;
+            border-top: 2px solid #ff4733;
+        }
+        .college-logo {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+        .college-name { font-family: 'Orbitron'; color: #ffcc33; font-size: 1.2rem; font-weight: 700; }
+        .footer-tagline { color: #ff9966; font-size: 1rem; font-style: italic; }
+        .social-icon {
+            width: 40px; height: 40px; border-radius: 50%;
+            background: rgba(255,71,51,0.2);
+            display: flex; align-items: center; justify-content: center;
+            color: #ffcc33; font-size: 1.2rem; text-decoration: none;
+            transition: all 0.3s;
+        }
+        .social-icon:hover {
+            background: rgba(255,71,51,0.4);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(255,71,51,0.3);
+        }
+
+        /* ----- Lightbox (Bootstrap modal integration) ----- */
+        .lightbox-modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.95);
+            z-index: 10000;
+            backdrop-filter: blur(10px);
+        }
+        .lightbox-content {
+            position: relative;
+            max-width: 90%;
+            max-height: 90%;
+            margin: 5% auto;
+            text-align: center;
+        }
+        .lightbox-image {
+            max-width: 100%;
+            max-height: 70vh;
+            border: 2px solid #ff4733;
+            border-radius: 8px;
+        }
+        .lightbox-close {
+            position: absolute;
+            top: -40px; right: 0;
+            background: rgba(0,0,0,0.7);
+            border: 2px solid #ff9966;
+            color: white;
+            width: 40px; height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+        }
+        .lightbox-close:hover { background: #ff9966; transform: rotate(90deg); }
+        .lightbox-nav {
+            position: absolute;
+            top: 50%; transform: translateY(-50%);
+            background: rgba(0,0,0,0.5);
+            border: 2px solid #ff9966;
+            color: white;
+            width: 50px; height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+        }
+        .lightbox-nav:hover { background: #ff9966; transform: translateY(-50%) scale(1.1); }
+        .lightbox-prev { left: -60px; }
+        .lightbox-next { right: -60px; }
+
+        /* ----- Back to Top ----- */
+        .back-to-top {
+            position: fixed;
+            bottom: 20px; right: 20px;
+            background: linear-gradient(135deg, #ff4733, #ff9966);
+            color: white;
+            width: 40px; height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: none;
+            z-index: 999;
+            box-shadow: 0 0 20px rgba(255,71,51,0.5);
+            transition: all 0.3s;
+        }
+        .back-to-top:hover { transform: translateY(-3px); box-shadow: 0 0 30px rgba(255,71,51,0.8); }
+        /* ----- LOADER ANIMATION ----- */
+        .loader-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #000;
+            z-index: 99999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 0.5s;
+        }
+        .loader-hidden { opacity: 0; pointer-events: none; visibility: hidden; }
+        .loader-wrapper { display: flex; justify-content: center; align-items: center; flex-wrap: wrap; }
+        .loader-letter {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 4rem;
+            font-weight: 900;
+            color: #ff4733;
+            text-shadow: 0 0 15px rgba(255,71,51,0.7);
+            margin: 0 3px;
+            opacity: 0;
+            animation: letterReveal 0.3s forwards;
+            display: inline-block;
+        }
+        .loader-letter:nth-child(1) { animation-delay: 0.1s; }
+        .loader-letter:nth-child(2) { animation-delay: 0.2s; }
+        .loader-letter:nth-child(3) { animation-delay: 0.3s; }
+        .loader-letter:nth-child(4) { animation-delay: 0.4s; }
+        @keyframes letterReveal { to { opacity: 1; text-shadow: 0 0 20px rgba(255,71,51,1); } }
+        .loader {
+            position: absolute;
+            bottom: -30px;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, transparent, #ffcc33, transparent);
+            animation: loadingBar 2.5s ease-in-out forwards;
+        }
+        @keyframes loadingBar { 0% { transform: translateX(-100%); } 100% { transform: translateX(100%); } }
+        .loader-subtitle {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 1.2rem;
+            color: #ff9966;
+            letter-spacing: 2px;
+            margin-top: 20px;
+            opacity: 0;
+            animation: fadeIn 0.5s ease forwards 1.5s;
+        }
+        @keyframes fadeIn { to { opacity: 1; } }        
+
+@media (max-width: 991px) {
+            .scroll-indicator { top: 0; }
+            .loader-letter { font-size: 3rem; }
+            .route-input-group { flex-direction: column; }
+            .route-btn { width: 100%; justify-content: center; }
+            .navbar-nav {
+                gap: 0;
+            }
+        }
+        @media (max-width: 767px) {
+            .hero-title { font-size: 2.5rem; }
+            .route-planner-wrapper { padding: 30px 20px; }
+            .loader-letter { font-size: 2.5rem; }
+            .map-container { height: 400px; }
+        }
+        @media (max-width: 599px) {
+            .hero-title { font-size: 2rem; }
+            .hero-subtitle { font-size: 1.2rem; }
+            .loader-letter { font-size: 2rem; }
+            .map-container { height: 350px; }
+        }
+        @media (max-width: 380px) {
+            .loader-letter { font-size: 1.5rem; }
+            .map-container { height: 300px; }
+        }
+
+        /* ----- Responsive Timeline (Bootstrap breakpoints) ----- */
+        @media (max-width: 991px) {
+            .scroll-indicator { top: 0; }
+            .timeline::after { left: 30px; }
+            .timeline-year { width: 100%; padding-left: 70px; padding-right: 0; text-align: left; }
+            .timeline-year:nth-child(even) { left: 0; }
+            .timeline-year::after { left: 21px !important; right: auto !important; }
+            .lightbox-prev { left: 10px; }
+            .lightbox-next { right: 10px; }
+            .navbar-nav {
+                gap: 0;
+            }
+        }
+        @media (max-width: 768px) {
+            .hero-title { font-size: 2rem; }
+            .hero-subtitle { font-size: 1rem; }
+            .year-header { font-size: 1.5rem; }
+            .year-media { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width: 480px) {
+            .hero-title { font-size: 1.8rem; }
+            .year-media { grid-template-columns: 1fr; }
+            .legacy-stats .legacy-stat { margin-bottom: 15px; }
+        }
+    </style>
+</head>
+<body>
+
+ 
+    <!-- LOADER (login page style) -->
+    <div class="loader-container" id="loader">
+        <div class="loader-wrapper">
+            <span class="loader-letter" style="animation-delay: 0s">P</span>
+            <span class="loader-letter" style="animation-delay: 0.1s">R</span>
+            <span class="loader-letter" style="animation-delay: 0.2s">E</span>
+            <span class="loader-letter" style="animation-delay: 0.3s">V</span>
+            <span class="loader-letter" style="animation-delay: 0.3s">I</span>
+            <span class="loader-letter" style="animation-delay: 0.3s">O</span>
+            <span class="loader-letter" style="animation-delay: 0.3s">U</span>
+            <span class="loader-letter" style="animation-delay: 0.3s">S</span>
+            <div class="loader"></div>
+        </div>
+    </div>
+
+    <!-- VIDEO BACKGROUND -->
+    <div class="video-background">
+        <video autoplay muted loop playsinline><source src="https://res.cloudinary.com/dpc4l1hic/video/upload/v1770814312/light_gzuewo.mp4" type="video/mp4"></video>
+        <div class="video-overlay"></div>
+    </div>
+    <div class="glass-overlay"></div>
+
+    <!-- CUSTOM CURSOR -->
+    <div class="cursor-dot" data-cursor-dot></div>
+    <div class="cursor-outline" data-cursor-outline></div>
+
+    <!-- SCROLL INDICATOR -->
+    <div class="scroll-indicator"></div>
+
+    <!-- ========== UPDATED NAVIGATION - MATCHING INDEX.HTML STYLE ========== -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container-fluid px-lg-4">
+            <a class="navbar-brand d-lg-none text-warning fw-bold" href="#"></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#festronixNavbar" aria-controls="festronixNavbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="festronixNavbar">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0 w-100 justify-content-center">
+                    <li class="nav-item"><a class="nav-link" href="index.html"><i class="fas fa-home"></i> Home</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="previous.html"><i class="fas fa-history"></i> Previous</a></li>
+                    <li class="nav-item"><a class="nav-link" href="gallery.html"><i class="fas fa-images"></i> Gallery</a></li>
+                    <li class="nav-item"><a class="nav-link" href="events.html"><i class="fas fa-calendar-alt"></i> Events</a></li>
+                    <li class="nav-item"><a class="nav-link" href="sponsors.html"><i class="fas fa-handshake"></i> Sponsors</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.html"><i class="fas fa-info-circle"></i> About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="team.html"><i class="fas fa-users"></i> Team</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contact.html"><i class="fas fa-envelope"></i> Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Auth Extra (will be moved inside collapse via JS) -->
+    <div class="d-lg-none mobile-auth-extra" id="mobileAuthExtra">
+        <div class="mobile-auth-buttons" id="mobileAuthButtons"></div>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <main>
+        <section class="previous-hero">
+            <div class="container text-center">
+                <h1 class="hero-title">LEGACY OF FESTRONIX</h1>
+                <p class="hero-subtitle">Journey through the evolution of FESTRONIX - from its humble beginnings to becoming one of the most anticipated technical fests.</p>
+                <div class="mt-4 d-flex gap-3 justify-content-center flex-wrap">
+                    <a href="#timeline" class="gallery-btn"><i class="fas fa-stream"></i> View Timeline</a>
+                    <a href="#milestones" class="gallery-btn outline"><i class="fas fa-trophy"></i> Key Milestones</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- TIMELINE (Only 2025 Festronix) -->
+        <section id="timeline" class="timeline-section">
+            <div class="container">
+                <h2 class="text-center mb-5" style="color: #ff9966; font-family: 'Orbitron'; font-size: 2rem;">
+                    <i class="fas fa-timeline"></i> FESTRONIX Timeline
+                </h2>
+                <div class="timeline">
+                    <div class="timeline-year">
+                        <div class="year-card">
+                            <h3 class="year-header">FESTRONIX 2026</h3>
+                            <div class="year-theme">"Digital Renaissance: Shaping Tomorrow's Technology"</div>
+                            <div class="year-stats">
+                                <div class="stat-item"><span class="stat-number">1,500+</span><span class="stat-label">Participants</span></div>
+                                <div class="stat-item"><span class="stat-number">50+</span><span class="stat-label">Events</span></div>
+                                <div class="stat-item"><span class="stat-number">₹3L</span><span class="stat-label">Prize Pool</span></div>
+                            </div>
+                            <ul class="highlight-list">
+                                <li>Inaugural edition of FESTRONIX 2.0</li>
+                                <li>Advanced AI & Machine Learning Workshops</li>
+                                <li>Inter-college robotics championship</li>
+                                <li>First edition of "Startup Conclave"</li>
+                                <li>Live coding competitions with industry experts</li>
+                            </ul>
+                            <div class="year-media">
+                                <div class="media-item" data-year="2025" data-index="0">
+                                    <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=500" alt="2025 Inauguration">
+                                    <div class="media-overlay"><i class="fas fa-expand" style="color: #ff9966; font-size: 1.2rem;"></i></div>
+                                </div>
+                                <div class="media-item" data-year="2025" data-index="1">
+                                    <img src="https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=500" alt="2025 Workshop">
+                                    <div class="media-overlay"><i class="fas fa-expand" style="color: #ff9966; font-size: 1.2rem;"></i></div>
+                                </div>
+                                <div class="media-item" data-year="2025" data-index="2">
+                                    <img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=500" alt="2025 Cultural">
+                                    <div class="media-overlay"><i class="fas fa-expand" style="color: #ff9966; font-size: 1.2rem;"></i></div>
+                                </div>
+                            </div>
+                            <div class="view-more" data-year="2025"><i class="fas fa-images"></i> View More Photos</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- MILESTONES -->
+        <section id="milestones" class="milestones-section">
+            <div class="container">
+                <h2 class="text-center mb-5" style="color: #ff9966; font-family: 'Orbitron'; font-size: 2rem;">
+                    <i class="fas fa-landmark"></i> Key Milestones
+                </h2>
+                <div class="row g-4">
+                    <div class="col-md-4">
+                        <div class="milestone-card h-100">
+                            <div class="milestone-icon"><i class="fas fa-rocket"></i></div>
+                            <div class="milestone-year">2026</div>
+                            <h3 class="milestone-title">FESTRONIX 2.0 Launch</h3>
+                            <p class="milestone-description">The inaugural edition with record participation and advanced technical events.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="milestone-card h-100">
+                            <div class="milestone-icon"><i class="fas fa-trophy"></i></div>
+                            <div class="milestone-year">2025</div>
+                            <h3 class="milestone-title">Record Participation</h3>
+                            <p class="milestone-description">1,500+ participants from across Odisha with ₹3 lakh prize pool.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="milestone-card h-100">
+                            <div class="milestone-icon"><i class="fas fa-bullseye"></i></div>
+                            <div class="milestone-year">Future</div>
+                            <h3 class="milestone-title">Expansion Plans</h3>
+                            <p class="milestone-description">National level expansion with international participation.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- LEGACY SECTION -->
+        <section class="legacy-section py-5">
+            <div class="container">
+                <h2 class="text-center mb-4" style="color: #ff9966; font-family: 'Orbitron'; font-size: 2rem;">
+                    <i class="fas fa-crown"></i> FESTRONIX Legacy
+                </h2>
+                <p class="text-center mx-auto" style="max-width: 800px; color: #fff; line-height: 1.5;">
+                    Starting with FESTRONIX 2.0 in 2025, we aim to build a legacy of technical excellence, innovation, and community building.
+                </p>
+                <div class="row g-4 justify-content-center mt-3">
+                    <div class="col-6 col-md-3">
+                        <div class="legacy-stat text-center">
+                            <div class="legacy-number">1</div>
+                            <div class="legacy-label">Edition</div>
+                        </div>
+                    </div>
+                    <div class="col-6 col-md-3">
+                        <div class="legacy-stat text-center">
+                            <div class="legacy-number">1,500+</div>
+                            <div class="legacy-label">Participants</div>
+                        </div>
+                    </div>
+                    <div class="col-6 col-md-3">
+                        <div class="legacy-stat text-center">
+                            <div class="legacy-number">50+</div>
+                            <div class="legacy-label">Events</div>
+                        </div>
+                    </div>
+                    <div class="col-6 col-md-3">
+                        <div class="legacy-stat text-center">
+                            <div class="legacy-number">₹3L+</div>
+                            <div class="legacy-label">Prize Money</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="text-center mt-5">
+                    <button class="gallery-btn" id="downloadLegacy"><i class="fas fa-download"></i> Download Legacy Report</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="footer-3d">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-lg-6">
+                    <div class="d-flex align-items-center gap-3 mb-3">
+                        <img src="https://res.cloudinary.com/dpc4l1hic/image/upload/v1770814304/gift_logo_rzl4tf.png" alt="GIFT Autonomous College Logo" class="college-logo">
+                        <div class="college-name">GIFT AUTONOMOUS<br><span style="font-size: 0.9rem;">BHUBANESWAR</span></div>
+                    </div>
+                    <p class="footer-tagline">Igniting Minds, Empowering Futures</p>
+                    <p style="color: #ff9966; font-size: 0.9rem;">GIFT Autonomous College is committed to providing quality education and fostering innovation through events like FESTRONIX.</p>
+                </div>
+                <div class="col-lg-6">
+                    <h4 style="font-family: 'Orbitron'; color: #ffcc33; font-size: 1.2rem; margin-bottom: 15px;">Connect With Us</h4>
+                    <div class="d-flex gap-3 mb-3">
+                        <a href="https://www.instagram.com/gift.autonomous.bhubaneswar?igsh=MXFiN205c2hwZ2RtYQ==" class="social-icon" target="_blank"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-youtube"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                    <p style="color: #ff9966; font-size: 0.85rem;">Follow us on social media for latest updates and event information!</p>
+                </div>
+            </div>
+            <div class="footer-bottom text-center mt-4 pt-3" style="border-top: 1px solid rgba(255,71,51,0.3);">
+                <p style="color: #888; font-size: 0.8rem;">© 2026 FESTRONIX 2.0 - GIFT Autonomous College. All Rights Reserved.</p>
+                <p style="color: #ffcc33; font-size: 0.9rem;">Pioneering Technical Education Since 1997</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- LIGHTBOX MODAL -->
+    <div class="lightbox-modal" id="lightboxModal">
+        <div class="lightbox-content">
+            <button class="lightbox-close" id="lightboxClose"><i class="fas fa-times"></i></button>
+            <img class="lightbox-image" id="lightboxImage" src="" alt="">
+            <div class="lightbox-info mt-3">
+                <h3 class="lightbox-title" id="lightboxTitle" style="font-family: 'Orbitron'; color: #ff9966;"></h3>
+                <p class="lightbox-description" id="lightboxDescription" style="color: #ccc;"></p>
+                <div class="d-flex justify-content-between align-items-center mt-3 pt-2" style="border-top: 1px solid rgba(255,153,102,0.3);">
+                    <div class="lightbox-date" id="lightboxDate" style="color: #ff9966;"><i class="far fa-calendar"></i> FESTRONIX 2025</div>
+                    <div class="lightbox-count" id="lightboxCount" style="color: #ff9966;">1/3</div>
+                </div>
+            </div>
+            <button class="lightbox-nav lightbox-prev" id="lightboxPrev"><i class="fas fa-chevron-left"></i></button>
+            <button class="lightbox-nav lightbox-next" id="lightboxNext"><i class="fas fa-chevron-right"></i></button>
+        </div>
+    </div>
+
+    <!-- BACK TO TOP -->
+    <button class="back-to-top" id="backToTop"><i class="fas fa-chevron-up"></i></button>
+
+    <!-- Bootstrap JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- jQuery (optional, for smoothness) -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    
+    <!-- UPDATED SCRIPT - MATCHING INDEX.HTML STYLE -->
+    <script>
+        (function() {
+            'use strict';
+
+            // ----- LOADER -----
+            window.addEventListener('load', () => {
+                setTimeout(() => document.getElementById('loader').classList.add('loader-hidden'), 1000);
+            });
+
+
+            // ----- MOBILE MENU (Bootstrap handled) but we need to move mobileAuthExtra into collapse -----
+            function arrangeMobileAuth() {
+                const collapse = document.getElementById('festronixNavbar');
+                const mobileExtra = document.getElementById('mobileAuthExtra');
+                if (collapse && mobileExtra) {
+                    collapse.appendChild(mobileExtra);
+                }
+            }
+
+            // ----- SCROLL INDICATOR & BACK TO TOP -----
+            function initScrollFeatures() {
+                const topBtn = document.getElementById('backToTop');
+                const scrollIndicator = document.querySelector('.scroll-indicator');
+                window.addEventListener('scroll', () => {
+                    if (topBtn) {
+                        topBtn.style.display = window.scrollY > 300 ? 'flex' : 'none';
+                    }
+                    if (scrollIndicator) {
+                        const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+                        const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                        scrollIndicator.style.transform = `scaleX(${winScroll / height})`;
+                    }
+                });
+                if (topBtn) {
+                    topBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+                }
+            }
+
+            // ----- CURSOR ANIMATION -----
+            const cursorDot = document.querySelector("[data-cursor-dot]");
+            const cursorOutline = document.querySelector("[data-cursor-outline]");
+            let mouseX = 0, mouseY = 0, cursorX = 0, cursorY = 0;
+            if (cursorDot && cursorOutline) {
+                document.addEventListener("mousemove", (e) => {
+                    mouseX = e.clientX; mouseY = e.clientY;
+                    cursorDot.style.left = `${mouseX}px`; cursorDot.style.top = `${mouseY}px`;
+                });
+                document.addEventListener("mousedown", () => {
+                    cursorOutline.style.transform = "translate(-50%, -50%) scale(0.8)";
+                    cursorOutline.style.borderColor = "#ffcc33";
+                });
+                document.addEventListener("mouseup", () => {
+                    cursorOutline.style.transform = "translate(-50%, -50%) scale(1)";
+                    cursorOutline.style.borderColor = "rgba(255,71,51,0.8)";
+                });
+                function animateCursor() {
+                    cursorX += (mouseX - cursorX) * 0.15;
+                    cursorY += (mouseY - cursorY) * 0.15;
+                    cursorOutline.style.left = `${cursorX}px`;
+                    cursorOutline.style.top = `${cursorY}px`;
+                    requestAnimationFrame(animateCursor);
+                }
+                animateCursor();
+            }
+
+            // ----- LIGHTBOX -----
+            const lightbox = document.getElementById('lightboxModal');
+            const lbImg = document.getElementById('lightboxImage');
+            const lbTitle = document.getElementById('lightboxTitle');
+            const lbDesc = document.getElementById('lightboxDescription');
+            const lbDate = document.getElementById('lightboxDate');
+            const lbCount = document.getElementById('lightboxCount');
+            let currentYear = '2025', currentIndex = 0;
+            const galleryData = {
+                '2025': [
+                    { src: 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800', title: 'Grand Inauguration 2025', desc: 'The opening ceremony of FESTRONIX 2.0 with college leadership and special guests.' },
+                    { src: 'https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=800', title: 'Workshop Session 2025', desc: 'Students participating in hands-on technical workshops led by industry experts.' },
+                    { src: 'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=800', title: 'Cultural Night 2025', desc: 'Memorable cultural performances showcasing talent from various colleges.' }
+                ]
+            };
+            function openLightbox(year, index) {
+                currentYear = year; currentIndex = index;
+                updateLightbox();
+                lightbox.style.display = 'block';
+                document.body.style.overflow = 'hidden';
+            }
+            function updateLightbox() {
+                const item = galleryData[currentYear][currentIndex];
+                const total = galleryData[currentYear].length;
+                lbImg.src = item.src;
+                lbTitle.innerText = item.title;
+                lbDesc.innerText = item.desc;
+                lbDate.innerHTML = `<i class="far fa-calendar"></i> FESTRONIX ${currentYear}`;
+                lbCount.textContent = `${currentIndex + 1}/${total}`;
+            }
+            document.getElementById('lightboxClose').onclick = () => {
+                lightbox.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            };
+            document.getElementById('lightboxNext').onclick = () => {
+                currentIndex = (currentIndex + 1) % galleryData[currentYear].length;
+                updateLightbox();
+            };
+            document.getElementById('lightboxPrev').onclick = () => {
+                currentIndex = (currentIndex - 1 + galleryData[currentYear].length) % galleryData[currentYear].length;
+                updateLightbox();
+            };
+            // Event listeners for media items
+            document.querySelectorAll('.media-item').forEach(item => {
+                item.addEventListener('click', (e) => {
+                    const year = e.currentTarget.getAttribute('data-year');
+                    const index = parseInt(e.currentTarget.getAttribute('data-index'));
+                    openLightbox(year, index);
+                });
+            });
+            document.querySelectorAll('.view-more').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const year = e.currentTarget.getAttribute('data-year');
+                    openLightbox(year, 0);
+                });
+            });
+            // Keyboard navigation
+            document.addEventListener('keydown', (e) => {
+                if (lightbox.style.display === 'block') {
+                    if (e.key === 'Escape') { lightbox.style.display = 'none'; document.body.style.overflow = 'auto'; }
+                    if (e.key === 'ArrowLeft') document.getElementById('lightboxPrev').click();
+                    if (e.key === 'ArrowRight') document.getElementById('lightboxNext').click();
+                }
+            });
+
+            // ----- DOWNLOAD LEGACY REPORT -----
+            const downloadBtn = document.getElementById('downloadLegacy');
+            if (downloadBtn) {
+                downloadBtn.addEventListener('click', () => {
+                    const notification = document.createElement('div');
+                    notification.style.cssText = `
+                        position: fixed; top: 100px; right: 20px; background: linear-gradient(145deg, #009933, #006622);
+                        color: white; padding: 15px 20px; border-radius: 10px; font-family: 'Rajdhani', sans-serif;
+                        font-weight: 600; z-index: 10001; box-shadow: 0 5px 20px rgba(0,153,51,0.4);
+                        animation: slideInNotification 0.3s ease, fadeOutNotification 0.3s ease 2.7s;
+                    `;
+                    notification.textContent = `Preparing FESTRONIX 2025 Legacy Report...`;
+                    document.body.appendChild(notification);
+                    setTimeout(() => notification.remove(), 3000);
+                });
+            }
+
+            // ----- SMOOTH SCROLL FOR ANCHOR LINKS -----
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        window.scrollTo({ top: targetElement.offsetTop - 80, behavior: 'smooth' });
+                    }
+                });
+            });
+
+            // ----- VIDEO AUTOPLAY FALLBACK -----
+            const video = document.querySelector('video');
+            if (video) video.play().catch(e => console.log("Autoplay blocked"));
+
+            // ----- INTERSECTION OBSERVER (fade-in animations) -----
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+            document.querySelectorAll('.year-card, .milestone-card, .legacy-stat').forEach(item => {
+                item.style.opacity = '0';
+                item.style.transform = 'translateY(20px)';
+                item.style.transition = 'all 0.5s ease';
+                observer.observe(item);
+            });
+
+            // ----- SET ACTIVE NAVIGATION -----
+            function setActiveNavItem() {
+                const currentPage = window.location.pathname.split('/').pop() || 'previous.html';
+                document.querySelectorAll('.nav-link').forEach(link => {
+                    const href = link.getAttribute('href');
+                    if (href === currentPage) link.classList.add('active');
+                    else link.classList.remove('active');
+                });
+            }
+
+            // ----- INITIALIZATION -----
+            document.addEventListener('DOMContentLoaded', function() {
+                // Create mobile user info placeholders if not exist (for mobile details)
+                if (!document.getElementById('mobileUserName')) {
+                    const nameSpan = document.createElement('span');
+                    nameSpan.id = 'mobileUserName';
+                    nameSpan.style.display = 'none';
+                    document.body.appendChild(nameSpan);
+                    const emailSpan = document.createElement('span');
+                    emailSpan.id = 'mobileUserEmail';
+                    emailSpan.style.display = 'none';
+                    document.body.appendChild(emailSpan);
+                }
+                
+                updateUserAuthDisplay();
+                arrangeMobileAuth();
+                initScrollFeatures();
+                setActiveNavItem();
+            });
+        })();
+    </script>
+</body>
+</html>

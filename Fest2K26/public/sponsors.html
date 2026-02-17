@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <title>FESTRONIX 2.0 - Sponsors (Bootstrap)</title>
+    <!-- BOOTSTRAP 5 CORE -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- icons + fonts -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Orbitron:wght@400;600;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- custom styles -->
+    <style>
+        /* ----- bootstrap reset remains, minimal theme overrides ----- */
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        
+        body {
+            background: #000;
+            font-family: 'Rajdhani', sans-serif;
+            overflow-x: hidden;
+            color: #fff;
+            cursor: none; 
+        }
+        a, button { cursor: none; }
+        @media (hover: none) and (pointer: coarse) { 
+            body, a, button { cursor: auto; } 
+            .cursor-dot, .cursor-outline { display: none !important; }
+        }
+
+        /* ----- LOADER ANIMATION - OPTIMIZED FOR FAST LOADING ----- */
+        .loader-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #000;
+            z-index: 99999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 0.3s ease;
+        }
+        .loader-hidden { 
+            opacity: 0; 
+            pointer-events: none; 
+            visibility: hidden; 
+        }
+        .loader-wrapper { 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            flex-wrap: wrap; 
+        }
+        .loader-letter {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 4rem;
+            font-weight: 900;
+            color: #ff4733;
+            text-shadow: 0 0 15px rgba(255,71,51,0.7);
+            margin: 0 3px;
+            opacity: 0;
+            animation: letterReveal 0.2s forwards;
+            display: inline-block;
+        }
+        .loader-letter:nth-child(1) { animation-delay: 0.1s; }
+        .loader-letter:nth-child(2) { animation-delay: 0.15s; }
+        .loader-letter:nth-child(3) { animation-delay: 0.2s; }
+        .loader-letter:nth-child(4) { animation-delay: 0.25s; }
+        .loader-letter:nth-child(5) { animation-delay: 0.3s; }
+        .loader-letter:nth-child(6) { animation-delay: 0.35s; }
+        .loader-letter:nth-child(7) { animation-delay: 0.4s; }
+        .loader-letter:nth-child(8) { animation-delay: 0.45s; }
+        @keyframes letterReveal { 
+            to { 
+                opacity: 1; 
+                text-shadow: 0 0 20px rgba(255,71,51,1); 
+            } 
+        }
+        .loader {
+            position: absolute;
+            bottom: -30px;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, transparent, #ffcc33, transparent);
+            animation: loadingBar 1.5s ease-in-out forwards;
+        }
+        @keyframes loadingBar { 
+            0% { transform: translateX(-100%); } 
+            100% { transform: translateX(100%); } 
+        }
+        .loader-subtitle {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 1.2rem;
+            color: #ff9966;
+            letter-spacing: 2px;
+            margin-top: 20px;
+            opacity: 0;
+            animation: fadeIn 0.5s ease forwards 0.8s;
+        }
+        @keyframes fadeIn { to { opacity: 1; } }
+
+        @media (max-width: 991px) {
+            .scroll-indicator { top: 0; }
+            .loader-letter { font-size: 3rem; }
+        }
+        @media (max-width: 767px) {
+            .loader-letter { font-size: 2.5rem; }
+        }
+        @media (max-width: 599px) {
+            .loader-letter { font-size: 2rem; }
+        }
+        @media (max-width: 380px) {
+            .loader-letter { font-size: 1.5rem; }
+        }
+
+        /* ----- CUSTOM CURSOR ----- */
+        .cursor-dot, .cursor-outline {
+            position: fixed; top: 0; left: 0; transform: translate(-50%, -50%);
+            border-radius: 50%; z-index: 9999; pointer-events: none;
+        }
+        .cursor-dot { width: 8px; height: 8px; background: #ffcc33; }
+        .cursor-outline {
+            width: 40px; height: 40px; border: 2px solid rgba(255,71,51,0.8);
+            transition: width 0.2s, height 0.2s, border-color 0.2s;
+        }
+
+        /* ===== UPDATED NAVBAR STYLES - USING ONLY BOOTSTRAP COLLAPSE ===== */
+        .navbar {
+            background: transparent;
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border-bottom: 2px solid #ff4733;
+            min-height: 70px;
+            z-index: 100;
+            padding: 0 1rem;
+        }
+
+        /* Desktop: Center Nav Items */
+        @media (min-width: 992px) {
+            .navbar-nav {
+                width: 100%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                gap: 40px;
+            }
+        }
+
+        .nav-link {
+            color: white !important;
+            font-weight: 700;
+            letter-spacing: 2px;
+            padding: 1rem 2rem !important;
+            font-size: 1.25rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            text-transform: uppercase;
+            white-space: nowrap;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-link i {
+            margin-right: 8px;
+            font-size: 1.1rem;
+        }
+
+        .nav-link:hover { 
+            color: #ffcc33 !important; 
+            background: rgba(255, 71, 51, 0.15); 
+            transform: translateY(-5px); 
+            box-shadow: 0 5px 15px rgba(255, 71, 51, 0.3); 
+        }
+
+        .nav-link.active { 
+            color: #ffcc33 !important; 
+            border-bottom: 4px solid #ffcc33;
+        }
+
+        /* Navbar Toggler Style */
+        .navbar-toggler {
+            border: 2px solid #ff4733 !important;
+            background: rgba(255, 71, 51, 0.2) !important;
+            padding: 0.5rem 0.75rem;
+        }
+        
+        .navbar-toggler-icon {
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(255, 71, 51, 0.9)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") !important;
+        }
+
+        .navbar-toggler:focus {
+            box-shadow: 0 0 0 0.25rem rgba(255, 71, 51, 0.25);
+        }
+
+        /* Mobile menu - Bootstrap collapse styling */
+        @media (max-width: 991px) {
+            .navbar-collapse {
+                background: rgba(0, 0, 0, 0.95);
+                backdrop-filter: blur(10px);
+                -webkit-backdrop-filter: blur(10px);
+                position: absolute;
+                top: 70px;
+                left: 0;
+                right: 0;
+                padding: 1rem;
+                border-bottom: 2px solid #ff4733;
+                border-top: none;
+            }
+            
+            .navbar-nav {
+                background: transparent;
+                margin: 0;
+            }
+            
+            .nav-link {
+                min-height: 50px;
+                padding: 0.8rem 1rem !important;
+                text-align: center;
+                background: rgba(255, 71, 51, 0.1);
+                margin: 4px 0;
+                border-radius: 8px;
+                border: 1px solid rgba(255, 71, 51, 0.3);
+                font-size: 1rem;
+                justify-content: center;
+            }
+            
+            .nav-link:hover {
+                background: rgba(255, 71, 51, 0.3);
+            }
+            
+            .nav-link.active {
+                background: rgba(255, 71, 51, 0.4);
+                border-bottom: 4px solid #ffcc33 !important;
+            }
+        }
+
+        /* ----- Scroll Indicator ----- */
+        .scroll-indicator {
+            position: fixed;
+            top: 70px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, #ff4733, #ffcc33, #ff4733);
+            transform-origin: left;
+            transform: scaleX(0);
+            z-index: 1031;
+        }
+
+        /* ----- SECTION HEADERS – ORBITRON ----- */
+        .section-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3.5rem;
+            font-weight: 900;
+            color: #ffcc33;
+            text-transform: uppercase;
+            text-shadow: 0 0 20px rgba(255,204,51,0.5);
+        }
+        .section-subtitle {
+            font-family: 'Cinzel', serif;
+            font-size: 1.5rem;
+            color: #ff9966;
+        }
+        .category-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: #ff9966;
+            text-shadow: 0 0 10px rgba(255,153,102,0.5);
+        }
+        /* ----- SPONSOR CARD – bootstrap grid, border, hover ----- */
+        .sponsor-card {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 10px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.3s;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        .sponsor-card:hover {
+            background: rgba(255,153,102,0.1);
+            border-color: rgba(255,153,102,0.5);
+            transform: translateY(-10px);
+            box-shadow: 0 10px 25px rgba(255,153,102,0.2);
+        }
+        .sponsor-logo-container {
+            height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+        }
+        .sponsor-logo-container img {
+            max-width: 100%; max-height: 100%;
+            object-fit: contain;
+            filter: drop-shadow(0 0 10px rgba(255,255,255,0.1));
+            transition: 0.3s;
+        }
+        .sponsor-card:hover img { transform: scale(1.05); filter: drop-shadow(0 0 15px rgba(255,153,102,0.5)); }
+        .sponsor-name { font-size: 1.3rem; font-weight: 600; color: #fff; }
+        .sponsor-type { color: #ff9966; text-transform: uppercase; letter-spacing: 1px; }
+
+        /* ----- FEATURED MARKETING SECTION (gradient, border) ----- */
+        .marketing-featured {
+            background: linear-gradient(135deg, rgba(255,153,102,0.1), rgba(0,102,204,0.1));
+            border: 2px solid rgba(0,102,204,0.5);
+            border-radius: 20px;
+            padding: 2.5rem;
+            position: relative;
+        }
+        .marketing-featured::before {
+            content: ''; position: absolute; top: 0; left: 0; right: 0;
+            height: 3px; background: linear-gradient(90deg, #ff9966, #0066cc, #ff9966);
+            animation: shimmer 2s infinite;
+        }
+        @keyframes shimmer { 0% { background-position: -200px 0; } 100% { background-position: 200px 0; } }
+        .featured-sponsor-tag {
+            background: linear-gradient(90deg, #ff9966, #0066cc);
+            color: white; padding: 8px 20px; border-radius: 20px;
+            display: inline-block; font-weight: 600;
+            animation: pulse-glow 2s infinite;
+        }
+        @keyframes pulse-glow { 0% { box-shadow: 0 0 15px rgba(255,153,102,0.5); } 50% { box-shadow: 0 0 25px rgba(255,153,102,0.8); } }
+
+        /* ----- INFINITE SLIDER ----- */
+        .slider-section {
+            background: rgba(0,0,0,0.3);
+            border-radius: 15px;
+            padding: 2rem 0;
+            overflow: hidden;
+        }
+        .slider-track {
+            display: flex;
+            animation: slide 40s linear infinite;
+            width: fit-content;
+        }
+        .slider-track:hover { animation-play-state: paused; }
+        @keyframes slide { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+        .slider-item {
+            flex: 0 0 auto;
+            width: 180px;
+            margin: 0 1.5rem;
+            text-align: center;
+        }
+        .slider-logo-box {
+            height: 70px; display: flex; align-items: center; justify-content: center;
+        }
+        .slider-logo-box img { max-width: 100%; max-height: 100%; filter: grayscale(0.3); transition: 0.3s; }
+        .slider-item:hover img { filter: grayscale(0); transform: scale(1.1); }
+
+        /* ----- 3D BUTTONS (effects) ----- */
+        .btn-3d-sponsor {
+            background: linear-gradient(145deg, #0066cc, #0052a3);
+            border: none; border-radius: 15px;
+            padding: 15px 35px;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700;
+            color: white;
+            text-transform: uppercase;
+            box-shadow: 0 8px 0 #004080, 0 15px 25px rgba(0,102,204,0.3), inset 0 3px 0 rgba(255,255,255,0.2);
+            transition: 0.2s;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .btn-3d-sponsor:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 0 #004080, 0 25px 40px rgba(0,102,204,0.4), inset 0 3px 0 rgba(255,255,255,0.3);
+            background: linear-gradient(145deg, #0077e6, #0066cc);
+            color: white;
+        }
+
+        /* ----- back to top ----- */
+        .back-to-top {
+            position: fixed; bottom: 30px; right: 30px;
+            width: 50px; height: 50px; border-radius: 50%;
+            background: linear-gradient(135deg, #ff4733, #ff9966);
+            border: none; color: white; font-size: 1.5rem;
+            display: none; align-items: center; justify-content: center;
+            box-shadow: 0 0 20px rgba(255,71,51,0.5);
+            z-index: 1000;
+            cursor: pointer;
+        }
+        .back-to-top:hover { transform: translateY(-5px); box-shadow: 0 0 30px rgba(255,71,51,0.8); }
+
+        /* footer */
+        .footer-3d {
+            border-top: 2px solid #ff4733;
+            background: #000;
+            padding: 2.5rem 0 1rem;
+        }
+        .college-logo { width: 60px; height: 60px; border-radius: 50%; object-fit: cover; }
+        .social-icon {
+            width: 45px; height: 45px; border-radius: 50%;
+            background: rgba(255,71,51,0.2); 
+            display: inline-flex; align-items: center; justify-content: center;
+            color: #ffcc33; font-size: 1.5rem;
+            transition: 0.3s;
+            text-decoration: none;
+        }
+        .social-icon:hover { background: rgba(255,71,51,0.4); transform: translateY(-5px); }
+
+        /* Responsive adjustments */
+        @media (max-width: 991px) {
+            .scroll-indicator { top: 0; }
+        }
+
+        /* Card button style */
+        .card-btn {
+            background: transparent;
+            border: 2px solid #ff9966;
+            color: #ff9966;
+            transition: all 0.3s ease;
+            margin-top: auto;
+        }
+        .card-btn:hover {
+            background: #ff9966;
+            color: #000;
+            transform: translateY(-3px);
+        }
+
+        /* Add loading="lazy" to all images for faster initial load */
+        img {
+            loading: lazy;
+        }
+    </style>
+</head>
+<body>
+    <!-- custom cursor -->
+    <div class="cursor-dot" data-cursor-dot></div>
+    <div class="cursor-outline" data-cursor-outline></div>
+
+    <!-- LOADER (sponsors page style) - FIXED TIMING -->
+    <div class="loader-container" id="loader">
+        <div class="loader-wrapper">
+            <span class="loader-letter">S</span>
+            <span class="loader-letter">P</span>
+            <span class="loader-letter">O</span>
+            <span class="loader-letter">N</span>
+            <span class="loader-letter">S</span>
+            <span class="loader-letter">O</span>
+            <span class="loader-letter">R</span>
+            <span class="loader-letter">S</span>
+            <div class="loader"></div>
+        </div>
+        <div class="loader-subtitle">FESTRONIX 2.0</div>
+    </div>
+
+    <!-- SCROLL INDICATOR -->
+    <div class="scroll-indicator"></div>
+
+    <!-- ========== UPDATED NAVIGATION - USING ONLY BOOTSTRAP COLLAPSE ========== -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container-fluid px-lg-4">
+            <a class="navbar-brand d-lg-none text-warning fw-bold" href="#">FESTRONIX</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#festronixNavbar" aria-controls="festronixNavbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="festronixNavbar">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0 w-100 justify-content-center">
+                    <li class="nav-item"><a class="nav-link" href="index.html"><i class="fas fa-home"></i> Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="previous.html"><i class="fas fa-history"></i> Previous</a></li>
+                    <li class="nav-item"><a class="nav-link" href="gallery.html"><i class="fas fa-images"></i> Gallery</a></li>
+                    <li class="nav-item"><a class="nav-link" href="events.html"><i class="fas fa-calendar-alt"></i> Events</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="sponsors.html"><i class="fas fa-handshake"></i> Sponsors</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.html"><i class="fas fa-info-circle"></i> About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="team.html"><i class="fas fa-users"></i> Team</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contact.html"><i class="fas fa-envelope"></i> Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- MAIN CONTENT – bootstrap grid -->
+    <main class="container-fluid px-3 px-md-5" style="margin-top: 90px;">
+        <!-- HEADER -->
+        <div class="row text-center my-5">
+            <div class="col-12">
+                <h1 class="section-title">Our Sponsors</h1>
+                <p class="section-subtitle">Proudly Supported By Industry Leaders</p>
+            </div>
+        </div>
+
+        <!-- MARKETING SPONSOR - featured -->
+        <div class="row justify-content-center mb-5">
+            <div class="col-lg-8">
+                <div class="marketing-featured text-center">
+                    <h3 class="category-title">Managed & Marketed By</h3>
+                    <p class="text-white-50">Official Media & Marketing Partner</p>
+                    <img src="https://res.cloudinary.com/dpc4l1hic/image/upload/v1771088369/Untitled_design_3_cnfuok.png" alt="BrandZone Media" class="img-fluid" style="max-height: 120px;" loading="lazy">
+                    <div class="featured-sponsor-name fs-2 fw-bold text-white mt-3">BrandZone Media</div>
+                    <span class="featured-sponsor-tag mt-3">Official Marketing Partner</span>
+                    <p class="text-secondary mt-3 mx-auto" style="max-width: 600px;">Leading the digital marketing revolution with innovative campaigns and strategic brand partnerships.</p>
+                    <a href="terms.html" class="btn-3d-sponsor mt-3"><i class="fas fa-file-contract"></i> View Partnership Terms</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- BECOME SPONSOR BUTTON -->
+        <div class="row justify-content-center my-4">
+            <div class="col-auto">
+                <a href="https://forms.google.com/your-sponsor-form" class="btn-3d-sponsor" id="becomeSponsorBtn" target="_blank"><i class="fas fa-handshake"></i> Become a Sponsor</a>
+            </div>
+        </div>
+
+        <!-- INFINITE SLIDER – duplicate via js -->
+        <div class="slider-section my-5">
+            <h3 class="text-center fs-1 fw-bold" style="color:#ff9966; font-family: Orbitron;">Our Esteemed Partners</h3>
+            <div class="position-relative">
+                <div class="slider-track" id="sponsorSlider">
+                    <!-- slides will be duplicated once via JS -->
+                    <div class="slider-item"><div class="slider-logo-box"><img src="https://via.placeholder.com/150x80/ff6600/ffffff?text=TECHGIANT" class="img-fluid" loading="lazy"></div><div class="text-white mt-2">TechGiant Inc.</div></div>
+                    <div class="slider-item"><div class="slider-logo-box"><img src="https://via.placeholder.com/150x80/0066cc/ffffff?text=INNOVATELABS" class="img-fluid" loading="lazy"></div><div class="text-white mt-2">InnovateLabs</div></div>
+                    <div class="slider-item"><div class="slider-logo-box"><img src="https://via.placeholder.com/150x80/3366ff/ffffff?text=AI-SOLUTIONS" class="img-fluid" loading="lazy"></div><div class="text-white mt-2">AI Solutions</div></div>
+                    <div class="slider-item"><div class="slider-logo-box"><img src="https://via.placeholder.com/150x80/9900cc/ffffff?text=CYBERNET" class="img-fluid" loading="lazy"></div><div class="text-white mt-2">CyberNet Systems</div></div>
+                    <div class="slider-item"><div class="slider-logo-box"><img src="https://via.placeholder.com/150x80/ff3366/ffffff?text=ROBOWORKS" class="img-fluid" loading="lazy"></div><div class="text-white mt-2">RoboWorks</div></div>
+                    <div class="slider-item"><div class="slider-logo-box"><img src="https://via.placeholder.com/150x80/009933/ffffff?text=GREENENERGY" class="img-fluid" loading="lazy"></div><div class="text-white mt-2">GreenEnergy</div></div>
+                    <div class="slider-item"><div class="slider-logo-box"><img src="https://via.placeholder.com/150x80/00cc99/ffffff?text=DATASYSTEMS" class="img-fluid" loading="lazy"></div><div class="text-white mt-2">DataSystems</div></div>
+                    <div class="slider-item"><div class="slider-logo-box"><img src="https://via.placeholder.com/150x80/ff9966/ffffff?text=DIGITALWAVE" class="img-fluid" loading="lazy"></div><div class="text-white mt-2">DigitalWave</div></div>
+                    <div class="slider-item"><div class="slider-logo-box"><img src="https://via.placeholder.com/150x80/b30000/ffffff?text=FUTURETECH" class="img-fluid" loading="lazy"></div><div class="text-white mt-2">FutureTech</div></div>
+                    <div class="slider-item"><div class="slider-logo-box"><img src="https://via.placeholder.com/150x80/663399/ffffff?text=QUANTUMLEAP" class="img-fluid" loading="lazy"></div><div class="text-white mt-2">QuantumLeap</div></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SPONSOR CATEGORIES - BOOTSTRAP GRID -->
+        <!-- Technical Sponsors -->
+        <div class="sponsor-category my-5 p-4" style="background: rgba(0,0,0,0.4); backdrop-filter: blur(10px); border-radius: 15px;">
+            <div class="category-header text-center mb-4">
+                <h2 class="category-title">Technical Sponsors</h2>
+                <p class="text-white-50">Technology & Innovation Partners</p>
+            </div>
+            <div class="row g-4">
+                <div class="col-sm-6 col-lg-4">
+                    <div class="sponsor-card">
+                        <div class="sponsor-logo-container"><img src="https://via.placeholder.com/200x80/0066cc/fff?text=INNOVATELABS" loading="lazy"></div>
+                        <div class="sponsor-name">InnovateLabs</div>
+                        <div class="sponsor-type">Technical Partner</div>
+                        <a href="terms.html?sponsor=innovatelabs" class="btn card-btn mt-3">View Terms</a>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-lg-4">
+                    <div class="sponsor-card">
+                        <div class="sponsor-logo-container"><img src="https://via.placeholder.com/200x80/3366ff/fff?text=AI-SOLUTIONS" loading="lazy"></div>
+                        <div class="sponsor-name">AI Solutions</div>
+                        <div class="sponsor-type">Technical Partner</div>
+                        <a href="terms.html?sponsor=aisolutions" class="btn card-btn mt-3">View Terms</a>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-lg-4">
+                    <div class="sponsor-card">
+                        <div class="sponsor-logo-container"><img src="https://via.placeholder.com/200x80/9900cc/fff?text=CYBERNET" loading="lazy"></div>
+                        <div class="sponsor-name">CyberNet Systems</div>
+                        <div class="sponsor-type">Technical Partner</div>
+                        <a href="terms.html?sponsor=cybernet" class="btn card-btn mt-3">View Terms</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Event Partners -->
+        <div class="sponsor-category my-5 p-4" style="background: rgba(0,0,0,0.4); backdrop-filter: blur(10px); border-radius: 15px;">
+            <div class="category-header text-center mb-4">
+                <h2 class="category-title">Event Partners</h2>
+                <p class="text-white-50">Supporting Our Vision</p>
+            </div>
+            <div class="row g-4">
+                <div class="col-sm-6 col-lg-4">
+                    <div class="sponsor-card">
+                        <div class="sponsor-logo-container"><img src="https://via.placeholder.com/200x80/009933/fff?text=GREENENERGY" loading="lazy"></div>
+                        <div class="sponsor-name">GreenEnergy</div>
+                        <div class="sponsor-type">Sustainability Partner</div>
+                        <a href="terms.html?sponsor=greenenergy" class="btn card-btn mt-3">View Terms</a>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-lg-4">
+                    <div class="sponsor-card">
+                        <div class="sponsor-logo-container"><img src="https://via.placeholder.com/200x80/00cc99/fff?text=DATASYSTEMS" loading="lazy"></div>
+                        <div class="sponsor-name">DataSystems</div>
+                        <div class="sponsor-type">Data Partner</div>
+                        <a href="terms.html?sponsor=datasystems" class="btn card-btn mt-3">View Terms</a>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-lg-4">
+                    <div class="sponsor-card">
+                        <div class="sponsor-logo-container"><img src="https://via.placeholder.com/200x80/b30000/fff?text=FUTURETECH" loading="lazy"></div>
+                        <div class="sponsor-name">FutureTech</div>
+                        <div class="sponsor-type">Innovation Partner</div>
+                        <a href="terms.html?sponsor=futuretech" class="btn card-btn mt-3">View Terms</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Media Partners -->
+        <div class="sponsor-category my-5 p-4" style="background: rgba(0,0,0,0.4); backdrop-filter: blur(10px); border-radius: 15px;">
+            <div class="category-header text-center mb-4">
+                <h2 class="category-title">Media Partners</h2>
+                <p class="text-white-50">Amplifying Our Message</p>
+            </div>
+            <div class="row g-4 justify-content-center">
+                <div class="col-sm-6 col-lg-4">
+                    <div class="sponsor-card">
+                        <div class="sponsor-logo-container"><img src="https://via.placeholder.com/200x80/ff9966/fff?text=DIGITALWAVE" loading="lazy"></div>
+                        <div class="sponsor-name">DigitalWave</div>
+                        <div class="sponsor-type">Media Partner</div>
+                        <a href="terms.html?sponsor=digitalwave" class="btn card-btn mt-3">View Terms</a>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-lg-4">
+                    <div class="sponsor-card">
+                        <div class="sponsor-logo-container"><img src="https://via.placeholder.com/200x80/663399/fff?text=QUANTUMLEAP" loading="lazy"></div>
+                        <div class="sponsor-name">QuantumLeap</div>
+                        <div class="sponsor-type">Media Partner</div>
+                        <a href="terms.html?sponsor=quantumleap" class="btn card-btn mt-3">View Terms</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CTA: contact -->
+        <div class="row text-center my-5 py-5">
+            <div class="col-12">
+                <h3 style="color:#ff9966; font-family: Orbitron;">Interested in Sponsoring?</h3>
+                <p class="text-white-50 mx-auto" style="max-width: 700px;">Join our growing list of sponsors and be part of the most anticipated technical fest of the year. Contact us to explore partnership opportunities.</p>
+                <a href="contact.html" class="btn-3d-sponsor fs-4 py-3 px-5" id="contactSponsorBtn"><i class="fas fa-envelope"></i> Contact Sponsorship Team</a>
+            </div>
+        </div>
+    </main>
+
+    <!-- FOOTER bootstrap grid -->
+    <footer class="footer-3d">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-6 mb-4 mb-md-0">
+                    <div class="d-flex align-items-center gap-3">
+                        <img src="gift logo.png" alt="GIFT" class="college-logo" loading="lazy">
+                        <div><span class="fw-bold fs-3" style="color:#ffcc33; font-family:Orbitron;">GIFT AUTONOMOUS</span><br><span class="text-white-50">BHUBANESWAR</span></div>
+                    </div>
+                    <p class="text-warning mt-3">Igniting Minds, Empowering Futures</p>
+                    <p class="text-secondary">GIFT Autonomous College is committed to providing quality education and fostering innovation through events like FESTRONIX.</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <h4 class="text-white mb-3">Connect With Us</h4>
+                    <div class="d-flex gap-3 justify-content-md-end">
+                        <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-youtube"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                    <p class="text-warning mt-4 small">Follow us for latest updates!</p>
+                </div>
+            </div>
+            <div class="row mt-5">
+                <div class="col-12 text-center text-white-50 border-top pt-4">
+                    <p>© 2026 FESTRONIX 2.0 - GIFT Autonomous College. All Rights Reserved.</p>
+                    <p class="text-warning">Pioneering Technical Education Since 1997</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button class="back-to-top" id="backToTop"><i class="fas fa-chevron-up"></i></button>
+
+    <!-- Bootstrap JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- UPDATED SCRIPT - REMOVED CUSTOM MOBILE MENU -->
+    <script>
+        (function() {
+            "use strict";
+            
+            // ==================== LOADER - FIXED FOR FAST LOADING ====================
+            setTimeout(function() {
+                const loader = document.getElementById('loader');
+                if (loader) {
+                    loader.classList.add('loader-hidden');
+                }
+            }, 1500);
+
+            document.addEventListener('DOMContentLoaded', function() {
+                setTimeout(function() {
+                    const loader = document.getElementById('loader');
+                    if (loader) {
+                        loader.classList.add('loader-hidden');
+                    }
+                }, 800);
+            });
+
+            // ---------- CURSOR ANIMATION ----------
+            const cursorDot = document.querySelector("[data-cursor-dot]");
+            const cursorOutline = document.querySelector("[data-cursor-outline]");
+            if (cursorDot && cursorOutline) {
+                let mouseX = 0, mouseY = 0, cursorX = 0, cursorY = 0;
+                document.addEventListener("mousemove", (e) => { 
+                    mouseX = e.clientX; mouseY = e.clientY; 
+                    cursorDot.style.left = mouseX + "px"; cursorDot.style.top = mouseY + "px"; 
+                });
+                document.addEventListener("mousedown", () => { 
+                    if(cursorOutline) { 
+                        cursorOutline.style.transform = "translate(-50%, -50%) scale(0.8)"; 
+                        cursorOutline.style.borderColor = "#ffcc33"; 
+                    } 
+                });
+                document.addEventListener("mouseup", () => { 
+                    if(cursorOutline) { 
+                        cursorOutline.style.transform = "translate(-50%, -50%) scale(1)"; 
+                        cursorOutline.style.borderColor = "rgba(255,71,51,0.8)"; 
+                    } 
+                });
+                function animateCursor() { 
+                    cursorX += (mouseX - cursorX) * 0.15; 
+                    cursorY += (mouseY - cursorY) * 0.15; 
+                    cursorOutline.style.left = cursorX + "px"; 
+                    cursorOutline.style.top = cursorY + "px"; 
+                    requestAnimationFrame(animateCursor); 
+                }
+                animateCursor();
+
+                // Hover effect for interactive elements
+                document.querySelectorAll('a, button, .btn-3d-sponsor, .card-btn, .social-icon, .back-to-top').forEach(el => {
+                    el.addEventListener('mouseenter', () => {
+                        cursorOutline.style.width = '50px';
+                        cursorOutline.style.height = '50px';
+                        cursorOutline.style.borderColor = '#ffcc33';
+                    });
+                    el.addEventListener('mouseleave', () => {
+                        cursorOutline.style.width = '40px';
+                        cursorOutline.style.height = '40px';
+                        cursorOutline.style.borderColor = 'rgba(255,71,51,0.8)';
+                    });
+                });
+            }
+
+            // ---------- SCROLL INDICATOR & BACK TO TOP ----------
+            function initScrollFeatures() {
+                const topBtn = document.getElementById('backToTop');
+                const scrollIndicator = document.querySelector('.scroll-indicator');
+                window.addEventListener('scroll', () => {
+                    if (topBtn) {
+                        topBtn.style.display = window.scrollY > 300 ? 'flex' : 'none';
+                    }
+                    if (scrollIndicator) {
+                        const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+                        const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                        scrollIndicator.style.transform = `scaleX(${winScroll / height})`;
+                    }
+                });
+                if (topBtn) {
+                    topBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+                }
+            }
+
+            // ---------- SET ACTIVE NAVIGATION ----------
+            function setActiveNavItem() {
+                const currentPage = window.location.pathname.split('/').pop() || 'sponsors.html';
+                document.querySelectorAll('.nav-link').forEach(link => {
+                    const href = link.getAttribute('href');
+                    if (href === currentPage) link.classList.add('active');
+                    else link.classList.remove('active');
+                });
+            }
+
+            // ---------- SLIDER DUPLICATE ----------
+            const track = document.getElementById('sponsorSlider');
+            if (track && !track.hasAttribute('data-duplicated')) {
+                const clone = track.innerHTML;
+                track.innerHTML = clone + clone;
+                track.setAttribute('data-duplicated', 'true');
+            }
+
+            // ---------- SPONSOR BUTTONS ----------
+            const becomeBtn = document.getElementById('becomeSponsorBtn');
+            if (becomeBtn) {
+                becomeBtn.href = 'https://forms.google.com/your-sponsor-form-link';
+            }
+
+            // ---------- VIDEO AUTOPLAY FALLBACK ----------
+            const video = document.querySelector('video');
+            if (video) video.play().catch(e => console.log("Autoplay blocked"));
+
+            // ---------- INITIALIZATION ----------
+            document.addEventListener('DOMContentLoaded', function() {
+                initScrollFeatures();
+                setActiveNavItem();
+            });
+        })();
+    </script>
+</body>
+</html>

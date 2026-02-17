@@ -1,0 +1,1587 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <title>FESTRONIX 2.0 – Team</title>
+    
+    <!-- BOOTSTRAP 5 + ICONS + FONTS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Orbitron:wght@400;600;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --blood: #b30000;
+            --ember: #ff2a00;
+            --fire: #ff5500;
+            --yellow-gold: #ffcc33;
+            --light-orange: #ff9966;
+            --dark-bg: #0a0000;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        
+        body {
+            background: #000;
+            font-family: 'Rajdhani', sans-serif;
+            color: #e0e0e0;
+            overflow-x: hidden;
+            cursor: none;
+        }
+        @media (max-width: 768px) { body { cursor: auto; } .cursor, .cursor-dot { display: none !important; } }
+
+        /* ----- CURSOR – O(1) direct update ----- */
+        .cursor, .cursor-dot {
+            position: fixed; pointer-events: none; z-index: 10000;
+            transform: translate(-50%, -50%);
+        }
+        .cursor {
+            width: 40px; height: 40px; border: 2px solid #ff2a00;
+            border-radius: 50%; backdrop-filter: blur(2px);
+            transition: all 0.2s ease;
+        }
+        .cursor-dot { width: 8px; height: 8px; background: #ffcc33; border-radius: 50%; }
+
+        /* ----- VIDEO BACKGROUND ----- */
+        .video-background {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100vh; z-index: -1; overflow: hidden;
+        }
+        .video-background video {
+            position: absolute; top: 50%; left: 50%; min-width: 100%; min-height: 100%;
+            transform: translate(-50%, -50%); object-fit: cover;
+        }
+        .video-overlay {
+            position: absolute; inset: 0; background: rgba(10,0,0,0.3); mix-blend-mode: multiply;
+        }
+
+        /* ===== UPDATED NAVBAR STYLES - MATCHING INDEX.HTML ===== */
+        .navbar {
+            background: transparent;
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border-bottom: 2px solid #ff4733;
+            min-height: 70px;
+            z-index: 100;
+            padding: 0 1rem;
+        }
+
+        /* Desktop: Center Nav Items */
+        @media (min-width: 992px) {
+            .navbar-nav {
+                width: 100%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                gap: 40px;
+            }
+        }
+
+        .nav-link {
+            color: white !important;
+            font-weight: 700;
+            letter-spacing: 2px;
+            padding: 1rem 2rem !important;
+            font-size: 1.25rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            text-transform: uppercase;
+            white-space: nowrap;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-link i {
+            margin-right: 8px;
+            font-size: 1.1rem;
+        }
+
+        .nav-link:hover { 
+            color: #ffcc33 !important; 
+            background: rgba(255, 71, 51, 0.15); 
+            transform: translateY(-5px); 
+            box-shadow: 0 5px 15px rgba(255, 71, 51, 0.3); 
+        }
+
+        .nav-link.active { 
+            color: #ffcc33 !important; 
+            border-bottom: 4px solid #ffcc33;
+        }
+
+        .user-auth-container {
+            margin-left: 20px;
+        }
+
+        /* Navbar Toggler Style */
+        .navbar-toggler {
+            border: 2px solid #ff4733 !important;
+            background: rgba(255, 71, 51, 0.2) !important;
+            padding: 0.5rem 0.75rem;
+        }
+        
+        .navbar-toggler-icon {
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(255, 71, 51, 0.9)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") !important;
+        }
+
+        .navbar-toggler:focus {
+            box-shadow: 0 0 0 0.25rem rgba(255, 71, 51, 0.25);
+        }
+
+        /* Mobile menu transparency */
+        @media (max-width: 991px) {
+            .navbar-collapse {
+                background: transparent !important;
+                position: absolute;
+                top: 70px;
+                left: 0;
+                right: 0;
+                padding: 1rem;
+                backdrop-filter: blur(8px);
+                -webkit-backdrop-filter: blur(8px);
+                border-bottom: 2px solid #ff4733;
+            }
+            
+            .navbar-nav {
+                background: transparent;
+                margin: 0;
+            }
+            
+            .nav-link {
+                min-height: 50px;
+                padding: 0.8rem 1rem !important;
+                text-align: center;
+                background: rgba(0, 0, 0, 0.4);
+                margin: 4px 0;
+                border-radius: 8px;
+                border: 1px solid rgba(255, 71, 51, 0.3);
+                font-size: 1rem;
+            }
+            
+            .nav-link:hover {
+                background: rgba(255, 71, 51, 0.3);
+            }
+            
+            .nav-link.active {
+                background: rgba(255, 71, 51, 0.4);
+                border-bottom: 4px solid #ffcc33 !important;
+            }
+
+            .user-auth-container {
+                margin-left: 0;
+                margin-top: 5px;
+            }
+        }
+
+        /* ----- User Auth Button (Desktop) ----- */
+        .user-auth-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255,71,51,0.3);
+            border: 2px solid #ff4733;
+            color: white;
+            font-weight: 700;
+            padding: 0 20px;
+            min-height: 50px;
+            text-decoration: none;
+            transition: all 0.3s;
+            border-radius: 10px;
+            white-space: nowrap;
+        }
+        .user-auth-btn:hover {
+            color: #ffcc33;
+            background: rgba(255,71,51,0.4);
+            transform: translateY(-2px);
+        }
+        .user-auth-btn i { margin-right: 8px; }
+
+
+
+        /* ----- Scroll Indicator ----- */
+        .scroll-indicator {
+            position: fixed;
+            top: 70px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, #ff4733, #ffcc33, #ff4733);
+            transform-origin: left;
+            transform: scaleX(0);
+            z-index: 1031;
+        }
+
+        /* ----- MOBILE MENU BOOTSTRAP OFFCANVAS STYLE (quick overlay) ----- */
+        .mobile-nav-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.95); backdrop-filter: blur(10px);
+            z-index: 2000; display: none;
+        }
+        .mobile-nav-overlay.show { display: block; }
+        .mobile-nav-container {
+            position: absolute; top: 0; right: 0; width: 85%; height: 100%;
+            background: linear-gradient(135deg, #0a0a0a, #1a1a2e); border-left: 2px solid #ff4733;
+            padding: 2rem 1.5rem;
+        }
+
+        /* ----- 3D TEAM CARDS – ADJUSTED SIZE FOR DESKTOP (SMALLER) ----- */
+        .team-card-parent {
+            width: 100%; 
+            max-width: 380px; /* Limit maximum width on desktop */
+            margin-left: auto;
+            margin-right: auto;
+            height: 480px; /* Reduced from 560px */
+            perspective: 1000px; 
+            margin-bottom: 30px;
+        }
+        
+        /* Desktop specific adjustments - even smaller on large screens */
+        @media (min-width: 1400px) {
+            .team-card-parent {
+                max-width: 360px; /* Smaller on large desktops */
+                height: 450px;
+            }
+        }
+        
+        @media (max-width: 1200px) and (min-width: 992px) {
+            .team-card-parent {
+                max-width: 340px; /* Even smaller on medium-large screens */
+                height: 460px;
+            }
+        }
+        
+        @media (max-width: 992px) { 
+            .team-card-parent { 
+                max-width: 400px; /* Slightly larger on tablets */
+                height: 500px;
+            } 
+        }
+        
+        @media (max-width: 768px) { 
+            .team-card-parent { 
+                max-width: 100%; /* Full width on mobile */
+                height: 520px; /* Original size on mobile for better readability */ 
+            } 
+        }
+
+        /* Center the cards in their columns */
+        .col-xl-4, .col-lg-6, .col-md-6 {
+            display: flex;
+            justify-content: center;
+        }
+
+        .team-card-3d {
+            height: 100%; 
+            width: 100%;
+            border-radius: 20px; /* Slightly smaller radius */
+            position: relative;
+            background: linear-gradient(135deg, #0a0000 0%, #1a0a0a 100%);
+            transform-style: preserve-3d; 
+            box-shadow: rgba(179,0,0,0.2) 0px 20px 20px -5px; /* Reduced shadow */
+            border: 1px solid rgba(255,42,0,0.2); 
+            transition: all 0.5s ease-in-out;
+        }
+        
+        .team-card-glass {
+            position: absolute; 
+            inset: 8px; /* Reduced from 10px */
+            border-radius: 20px; /* Matching card radius */
+            background: linear-gradient(0deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.15) 100%);
+            transform: translate3d(0,0,20px); /* Reduced from 25px */
+            border-left: 1px solid rgba(255,255,255,0.2);
+            border-bottom: 1px solid rgba(255,255,255,0.2); 
+            backdrop-filter: blur(8px); /* Slightly less blur */
+        }
+        
+        .team-card-content {
+            position: relative; 
+            z-index: 3; 
+            padding: 50px 25px 25px; /* Reduced top padding from 70px */
+            transform: translate3d(0,0,21px); /* Adjusted */
+            text-align: center; 
+            display: flex;
+            flex-direction: column; 
+            align-items: center; 
+            height: 100%;
+        }
+        
+        .team-image {
+            width: 130px; /* Reduced from 150px */
+            height: 130px; /* Reduced from 150px */
+            border-radius: 50%; 
+            overflow: hidden;
+            border: 3px solid rgba(255,204,51,0.3); 
+            box-shadow: 0 0 25px rgba(255,204,51,0.2); /* Reduced shadow */
+            transform: translateZ(25px); /* Reduced from 30px */
+            transition: all 0.5s; 
+            margin-bottom: 20px; /* Reduced from 25px */
+        }
+        
+        .team-image img { 
+            width: 100%; 
+            height: 100%; 
+            object-fit: cover; 
+            transition: transform 0.5s; 
+        }
+        
+        .team-card-3d h3 {
+            font-family: 'Orbitron', sans-serif; 
+            font-size: 1.8rem; /* Reduced from 2rem */
+            color: var(--yellow-gold);
+            text-shadow: 0 0 8px rgba(255,204,51,0.3); 
+            transform: translateZ(18px); /* Reduced from 20px */
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+        
+        .team-role {
+            color: var(--fire); 
+            font-weight: 800; /* Slightly lighter */
+            font-size: 1.1rem; /* Reduced from 1.3rem */
+            text-transform: uppercase;
+            letter-spacing: 1.5px; /* Reduced from 2px */
+            transform: translateZ(14px); /* Reduced from 15px */
+            margin-bottom: 15px; /* Reduced from 20px */
+        }
+        
+        .team-description {
+            color: rgba(255,255,255,0.95); 
+            font-size: 1rem; /* Reduced from 1.1rem */
+            line-height: 1.6; /* Slightly tighter */
+            transform: translateZ(10px); 
+            max-height: 120px; /* Reduced from 140px */
+            overflow-y: auto;
+            padding: 0 5px; 
+            margin-bottom: 15px; /* Reduced from 20px */
+            flex-grow: 1;
+        }
+        
+        .team-card-bottom {
+            background: rgba(10,0,0,0.5); 
+            backdrop-filter: blur(5px); 
+            border-radius: 12px; /* Reduced from 15px */
+            padding: 12px 20px; /* Reduced from 15px 25px */
+            width: calc(100% - 30px); /* Reduced from 40px */
+            margin: 0 auto;
+            display: flex; 
+            align-items: center; 
+            justify-content: space-between;
+            transform: translate3d(0,0,21px); /* Adjusted */
+            border: 1px solid rgba(255,42,0,0.2);
+        }
+        
+        @media (max-width: 768px) { 
+            .team-card-bottom { 
+                flex-direction: column; 
+                gap: 12px; /* Reduced from 15px */
+            } 
+        }
+
+        .team-social { 
+            display: flex; 
+            gap: 12px; /* Reduced from 15px */
+        }
+        
+        .social-link {
+            width: 36px; /* Reduced from 40px */
+            height: 36px; /* Reduced from 40px */
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center;
+            color: var(--yellow-gold); 
+            text-decoration: none; 
+            transition: all 0.3s;
+            border: 1px solid rgba(255,204,51,0.3); 
+            backdrop-filter: blur(5px);
+            font-size: 1rem; /* Added to scale icons */
+        }
+        
+        .social-link:hover { 
+            background: var(--ember); 
+            color: white; 
+            transform: translateZ(25px); /* Reduced from 30px */
+        }
+
+        .team-view-more .view-more-button {
+            background: none; 
+            border: none; 
+            color: var(--yellow-gold); 
+            font-weight: 600; /* Reduced from bolder */
+            letter-spacing: 0.5px; /* Reduced from 1px */
+            font-size: 0.95rem; /* Added */
+            transition: 0.3s;
+        }
+        
+        .team-view-more:hover .view-more-button { 
+            color: var(--fire); 
+        }
+
+        /* circles logo - scaled down proportionally */
+        .team-card-logo { 
+            position: absolute; 
+            right: 0; 
+            top: 0; 
+            transform-style: preserve-3d; 
+            z-index: 2; 
+        }
+        
+        .team-card-logo .circle {
+            position: absolute; 
+            aspect-ratio: 1; 
+            border-radius: 50%; 
+            background: rgba(255,42,0,0.1);
+            backdrop-filter: blur(4px); /* Reduced from 5px */
+            border: 1px solid rgba(255,42,0,0.2);
+        }
+        
+        .circle1 { 
+            width: 180px; /* Reduced from 220px */
+            transform: translate3d(0,0,18px); /* Reduced from 20px */
+            top: 8px; 
+            right: 8px; 
+        }
+        
+        .circle2 { 
+            width: 150px; /* Reduced from 180px */
+            transform: translate3d(0,0,35px); /* Reduced from 40px */
+            top: 12px; 
+            right: 12px; 
+        }
+        
+        .circle3 { 
+            width: 120px; /* Reduced from 140px */
+            transform: translate3d(0,0,52px); /* Reduced from 60px */
+            top: 16px; 
+            right: 16px; 
+        }
+        
+        .circle4 { 
+            width: 95px; /* Reduced from 110px */
+            transform: translate3d(0,0,70px); /* Reduced from 80px */
+            top: 20px; 
+            right: 20px; 
+        }
+        
+        .circle5 {
+            width: 60px; /* Reduced from 70px */
+            transform: translate3d(0,0,88px); /* Reduced from 100px */
+            top: 28px; 
+            right: 28px;
+            display: grid; 
+            place-content: center; 
+            background: rgba(255,204,51,0.2);
+        }
+        
+        .circle5 svg { 
+            width: 24px; /* Reduced from 28px */
+            fill: var(--yellow-gold); 
+        }
+
+        /* HOVER 3D EFFECT - adjusted for smaller cards */
+        .team-card-parent:hover .team-card-3d { 
+            transform: rotate3d(1,1,0,20deg); /* Slightly less rotation */
+            border-color: rgba(255,42,0,0.4); 
+        }
+        
+        .team-card-parent:hover .team-card-glass { 
+            background: linear-gradient(0deg, rgba(255,255,255,0.1), rgba(255,255,255,0.2)); 
+        }
+        
+        .team-card-parent:hover .team-image { 
+            border-color: rgba(255,204,51,0.6); 
+            box-shadow: 0 0 30px rgba(255,204,51,0.4); /* Reduced from 40px */
+        }
+        
+        .team-card-parent:hover .team-image img { 
+            transform: scale(1.08); /* Slightly less zoom */
+        }
+
+        /* ----- SECTION STYLES (bootstrap friendly) ----- */
+        .section-title {
+            font-family: 'Cinzel', serif; 
+            font-size: 3rem; 
+            color: var(--ember);
+            text-shadow: 0 0 10px var(--ember); 
+            font-weight: 800; 
+            letter-spacing: 3px;
+            display: inline-block; 
+            margin-bottom: 1rem;
+        }
+        
+        .section-subtitle { 
+            font-size: 1.2rem; 
+            color: var(--light-orange); 
+            font-family: 'Orbitron'; 
+        }
+        
+        .team-stats {
+            background: rgba(10,0,0,0.7); 
+            border-radius: 25px; 
+            padding: 3rem;
+            border: 1px solid rgba(255,42,0,0.3); 
+            margin-top: 4rem;
+        }
+        
+        .stat-number { 
+            font-size: 3.5rem; 
+            color: var(--ember); 
+            font-weight: 800; 
+            font-family: 'Orbitron'; 
+        }
+        
+        .btn-3d {
+            background: linear-gradient(45deg, var(--blood), var(--ember)); 
+            border: none;
+            padding: 15px 40px; 
+            font-weight: 600; 
+            color: white; 
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(255,42,0,0.4); 
+            transition: 0.3s;
+        }
+        
+        .btn-3d:hover { 
+            transform: translateY(-5px); 
+            box-shadow: 0 15px 30px rgba(255,42,0,0.6); 
+        }
+        
+        .btn-outline-3d {
+            background: transparent; 
+            border: 2px solid var(--ember); 
+            color: var(--ember);
+            padding: 15px 40px; 
+            border-radius: 10px; 
+            font-weight: 600;
+        }
+        
+        .btn-outline-3d:hover { 
+            background: rgba(255,42,0,0.1); 
+            transform: translateY(-5px); 
+        }
+
+        /* modal */
+        .team-modal {
+            position: fixed; 
+            inset: 0; 
+            background: rgba(0,0,0,0.95); 
+            z-index: 9999;
+            display: none; 
+            justify-content: center; 
+            align-items: center; 
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        
+        .team-modal.active { 
+            display: flex; 
+            opacity: 1; 
+        }
+        
+        .modal-content {
+            background: linear-gradient(135deg, #0a0000, #1a0a0a); 
+            max-width: 600px;
+            border-radius: 30px; 
+            padding: 40px; 
+            border: 2px solid var(--ember);
+            box-shadow: 0 0 50px var(--ember); 
+            position: relative;
+        }
+        
+        .back-to-top {
+            position: fixed; 
+            bottom: 30px; 
+            right: 30px; 
+            width: 50px; 
+            height: 50px;
+            border-radius: 50%; 
+            background: linear-gradient(135deg, #ff4733, #ff9966);
+            border: none; 
+            color: white; 
+            display: none; 
+            align-items: center; 
+            justify-content: center;
+        }
+        
+        @media (max-width: 768px) { 
+            .section-title { 
+                font-size: 2.2rem; 
+            } 
+        }
+        
+        /* bootstrap grid overrides - removed min-width constraint */
+        .team-container .col { 
+            /* Remove min-width constraint to allow natural sizing */
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 991px) {
+            .scroll-indicator { 
+                top: 0; 
+            }
+            .navbar-nav {
+                gap: 0;
+            }
+        }
+
+        /* Additional spacing adjustments for better desktop layout */
+        @media (min-width: 1200px) {
+            .container-fluid.px-md-5 {
+                padding-left: 3rem !important;
+                padding-right: 3rem !important;
+            }
+            
+            .row.g-4 {
+                --bs-gutter-x: 1.5rem;
+                --bs-gutter-y: 1.5rem;
+            }
+        }
+
+        /* Center the row content */
+        .row.justify-content-center {
+            margin-left: auto;
+            margin-right: auto;
+        }
+        /* ----- LOADER ANIMATION ----- */
+        .loader-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #000;
+            z-index: 99999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 0.5s;
+        }
+        .loader-hidden { opacity: 0; pointer-events: none; visibility: hidden; }
+        .loader-wrapper { display: flex; justify-content: center; align-items: center; flex-wrap: wrap; }
+        .loader-letter {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 4rem;
+            font-weight: 900;
+            color: #ff4733;
+            text-shadow: 0 0 15px rgba(255,71,51,0.7);
+            margin: 0 3px;
+            opacity: 0;
+            animation: letterReveal 0.3s forwards;
+            display: inline-block;
+        }
+        .loader-letter:nth-child(1) { animation-delay: 0.1s; }
+        .loader-letter:nth-child(2) { animation-delay: 0.2s; }
+        .loader-letter:nth-child(3) { animation-delay: 0.3s; }
+        .loader-letter:nth-child(4) { animation-delay: 0.4s; }
+        @keyframes letterReveal { to { opacity: 1; text-shadow: 0 0 20px rgba(255,71,51,1); } }
+        .loader {
+            position: absolute;
+            bottom: -30px;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, transparent, #ffcc33, transparent);
+            animation: loadingBar 2.5s ease-in-out forwards;
+        }
+        @keyframes loadingBar { 0% { transform: translateX(-100%); } 100% { transform: translateX(100%); } }
+        .loader-subtitle {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 1.2rem;
+            color: #ff9966;
+            letter-spacing: 2px;
+            margin-top: 20px;
+            opacity: 0;
+            animation: fadeIn 0.5s ease forwards 1.5s;
+        }
+        @keyframes fadeIn { to { opacity: 1; } }        
+
+        @media (max-width: 991px) {
+                    .scroll-indicator { top: 0; }
+                    .loader-letter { font-size: 3rem; }
+                    .route-input-group { flex-direction: column; }
+                    .route-btn { width: 100%; justify-content: center; }
+                    .navbar-nav {
+                        gap: 0;
+                    }
+                }
+                @media (max-width: 767px) {
+                    .hero-title { font-size: 2.5rem; }
+                    .route-planner-wrapper { padding: 30px 20px; }
+                    .loader-letter { font-size: 2.5rem; }
+                    .map-container { height: 400px; }
+                }
+                @media (max-width: 599px) {
+                    .hero-title { font-size: 2rem; }
+                    .hero-subtitle { font-size: 1.2rem; }
+                    .loader-letter { font-size: 2rem; }
+                    .map-container { height: 350px; }
+                }
+                @media (max-width: 380px) {
+                    .loader-letter { font-size: 1.5rem; }
+                    .map-container { height: 300px; }
+                }
+
+/* Sub-team headers styling - UPDATED FOR MOBILE RESPONSIVE */
+.sub-team-header {
+    font-family: 'Orbitron', sans-serif;
+    color: #ffcc33;
+    font-size: 2rem;
+    margin: 40px 0 20px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #ff2a00;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+.sub-team-header small {
+    font-size: 1rem;
+    color: #ff9966;
+    margin-left: 10px;
+    font-family: 'Rajdhani', sans-serif;
+    display: inline-block;
+}
+
+/* Mobile responsive adjustments */
+@media (max-width: 768px) {
+    .sub-team-header {
+        font-size: 1.5rem; /* Smaller font on mobile */
+        margin: 30px 0 15px;
+        padding-bottom: 8px;
+        letter-spacing: 1px;
+        padding-left: 10px; /* Add some padding on mobile */
+        padding-right: 10px;
+    }
+    
+    .sub-team-header small {
+        font-size: 0.85rem; /* Smaller small text on mobile */
+        margin-left: 5px;
+        display: block; /* Stack on mobile for better readability */
+        margin-top: 5px;
+    }
+}
+
+/* Extra small devices */
+@media (max-width: 480px) {
+    .sub-team-header {
+        font-size: 1.3rem;
+        margin: 25px 0 12px;
+    }
+    
+    .sub-team-header small {
+        font-size: 0.8rem;
+    }
+}
+
+/* Landscape mode adjustments */
+@media (max-width: 768px) and (orientation: landscape) {
+    .sub-team-header {
+        font-size: 1.4rem;
+        margin: 20px 0 10px;
+    }
+}
+    </style>
+</head>
+<body>
+    <!-- VIDEO BACKGROUND -->
+    <div class="video-background">
+        <video autoplay muted loop playsinline><source src="light.mp4" type="video/mp4"></video>
+        <div class="video-overlay"></div>
+    </div>
+    <!-- LOADER (login page style) -->
+    <div class="loader-container" id="loader">
+        <div class="loader-wrapper">
+            <span class="loader-letter" style="animation-delay: 0s">T</span>
+            <span class="loader-letter" style="animation-delay: 0.1s">E</span>
+            <span class="loader-letter" style="animation-delay: 0.2s">A</span>
+            <span class="loader-letter" style="animation-delay: 0.3s">M</span>
+            <div class="loader"></div>
+        </div>
+    </div>
+    <!-- CUSTOM CURSOR -->
+    <div class="cursor"></div>
+    <div class="cursor-dot"></div>
+
+    <!-- SCROLL INDICATOR -->
+    <div class="scroll-indicator"></div>
+
+    <!-- MODAL (team details) -->
+    <div class="team-modal" id="teamModal">
+        <div class="modal-content">
+            <button class="btn-close btn-close-white position-absolute top-0 end-0 m-3" id="closeModal" style="color: white; font-size: 1.5rem;"></button>
+            <div class="modal-image d-flex justify-content-center mb-4">
+                <div class="team-image" id="modalImage" style="width:150px; height:150px;"></div>
+            </div>
+            <h2 class="modal-name text-center" id="modalName" style="font-family: Orbitron; color: var(--yellow-gold);">Name</h2>
+            <p class="modal-role text-center fs-4" id="modalRole" style="color: var(--fire);"></p>
+            <p class="modal-description text-center text-white" id="modalDescription"></p>
+            <div class="team-social justify-content-center" id="modalSocial"></div>
+        </div>
+    </div>
+
+    <!-- ========== UPDATED NAVIGATION - MATCHING INDEX.HTML STYLE ========== -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container-fluid px-lg-4">
+            <a class="navbar-brand d-lg-none text-warning fw-bold" href="#"></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#festronixNavbar" aria-controls="festronixNavbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="festronixNavbar">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0 w-100 justify-content-center">
+                    <li class="nav-item"><a class="nav-link" href="index.html"><i class="fas fa-home"></i> Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="previous.html"><i class="fas fa-history"></i> Previous</a></li>
+                    <li class="nav-item"><a class="nav-link" href="gallery.html"><i class="fas fa-images"></i> Gallery</a></li>
+                    <li class="nav-item"><a class="nav-link" href="events.html"><i class="fas fa-calendar-alt"></i> Events</a></li>
+                    <li class="nav-item"><a class="nav-link" href="sponsors.html"><i class="fas fa-handshake"></i> Sponsors</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.html"><i class="fas fa-info-circle"></i> About</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="team.html"><i class="fas fa-users"></i> Team</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contact.html"><i class="fas fa-envelope"></i> Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Auth Extra (will be moved inside collapse via JS) -->
+    <div class="d-lg-none mobile-auth-extra" id="mobileAuthExtra">
+        <div class="mobile-auth-buttons" id="mobileAuthButtons"></div>
+    </div>
+
+    <!-- MOBILE OVERLAY (offcanvas style) -->
+    <div class="mobile-nav-overlay" id="mobileNavOverlay">
+        <div class="mobile-nav-container">
+            <div class="d-flex justify-content-between align-items-center text-white mb-4">
+                <div><i class="fas fa-user-circle fs-1" style="color: #ff9966;"></i></div>
+                <button class="btn-close btn-close-white" id="mobileCloseBtn"></button>
+            </div>
+            <div class="mobile-user-details text-white mb-4">
+                <h4 id="mobileUserName">Guest</h4>
+                <p id="mobileUserEmail" class="text-secondary">Not logged in</p>
+            </div>
+            <div class="d-flex flex-column gap-2">
+                <a href="index.html" class="mobile-nav-item text-white text-decoration-none p-2"><i class="fas fa-home me-3"></i>Home</a>
+                <a href="previous.html" class="mobile-nav-item text-white text-decoration-none p-2"><i class="fas fa-history me-3"></i>Previous</a>
+                <a href="gallery.html" class="mobile-nav-item text-white text-decoration-none p-2"><i class="fas fa-images me-3"></i>Gallery</a>
+                <a href="events.html" class="mobile-nav-item text-white text-decoration-none p-2"><i class="fas fa-calendar-alt me-3"></i>Events</a>
+                <a href="sponsors.html" class="mobile-nav-item text-white text-decoration-none p-2"><i class="fas fa-handshake me-3"></i>Sponsors</a>
+                <a href="about.html" class="mobile-nav-item text-white text-decoration-none p-2"><i class="fas fa-info-circle me-3"></i>About</a>
+                <a href="team.html" class="mobile-nav-item text-white text-decoration-none p-2"><i class="fas fa-users me-3"></i>Team</a>
+                <a href="contact.html" class="mobile-nav-item text-white text-decoration-none p-2"><i class="fas fa-envelope me-3"></i>Contact</a>
+            </div>
+            <div class="mt-4 d-flex flex-column gap-2" id="mobileAuthButtons"></div>
+        </div>
+    </div>
+
+    <!-- MAIN – BOOTSTRAP GRID -->
+    <main class="container-fluid px-3 px-md-5" style="margin-top: 90px;">
+
+        <!-- LEADERSHIP TEAM (2 members - UNCHANGED) -->
+        <div class="team-category mb-5">
+            <div class="section-header text-center mb-4">
+                <h2 class="section-title" style="font-size:2.4rem;">Faculty Lead Co-ordinator</h2>
+                <p class="section-subtitle">The Visionaries Behind FESTRONIX 2.0</p>
+            </div>
+            <!-- bootstrap row with cols (automatic grid) -->
+            <div class="row g-4 team-container justify-content-center">
+                <!-- Member 1 -->
+                <div class="col-xl-4 col-lg-6 col-md-6">
+                    <div class="team-card-parent" data-member="1">
+                        <div class="team-card-3d">
+                            <div class="team-card-logo">
+                                <span class="circle circle3"></span><span class="circle circle4"></span>
+                                <span class="circle circle5">
+                                    <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/></svg>
+                                </span>
+                            </div>
+                            <div class="team-card-glass"></div>
+                            <div class="team-card-content">
+                                <div class="team-image"><img src="https://res.cloudinary.com/dpc4l1hic/image/upload/v1771315014/7beaec65-27a2-4e64-bdf2-fb66adde0368.png" alt="Satya"></div>
+                                <h3>Dr. Satya Ranjan Pattanaik</h3>
+                                <span class="team-role">Events SPOC</span>
+                                <p class="team-description">Overall coordination and strategic planning. Leads core team, manages departments, and coordinates with administration. Exceptional leadership.</p>
+                            </div>
+                            <div class="team-card-bottom">
+                                <div class="team-view-more">
+                                    <button class="view-more-button btn p-0">View Profile</button>
+                                    <i class="bi bi-chevron-down" style="color: #ffcc33;"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Member 2 -->
+                <div class="col-xl-4 col-lg-6 col-md-6">
+                    <div class="team-card-parent" data-member="2">
+                        <div class="team-card-3d">
+                            <div class="team-card-logo">
+                                
+                                <span class="circle circle3"></span><span class="circle circle4"></span>
+                                <span class="circle circle5">
+                                    <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/></svg>
+                                </span>
+                            </div>
+                            <div class="team-card-glass"></div>
+                            <div class="team-card-content">
+                                <div class="team-image"><img src="" alt="Jaga"></div>
+                                <h3>Prof. Jagannath Ray</h3>
+                                <span class="team-role">Co-SPOC</span>
+                                <p class="team-description">Manages PR, marketing, social media, sponsors. Digital marketing expert, boosts fest reach.</p>
+                            </div>
+                            <div class="team-card-bottom">
+                                <div class="team-view-more">
+                                    <button class="view-more-button btn p-0">View Profile</button>
+                                    <i class="bi bi-chevron-down" style="color: #ffcc33;"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- STUDENT CORE MEMBERS - REORGANIZED INTO SUB-TEAMS -->
+        <div class="team-category mb-5">
+            <div class="section-header text-center mb-4">
+                <h2 class="section-title" style="font-size:2.4rem;">STUDENTS CORE MEMBERS</h2>
+                <p class="section-subtitle">The dedicated sub-teams making FESTRONIX happen</p>
+            </div>
+
+            <!-- Sponsor's Team (3 members) -->
+            <h3 class="sub-team-header">Sponsor's Team <small></small></h3>
+            <div class="row g-4 team-container justify-content-center">
+                <!-- Member 5 (Somen Pradhan - moved to Sponsors) -->
+                <div class="col-xl-4 col-lg-6 col-md-6">
+                    <div class="team-card-parent" data-member="5">
+                        <div class="team-card-3d">
+                            <div class="team-card-logo">
+                                <span class="circle circle3"></span><span class="circle circle4"></span>
+                                <span class="circle circle5">
+                                    <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/></svg>
+                                </span>
+                            </div>
+                            <div class="team-card-glass"></div>
+                            <div class="team-card-content">
+                                <div class="team-image"><img src="https://res.cloudinary.com/dpc4l1hic/image/upload/v1771329395/20260121_094336.jpg_uttxgq.jpg" alt="Somen Pradhan"></div>
+                                <h3>Somen Pradhan</h3>
+                                <span class="team-role">Sponsorship Manager</span>
+                                <p class="team-description">Manages sponsor relationships, partnerships, and funding acquisition. Expert in corporate communications.</p>
+                            </div>
+                            <div class="team-card-bottom">
+                                <div class="team-social">
+                                    <a href="#" class="social-link"><i class="bi bi-linkedin"></i></a>
+                                    <a href="#" class="social-link"><i class="bi bi-youtube"></i></a>
+                                    <a href="#" class="social-link"><i class="bi bi-envelope-fill"></i></a>
+                                </div>
+                                <div class="team-view-more">
+                                    <button class="view-more-button btn p-0">View Profile</button>
+                                    <i class="bi bi-chevron-down" style="color: #ffcc33;"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Additional Sponsor Team Member 2 (placeholder - using existing image) -->
+                <div class="col-xl-4 col-lg-6 col-md-6">
+                    <div class="team-card-parent" data-member="9">
+                        <div class="team-card-3d">
+                            <div class="team-card-logo">
+                            
+                                <span class="circle circle3"></span><span class="circle circle4"></span>
+                                <span class="circle circle5">
+                                    <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/></svg>
+                                </span>
+                            </div>
+                            <div class="team-card-glass"></div>
+                            <div class="team-card-content">
+                                <div class="team-image"><img src="https://res.cloudinary.com/dpc4l1hic/image/upload/v1771319206/Screenshot_2026-02-17_143542_u8832k.png" alt="Vikash Adhikari"></div>
+                                <h3>Vikash Adhikari</h3>
+                                <span class="team-role">Sponsorship Coordinator</span>
+                                <p class="team-description">Coordinates sponsor meetings, manages sponsorship deliverables and communications.</p>
+                            </div>
+                            <div class="team-card-bottom">
+                                <div class="team-view-more">
+                                    <button class="view-more-button btn p-0">View Profile</button>
+                                    <i class="bi bi-chevron-down" style="color: #ffcc33;"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Additional Sponsor Team Member 3 (placeholder) -->
+                <div class="col-xl-4 col-lg-6 col-md-6">
+                    <div class="team-card-parent" data-member="10">
+                        <div class="team-card-3d">
+                            <div class="team-card-logo">
+                                
+                                <span class="circle circle3"></span><span class="circle circle4"></span>
+                                <span class="circle circle5">
+                                    <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/></svg>
+                                </span>
+                            </div>
+                            <div class="team-card-glass"></div>
+                            <div class="team-card-content">
+                                <div class="team-image"><img src="https://res.cloudinary.com/dpc4l1hic/image/upload/v1771329604/IMG_20260217_172318154.jpg_bwdgsz.jpg" alt="Deba Prasad Sutar"></div>
+                                <h3>Deba Prasad Sutar</h3>
+                                <span class="team-role">Sponsorship Executive</span>
+                                <p class="team-description">Handles sponsor outreach, proposals, and maintaining sponsor databases.</p>
+                            </div>
+                            <div class="team-card-bottom">
+                                <div class="team-view-more">
+                                    <button class="view-more-button btn p-0">View Profile</button>
+                                    <i class="bi bi-chevron-down" style="color: #ffcc33;"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Ceremony & Closing (4 members) -->
+            <h3 class="sub-team-header">Ceremony & Closing <small></small></h3>
+            <div class="row g-4 team-container justify-content-center">
+                <!-- Member 7 (Priya Sharma - moved to Ceremony) -->
+                <div class="col-xl-3 col-lg-4 col-md-6">
+                    <div class="team-card-parent" data-member="7">
+                        <div class="team-card-3d">
+                            <div class="team-card-logo">
+                            
+                                <span class="circle circle4"></span>
+                                <span class="circle circle5">
+                                    <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/></svg>
+                                </span>
+                            </div>
+                            <div class="team-card-glass"></div>
+                            <div class="team-card-content">
+                                <div class="team-image"><img src="https://res.cloudinary.com/dpc4l1hic/image/upload/v1771319207/Screenshot_2026-02-17_143624_pljod7.png" alt="Priya Sharma"></div>
+                                <h3>Sraddhananda Rath</h3>
+                                <span class="team-role">Ceremony Coordinator</span>
+                                <p class="team-description">Manages opening and closing ceremonies, stage setup, and event flow.</p>
+                            </div>
+                            <div class="team-card-bottom">
+                                <div class="team-view-more">
+                                    <button class="view-more-button btn p-0">View Profile</button>
+                                    <i class="bi bi-chevron-down" style="color: #ffcc33;"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Member 8 (Rahul Mishra - moved to Ceremony) -->
+                <div class="col-xl-3 col-lg-4 col-md-6">
+                    <div class="team-card-parent" data-member="8">
+                        <div class="team-card-3d">
+                            <div class="team-card-logo">
+                                <span class="circle circle4"></span>
+                                <span class="circle circle5">
+                                    <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/></svg>
+                                </span>
+                            </div>
+                            <div class="team-card-glass"></div>
+                            <div class="team-card-content">
+                                <div class="team-image"><img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=400" alt="Dibya Ranjan Jena"></div>
+                                <h3>Dibya Ranjan Jena</h3>
+                                <span class="team-role">Event Management Head</span>
+                                <p class="team-description">Manages all cultural events, logistics, scheduling, and venue coordination.</p>
+                            </div>
+                            <div class="team-card-bottom">
+                                <div class="team-view-more">
+                                    <button class="view-more-button btn p-0">View Profile</button>
+                                    <i class="bi bi-chevron-down" style="color: #ffcc33;"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Additional Ceremony Member 3 -->
+                <div class="col-xl-3 col-lg-4 col-md-6">
+                    <div class="team-card-parent" data-member="11">
+                        <div class="team-card-3d">
+                            <div class="team-card-logo">
+                                <span class="circle circle4"></span>
+                                <span class="circle circle5">
+                                    <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/></svg>
+                                </span>
+                            </div>
+                            <div class="team-card-glass"></div>
+                            <div class="team-card-content">
+                                <div class="team-image"><img src="" alt="Nafeesha Alam "></div>
+                                <h3>Nafeesha Alam </h3>
+                                <span class="team-role">Stage Management</span>
+                                <p class="team-description">Handles stage setup, audio-visual coordination, and backstage management.</p>
+                            </div>
+                            <div class="team-card-bottom">
+                                <div class="team-view-more">
+                                    <button class="view-more-button btn p-0">View Profile</button>
+                                    <i class="bi bi-chevron-down" style="color: #ffcc33;"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Additional Ceremony Member 4 -->
+                <div class="col-xl-3 col-lg-4 col-md-6">
+                    <div class="team-card-parent" data-member="12">
+                        <div class="team-card-3d">
+                            <div class="team-card-logo">
+                                <span class="circle circle4"></span>
+                                <span class="circle circle5">
+                                    <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/></svg>
+                                </span>
+                            </div>
+                            <div class="team-card-glass"></div>
+                            <div class="team-card-content">
+                                <div class="team-image"><img src="https://res.cloudinary.com/dpc4l1hic/image/upload/v1771329673/5c76839b-1ad8-483d-ab0d-9f3305471762.png" alt="Pragyanshree Samal"></div>
+                                <h3>Pragyanshree Samal</h3>
+                                <span class="team-role">Hospitality</span>
+                                <p class="team-description">Manages guest hospitality, green room, and VIP coordination during ceremonies.</p>
+                            </div>
+                            <div class="team-card-bottom">
+                                <div class="team-view-more">
+                                    <button class="view-more-button btn p-0">View Profile</button>
+                                    <i class="bi bi-chevron-down" style="color: #ffcc33;"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Registration & Scheduling (1 member) -->
+            <h3 class="sub-team-header">Registration & Scheduling <small>· 1 member</small></h3>
+            <div class="row g-4 team-container justify-content-center">
+                <!-- New Registration member -->
+                <div class="col-xl-4 col-lg-6 col-md-6">
+                    <div class="team-card-parent" data-member="13">
+                        <div class="team-card-3d">
+                            <div class="team-card-logo">
+                                <span class="circle circle3"></span><span class="circle circle4"></span>
+                                <span class="circle circle5">
+                                    <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/></svg>
+                                </span>
+                            </div>
+                            <div class="team-card-glass"></div>
+                            <div class="team-card-content">
+                                <div class="team-image"><img src="" alt="Ronit Kumar Mishra"></div>
+                                <h3>Ronit Kumar Mishra</h3>
+                                <span class="team-role">Registration Lead</span>
+                                <p class="team-description">Manages participant registrations, scheduling, and helpdesk operations.</p>
+                            </div>
+                            <div class="team-card-bottom">
+                                <div class="team-view-more">
+                                    <button class="view-more-button btn p-0">View Profile</button>
+                                    <i class="bi bi-chevron-down" style="color: #ffcc33;"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Website Development (1 member) -->
+            <h3 class="sub-team-header">Website Development <small>· 1 member</small></h3>
+            <div class="row g-4 team-container justify-content-center">
+                <!-- Member 4 (Sumit Kumar Rout - moved to Website Development) -->
+                <div class="col-xl-4 col-lg-6 col-md-6">
+                    <div class="team-card-parent" data-member="4">
+                        <div class="team-card-3d">
+                            <div class="team-card-logo">
+                               
+                                <span class="circle circle3"></span><span class="circle circle4"></span>
+                                <span class="circle circle5">
+                                    <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/></svg>
+                                </span>
+                            </div>
+                            <div class="team-card-glass"></div>
+                            <div class="team-card-content">
+                                <div class="team-image"><img src="https://res.cloudinary.com/dpc4l1hic/image/upload/v1771317381/e29e83bc-bd7f-468b-b7b6-cbd18f550c64.png" alt="Sumit"></div>
+                                <h3>Sumit Kumar Rout</h3>
+                                <span class="team-role">Website Development</span>
+                                <p class="team-description">Develops website, registration portal, full-stack expert. Seamless UX.</p>
+                            </div>
+                            <div class="team-card-bottom">
+                                <div class="team-social">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Technical & Control (2 members) -->
+            <h3 class="sub-team-header">Technical & Control <small>· 2 members</small></h3>
+            <div class="row g-4 team-container justify-content-center">
+                <!-- Member 6 (Sneha Reddy - moved to Technical) -->
+                <div class="col-xl-4 col-lg-6 col-md-6">
+                    <div class="team-card-parent" data-member="6">
+                        <div class="team-card-3d">
+                            <div class="team-card-logo">
+                                
+                                <span class="circle circle3"></span><span class="circle circle4"></span>
+                                <span class="circle circle5">
+                                    <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/></svg>
+                                </span>
+                            </div>
+                            <div class="team-card-glass"></div>
+                            <div class="team-card-content">
+                                <div class="team-image"><img src="https://res.cloudinary.com/dpc4l1hic/image/upload/v1771318655/Screenshot_2026-02-17_141510_nbr1jb.png" alt="Sneha"></div>
+                                <h3>SK Saiful Adil Qadir</h3>
+                                <span class="team-role">AI/ML Coordinator</span>
+                                <p class="team-description">Any Techniacal Issues</p>
+                            </div>
+                            <div class="team-card-bottom">
+                                <div class="team-social">
+                                    <a href="#" class="social-link"><i class="bi bi-file-earmark-code"></i></a>
+                                    <a href="#" class="social-link"><i class="bi bi-github"></i></a>
+                                    <a href="#" class="social-link"><i class="bi bi-envelope-fill"></i></a>
+                                </div>
+                                <div class="team-view-more">
+                                    <button class="view-more-button btn p-0">View Profile</button>
+                                    <i class="bi bi-chevron-down" style="color: #ffcc33;"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Additional Technical Member -->
+                <div class="col-xl-4 col-lg-6 col-md-6">
+                    <div class="team-card-parent" data-member="14">
+                        <div class="team-card-3d">
+                            <div class="team-card-logo">
+                                
+                                <span class="circle circle3"></span><span class="circle circle4"></span>
+                                <span class="circle circle5">
+                                    <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/></svg>
+                                </span>
+                            </div>
+                            <div class="team-card-glass"></div>
+                            <div class="team-card-content">
+                                <div class="team-image"><img src="https://res.cloudinary.com/dpc4l1hic/image/upload/v1771318848/Screenshot_2026-02-17_143033_pqakf8.png" alt="Arjun Mehta"></div>
+                                <h3>Trilochan Chakaraborty</h3>
+                                <span class="team-role">Technical Lead</span>
+                                <p class="team-description">Oversees technical infrastructure, hardware setup, and technical support.</p>
+                            </div>
+                            <div class="team-card-bottom">
+                                <div class="team-view-more">
+                                    <button class="view-more-button btn p-0">View Profile</button>
+                                    <i class="bi bi-chevron-down" style="color: #ffcc33;"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Content Creation & Promotion (6 members) -->
+            <h3 class="sub-team-header">Content Creation & Promotion <small>· 6 members</small></h3>
+            <div class="row g-4 team-container justify-content-center">
+                <!-- Member 3 (Vikram Patel - moved to Content) -->
+                <div class="col-xl-2 col-lg-3 col-md-4 col-6">
+                    <div class="team-card-parent" data-member="3">
+                        <div class="team-card-3d">
+                            <div class="team-card-logo">
+                                    <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/></svg>
+                                </span>
+                            </div>
+                            <div class="team-card-glass"></div>
+                            <div class="team-card-content" style="padding: 30px 15px 15px;">
+                                <div class="team-image" style="width: 100px; height: 100px;"><img src="https://res.cloudinary.com/dpc4l1hic/image/upload/v1771318072/2bce0020-1985-459b-b278-a7970a9955a5.png" alt="Vikram"></div>
+                                <h3 style="font-size: 1.4rem;">Shakti Prasad Sahoo</h3>
+                                <span class="team-role" style="font-size: 0.9rem;">Content Strategist</span>
+                                <p class="team-description" style="font-size: 0.85rem; max-height: 80px;">Leads content strategy, blog posts, and promotional materials.</p>
+                            </div>
+                            <div class="team-card-bottom" style="padding: 8px 12px;">
+                                <div class="team-view-more">
+                                    <button class="view-more-button btn p-0">View</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Additional Content Members (5 more) -->
+                <div class="col-xl-2 col-lg-3 col-md-4 col-6">
+                    <div class="team-card-parent" data-member="15">
+                        <div class="team-card-3d">
+                            <div class="team-card-glass"></div>
+                            <div class="team-card-content" style="padding: 30px 15px 15px;">
+                                <div class="team-image" style="width: 100px; height: 100px;"><img src="https://res.cloudinary.com/dpc4l1hic/image/upload/v1771317397/9e4f6da9-ae79-4f5b-9786-fcb1565bf33a.png" alt="Arjun"></div>
+                                <h3 style="font-size: 1.0rem;">Ashutosh Parthasarathi</h3>
+                                <span class="team-role" style="font-size: 0.9rem;">Content Writer</span>
+                                <p class="team-description" style="font-size: 0.85rem;">Creates engaging content for social media and website.</p>
+                            </div>
+                            <div class="team-card-bottom" style="padding: 8px 12px;">
+                                <div class="team-view-more">
+                                    <button class="view-more-button btn p-0">View</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-2 col-lg-3 col-md-4 col-6">
+                    <div class="team-card-parent" data-member="16">
+                        <div class="team-card-3d">
+                            <div class="team-card-glass"></div>
+                            <div class="team-card-content" style="padding: 30px 15px 15px;">
+                                <div class="team-image" style="width: 100px; height: 100px;"><img src="https://res.cloudinary.com/dpc4l1hic/image/upload/v1771318227/e52e9af4-197b-480c-9e82-2ed5e16b37da.png" alt="Meera"></div>
+                                <h3 style="font-size: 1.4rem;">Ayush Kumar Nath</h3>
+                                <span class="team-role" style="font-size: 0.9rem;">Social Media</span>
+                                <p class="team-description" style="font-size: 0.85rem;">Manages social media accounts and engagement.</p>
+                            </div>
+                            <div class="team-card-bottom" style="padding: 8px 12px;">
+                                <div class="team-view-more">
+                                    <button class="view-more-button btn p-0">View</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-2 col-lg-3 col-md-4 col-6">
+                    <div class="team-card-parent" data-member="17">
+                        <div class="team-card-3d">
+                            <div class="team-card-glass"></div>
+                            <div class="team-card-content" style="padding: 30px 15px 15px;">
+                                <div class="team-image" style="width: 100px; height: 100px;"><img src="https://images.unsplash.com/photo-1531427186003-8f7a13b8e7b6?w=400" alt="Vivek"></div>
+                                <h3 style="font-size: 1.4rem;">Piyush Nayak</h3>
+                                <span class="team-role" style="font-size: 0.9rem;">Video Editor</span>
+                                <p class="team-description" style="font-size: 0.85rem;">Creates promotional videos and recap reels.</p>
+                            </div>
+                            <div class="team-card-bottom" style="padding: 8px 12px;">
+                                <div class="team-view-more">
+                                    <button class="view-more-button btn p-0">View</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-2 col-lg-3 col-md-4 col-6">
+                    <div class="team-card-parent" data-member="18">
+                        <div class="team-card-3d">
+                            <div class="team-card-glass"></div>
+                            <div class="team-card-content" style="padding: 30px 15px 15px;">
+                                <div class="team-image" style="width: 100px; height: 100px;"><img src="https://res.cloudinary.com/dpc4l1hic/image/upload/v1771319012/Screenshot_2026-02-17_143319_bqcmwg.png" alt="Zayn"></div>
+                                <h3 style="font-size: 1.4rem;">Priyansu Rout</h3>
+                                <span class="team-role" style="font-size: 0.9rem;">Graphic Designer</span>
+                                <p class="team-description" style="font-size: 0.85rem;">Designs posters, banners, and digital assets.</p>
+                            </div>
+                            <div class="team-card-bottom" style="padding: 8px 12px;">
+                                <div class="team-view-more">
+                                    <button class="view-more-button btn p-0">View</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-2 col-lg-3 col-md-4 col-6">
+                    <div class="team-card-parent" data-member="18">
+                        <div class="team-card-3d">
+                            <div class="team-card-glass"></div>
+                            <div class="team-card-content" style="padding: 30px 15px 15px;">
+                                <div class="team-image" style="width: 100px; height: 100px;"><img src="https://res.cloudinary.com/dpc4l1hic/image/upload/v1771318561/8d59567d-36f9-4336-95fb-5a1aa0708d90.png" alt="Zayn"></div>
+                                <h3 style="font-size: 1.4rem;">Suraj Jena</h3>
+                                <span class="team-role" style="font-size: 0.9rem;">Graphic Designer</span>
+                                <p class="team-description" style="font-size: 0.85rem;">Designs posters, banners, and digital assets.</p>
+                            </div>
+                            <div class="team-card-bottom" style="padding: 8px 12px;">
+                                <div class="team-view-more">
+                                    <button class="view-more-button btn p-0">View</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-2 col-lg-3 col-md-4 col-6">
+                    <div class="team-card-parent" data-member="19">
+                        <div class="team-card-3d">
+                            <div class="team-card-glass"></div>
+                            <div class="team-card-content" style="padding: 30px 15px 15px;">
+                                <div class="team-image" style="width: 100px; height: 100px;"><img src="https://res.cloudinary.com/dpc4l1hic/image/upload/v1771318486/c58df1ef-de2d-46bf-81ed-204e5659bd78.png" alt="Rahul"></div>
+                                <h3 style="font-size: 1.4rem;">Sohan Kumar Pradhan</h3>
+                                <span class="team-role" style="font-size: 0.9rem;">Promotions Lead</span>
+                                <p class="team-description" style="font-size: 0.85rem;">Coordinates on-ground promotions and campaigns.</p>
+                            </div>
+                            <div class="team-card-bottom" style="padding: 8px 12px;">
+                                <div class="team-view-more">
+                                    <button class="view-more-button btn p-0">View</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- STATS + JOIN (bootstrap grid) - UPDATED STATS -->
+        <div class="team-stats">
+            <div class="row text-center">
+                <div class="col-12"><h2 class="section-title">Team Statistics</h2><p class="section-subtitle">Behind the Scenes</p></div>
+            </div>
+            <div class="row g-4 mt-2 text-center">
+                <div class="col-md-3 col-6"><div class="stat-number">19</div><div class="stat-label">Core Team</div></div>
+                <div class="col-md-3 col-6"><div class="stat-number">50+</div><div class="stat-label">Volunteers</div></div>
+                <div class="col-md-3 col-6"><div class="stat-number">6</div><div class="stat-label">Sub-teams</div></div>
+                <div class="col-md-3 col-6"><div class="stat-number">1000+</div><div class="stat-label">Man Hours</div></div>
+            </div>
+        </div>
+
+        <div class="join-team my-5 text-center">
+            <h2 class="section-title">Join Our Team</h2>
+            <p class="text-warning mb-4">Want to contribute to FESTRONIX 3.0? We're looking for passionate students.</p>
+            <div class="d-flex flex-wrap gap-3 justify-content-center">
+                <a href="contact.html" class="btn btn-3d"><i class="fas fa-envelope"></i> Contact Us</a>
+                <a href="signup.html?type=volunteer" class="btn btn-outline-3d"><i class="fas fa-hand-paper"></i> Volunteer</a>
+                <a href="#" class="btn btn-outline-3d" onclick="alert('Applications open Dec 2024');"><i class="fas fa-user-plus"></i> Core Team</a>
+            </div>
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="footer-3d py-5" style="border-top: 1px solid #ff2a00;">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-6 mb-4">
+                    <div class="d-flex gap-3">
+                        <img src="gift logo.png" alt="GIFT" class="college-logo" style="width:60px; height:60px; border-radius:50%;">
+                        <div><span class="fs-2" style="color:var(--ember); font-family:Cinzel;">GIFT AUTONOMOUS</span><br><span class="text-secondary">BHUBANESWAR</span></div>
+                    </div>
+                    <p class="text-warning mt-3">Igniting Minds, Empowering Futures</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <h4 style="color:var(--ember);">Connect With Us</h4>
+                    <div class="d-flex gap-3 justify-content-md-end">
+                        <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-youtube"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-linkedin"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-github"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-4 pt-3 border-top border-secondary">
+                <div class="col-12 text-center text-secondary">© 2026 FESTRONIX 2.0 - GIFT Autonomous College. All Rights Reserved.</div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- BACK TO TOP -->
+    <button class="back-to-top" id="backToTop"><i class="fas fa-chevron-up"></i></button>
+
+    <!-- Bootstrap JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    
+    <!-- UPDATED SCRIPT - MATCHING INDEX.HTML STYLE -->
+    <script>
+        (function(){
+            "use strict";
+
+            // ----- CURSOR -----
+            const cursor = document.querySelector('.cursor'), cursorDot = document.querySelector('.cursor-dot');
+            if (cursor && cursorDot) {
+                let mx = 0, my = 0, cx = 0, cy = 0;
+                document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; cursorDot.style.left = mx+'px'; cursorDot.style.top = my+'px'; });
+                function animate() { cx += (mx - cx) * 0.15; cy += (my - cy) * 0.15; if (cursor) { cursor.style.left = cx+'px'; cursor.style.top = cy+'px'; } requestAnimationFrame(animate); }
+                animate();
+                // hover effect
+                document.querySelectorAll('a, button, .team-card-parent').forEach(el => {
+                    el.addEventListener('mouseenter', () => { if (cursor) { cursor.style.transform = 'translate(-50%, -50%) scale(1.5)'; cursor.style.background = 'rgba(255,71,51,0.2)'; cursor.style.borderColor = '#ff5500'; } });
+                    el.addEventListener('mouseleave', () => { if (cursor) { cursor.style.transform = 'translate(-50%, -50%) scale(1)'; cursor.style.background = 'transparent'; cursor.style.borderColor = '#ff2a00'; } });
+                });
+            }
+
+            // ----- TEAM MEMBER DATA (UPDATED) -----
+
+            // ==================== LOADER ====================
+            window.addEventListener('load', function() {
+                setTimeout(function() {
+                    const loader = document.getElementById('loader');
+                    if (loader) loader.classList.add('loader-hidden');
+                }, 3000);
+            });
+
+            // ----- MODAL -----
+            const modal = document.getElementById('teamModal');
+            const modalImg = document.getElementById('modalImage'), modalName = document.getElementById('modalName'), modalRole = document.getElementById('modalRole'), modalDesc = document.getElementById('modalDescription');
+            function showTeamMember(id) {
+                const m = teamMembers[id]; if (!m) return;
+                modalImg.innerHTML = `<img src="${m.image}" alt="${m.name}" style="width:100%; height:100%; object-fit:cover;">`;
+                modalName.textContent = m.name; modalRole.textContent = m.role; modalDesc.textContent = m.desc;
+                modal.classList.add('active'); document.body.style.overflow = 'hidden';
+            }
+            window.showTeamMember = showTeamMember; // global for onclick
+            // attach click events to cards
+            document.querySelectorAll('.team-card-parent').forEach(card => {
+                const id = card.getAttribute('data-member');
+                card.addEventListener('click', (e) => { if (!e.target.closest('.team-social') && !e.target.closest('.view-more-button')) showTeamMember(id); });
+                const btn = card.querySelector('.view-more-button');
+                if (btn) btn.addEventListener('click', (e) => { e.stopPropagation(); showTeamMember(id); });
+            });
+            // close modal
+            document.getElementById('closeModal').addEventListener('click', function(){ modal.classList.remove('active'); document.body.style.overflow = 'auto'; });
+            modal.addEventListener('click', (e) => { if(e.target === modal) { modal.classList.remove('active'); document.body.style.overflow = 'auto'; } });
+
+            // ----- SCROLL INDICATOR & BACK TO TOP -----
+            function initScrollFeatures() {
+                const topBtn = document.getElementById('backToTop');
+                const scrollIndicator = document.querySelector('.scroll-indicator');
+                window.addEventListener('scroll', () => {
+                    if (topBtn) {
+                        topBtn.style.display = window.scrollY > 300 ? 'flex' : 'none';
+                    }
+                    if (scrollIndicator) {
+                        const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+                        const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                        scrollIndicator.style.transform = `scaleX(${winScroll / height})`;
+                    }
+                });
+                if (topBtn) {
+                    topBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+                }
+            }
+
+            // ----- SET ACTIVE NAVIGATION -----
+            function setActiveNavItem() {
+                const currentPage = window.location.pathname.split('/').pop() || 'team.html';
+                document.querySelectorAll('.nav-link').forEach(link => {
+                    const href = link.getAttribute('href');
+                    if (href === currentPage) link.classList.add('active');
+                    else link.classList.remove('active');
+                });
+            }
+
+            // ----- MOBILE MENU TOGGLE -----
+            const mobBtn = document.getElementById('mobileMenuBtn'), overlay = document.getElementById('mobileNavOverlay'), closeBtn = document.getElementById('mobileCloseBtn');
+            if(mobBtn && overlay && closeBtn) {
+                const toggle = () => { overlay.classList.toggle('show'); document.body.style.overflow = overlay.classList.contains('show') ? 'hidden' : ''; };
+                mobBtn.addEventListener('click', toggle); closeBtn.addEventListener('click', toggle);
+                overlay.addEventListener('click', (e) => { if(e.target === overlay) toggle(); });
+            }
+
+            // ----- VIDEO AUTOPLAY FALLBACK -----
+            const video = document.querySelector('video');
+            if (video) video.play().catch(e => console.log("Autoplay blocked"));
+
+            // ----- ENSURE MOBILE USER ELEMENTS -----
+            function ensureMobileUserElements() {
+                if (!document.getElementById('mobileUserName')) {
+                    const nameSpan = document.createElement('span');
+                    nameSpan.id = 'mobileUserName';
+                    nameSpan.style.display = 'none';
+                    document.body.appendChild(nameSpan);
+                    const emailSpan = document.createElement('span');
+                    emailSpan.id = 'mobileUserEmail';
+                    emailSpan.style.display = 'none';
+                    document.body.appendChild(emailSpan);
+                }
+            }
+
+            // ----- INITIALIZATION -----
+            document.addEventListener('DOMContentLoaded', function() {
+                ensureMobileUserElements();
+                updateUserAuthDisplay();
+                arrangeMobileAuth();
+                initScrollFeatures();
+                setActiveNavItem();
+            });
+        })();
+    </script>
+</body>
+</html>

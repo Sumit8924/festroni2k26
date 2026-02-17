@@ -1,0 +1,499 @@
+/* Reset and base styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+    color: #e2e8f0;
+    position: relative;
+    overflow-x: hidden;
+}
+
+/* Decorative background circles */
+.circle {
+    position: absolute;
+    border-radius: 50%;
+    background: linear-gradient(45deg, rgba(56, 189, 248, 0.1), rgba(124, 58, 237, 0.1));
+    z-index: 0;
+}
+
+.circle-1 {
+    width: 300px;
+    height: 300px;
+    top: -100px;
+    left: -100px;
+}
+
+.circle-2 {
+    width: 200px;
+    height: 200px;
+    bottom: -50px;
+    right: 10%;
+}
+
+.circle-3 {
+    width: 150px;
+    height: 150px;
+    bottom: 20%;
+    left: 5%;
+}
+
+/* Container and layout */
+.container {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 1100px;
+}
+
+.login-wrapper {
+    display: flex;
+    background: rgba(30, 41, 59, 0.8);
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Brand section (left side) */
+.brand-section {
+    flex: 1;
+    padding: 50px 40px;
+    background: linear-gradient(145deg, rgba(30, 41, 59, 0.9), rgba(15, 23, 42, 0.9));
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.logo {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(45deg, #38bdf8, #3b82f6);
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 30px;
+    box-shadow: 0 10px 20px rgba(56, 189, 248, 0.3);
+}
+
+.logo i {
+    font-size: 40px;
+    color: white;
+}
+
+.brand-section h1 {
+    font-size: 36px;
+    margin-bottom: 10px;
+    font-weight: 800;
+    background: linear-gradient(45deg, #38bdf8, #60a5fa);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.brand-section h1 span {
+    color: #e2e8f0;
+    -webkit-text-fill-color: #e2e8f0;
+}
+
+.tagline {
+    color: #94a3b8;
+    margin-bottom: 40px;
+    line-height: 1.6;
+    font-size: 16px;
+}
+
+.features {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    margin-top: 20px;
+}
+
+.feature {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.feature i {
+    width: 40px;
+    height: 40px;
+    background: rgba(56, 189, 248, 0.1);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #38bdf8;
+}
+
+.feature p {
+    color: #cbd5e1;
+    font-weight: 500;
+}
+
+/* Card with login form (right side) */
+.card {
+    flex: 1;
+    padding: 50px 40px;
+    background: rgba(30, 41, 59, 0.7);
+}
+
+.card-header {
+    margin-bottom: 40px;
+}
+
+.card-header h2 {
+    font-size: 32px;
+    margin-bottom: 10px;
+    color: #f1f5f9;
+}
+
+.card-header p {
+    color: #94a3b8;
+    font-size: 16px;
+}
+
+/* Form elements */
+#loginForm {
+    width: 100%;
+}
+
+.input-group {
+    margin-bottom: 25px;
+    position: relative;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 8px;
+    color: #cbd5e1;
+    font-weight: 500;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.label-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.forgot-link {
+    color: #38bdf8;
+    text-decoration: none;
+    font-size: 14px;
+    transition: all 0.3s;
+}
+
+.forgot-link:hover {
+    color: #7dd3fc;
+    text-decoration: underline;
+}
+
+.password-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+input {
+    width: 100%;
+    padding: 16px 20px;
+    background: rgba(15, 23, 42, 0.7);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    color: #f1f5f9;
+    font-size: 16px;
+    transition: all 0.3s;
+}
+
+input:focus {
+    outline: none;
+    border-color: #38bdf8;
+    box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.2);
+    background: rgba(15, 23, 42, 0.9);
+}
+
+input::placeholder {
+    color: #64748b;
+}
+
+.toggle-password {
+    position: absolute;
+    right: 15px;
+    background: transparent;
+    border: none;
+    color: #94a3b8;
+    cursor: pointer;
+    padding: 5px;
+    font-size: 18px;
+    transition: color 0.3s;
+}
+
+.toggle-password:hover {
+    color: #38bdf8;
+}
+
+/* Options */
+.options-group {
+    margin-bottom: 25px;
+}
+
+.remember-me {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.remember-me input[type="checkbox"] {
+    width: auto;
+    accent-color: #38bdf8;
+}
+
+.remember-me label {
+    color: #cbd5e1;
+    cursor: pointer;
+    user-select: none;
+}
+
+/* Login button */
+.login-btn {
+    width: 100%;
+    padding: 18px;
+    background: linear-gradient(45deg, #38bdf8, #3b82f6);
+    border: none;
+    border-radius: 12px;
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    transition: all 0.3s;
+    margin-bottom: 25px;
+}
+
+.login-btn:hover {
+    background: linear-gradient(45deg, #0ea5e9, #2563eb);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(56, 189, 248, 0.3);
+}
+
+.login-btn:active {
+    transform: translateY(0);
+}
+
+.btn-text {
+    font-weight: 600;
+}
+
+.btn-icon {
+    font-size: 14px;
+    transition: transform 0.3s;
+}
+
+.login-btn:hover .btn-icon {
+    transform: translateX(5px);
+}
+
+/* Divider */
+.divider {
+    display: flex;
+    align-items: center;
+    margin: 25px 0;
+    color: #64748b;
+}
+
+.divider::before, .divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.divider span {
+    padding: 0 15px;
+    font-size: 14px;
+}
+
+/* Social login */
+.social-login {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 30px;
+}
+
+.social-btn {
+    flex: 1;
+    padding: 15px;
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    background: rgba(15, 23, 42, 0.5);
+    color: #cbd5e1;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.social-btn:hover {
+    border-color: #38bdf8;
+    background: rgba(56, 189, 248, 0.1);
+    transform: translateY(-2px);
+}
+
+.social-btn.google:hover {
+    border-color: #ea4335;
+    background: rgba(234, 67, 53, 0.1);
+}
+
+.social-btn.github:hover {
+    border-color: #333;
+    background: rgba(51, 51, 51, 0.1);
+}
+
+/* Signup link */
+.signup-link {
+    text-align: center;
+    color: #94a3b8;
+    font-size: 15px;
+}
+
+.signup-link a {
+    color: #38bdf8;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s;
+}
+
+.signup-link a:hover {
+    color: #7dd3fc;
+    text-decoration: underline;
+}
+
+/* Footer */
+.footer {
+    text-align: center;
+    margin-top: 40px;
+    color: #64748b;
+    font-size: 14px;
+}
+
+.footer a {
+    color: #94a3b8;
+    text-decoration: none;
+    margin: 0 10px;
+    transition: color 0.3s;
+}
+
+.footer a:hover {
+    color: #38bdf8;
+}
+
+/* Message notifications */
+.message {
+    padding: 15px 20px;
+    border-radius: 12px;
+    margin-bottom: 25px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    animation: slideIn 0.3s ease;
+    transition: opacity 0.3s;
+}
+
+.message.success {
+    background: rgba(34, 197, 94, 0.1);
+    border: 1px solid rgba(34, 197, 94, 0.3);
+    color: #4ade80;
+}
+
+.message.error {
+    background: rgba(239, 68, 68, 0.1);
+    border: 1px solid rgba(239, 68, 68, 0.3);
+    color: #f87171;
+}
+
+.message i {
+    font-size: 18px;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive design */
+@media (max-width: 900px) {
+    .login-wrapper {
+        flex-direction: column;
+    }
+    
+    .brand-section {
+        padding: 40px 30px;
+    }
+    
+    .card {
+        padding: 40px 30px;
+    }
+    
+    .social-login {
+        flex-direction: column;
+    }
+    
+    .circle-1, .circle-2, .circle-3 {
+        display: none;
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        padding: 10px;
+    }
+    
+    .brand-section, .card {
+        padding: 30px 20px;
+    }
+    
+    .brand-section h1 {
+        font-size: 28px;
+    }
+    
+    .card-header h2 {
+        font-size: 26px;
+    }
+    
+    .logo {
+        width: 60px;
+        height: 60px;
+    }
+    
+    .logo i {
+        font-size: 30px;
+    }
+}
