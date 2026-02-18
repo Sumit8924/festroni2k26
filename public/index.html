@@ -2,1343 +2,241 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>FESTRONIX 2.0 - Bootstrap</title>
-    <!-- Bootstrap 5 + Icons -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Orbitron:wght@400;600;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FESTRONIX 2.0 - Top Aligned</title>
     <style>
-        /* OPTIMIZED CRITICAL CSS */
-        * {
+        /* Import Fonts */
+        @import url('https://fonts.googleapis.com/css2?family=Benguiat+ITC:wght@700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Crimson+Text:wght@700&display=swap');
+
+        :root {
+            --red: #e60000;
+            --neon-glow: 
+                0 0 5px var(--red),
+                0 0 10px var(--red),
+                0 0 20px var(--red),
+                0 0 40px var(--red),
+                0 0 80px var(--red);
+        }
+
+        body, html {
+            background-color: #000;
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            background: #000;
-            font-family: 'Rajdhani', sans-serif;
-            overflow-x: hidden;
-            color: white;
-        }
-
-        /* Video Background */
-        .video-background {
-            position: fixed;
-            top: 0;
-            left: 0;
             width: 100%;
             height: 100%;
-            z-index: -1;
             overflow: hidden;
-        }
-
-        .video-background video {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            min-width: 100%;
-            min-height: 100%;
-            width: auto;
-            height: auto;
-            object-fit: cover;
-            opacity: 0.6;
-        }
-
-        .video-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(to bottom, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.3) 50%, rgba(0,0,0,0.8) 100%);
-        }
-
-        /* NAVBAR STYLES */
-        .navbar {
-            background: transparent;
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
-            border-bottom: 2px solid #ff4733;
-            min-height: 70px;
-            z-index: 100;
-        }
-
-        @media (min-width: 992px) {
-            .navbar-nav {
-                width: 100%;
-                display: flex;
-                justify-content: center; 
-                align-items: center;
-                gap: 40px;
-            }
-        }
-
-        .nav-link {
-            color: white !important;
-            font-weight: 700;
-            letter-spacing: 2px;
-            padding: 1rem 2rem !important; 
-            font-size: 1.25rem;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            text-transform: uppercase;
-            white-space: nowrap;
-            border-radius: 10px;    
-        }
-
-        .nav-link:hover { 
-            color: #ffcc33 !important; 
-            background: rgba(255, 71, 51, 0.15); 
-            transform: translateY(-5px); 
-            box-shadow: 0 5px 15px rgba(255, 71, 51, 0.3); 
-        }
-
-        .nav-link.active { 
-            color: #ffcc33 !important; 
-            border-bottom: 4px solid #ffcc33;
-        }
-
-        .user-auth-container {
-            margin-left: 20px;
-        }
-
-        /* TIMER SECTION */
-        .main-timer-section {
-            width: 90%;
-            max-width: 800px;
-            margin: 120px auto 40px;
-            position: relative;
-            z-index: 200;
-        }
-
-        /* ===== REGISTRATION TITLE STYLING WITH COLOR ===== */
-        .main-timer-title {
-            font-size: 1.8rem;
-            font-weight: 700;
-            text-align: center;
-            margin-bottom: 20px;
-            letter-spacing: 3px;
-            
-            /* Gradient text effect */
-            background: linear-gradient(135deg, #ff3333, #ffcc33, #66e0ff);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            
-            /* Neon glow effect */
-            text-shadow: 0 0 10px rgba(255, 51, 51, 0.5),
-                        0 0 20px rgba(51, 61, 255, 0.3);
-            
-            /* Optional animation */
-            animation: titlePulse 3s infinite ease-in-out;
-        }
-
-        /* Alternative: Solid color option (if you prefer solid instead of gradient) */
-        .main-timer-title.solid-color {
-            color: #ffcc33;  /* Solid gold/yellow */
-            text-shadow: 0 0 10px #ff3333,
-                        0 0 20px #ff9966;
-        }
-
-        /* Icon styling within the title */
-        .main-timer-title i {
-            color: #ff3333;
-            margin-right: 10px;
-            text-shadow: 0 0 10px #ff3333,
-                        0 0 20px #ff3333;
-            animation: iconPulse 2s infinite;
-        }
-
-        /* Title animation */
-        @keyframes titlePulse {
-            0% {
-                text-shadow: 0 0 10px rgba(255, 51, 51, 0.5),
-                            0 0 20px rgba(255, 204, 51, 0.3);
-            }
-            50% {
-                text-shadow: 0 0 15px rgba(255, 51, 51, 0.8),
-                            0 0 30px rgba(255, 204, 51, 0.6),
-                            0 0 45px rgba(255, 153, 102, 0.4);
-            }
-            100% {
-                text-shadow: 0 0 10px rgba(255, 51, 51, 0.5),
-                            0 0 20px rgba(255, 204, 51, 0.3);
-            }
-        }
-
-        /* Icon pulse animation */
-        @keyframes iconPulse {
-            0%, 100% {
-                transform: scale(1);
-                text-shadow: 0 0 10px #ff3333;
-            }
-            50% {
-                transform: scale(1.1);
-                text-shadow: 0 0 20px #ff3333,
-                            0 0 30px #ff9966;
-            }
-        }
-
-        .main-timer-grid { 
-            display: grid; 
-            grid-template-columns: repeat(4, 1fr); 
-            gap: 15px; 
-            max-width: 700px; 
-            margin: 0 auto; 
-        }
-        .main-timer-box { 
-            background: rgba(0, 0, 0, 0); 
-            border: 2px solid #ff3333;
-            border-radius: 12px; 
-            padding: 15px 5px; 
-            backdrop-filter: blur(10px);
-            box-shadow: 0 0 10px #ff3333,
-                        0 0 20px #ff3333,
-                        0 0 30px #ff3333,
-                        inset 0 0 10px #ff3333;
-            animation: redPulse 2s infinite ease-in-out;
-        }
-        .main-timer-value { 
-            font-size: 3.5rem; 
-            font-weight: 900; 
-            color: #049fff;
-            font-family: 'Orbitron', sans-serif; 
-            line-height: 1;
-            text-shadow: 0 0 5px #af840f,
-                        0 0 10px #6eca2c,
-                        0 0 20px #fff,
-                        0 0 40px #fa1313;
-            animation: whitePulse 2s infinite ease-in-out;
-        }
-        .main-timer-content { 
-            pointer-events: auto; 
-        }
-
-        /* Label text styling */
-        .main-timer-label {
-            color: #2e999b;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            text-shadow: 0 0 5px #fff,
-                        0 0 10px #fff;
-            font-size: 0.9rem;
-            margin-top: 5px;
-        }
-
-        /* Animations */
-        @keyframes redPulse {
-            0% {
-                box-shadow: 0 0 5px #ff3333,
-                            0 0 10px #ff3333,
-                            0 0 15px #ff3333,
-                            inset 0 0 5px #ff3333;
-            }
-            50% {
-                box-shadow: 0 0 10px #ff3333,
-                            0 0 20px #ff3333,
-                            0 0 30px #ff3333,
-                            inset 0 0 10px #ff3333;
-            }
-            100% {
-                box-shadow: 0 0 5px #ff3333,
-                            0 0 10px #ff3333,
-                            0 0 15px #ff3333,
-                            inset 0 0 5px #ff3333;
-            }
-        }
-
-        @keyframes whitePulse {
-            0% {
-                text-shadow: 0 0 5px #ffffff9a,
-                            0 0 10px #fff,
-                            0 0 15px #fff;
-            }
-            50% {
-                text-shadow: 0 0 10px #fff,
-                            0 0 20px #fff,
-                            0 0 30px #fff,
-                            0 0 40px #fff;
-            }
-            100% {
-                text-shadow: 0 0 5px #fff,
-                            0 0 10px #fff,
-                            0 0 15px #fff;
-            }
-        }
-
-        .ui-container {
-            position: relative;
-            z-index: 50;
-            min-height: 100vh;
-            padding-top: 20px;
-        }
-
-        /* LOGO STYLING */
-        .logo-container {
-            margin-top: -300px;
-            display: flex;
-            justify-content: center;
-            width: 100%;
-        }
-        .fest-logo {
-            width: 1000px; 
-            max-width: 80vw; 
-            height: auto; 
-            filter: drop-shadow(0 0 25px rgba(255,0,0,0.6));
-        }
-
-        #welcomeTitle {
-            position: relative;
-            top: -400px;
-            margin-bottom: 20px;
-        }
-
-        /* ===== MOBILE RESPONSIVE STYLES ===== */
-        @media screen and (max-width: 768px) {
-            /* Timer Section */
-            .main-timer-section {
-                margin: 80px auto 20px;
-            }
-            
-            .main-timer-title {
-                font-size: 1.4rem;  /* Smaller on mobile */
-                letter-spacing: 2px;
-            }
-            
-            .main-timer-grid {
-                gap: 8px;
-            }
-            
-            .main-timer-box {
-                padding: 10px 3px;
-                border-width: 1px;
-            }
-            
-            .main-timer-value {
-                font-size: 2rem;
-            }
-            
-            .main-timer-label {
-                font-size: 0.7rem;
-                letter-spacing: 0.5px;
-            }
-            
-            .logo-container {
-                margin-top: -150px;
-            }
-            
-            .fest-logo {
-                width: 600px;
-                max-width: 70vw;
-            }
-            
-            #welcomeTitle {
-                top: -200px;
-                margin-bottom: 10px;
-            }
-            
-            #welcomeTitle h1 {
-                font-size: 1.8rem !important;
-            }
-            
-            #welcomeTitle h2 {
-                font-size: 1rem !important;
-            }
-        }
-
-        /* Small phones (portrait) */
-        @media screen and (max-width: 480px) {
-            .main-timer-section {
-                margin: 60px auto 15px;
-            }
-            
-            .main-timer-title {
-                font-size: 1.2rem;
-                letter-spacing: 1px;
-            }
-            
-            .main-timer-grid {
-                gap: 5px;
-            }
-            
-            .main-timer-box {
-                padding: 8px 2px;
-            }
-            
-            .main-timer-value {
-                font-size: 1.5rem;
-            }
-            
-            .main-timer-label {
-                font-size: 0.6rem;
-            }
-            
-            .logo-container {
-                margin-top: -100px;
-            }
-            
-            .fest-logo {
-                width: 400px;
-                max-width: 80vw;
-            }
-            
-            #welcomeTitle {
-                top: -150px;
-            }
-            
-            #welcomeTitle h1 {
-                font-size: 2rem !important;
-            }
-            
-            #welcomeTitle h2 {
-                font-size: 1rem !important;
-            }
-        }
-
-        /* Extra small phones */
-        @media screen and (max-width: 360px) {
-            .main-timer-title {
-                font-size: 1rem;
-            }
-            
-            .main-timer-value {
-                font-size: 1.2rem;
-            }
-            
-            .main-timer-label {
-                font-size: 0.5rem;
-            }
-            
-            .logo-container {
-                margin-top: -80px;
-            }
-            
-            #welcomeTitle {
-                top: -120px;
-            }
-        }
-
-        /* Landscape mode on mobile */
-        @media screen and (max-width: 768px) and (orientation: landscape) {
-            .main-timer-section {
-                margin: 40px auto 10px;
-            }
-            
-            .main-timer-title {
-                font-size: 1.2rem;
-            }
-            
-            .main-timer-grid {
-                max-width: 500px;
-            }
-            
-            .main-timer-value {
-                font-size: 1.8rem;
-            }
-            
-            .logo-container {
-                margin-top: -100px;
-            }
-            
-            .fest-logo {
-                width: 400px;
-            }
-            
-            #welcomeTitle {
-                top: -150px;
-            }
-        }
-
-        /* Tablet devices */
-        @media screen and (min-width: 769px) and (max-width: 1024px) {
-            .main-timer-section {
-                margin: 100px auto 30px;
-            }
-            
-            .main-timer-title {
-                font-size: 1.6rem;
-            }
-            
-            .main-timer-value {
-                font-size: 2.8rem;
-            }
-            
-            .logo-container {
-                margin-top: -200px;
-            }
-            
-            .fest-logo {
-                width: 800px;
-            }
-            
-            #welcomeTitle {
-                top: -300px;
-            }
-        }
-
-        /* 3D SLIDER */
-        .scene {
-            position: relative;
-            width: 100%;
-            height: 35vh;
-            perspective: 2000px;
-            z-index: 5;
-            overflow: hidden;
-            margin-bottom: 20px;
-        }
-
-        .slider {
-            position: absolute;
-            bottom: 60px;
-            width: 100%;
-            height: 100%;
-            transform-style: preserve-3d;
-            display: flex;
-            justify-content: center;
-            align-items: flex-end;
-            pointer-events: auto;
-        }
-
-        .card {
-            position: absolute;
-            width: 240px;
-            height: 300px;
-            border-radius: 18px;
-            overflow: hidden;
-            background: #fff;
-            box-shadow: 0 35px 90px rgba(0,0,0,0.65);
-            transform-style: preserve-3d;
-            bottom: 15%;
-            transition: box-shadow 0.3s ease;
-            border: none;
-            backface-visibility: hidden;
-            will-change: transform, opacity;
-        }
-
-        .card img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .card-overlay {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
-            color: white;
-            padding: 15px;
-            transform: translateY(100%);
-            transition: transform 0.2s ease;
-        }
-
-        .card:hover .card-overlay {
-            transform: translateY(0);
-        }
-
-        .slider-controls {
-            position: absolute;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            gap: 30px;
-            z-index: 100;
-        }
-
-        .slider-btn {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background: rgba(255,71,51,0.8);
-            border: 2px solid #ffcc33;
-            color: white;
-            font-size: 1.5rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.2s ease;
-            cursor: pointer;
-        }
-
-        .slider-btn:hover {
-            background: #ff4733;
-            transform: scale(1.1);
-        }
-
-        /* ===== MOBILE RESPONSIVE ADJUSTMENTS ===== */
-
-        /* Tablets and large phones */
-        @media screen and (max-width: 768px) {
-            .scene {
-                height: 30vh;  /* Slightly smaller height */
-                margin-top: -150px;  /* Move the entire slider UP by 20px */
-            }
-            
-            .slider {
-                bottom: 100px;  /* Adjusted bottom position */
-            }
-            
-            .card {
-                width: 180px;  /* Smaller cards on mobile */
-                height: 220px;
-                bottom: 10%;  /* Adjusted bottom position */
-            }
-            
-            .slider-controls {
-                bottom: 10px;  /* Move controls up */
-                gap: 20px;
-            }
-            
-            .slider-btn {
-                width: 40px;
-                height: 40px;
-                font-size: 1.2rem;
-            }
-        }
-
-        /* Small phones */
-        @media screen and (max-width: 480px) {
-            .scene {
-                height: 28vh;
-                margin-top: -150px;  /* Move even higher on small phones */
-            }
-            
-            .slider {
-                bottom: 100px;
-            }
-            
-            .card {
-                width: 200px;  /* Even smaller cards */
-                height: 250px;
-                bottom: 5%;
-            }
-            
-            .slider-controls {
-                bottom: 5px;
-                gap: 15px;
-            }
-            
-            .slider-btn {
-                width: 35px;
-                height: 35px;
-                font-size: 1rem;
-            }
-        }
-
-        /* Extra small phones */
-        @media screen and (max-width: 360px) {
-            .scene {
-                height: 25vh;
-                margin-top: -40px;  /* Move highest on very small screens */
-            }
-            
-            .slider {
-                bottom: 20px;
-            }
-            
-            .card {
-                width: 110px;
-                height: 150px;
-                bottom: 5%;
-            }
-        }
-
-        /* Landscape mode on mobile */
-        @media screen and (max-width: 768px) and (orientation: landscape) {
-            .scene {
-                height: 45vh;  /* Taller in landscape */
-                margin-top: -15px;
-            }
-            
-            .slider {
-                bottom: 25px;
-            }
-            
-            .card {
-                width: 150px;
-                height: 190px;
-            }
-        }
-
-        /* Alternative: If you want to move just the slider container without affecting height */
-        @media screen and (max-width: 768px) {
-            /* Option 2: Using transform to move up */
-            .scene {
-                transform: translateY(-20px);  /* Moves the entire slider up by 20px */
-            }
-        }
-
-        /* Option 3: Using negative top margin on parent container if scene is inside one */
-        @media screen and (max-width: 768px) {
-            .your-parent-container {
-                margin-top: -30px;  /* Adjust based on your layout */
-            }
-        }
-
-        /* SIMPLE PROMO VIDEO */
-        .promo-section {
-            width: 100%;
-            margin: 30px auto 80px;
-            text-align: center;
-        }
-
-        .promo-header {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 2rem;
-            font-weight: 900;
-            color: #ff4733;
-            text-transform: uppercase;
-            letter-spacing: 4px;
-            margin-bottom: 20px;
-            text-shadow: 0 0 15px rgba(255, 71, 51, 0.5);
-            position: relative;
-            display: inline-block;
-            padding: 0 20px;
-        }
-
-        .promo-header::before,
-        .promo-header::after {
-            content: '';
-            position: absolute;
-            top: 50%;
-            width: 50px;
-            height: 2px;
-            background: #ff4733;
-            box-shadow: 0 0 10px #ff4733;
-        }
-
-        .promo-header::before {
-            left: -30px;
-        }
-
-        .promo-header::after {
-            right: -30px;
-        }
-
-        .promo-header i {
-            margin-right: 10px;
-            color: #ffcc33;
-        }
-
-        .promo-video {
-            width: 100%;
-            max-width: 900px;
-            height: auto;
-            aspect-ratio: 16/9;
-            display: block;
-            margin: 0 auto;
-            border: none;
-            box-shadow: 0 20px 40px rgba(255, 71, 51, 0.3);
-            border-radius: 8px;
-        }
-
-        .promo-controls {
-            margin-top: 15px;
-        }
-
-        .mute-toggle {
-            background: rgba(255, 71, 51, 0.2);
-            border: 2px solid #ff4733;
-            color: white;
-            width: 45px;
-            height: 45px;
-            border-radius: 50%;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.3rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .mute-toggle:hover {
-            background: #ff4733;
-            transform: scale(1.1);
-        }
-
-        /* Marquee */
-        .marquee-container {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            background: linear-gradient(90deg, #b30000, #ff6600, #b30000);
-            color: white;
-            padding: 8px 0;
-            font-family: 'Orbitron', sans-serif;
-            font-weight: 700;
-            z-index: 100;
-            white-space: nowrap;
-            overflow: hidden;
-            border-top: 2px solid #ffcc33;
-        }
-
-        .marquee-content {
-            display: inline-block;
-            animation: marquee 25s linear infinite;
-            white-space: nowrap;
-            padding-left: 100%;
-        }
-
-        @keyframes marquee {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-100%); }
-        }
-
-        /* ===== LOADER WITH ORIENTATION-BASED VIDEO ===== */
-        .loader-container {
-            position: fixed;
-            inset: 0;
-            background: #000;
-            z-index: 99999;
             display: flex;
             justify-content: center;
             align-items: center;
-            overflow: hidden;
-            transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            font-family: 'Crimson Text', serif;
         }
 
-        .loader-video {
+        /* 1. Background Atmosphere */
+        .fog {
             position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%) scale(1.1);
-            min-width: 100%;
-            min-height: 100%;
-            width: auto;
-            height: auto;
-            object-fit: cover;
+            width: 100%; height: 100%;
+            background: radial-gradient(circle at center, rgba(100, 0, 0, 0.2) 0%, #000 90%);
+            z-index: 1;
+            animation: pulseFog 5s infinite alternate;
         }
 
-        /* Hide desktop video on mobile, hide mobile video on desktop */
-        .video-desktop {
-            display: block;
-        }
-        .video-mobile {
-            display: none;
-        }
-
-        @media (max-width: 768px) {
-            .video-desktop {
-                display: none;
-            }
-            .video-mobile {
-                display: block;
-            }
-            
-            /* Mobile-specific video sizing */
-            .loader-video {
-                object-fit: contain;
-                width: 100% !important;
-                height: 100% !important;
-                min-width: unset;
-                min-height: unset;
-            }
-        }
-
-        .loader-hidden {
-            opacity: 0;
-            visibility: hidden;
+        .scanlines {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,0) 50%, rgba(0,0,0,0.4) 50%, rgba(0,0,0,0.4));
+            background-size: 100% 4px;
+            z-index: 10;
             pointer-events: none;
         }
 
-        /* Mobile responsive general */
-        @media (max-width: 600px) {
-            .main-timer-section { top: 15px; }
-            .main-timer-grid { gap: 5px; }
-            .main-timer-box { padding: 6px 3px; }
-            .main-timer-value { font-size: 1.4rem; }
-            .scene { height: 35vh; margin-bottom: 10px; }
-            .card { width: 120px; height: 160px; }
-            .slider-controls { display: none; }
-            .promo-header { font-size: 1.5rem; }
-            .promo-header::before,
-            .promo-header::after {
-                width: 20px;
-            }
-            .promo-header::before { left: -15px; }
-            .promo-header::after { right: -15px; }
+        /* 2. Main Stage */
+        .stage {
+            position: relative;
+            z-index: 5;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            transform: scale(0.8);
+            animation: cameraZoom 10s ease-out forwards;
         }
 
-        @media (max-width: 400px) {
-            .card { width: 100px; height: 140px; }
+        /* 3. Title Group Alignment */
+        .title-group {
+            position: relative;
+            display: flex;
+            align-items: flex-start; 
+            justify-content: center;
+            gap: 0.5vw;
+        }
+
+        /* 4. Letter Styling */
+        .char {
+            font-size: 13vw;
+            line-height: 0.8;
+            color: transparent;
+            -webkit-text-stroke: 2px var(--red);
+            text-transform: uppercase;
+            position: relative;
+            display: inline-block;
+            opacity: 0;
+            filter: none !important; 
+            animation: driftAssemble 2s cubic-bezier(0.19, 1, 0.22, 1) forwards;
+        }
+
+        .char.small {
+            font-size: 8vw; 
+            line-height: 0.8;
+            margin-top: 0.5vw; 
+        }
+
+        .char.filled {
+            color: var(--red);
+            -webkit-text-stroke: 0;
+            text-shadow: var(--neon-glow);
+        }
+
+        .line-container {
+            position: absolute;
+            bottom: -2vw;
+            width: 100%;
+            height: 5px;
+        }
+
+        .line-fes {
+            position: absolute;
+            left: 0; 
+            width: 32%;
+            height: 6px;
+            background: var(--red);
+            box-shadow: var(--neon-glow);
+            transform: scaleX(0);
+            transform-origin: left;
+            animation: drawLine 1s 1.5s forwards;
+        }
+
+        .line-nix {
+            position: absolute;
+            right: 0; 
+            width: 32%;
+            height: 6px;
+            background: var(--red);
+            box-shadow: var(--neon-glow);
+            transform: scaleX(0);
+            transform-origin: right;
+            animation: drawLine 1s 1.8s forwards;
+        }
+
+        .line-top {
+            position: absolute;
+            top: -2vw; 
+            width: 100%;
+            height: 6px;
+            background: var(--red);
+            box-shadow: var(--neon-glow);
+            transform: scaleX(0);
+            animation: drawLine 2s 1s forwards;
+        }
+
+        .version {
+            font-size: 8vw;
+            color: var(--red);
+            font-family: 'Crimson Text', serif;
+            margin-top: -3vw; 
+            text-shadow: var(--neon-glow);
+            opacity: 0;
+            letter-spacing: 1vw;
+            transform: scale(2);
+            filter: none !important;
+            animation: slamDown 0.5s 2.5s forwards;
+        }
+
+        @keyframes driftAssemble {
+            0% { 
+                opacity: 0; 
+                transform: translateY(50px) scale(0.8);
+            }
+            100% { 
+                opacity: 1; 
+                transform: translateY(0) scale(1);
+                color: var(--red);
+                text-shadow: var(--neon-glow);
+                -webkit-text-stroke: 0;
+            }
+        }
+
+        @keyframes drawLine {
+            to { transform: scaleX(1); }
+        }
+
+        @keyframes slamDown {
+            0% { opacity: 0; transform: scale(3) translateY(-50px); }
+            70% { opacity: 1; transform: scale(0.9); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+
+        @keyframes cameraZoom {
+            to { transform: scale(1); }
+        }
+
+        @keyframes pulseFog {
+            0% { opacity: 0.3; }
+            100% { opacity: 0.6; }
+        }
+
+        .flicker { animation: neonFlicker 2s infinite alternate; }
+
+        @keyframes neonFlicker {
+            0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
+                text-shadow: var(--neon-glow);
+                opacity: 1;
+            }
+            20%, 24%, 55% {
+                text-shadow: none;
+                opacity: 0.5;
+            }
         }
     </style>
+    <!-- REDIRECT SCRIPT: Auto-redirect to index.html after animation -->
+    <script>
+        window.addEventListener('load', function () {
+            setTimeout(function () {
+                window.location.href = 'home.html';
+            }, 3500);
+        });
+    </script>
 </head>
 <body>
 
-    <!-- LOADER WITH SEPARATE DESKTOP & MOBILE VIDEOS -->
-    <div class="loader-container" id="loader">
-        <!-- Desktop/Landscape Video -->
-        <video autoplay muted playsinline class="loader-video video-desktop" id="desktopVideo">
-            <source src="Anime.mp4" type="video/mp4">
-            <!-- Replace with your desktop/landscape video -->
-        </video>
-        
-        <!-- Mobile/Portrait Video -->
-        <video autoplay muted playsinline class="loader-video video-mobile" id="mobileVideo">
-            <source src="Anime.mp4" type="video/mp4">
-            <!-- Replace with your mobile/portrait video -->
-        </video>
-    </div>
+    <div class="fog"></div>
+    <div class="scanlines"></div>
 
-    <!-- VIDEO BACKGROUND -->
-    <div class="video-background">
-        <video autoplay muted loop playsinline id="bgVideo" preload="metadata">
-            <source src="https://res.cloudinary.com/dpc4l1hic/video/upload/v1770814312/light_gzuewo.mp4" type="video/mp4">
-        </video>
-        <div class="video-overlay"></div>
-    </div>
+    <div class="stage">
+        <div class="title-group">
+            <div class="line-top"></div>
 
-    <!-- NAVIGATION -->
-    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
-        <div class="container-fluid px-lg-4">
-            <a class="navbar-brand d-lg-none text-warning fw-bold" href="#"></a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#festronixNavbar">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="festronixNavbar">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0 w-100 justify-content-center">
-                    <li class="nav-item"><a class="nav-link" href="index.html"><i class="fas fa-home"></i> Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="previous.html"><i class="fas fa-history"></i> Previous</a></li>
-                    <li class="nav-item"><a class="nav-link" href="gallery.html"><i class="fas fa-images"></i> Gallery</a></li>
-                    <li class="nav-item"><a class="nav-link" href="events.html"><i class="fas fa-calendar-alt"></i> Events</a></li>
-                    <li class="nav-item"><a class="nav-link" href="sponsors.html"><i class="fas fa-handshake"></i> Sponsors</a></li>
-                    <li class="nav-item"><a class="nav-link" href="about.html"><i class="fas fa-info-circle"></i> About</a></li>
-                    <li class="nav-item"><a class="nav-link" href="team.html"><i class="fas fa-users"></i> Team</a></li>
-                    <li class="nav-item"><a class="nav-link" href="contact.html"><i class="fas fa-envelope"></i> Contact</a></li>
-                </ul>
-            </div>
-        </div>
-    </nav>
+            <span class="char" style="animation-delay: 0.1s">F</span>
+            <span class="char" style="animation-delay: 0.2s">E</span>
+            <span class="char" style="animation-delay: 0.3s">S</span>
+            
+            <span class="char small" style="animation-delay: 0.4s">T</span>
+            <span class="char small" style="animation-delay: 0.5s">R</span>
+            <span class="char small" style="animation-delay: 0.6s">O</span>
 
-    <!-- MAIN UI -->
-    <div class="ui-container">
-        
-        <!-- TIMER WRAPPER -->
-        <div class="timer-wrapper">
-            <div class="main-timer-section">
-                <div class="main-timer-content">
-                    <div class="main-timer-title text-center mb-3">
-                        <i class="fas fa-hourglass-half"></i> REGISTRATION CLOSES IN
-                    </div>
-                    <div class="main-timer-grid">
-                        <div class="main-timer-box text-center"><div class="main-timer-value" id="mainDays">00</div><div>Days</div></div>
-                        <div class="main-timer-box text-center"><div class="main-timer-value" id="mainHours">00</div><div>Hours</div></div>
-                        <div class="main-timer-box text-center"><div class="main-timer-value" id="mainMinutes">00</div><div>Mins</div></div>
-                        <div class="main-timer-box text-center"><div class="main-timer-value" id="mainSeconds">00</div><div>Secs</div></div>
-                    </div>
-                </div>
+            <span class="char" style="animation-delay: 0.7s">N</span>
+            <span class="char" style="animation-delay: 0.8s">I</span>
+            <span class="char" style="animation-delay: 0.9s">X</span>
+
+            <div class="line-container">
+                <div class="line-fes"></div>
+                <div class="line-nix"></div>
             </div>
         </div>
 
-        <div class="logo-container text-center">
-            <img src="https://res.cloudinary.com/dpc4l1hic/image/upload/v1771088331/Untitled_design_1_kwxvjb.png" alt="FESTRONIX 2.0" class="fest-logo">
-        </div>
-
-        <div class="text-center" id="welcomeTitle"></div>
-        
+        <div class="version flicker">2.0</div>
     </div>
-
-    <!-- 3D SLIDER -->
-    <div class="scene">
-        <div class="slider" id="slider"></div>
-        <div class="slider-controls">
-            <button class="slider-btn" id="prevBtn"><i class="fas fa-chevron-left"></i></button>
-            <button class="slider-btn" id="nextBtn"><i class="fas fa-chevron-right"></i></button>
-        </div>
-    </div>
-
-    <!-- SIMPLE PROMO VIDEO -->
-    <div class="promo-section">
-        <div class="promo-header">
-            <i class="fas fa-play"></i> PROMO 2026
-        </div>
-        <video class="promo-video" id="promoVideo" loop playsinline preload="metadata" autoplay muted>
-            <source src="https://res.cloudinary.com/dpc4l1hic/video/upload/v1771331285/festronix_2_bslnvg.mp4" type="video/mp4">
-            <!-- Replace with your actual promo video URL -->
-        </video>
-        <div class="promo-controls">
-            <button class="mute-toggle" id="promoMuteBtn" title="Mute/Unmute">
-                <i class="fas fa-volume-mute"></i>
-            </button>
-        </div>
-    </div>
-
-    <!-- MARQUEE -->
-    <div class="marquee-container">
-        <div class="marquee-content">
-            <span style="margin-right: 40px;"><i class="fas fa-exclamation-triangle"></i> REGISTRATION CLOSING SOON! REGISTER NOW!</span>
-            <span style="margin-right: 40px;"><i class="fas fa-bolt"></i> HURRY UP! LIMITED SEATS AVAILABLE!</span>
-            <span style="margin-right: 40px;"><i class="fas fa-ticket-alt"></i> REGISTER NOW BEFORE DEADLINE!</span>
-        </div>
-    </div>
-
-    <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-    
-    <script>
-        (function() {
-            'use strict';
-
-            // DOM cache
-            const DOM = {
-                loader: document.getElementById('loader'),
-                days: document.getElementById('mainDays'),
-                hours: document.getElementById('mainHours'),
-                minutes: document.getElementById('mainMinutes'),
-                seconds: document.getElementById('mainSeconds'),
-                slider: document.getElementById('slider'),
-                welcomeTitle: document.getElementById('welcomeTitle'),
-                userAuthContainer: document.getElementById('userAuthContainer'),
-                promoVideo: document.getElementById('promoVideo'),
-                promoMuteBtn: document.getElementById('promoMuteBtn'),
-                desktopVideo: document.getElementById('desktopVideo'),
-                mobileVideo: document.getElementById('mobileVideo')
-            };
-
-            // ---------- SMART LOADER WITH ORIENTATION DETECTION ----------
-            window.addEventListener('load', function() {
-                const loader = document.getElementById('loader');
-                
-                // Function to determine which video to play
-                function playAppropriateVideo() {
-                    const isMobile = window.innerWidth <= 768;
-                    
-                    // Pause both videos first
-                    if (DOM.desktopVideo) DOM.desktopVideo.pause();
-                    if (DOM.mobileVideo) DOM.mobileVideo.pause();
-                    
-                    // Play the appropriate video based on screen size
-                    if (isMobile && DOM.mobileVideo) {
-                        DOM.mobileVideo.play().catch(e => console.log('Mobile video autoplay failed:', e));
-                    } else if (!isMobile && DOM.desktopVideo) {
-                        DOM.desktopVideo.play().catch(e => console.log('Desktop video autoplay failed:', e));
-                    }
-                }
-                
-                // Initial play
-                playAppropriateVideo();
-
-                // Handle orientation change for mobile
-                window.addEventListener('orientationchange', function() {
-                    setTimeout(playAppropriateVideo, 250);
-                });
-
-                // Handle resize for desktop/tablet
-                let resizeTimer;
-                window.addEventListener('resize', function() {
-                    clearTimeout(resizeTimer);
-                    resizeTimer = setTimeout(playAppropriateVideo, 250);
-                });
-
-                // Hide loader after duration
-                const isMobile = window.innerWidth <= 768;
-                const loaderDuration = isMobile ? 5000 : 7000; // Shorter on mobile for better UX
-                
-                setTimeout(() => {
-                    if (loader) {
-                        loader.classList.add('loader-hidden');
-                        
-                        // Pause videos to save resources
-                        if (DOM.desktopVideo && !DOM.desktopVideo.paused) {
-                            DOM.desktopVideo.pause();
-                        }
-                        if (DOM.mobileVideo && !DOM.mobileVideo.paused) {
-                            DOM.mobileVideo.pause();
-                        }
-                    }
-                }, loaderDuration); 
-
-                // Backup: Hide loader if any video ends
-                if (DOM.desktopVideo) {
-                    DOM.desktopVideo.addEventListener('ended', function() {
-                        if (loader) loader.classList.add('loader-hidden');
-                    });
-                }
-                if (DOM.mobileVideo) {
-                    DOM.mobileVideo.addEventListener('ended', function() {
-                        if (loader) loader.classList.add('loader-hidden');
-                    });
-                }
-            });
-
-            // ---------- TIMER ----------
-            const TARGET_DATE = new Date("2026-02-26T23:59:59").getTime();
-            let lastUpdate = 0;
-            
-            function updateCountdown(timestamp) {
-                if (timestamp - lastUpdate > 500) {
-                    const now = Date.now();
-                    const diff = TARGET_DATE - now;
-                    
-                    if (diff > 0) {
-                        const days = Math.floor(diff / 86400000);
-                        const hours = Math.floor((diff % 86400000) / 3600000);
-                        const minutes = Math.floor((diff % 3600000) / 60000);
-                        const seconds = Math.floor((diff % 60000) / 1000);
-                        
-                        if (DOM.days) DOM.days.textContent = days.toString().padStart(2, '0');
-                        if (DOM.hours) DOM.hours.textContent = hours.toString().padStart(2, '0');
-                        if (DOM.minutes) DOM.minutes.textContent = minutes.toString().padStart(2, '0');
-                        if (DOM.seconds) DOM.seconds.textContent = seconds.toString().padStart(2, '0');
-                    }
-                    lastUpdate = timestamp;
-                }
-                requestAnimationFrame(updateCountdown);
-            }
-            requestAnimationFrame(updateCountdown);
-
-            // ---------- WELCOME TITLE ----------
-            if (DOM.welcomeTitle) {
-                DOM.welcomeTitle.innerHTML = `
-                    <h1 style="font-size: clamp(1.2rem, 3vw, 2.5rem); font-weight: 900; letter-spacing: 6px;">WELCOME TO</h1>
-                    <h1 style="font-size: clamp(1.8rem, 5vw, 3.5rem); font-weight: 900; letter-spacing: 6px; color: #33ccff; text-shadow: 0 0 10px #33ccff;">FESTRONIX 2.0</h1>
-                    <h2 style="font-family: 'Cinzel', serif; font-size: clamp(0.8rem, 2vw, 1.4rem); padding: 10px 20px;">GIFT AUTONOMOUS, BHUBANESWAR</h2>
-                `;
-            }
-
-            // ---------- PROMO VIDEO CONTROLS ----------
-            if (DOM.promoVideo && DOM.promoMuteBtn) {
-                // Start with muted state (required for autoplay)
-                DOM.promoVideo.muted = true;
-                
-                // Mute toggle functionality
-                DOM.promoMuteBtn.addEventListener('click', function() {
-                    if (DOM.promoVideo.muted) {
-                        DOM.promoVideo.muted = false;
-                        DOM.promoMuteBtn.innerHTML = '<i class="fas fa-volume-up"></i>';
-                    } else {
-                        DOM.promoVideo.muted = true;
-                        DOM.promoMuteBtn.innerHTML = '<i class="fas fa-volume-mute"></i>';
-                    }
-                });
-            }
-
-            // ---------- FAST 3D SLIDER ----------
-            class FastSlider3D {
-                constructor() {
-                    this.cards = [];
-                    
-                    const isMobile = window.innerWidth < 600;
-                    const isTablet = window.innerWidth >= 600 && window.innerWidth < 1024;
-                    
-                    this.config = {
-                        count: isMobile ? 8 : (isTablet ? 10 : 12),
-                        radius: isMobile ? 180 : (isTablet ? 300 : 400),
-                        angle: 0,
-                        baseSpeed: isMobile ? 0.25 : 0.2,
-                        fastSpeed: isMobile ? 0.5 : 0.4,
-                        currentSpeed: isMobile ? 0.25 : 0.2,
-                        isRunning: true,
-                        direction: 1
-                    };
-                    
-                    this.images = [
-                        'https://res.cloudinary.com/dpc4l1hic/image/upload/v1770814179/img16_pg2tn8.jpg',
-                        'https://res.cloudinary.com/dpc4l1hic/image/upload/v1770814172/img13_td70sk.jpg',
-                        'https://res.cloudinary.com/dpc4l1hic/image/upload/v1770814171/img12_xxhzxp.jpg',
-                        'https://res.cloudinary.com/dpc4l1hic/image/upload/v1770814257/img29_haddwu.jpg',
-                        'https://res.cloudinary.com/dpc4l1hic/image/upload/v1770814181/img17_ulwi5t.jpg',
-                        'https://res.cloudinary.com/dpc4l1hic/image/upload/v1770814170/img25_ukotc2.jpg',
-                        'https://res.cloudinary.com/dpc4l1hic/image/upload/v1770814167/img23_n2fqmk.jpg',
-                        'https://res.cloudinary.com/dpc4l1hic/image/upload/v1770814183/img18_ainjk9.jpg'
-                    ];
-                    
-                    this.init();
-                    this.setupControls();
-                    this.animate();
-                }
-                
-                init() {
-                    if (!DOM.slider) return;
-                    DOM.slider.innerHTML = "";
-                    
-                    const fragment = document.createDocumentFragment();
-                    
-                    for (let i = 0; i < this.config.count; i++) {
-                        const card = document.createElement('div');
-                        card.className = 'card';
-                        
-                        const img = document.createElement('img');
-                        img.src = this.images[i % this.images.length];
-                        img.alt = `Event ${i + 1}`;
-                        img.loading = 'lazy';
-                        
-                        const overlay = document.createElement('div');
-                        overlay.className = 'card-overlay';
-                        overlay.innerHTML = `<h3 style="margin: 0; font-size: 1.2rem;">Event ${i + 1}</h3><p style="margin: 5px 0 0; font-size: 0.9rem;">Click to learn more</p>`;
-                        
-                        card.appendChild(img);
-                        card.appendChild(overlay);
-                        fragment.appendChild(card);
-                        this.cards.push(card);
-                        
-                        card.addEventListener('click', (e) => {
-                            e.preventDefault();
-                            this.zoomToCard(i);
-                        });
-                    }
-                    
-                    DOM.slider.appendChild(fragment);
-                }
-                
-                animate() {
-                    if (!this.config.isRunning) return;
-                    
-                    this.config.angle += this.config.currentSpeed * this.config.direction;
-                    
-                    const step = 360 / this.config.count;
-                    const radius = this.config.radius;
-                    
-                    for (let i = 0; i < this.cards.length; i++) {
-                        const card = this.cards[i];
-                        if (!card) continue;
-                        
-                        const angle = this.config.angle + (i * step);
-                        const rad = angle * (Math.PI / 180);
-                        
-                        const x = Math.sin(rad) * radius;
-                        const z = Math.cos(rad) * radius - radius;
-                        const scale = 1 + (z / 2000);
-                        const opacity = Math.max(0.4, Math.min(1, (z + 1000) / 1000));
-                        
-                        card.style.transform = `translate3d(${x}px, 0, ${z}px) scale(${scale})`;
-                        card.style.zIndex = Math.floor(z + 1000);
-                        card.style.opacity = opacity;
-                    }
-                    
-                    requestAnimationFrame(() => this.animate());
-                }
-                
-                setupControls() {
-                    const prevBtn = document.getElementById('prevBtn');
-                    const nextBtn = document.getElementById('nextBtn');
-                    
-                    if (prevBtn) {
-                        prevBtn.addEventListener('mousedown', (e) => {
-                            e.preventDefault();
-                            this.config.direction = -1;
-                            this.config.currentSpeed = this.config.fastSpeed;
-                        });
-                        
-                        prevBtn.addEventListener('mouseup', () => {
-                            this.config.currentSpeed = this.config.baseSpeed;
-                        });
-                        
-                        prevBtn.addEventListener('mouseleave', () => {
-                            this.config.currentSpeed = this.config.baseSpeed;
-                        });
-                    }
-                    
-                    if (nextBtn) {
-                        nextBtn.addEventListener('mousedown', (e) => {
-                            e.preventDefault();
-                            this.config.direction = 1;
-                            this.config.currentSpeed = this.config.fastSpeed;
-                        });
-                        
-                        nextBtn.addEventListener('mouseup', () => {
-                            this.config.currentSpeed = this.config.baseSpeed;
-                        });
-                        
-                        nextBtn.addEventListener('mouseleave', () => {
-                            this.config.currentSpeed = this.config.baseSpeed;
-                        });
-                    }
-                }
-                
-                zoomToCard(index) {
-                    const targetAngle = -index * (360 / this.config.count);
-                    
-                    const animateToTarget = () => {
-                        const diff = targetAngle - this.config.angle;
-                        if (Math.abs(diff) > 0.5) {
-                            this.config.angle += diff * 0.1;
-                            requestAnimationFrame(animateToTarget);
-                        } else {
-                            this.config.angle = targetAngle;
-                            console.log(`Navigate to event ${index + 1}`);
-                        }
-                    };
-                    
-                    requestAnimationFrame(animateToTarget);
-                }
-            }
-
-            if (DOM.slider) {
-                new FastSlider3D();
-            }
-
-            function updateUserAuth() {
-                if (!DOM.userAuthContainer) return;
-                
-                const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
-                const user = JSON.parse(localStorage.getItem('userData') || '{}');
-                
-                const btnStyle = "background: rgba(255,71,51,0.3); border: 2px solid #ff4733; display: flex; align-items: center; justify-content: center;";
-
-                if (isLoggedIn) {
-                    DOM.userAuthContainer.innerHTML = `
-                        <a class="nav-link user-auth-btn" href="profile.html" style="${btnStyle}">
-                            <i class="fas fa-user me-3"></i>
-                            <span>${user.firstName || 'User'}</span>
-                        </a>
-                    `;
-                } else {
-                    DOM.userAuthContainer.innerHTML = `
-                        <a class="nav-link user-auth-btn" href="signup.html" style="${btnStyle}">
-                            <i class="fas fa-user-plus me-3"></i>
-                            <span>Signup</span>
-                        </a>
-                    `;
-                }
-            }
-            
-            updateUserAuth();
-
-            // ---------- ACTIVE NAV ----------
-            const currentPage = window.location.pathname.split('/').pop() || 'index.html';
-            document.querySelectorAll('.nav-link').forEach(link => {
-                if (link.getAttribute('href') === currentPage) {
-                    link.classList.add('active');
-                }
-            });
-
-            // ---------- BACKGROUND MUSIC ----------
-            document.addEventListener('click', function initMusic() {
-                const bgMusic = document.getElementById('bgMusic');
-                if (bgMusic) {
-                    bgMusic.volume = 0.2;
-                    bgMusic.play().catch(() => {});
-                }
-                document.removeEventListener('click', initMusic);
-            }, { once: true });
-
-            // ---------- RESIZE HANDLER ----------
-            let resizeTimeout;
-            window.addEventListener('resize', () => {
-                clearTimeout(resizeTimeout);
-                resizeTimeout = setTimeout(() => {
-                    console.log('Window resized');
-                }, 250);
-            });
-
-        })();
-    </script>
-    
-    <!-- Font Awesome (deferred) -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" media="print" onload="this.media='all'">
-    
-    <!-- Background Music -->
-    <audio id="bgMusic" loop preload="none">
-        <source src="https://res.cloudinary.com/dpc4l1hic/video/upload/v1770814278/beats_p2c79u.mp3" type="audio/mpeg">
-    </audio>
 
 </body>
 </html>
