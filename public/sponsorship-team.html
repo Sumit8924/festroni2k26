@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <title>FESTRONIX 2.0 - Sponsorship Team</title>
+    <!-- BOOTSTRAP 5 CORE -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- icons + fonts -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Orbitron:wght@400;600;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- custom styles -->
+    <style>
+        /* ----- bootstrap reset remains, minimal theme overrides ----- */
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        
+        body {
+            background: #000;
+            font-family: 'Rajdhani', sans-serif;
+            overflow-x: hidden;
+            color: #fff;
+            cursor: none; 
+        }
+        a, button { cursor: none; }
+        @media (hover: none) and (pointer: coarse) { 
+            body, a, button { cursor: auto; } 
+            .cursor-dot, .cursor-outline { display: none !important; }
+        }
+        /* Video Background */
+        .video-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .video-background video {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            object-fit: cover;
+            opacity: 0.6;
+        }
+
+        .video-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.3) 50%, rgba(0,0,0,0.8) 100%);
+        }
+
+        /* ----- LOADER ANIMATION - OPTIMIZED FOR FAST LOADING ----- */
+        .loader-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #000;
+            z-index: 99999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 0.3s ease;
+        }
+        .loader-hidden { 
+            opacity: 0; 
+            pointer-events: none; 
+            visibility: hidden; 
+        }
+        .loader-wrapper { 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            flex-wrap: wrap; 
+        }
+        .loader-letter {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 4rem;
+            font-weight: 900;
+            color: #ff4733;
+            text-shadow: 0 0 15px rgba(255,71,51,0.7);
+            margin: 0 3px;
+            opacity: 0;
+            animation: letterReveal 0.2s forwards;
+            display: inline-block;
+        }
+        .loader-letter:nth-child(1) { animation-delay: 0.1s; }
+        .loader-letter:nth-child(2) { animation-delay: 0.15s; }
+        .loader-letter:nth-child(3) { animation-delay: 0.2s; }
+        .loader-letter:nth-child(4) { animation-delay: 0.25s; }
+        .loader-letter:nth-child(5) { animation-delay: 0.3s; }
+        .loader-letter:nth-child(6) { animation-delay: 0.35s; }
+        .loader-letter:nth-child(7) { animation-delay: 0.4s; }
+        .loader-letter:nth-child(8) { animation-delay: 0.45s; }
+        .loader-letter:nth-child(9) { animation-delay: 0.5s; }
+        .loader-letter:nth-child(10) { animation-delay: 0.55s; }
+        .loader-letter:nth-child(11) { animation-delay: 0.6s; }
+        .loader-letter:nth-child(12) { animation-delay: 0.65s; }
+        .loader-letter:nth-child(13) { animation-delay: 0.7s; }
+        .loader-letter:nth-child(14) { animation-delay: 0.75s; }
+        .loader-letter:nth-child(15) { animation-delay: 0.8s; }
+        .loader-letter:nth-child(16) { animation-delay: 0.85s; }
+        .loader-letter:nth-child(17) { animation-delay: 0.9s; }
+        .loader-letter:nth-child(18) { animation-delay: 0.95s; }
+        @keyframes letterReveal { 
+            to { 
+                opacity: 1; 
+                text-shadow: 0 0 20px rgba(255,71,51,1); 
+            } 
+        }
+        .loader {
+            position: absolute;
+            bottom: -30px;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, transparent, #ffcc33, transparent);
+            animation: loadingBar 1.5s ease-in-out forwards;
+        }
+        @keyframes loadingBar { 
+            0% { transform: translateX(-100%); } 
+            100% { transform: translateX(100%); } 
+        }
+
+        @media (max-width: 991px) {
+            .loader-letter { font-size: 3rem; }
+        }
+        @media (max-width: 767px) {
+            .loader-letter { font-size: 2.5rem; }
+        }
+        @media (max-width: 599px) {
+            .loader-letter { font-size: 2rem; }
+        }
+        @media (max-width: 380px) {
+            .loader-letter { font-size: 1.5rem; }
+        }
+
+        /* ----- CUSTOM CURSOR ----- */
+        .cursor-dot, .cursor-outline {
+            position: fixed; top: 0; left: 0; transform: translate(-50%, -50%);
+            border-radius: 50%; z-index: 9999; pointer-events: none;
+        }
+        .cursor-dot { width: 8px; height: 8px; background: #ffcc33; }
+        .cursor-outline {
+            width: 40px; height: 40px; border: 2px solid rgba(255,71,51,0.8);
+            transition: width 0.2s, height 0.2s, border-color 0.2s;
+        }
+
+        /* ===== UPDATED NAVBAR STYLES - USING ONLY BOOTSTRAP COLLAPSE ===== */
+        .navbar {
+            background: transparent;
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border-bottom: 2px solid #ff4733;
+            min-height: 70px;
+            z-index: 100;
+            padding: 0 1rem;
+        }
+
+        /* Desktop: Center Nav Items */
+        @media (min-width: 992px) {
+            .navbar-nav {
+                width: 100%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                gap: 40px;
+            }
+        }
+
+        .nav-link {
+            color: white !important;
+            font-weight: 500;
+            letter-spacing: 1.5px;
+            padding: 1rem 2rem !important;
+            font-size: 1.1rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            text-transform: uppercase;
+            white-space: nowrap;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-link i {
+            margin-right: 8px;
+            font-size: 1.1rem;
+        }
+
+        .nav-link:hover { 
+            color: #ffcc33 !important; 
+            background: rgba(255, 71, 51, 0.15); 
+            transform: translateY(-5px); 
+            box-shadow: 0 5px 15px rgba(255, 71, 51, 0.3); 
+        }
+
+        .nav-link.active { 
+            color: #ffcc33 !important; 
+            border-bottom: 4px solid #ffcc33;
+        }
+
+        /* Navbar Toggler Style */
+        .navbar-toggler {
+            border: 2px solid #ff4733 !important;
+            background: rgba(255, 71, 51, 0.2) !important;
+            padding: 0.5rem 0.75rem;
+            margin: 0 1rem;
+        }
+        
+        .navbar-toggler-icon {
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(255, 71, 51, 0.9)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") !important;
+        }
+
+        .navbar-toggler:focus {
+            box-shadow: 0 0 0 0.25rem rgba(255, 71, 51, 0.25);
+        }
+
+        /* ----- Scroll Indicator ----- */
+        .scroll-indicator {
+            position: fixed;
+            top: 70px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, #ff4733, #ffcc33, #ff4733);
+            transform-origin: left;
+            transform: scaleX(0);
+            z-index: 1031;
+        }
+
+        /* ----- PAGE TITLE ----- */
+        .page-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3.5rem;
+            font-weight: 900;
+            color: #ffcc33;
+            text-transform: uppercase;
+            text-shadow: 0 0 20px rgba(255,204,51,0.5);
+            margin-bottom: 0.5rem;
+        }
+        
+        .page-subtitle {
+            font-family: 'Cinzel', serif;
+            font-size: 1.5rem;
+            color: #ff9966;
+            margin-bottom: 2rem;
+        }
+
+        /* ----- TEAM CARDS FOR SPONSORSHIP TEAM ----- */
+        .team-card {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s;
+            height: 100%;
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .team-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #ff4733, #ffcc33, #ff4733);
+            transform: translateX(-100%);
+            transition: transform 0.5s;
+        }
+        
+        .team-card:hover::before {
+            transform: translateX(100%);
+        }
+        
+        .team-card:hover {
+            background: rgba(255,153,102,0.1);
+            border-color: rgba(255,153,102,0.5);
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(255,153,102,0.2);
+        }
+
+        .team-image {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            margin: 0 auto 1.5rem;
+            border: 3px solid rgba(255,204,51,0.3);
+            overflow: hidden;
+            transition: all 0.3s;
+        }
+        
+        .team-card:hover .team-image {
+            border-color: #ffcc33;
+            transform: scale(1.05);
+            box-shadow: 0 0 30px rgba(255,204,51,0.3);
+        }
+        
+        .team-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .team-name {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #ffcc33;
+            margin-bottom: 0.5rem;
+        }
+
+        .team-role {
+            font-size: 1.2rem;
+            color: #ff9966;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-info {
+            background: rgba(0,0,0,0.3);
+            border-radius: 10px;
+            padding: 1rem;
+            margin: 1.5rem 0;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.8rem;
+            margin-bottom: 0.8rem;
+            color: #fff;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        
+        .contact-item:last-child {
+            margin-bottom: 0;
+        }
+        
+        .contact-item:hover {
+            color: #ffcc33;
+            transform: translateX(5px);
+        }
+        
+        .contact-item i {
+            color: #ff9966;
+            font-size: 1.2rem;
+            width: 24px;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ffcc33;
+            text-decoration: none;
+            transition: all 0.3s;
+            border: 1px solid rgba(255,204,51,0.3);
+        }
+        
+        .social-links a:hover {
+            background: #ff9966;
+            color: #000;
+            transform: translateY(-5px);
+        }
+
+        /* ----- BACK BUTTON ----- */
+        .back-btn {
+            background: linear-gradient(145deg, #0066cc, #0052a3);
+            border: none;
+            border-radius: 10px;
+            padding: 12px 25px;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 600;
+            color: white;
+            text-transform: uppercase;
+            box-shadow: 0 4px 0 #004080, 0 10px 20px rgba(0,102,204,0.3);
+            transition: 0.2s;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 2rem;
+        }
+        
+        .back-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 0 #004080, 0 15px 25px rgba(0,102,204,0.4);
+            color: white;
+        }
+
+        /* ----- RESPONSIVE ADJUSTMENTS ----- */
+        @media (max-width: 991px) {
+            .page-title { font-size: 2.8rem; }
+            .scroll-indicator { top: 0; }
+        }
+
+        @media (max-width: 768px) {
+            .page-title { font-size: 2.2rem; }
+            .page-subtitle { font-size: 1.2rem; }
+            .team-name { font-size: 1.5rem; }
+            .team-image { width: 120px; height: 120px; }
+        }
+
+        @media (max-width: 576px) {
+            .page-title { font-size: 1.8rem; }
+            .page-subtitle { font-size: 1rem; }
+        }
+
+        /* ----- back to top ----- */
+        .back-to-top {
+            position: fixed; bottom: 30px; right: 30px;
+            width: 50px; height: 50px; border-radius: 50%;
+            background: linear-gradient(135deg, #ff4733, #ff9966);
+            border: none; color: white; font-size: 1.5rem;
+            display: none; align-items: center; justify-content: center;
+            box-shadow: 0 0 20px rgba(255,71,51,0.5);
+            z-index: 1000;
+            cursor: pointer;
+        }
+        .back-to-top:hover { transform: translateY(-5px); box-shadow: 0 0 30px rgba(255,71,51,0.8); }
+
+        /* footer */
+        .footer-3d {
+            border-top: 2px solid #ff4733;
+            background: #000;
+            padding: 2.5rem 0 1rem;
+            margin-top: 4rem;
+        }
+        .college-logo { width: 60px; height: 60px; border-radius: 50%; object-fit: cover; }
+        .social-icon {
+            width: 45px; height: 45px; border-radius: 50%;
+            background: rgba(255,71,51,0.2); 
+            display: inline-flex; align-items: center; justify-content: center;
+            color: #ffcc33; font-size: 1.5rem;
+            transition: 0.3s;
+            text-decoration: none;
+        }
+        .social-icon:hover { background: rgba(255,71,51,0.4); transform: translateY(-5px); }
+    </style>
+</head>
+<body>
+    <!-- custom cursor -->
+    <div class="cursor-dot" data-cursor-dot></div>
+    <div class="cursor-outline" data-cursor-outline></div>
+
+    <!-- VIDEO BACKGROUND -->
+    <div class="video-background">
+        <video autoplay muted loop playsinline id="bgVideo" preload="metadata">
+            <source src="https://res.cloudinary.com/dpc4l1hic/video/upload/v1770814312/light_gzuewo.mp4" type="video/mp4">
+        </video>
+        <div class="video-overlay"></div>
+    </div>
+
+    <!-- LOADER -->
+    <div class="loader-container" id="loader">
+        <div class="loader-wrapper">
+            <span class="loader-letter">S</span>
+            <span class="loader-letter">P</span>
+            <span class="loader-letter">O</span>
+            <span class="loader-letter">N</span>
+            <span class="loader-letter">S</span>
+            <span class="loader-letter">O</span>
+            <span class="loader-letter">R</span>
+            <span class="loader-letter">S</span>
+            <span class="loader-letter">H</span>
+            <span class="loader-letter">I</span>
+            <span class="loader-letter">P</span>
+            <span class="loader-letter"> </span>
+            <span class="loader-letter">T</span>
+            <span class="loader-letter">E</span>
+            <span class="loader-letter">A</span>
+            <span class="loader-letter">M</span>
+            <div class="loader"></div>
+        </div>
+    </div>
+
+    <!-- SCROLL INDICATOR -->
+    <div class="scroll-indicator"></div>
+
+    <!-- ========== NAVIGATION ========== -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container-fluid px-lg-4">
+            <a class="navbar-brand" href="home.html"></a>
+            <button class="navbar-toggler ms-auto" type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#festronixNavbar"
+                aria-controls="festronixNavbar"
+                aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="festronixNavbar">
+                <ul class="navbar-nav mx-auto mb-2 mb-lg-0 w-100 justify-content-center">
+                    <li class="nav-item"><a class="nav-link" href="home.html"><i class="fas fa-home"></i> Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="previous.html"><i class="fas fa-history"></i> Previous</a></li>
+                    <li class="nav-item"><a class="nav-link" href="gallery.html"><i class="fas fa-images"></i> Gallery</a></li>
+                    <li class="nav-item"><a class="nav-link" href="events.html"><i class="fas fa-calendar-alt"></i> Events</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="sponsors.html"><i class="fas fa-handshake"></i> Sponsors</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.html"><i class="fas fa-info-circle"></i> About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="team.html"><i class="fas fa-users"></i> Team</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contact.html"><i class="fas fa-envelope"></i> Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- MAIN CONTENT -->
+    <main class="container-fluid px-3 px-md-5" style="margin-top: 100px;">
+        
+        <!-- BACK BUTTON -->
+        <div class="row">
+            <div class="col-12">
+                <a href="sponsors.html" class="back-btn">
+                    <i class="fas fa-arrow-left"></i> Back to Sponsors
+                </a>
+            </div>
+        </div>
+
+        <!-- PAGE HEADER -->
+        <div class="row text-center mb-5">
+            <div class="col-12">
+                <h1 class="page-title">Sponsorship Team</h1>
+                <p class="page-subtitle">Meet the team that makes partnerships happen</p>
+                <p class="text-white-50 mx-auto" style="max-width: 700px;">Our dedicated sponsorship team works tirelessly to build meaningful partnerships. Reach out to any of our team members for sponsorship inquiries, collaboration opportunities, or partnership discussions.</p>
+            </div>
+        </div>
+
+        <!-- SPONSORSHIP TEAM MEMBERS -->
+        <div class="row g-4 justify-content-center">
+            
+            <!-- Member 1: Somen Pradhan -->
+            <div class="col-lg-4 col-md-6">
+                <div class="team-card">
+                    <div class="team-image">
+                        <img src="https://res.cloudinary.com/dpc4l1hic/image/upload/v1771329395/20260121_094336.jpg_uttxgq.jpg" alt="Somen Pradhan">
+                    </div>
+                    <h2 class="team-name">Somen Pradhan</h2>
+                    <div class="team-role">Student SPOC - Sponsorship</div>
+                    
+                    <div class="contact-info">
+                        <a href="tel:+917978103026" class="contact-item">
+                            <i class="fas fa-phone-alt"></i>
+                            <span>+91 79781 03026</span>
+                        </a>
+                        <a href="mailto:somenpradhan@gift.edu.in" class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <span>somenpradhan@gift.edu.in</span>
+                        </a>
+                    </div>
+                    
+                    <p class="text-white-50 small">Student coordinator managing sponsor relationships, partnerships, and funding acquisition. Expert in corporate communications.</p>
+                    
+                </div>
+            </div>
+            
+            <!-- Member 2: Deba Prasad Sutar -->
+            <div class="col-lg-4 col-md-6">
+                <div class="team-card">
+                    <div class="team-image">
+                        <img src="https://res.cloudinary.com/dpc4l1hic/image/upload/v1771329604/IMG_20260217_172318154.jpg_bwdgsz.jpg" alt="Deba Prasad Sutar">
+                    </div>
+                    <h2 class="team-name">Deba Prasad Sutar</h2>
+                    <div class="team-role">Sponsorship Executive</div>
+                    
+                    <div class="contact-info">
+                        <a href="tel:+918658900524" class="contact-item">
+                            <i class="fas fa-phone-alt"></i>
+                            <span>+91 86589 00524</span>
+                        </a>
+                        <a href="mailto:deba.sutar@gift.edu.in" class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <span>debaprasad2023@gift.edu.in</span>
+                        </a>
+                    </div>
+                    
+                    <p class="text-white-50 small">Handles sponsor outreach, proposals, and maintaining sponsor databases. Coordinates all sponsorship communications.</p>
+                    
+
+                </div>
+            </div>
+            
+            
+            <!-- Member 4: Faculty Coordinator (optional) -->
+            <div class="col-lg-4 col-md-6">
+                <div class="team-card">
+                    <div class="team-image">
+                        <img src="https://res.cloudinary.com/dpc4l1hic/image/upload/v1771315014/7beaec65-27a2-4e64-bdf2-fb66adde0368.png" alt="Dr. Satya Ranjan Pattanaik">
+                    </div>
+                    <h2 class="team-name">Dr. Satya Ranjan Pattanaik</h2>
+                    <div class="team-role">Faculty Coordinator - Sponsorship</div>
+                    
+                    <div class="contact-info">
+                        <a href="tel:+916372745082" class="contact-item">
+                            <i class="fas fa-phone-alt"></i>
+                            <span>+91 63727 45082</span>
+                        </a>
+                        <a href="mailto:satya.pattanaik@gift.edu.in" class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <span>drsatyaranjank@gift.edu.in</span>
+                        </a>
+                    </div>
+                    
+                    <p class="text-white-50 small">Faculty lead overseeing all sponsorship activities. Provides strategic guidance and connects with industry partners.</p>
+                    
+                </div>
+            </div>
+        </div>
+
+        <!-- CONTACT OPTIONS SECTION -->
+        <div class="row my-5 py-4">
+            <div class="col-12">
+                <div class="marketing-featured text-center p-5" style="background: rgba(0,0,0,0.5); border-radius: 20px; border: 2px solid rgba(255,153,102,0.3);">
+                    <h2 class="category-title" style="color: #ffcc33;">Sponsorship Inquiry</h2>
+                    <p class="text-white-50 mb-4">For general sponsorship inquiries, partnership proposals, or collaboration opportunities, please reach out to our team or use the form below.</p>
+                    
+                    <div class="row g-4 mt-3">
+                        <div class="col-md-4">
+                            <div class="d-flex flex-column align-items-center">
+                                <i class="fas fa-phone-alt fa-3x mb-3" style="color: #ff9966;"></i>
+                                <h4 class="text-white">Call Us</h4>
+                                <a href="tel:+917978103026" class="text-white-50 text-decoration-none">+91 79781 03026</a>
+                                <a href="tel:+918658900524" class="text-white-50 text-decoration-none">+91 86589 00524</a>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="d-flex flex-column align-items-center">
+                                <i class="fas fa-envelope fa-3x mb-3" style="color: #ff9966;"></i>
+                                <h4 class="text-white">Email Us</h4>
+                                <a href="mailto:sponsorship@festronix.in" class="text-white-50 text-decoration-none">debaprasad2023@gift.edu.in</a>
+                                <a href="mailto:partnerships@gift.edu.in" class="text-white-50 text-decoration-none">drsatyaranjank@gift.edu.in</a>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="d-flex flex-column align-items-center">
+                                <i class="fab fa-whatsapp fa-3x mb-3" style="color: #ff9966;"></i>
+                                <h4 class="text-white">WhatsApp</h4>
+                                <a href="https://wa.me/917978103026" class="text-white-50 text-decoration-none">+91 79781 03026</a>
+                                <span class="text-white-50 small">Mon-Fri, 9AM-6PM</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <a href="mailto:sponsorship@festronix.in?subject=Sponsorship%20Inquiry%20-%20FESTRONIX%202.0" class="btn-3d-sponsor mt-5 d-inline-block" style="background: linear-gradient(145deg, #ff4733, #ff9966);">
+                        <i class="fas fa-paper-plane"></i> Send Sponsorship Inquiry
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- SPONSORSHIP BENEFITS CARD (Optional) -->
+        <div class="row my-4">
+            <div class="col-12">
+                <div class="text-center">
+                    <a href="sponsorship-brochure.pdf" class="btn-3d-sponsor" style="background: linear-gradient(145deg, #0066cc, #004080);" target="_blank">
+                        <i class="fas fa-download"></i> Download Sponsorship Brochure
+                    </a>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="footer-3d">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-4 col-md-6 col-sm-10 text-center text-md-start">
+                    <div class="d-flex align-items-center gap-3 justify-content-center justify-content-md-start">
+                        <img src="https://res.cloudinary.com/dpc4l1hic/image/upload/v1770814304/gift_logo_rzl4tf.png" alt="GIFT" class="college-logo" loading="lazy">
+                        <div>
+                            <span class="fw-bold fs-3" style="color:#ffcc33; font-family:Orbitron;">GIFT AUTONOMOUS</span>
+                            <br><span class="text-white-50">BHUBANESWAR</span>
+                        </div>
+                    </div>
+                    <p class="text-warning mt-3">Igniting Minds, Empowering Futures</p>
+                    <p class="text-secondary">GIFT Autonomous, Bhubaneswar is committed to providing quality education and fostering innovation through events like FESTRONIX.</p>
+                </div>
+                <div class="col-md-6 text-md-end text-center mt-4 mt-md-0">
+                    <h4 class="text-white mb-3">Connect With Us</h4>
+                    <div class="d-flex gap-3 justify-content-center justify-content-md-end">
+                        <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-youtube"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                    <p class="text-warning mt-4 small">Follow us for latest updates!</p>
+                </div>
+            </div>
+            <div class="row mt-5">
+                <div class="col-12 text-center text-white-50 border-top pt-4">
+                    <p>© 2026 FESTRONIX 2.0 - GIFT Autonomous, Bhubaneswar. All Rights Reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button class="back-to-top" id="backToTop"><i class="fas fa-chevron-up"></i></button>
+
+    <!-- Bootstrap JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- UPDATED SCRIPT -->
+    <script>
+        (function() {
+            "use strict";
+            
+            // ==================== LOADER ====================
+            setTimeout(function() {
+                const loader = document.getElementById('loader');
+                if (loader) {
+                    loader.classList.add('loader-hidden');
+                }
+            }, 2000);
+
+            document.addEventListener('DOMContentLoaded', function() {
+                setTimeout(function() {
+                    const loader = document.getElementById('loader');
+                    if (loader) {
+                        loader.classList.add('loader-hidden');
+                    }
+                }, 1500);
+            });
+
+            // ---------- CURSOR ANIMATION ----------
+            const cursorDot = document.querySelector("[data-cursor-dot]");
+            const cursorOutline = document.querySelector("[data-cursor-outline]");
+            if (cursorDot && cursorOutline) {
+                let mouseX = 0, mouseY = 0, cursorX = 0, cursorY = 0;
+                document.addEventListener("mousemove", (e) => { 
+                    mouseX = e.clientX; mouseY = e.clientY; 
+                    cursorDot.style.left = mouseX + "px"; cursorDot.style.top = mouseY + "px"; 
+                });
+                
+                document.addEventListener("mousedown", () => { 
+                    if(cursorOutline) { 
+                        cursorOutline.style.transform = "translate(-50%, -50%) scale(0.8)"; 
+                        cursorOutline.style.borderColor = "#ffcc33"; 
+                    } 
+                });
+                
+                document.addEventListener("mouseup", () => { 
+                    if(cursorOutline) { 
+                        cursorOutline.style.transform = "translate(-50%, -50%) scale(1)"; 
+                        cursorOutline.style.borderColor = "rgba(255,71,51,0.8)"; 
+                    } 
+                });
+                
+                function animateCursor() { 
+                    cursorX += (mouseX - cursorX) * 0.15; 
+                    cursorY += (mouseY - cursorY) * 0.15; 
+                    cursorOutline.style.left = cursorX + "px"; 
+                    cursorOutline.style.top = cursorY + "px"; 
+                    requestAnimationFrame(animateCursor); 
+                }
+                animateCursor();
+
+                // Hover effect for interactive elements
+                document.querySelectorAll('a, button, .btn-3d-sponsor, .team-card, .social-icon, .back-to-top').forEach(el => {
+                    el.addEventListener('mouseenter', () => {
+                        cursorOutline.style.width = '50px';
+                        cursorOutline.style.height = '50px';
+                        cursorOutline.style.borderColor = '#ffcc33';
+                    });
+                    el.addEventListener('mouseleave', () => {
+                        cursorOutline.style.width = '40px';
+                        cursorOutline.style.height = '40px';
+                        cursorOutline.style.borderColor = 'rgba(255,71,51,0.8)';
+                    });
+                });
+            }
+
+            // ---------- SCROLL INDICATOR & BACK TO TOP ----------
+            const topBtn = document.getElementById('backToTop');
+            const scrollIndicator = document.querySelector('.scroll-indicator');
+            
+            window.addEventListener('scroll', () => {
+                if (topBtn) {
+                    topBtn.style.display = window.scrollY > 300 ? 'flex' : 'none';
+                }
+                if (scrollIndicator) {
+                    const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+                    const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                    scrollIndicator.style.transform = `scaleX(${winScroll / height})`;
+                }
+            });
+            
+            if (topBtn) {
+                topBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+            }
+
+            // ---------- VIDEO AUTOPLAY ----------
+            const video = document.querySelector('video');
+            if (video) video.play().catch(e => console.log("Autoplay blocked"));
+
+        })();
+    </script>
+</body>
+</html>
