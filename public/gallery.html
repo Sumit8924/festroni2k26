@@ -37,7 +37,7 @@
             min-height: 100vh;
             padding-top: 70px;
             font-size: 0.95rem;
-            cursor: none; /* custom cursor active */
+            cursor: none;
         }
 
         /* ----- Video Background ----- */
@@ -84,7 +84,7 @@
             z-index: -1;
         }
 
-        /* ----- Custom Cursor (unchanged) ----- */
+        /* ----- Custom Cursor ----- */
         .cursor-dot, .cursor-outline {
             position: fixed; top: 0; left: 0; transform: translate(-50%, -50%);
             border-radius: 50%; z-index: 9999; pointer-events: none;
@@ -99,7 +99,7 @@
             body { cursor: auto; }
         }
 
-        /* ===== UPDATED NAVBAR STYLES - MATCHING INDEX.HTML ===== */
+        /* ===== UPDATED NAVBAR STYLES ===== */
         .navbar {
             background: transparent;
             backdrop-filter: blur(15px);
@@ -110,7 +110,6 @@
             padding: 0 1rem;
         }
 
-        /* Desktop: Center Nav Items */
         @media (min-width: 992px) {
             .navbar-nav {
                 width: 100%;
@@ -156,7 +155,6 @@
             margin-left: 20px;
         }
 
-        /* Navbar Toggler Style */
         .navbar-toggler {
             border: 2px solid #ff4733 !important;
             background: rgba(255, 71, 51, 0.2) !important;
@@ -171,7 +169,6 @@
             box-shadow: 0 0 0 0.25rem rgba(255, 71, 51, 0.25);
         }
 
-        /* Mobile menu transparency */
         @media (max-width: 991px) {
             .navbar-collapse {
                 background: transparent !important;
@@ -216,7 +213,7 @@
             }
         }
 
-        /* ----- User Auth Button (Desktop) ----- */
+        /* ----- User Auth Button ----- */
         .user-auth-btn {
             display: flex;
             align-items: center;
@@ -239,7 +236,6 @@
         }
         .user-auth-btn i { margin-right: 8px; }
 
-
         /* ----- Scroll Indicator ----- */
         .scroll-indicator {
             position: fixed;
@@ -253,7 +249,7 @@
             z-index: 1031;
         }
 
-        /* ----- LOADER ANIMATION - OPTIMIZED FOR FAST LOADING ----- */
+        /* ----- LOADER ANIMATION - MUCH SLOWER TIMING (as requested) ----- */
         .loader-container {
             position: fixed;
             top: 0;
@@ -265,11 +261,11 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            transition: opacity 0.3s ease;
+            transition: opacity 1s ease;
+            pointer-events: none;
         }
         .loader-hidden { 
             opacity: 0; 
-            pointer-events: none; 
             visibility: hidden; 
         }
         .loader-wrapper { 
@@ -277,6 +273,7 @@
             justify-content: center; 
             align-items: center; 
             flex-wrap: wrap; 
+            position: relative;
         }
         .loader-letter {
             font-family: 'Orbitron', sans-serif;
@@ -286,16 +283,17 @@
             text-shadow: 0 0 15px rgba(255,71,51,0.7);
             margin: 0 3px;
             opacity: 0;
-            animation: letterReveal 0.2s forwards;
+            animation: letterReveal 0.6s forwards;
             display: inline-block;
         }
-        .loader-letter:nth-child(1) { animation-delay: 0.1s; }
-        .loader-letter:nth-child(2) { animation-delay: 0.15s; }
-        .loader-letter:nth-child(3) { animation-delay: 0.2s; }
-        .loader-letter:nth-child(4) { animation-delay: 0.25s; }
-        .loader-letter:nth-child(5) { animation-delay: 0.3s; }
-        .loader-letter:nth-child(6) { animation-delay: 0.35s; }
-        .loader-letter:nth-child(7) { animation-delay: 0.4s; }
+        .loader-letter:nth-child(1) { animation-delay: 0.2s; }
+        .loader-letter:nth-child(2) { animation-delay: 0.3s; }
+        .loader-letter:nth-child(3) { animation-delay: 0.4s; }
+        .loader-letter:nth-child(4) { animation-delay: 0.5s; }
+        .loader-letter:nth-child(5) { animation-delay: 0.6s; }
+        .loader-letter:nth-child(6) { animation-delay: 0.7s; }
+        .loader-letter:nth-child(7) { animation-delay: 0.8s; }
+        
         @keyframes letterReveal { 
             to { 
                 opacity: 1; 
@@ -304,33 +302,21 @@
         }
         .loader {
             position: absolute;
-            bottom: -30px;
+            bottom: -20px;
             width: 100%;
-            height: 4px;
+            height: 3px;
             background: linear-gradient(90deg, transparent, #ffcc33, transparent);
-            animation: loadingBar 1.5s ease-in-out forwards;
+            animation: loadingBar 3s ease-in-out forwards;
         }
         @keyframes loadingBar { 
             0% { transform: translateX(-100%); } 
             100% { transform: translateX(100%); } 
         }
-        .loader-subtitle {
-            font-family: 'Rajdhani', sans-serif;
-            font-size: 1.2rem;
-            color: #ff9966;
-            letter-spacing: 2px;
-            margin-top: 20px;
-            opacity: 0;
-            animation: fadeIn 0.5s ease forwards 0.8s;
-        }
-        @keyframes fadeIn { to { opacity: 1; } }        
 
         @media (max-width: 991px) {
             .scroll-indicator { top: 0; }
             .loader-letter { font-size: 3rem; }
-            .navbar-nav {
-                gap: 0;
-            }
+            .navbar-nav { gap: 0; }
         }
         @media (max-width: 767px) {
             .loader-letter { font-size: 2.5rem; }
@@ -342,7 +328,7 @@
             .loader-letter { font-size: 1.5rem; }
         }
 
-        /* ----- GALLERY CONTENT (Bootstrap enhanced) ----- */
+        /* ----- GALLERY CONTENT ----- */
         .main-content {
             position: relative;
             z-index: 2;
@@ -391,7 +377,6 @@
             line-height: 1.5;
         }
 
-        /* Gallery Grid - Bootstrap card style */
         .gallery-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -426,7 +411,7 @@
             transform: scale(1.05);
         }
 
-        /* Lightbox Modal (Bootstrap modal style) - Simplified */
+        /* Lightbox Modal */
         .lightbox-modal {
             display: none;
             position: fixed;
@@ -499,7 +484,7 @@
         .lightbox-prev { left: 10px; }
         .lightbox-next { right: 10px; }
 
-        /* Footer - Bootstrap grid */
+        /* Footer */
         .footer-3d {
             background: rgba(0,0,0,0.9);
             padding: 40px 20px 20px;
@@ -557,9 +542,7 @@
         /* Responsive */
         @media (max-width: 991px) {
             .scroll-indicator { top: 0; }
-            .navbar-nav {
-                gap: 0;
-            }
+            .navbar-nav { gap: 0; }
         }
         @media (max-width: 768px) {
             body { padding-top: 60px; }
@@ -572,6 +555,7 @@
             .gallery-grid { grid-template-columns: 1fr; }
             .lightbox-nav { width: 35px; height: 35px; }
         }
+        
         /* Touch targets */
         button, .nav-link, .gallery-item, .user-auth-btn {
             min-height: 44px;
@@ -581,7 +565,7 @@
 </head>
 <body>
 
-<!-- LOADER (gallery page style) -->
+<!-- LOADER (gallery page style) - MUCH SLOWER TIMING -->
 <div class="loader-container" id="loader">
     <div class="loader-wrapper">
         <span class="loader-letter">G</span>
@@ -597,7 +581,7 @@
 
     <!-- VIDEO BACKGROUND -->
     <div class="video-background">
-        <video autoplay muted loop playsinline>
+        <video autoplay muted loop playsinline preload="metadata">
             <source src="https://res.cloudinary.com/dpc4l1hic/video/upload/v1770814312/light_gzuewo.mp4" type="video/mp4">
         </video>
         <div class="video-overlay"></div>
@@ -611,7 +595,7 @@
     <!-- SCROLL INDICATOR -->
     <div class="scroll-indicator"></div>
 
-    <!-- ========== UPDATED NAVIGATION - MATCHING INDEX.HTML STYLE ========== -->
+    <!-- ========== UPDATED NAVIGATION ========== -->
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
         <div class="container-fluid px-lg-4">
             <a class="navbar-brand d-lg-none text-warning fw-bold" href="#"></a>
@@ -638,7 +622,7 @@
         <div class="gallery-container">
             <!-- Header -->
             <div class="gallery-header">
-                <img src="https://res.cloudinary.com/dpc4l1hic/image/upload/v1771088331/Untitled_design_1_kwxvjb.png" alt="FESTRONIX 2.0 Logo" class="gallery-logo img-fluid">
+                <img src="https://res.cloudinary.com/dpc4l1hic/image/upload/v1771088331/Untitled_design_1_kwxvjb.png" alt="FESTRONIX 2.0 Logo" class="gallery-logo img-fluid" loading="lazy">
                 <h1 class="gallery-title">Picture Gallery</h1>
                 <p class="gallery-subtitle">Relive the spectacular moments, electrifying performances, and unforgettable memories from FESTRONIX 2.0. Browse through our curated collection of photos capturing the essence of innovation and celebration.</p>
             </div>
@@ -648,13 +632,13 @@
         </div>
     </main>
 
-    <!-- LIGHTBOX MODAL - Simplified -->
+    <!-- LIGHTBOX MODAL -->
     <div class="lightbox-modal" id="lightboxModal">
         <button class="lightbox-close" id="lightboxClose"><i class="fas fa-times"></i></button>
         <button class="lightbox-nav lightbox-prev" id="lightboxPrev"><i class="fas fa-chevron-left"></i></button>
         <button class="lightbox-nav lightbox-next" id="lightboxNext"><i class="fas fa-chevron-right"></i></button>
         <div class="lightbox-content">
-            <img class="lightbox-img" id="lightboxImage" src="" alt="Gallery Image">
+            <img class="lightbox-img" id="lightboxImage" src="" alt="Gallery Image" loading="lazy">
         </div>
     </div>
 
@@ -690,36 +674,16 @@
     <!-- BACK TO TOP -->
     <button class="back-to-top" id="backToTop"><i class="fas fa-chevron-up"></i></button>
 
-    <!-- Bootstrap JS Bundle -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Bootstrap JS Bundle - deferred -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" defer></script>
 
-    <!-- UPDATED SCRIPT - SIMPLIFIED GALLERY -->
+    <!-- OPTIMIZED SCRIPT - WITH MUCH SLOWER LOADER TIMING -->
     <script>
         (function() {
             'use strict';
 
-            // ==================== LOADER - FAST LOADING ====================
-            // Hide loader after 1.5 seconds (matches animation duration)
-            setTimeout(function() {
-                const loader = document.getElementById('loader');
-                if (loader) {
-                    loader.classList.add('loader-hidden');
-                }
-            }, 1500);
-
-            // Also hide on DOM ready (faster)
-            document.addEventListener('DOMContentLoaded', function() {
-                setTimeout(function() {
-                    const loader = document.getElementById('loader');
-                    if (loader) {
-                        loader.classList.add('loader-hidden');
-                    }
-                }, 800);
-            });
-
-            // ==================== SIMPLIFIED GALLERY DATA - ONLY IMAGE URLS ====================
+            // ==================== GALLERY DATA ====================
             const galleryImages = [
-                // All images without titles or descriptions
                 'https://res.cloudinary.com/dpc4l1hic/image/upload/v1770814181/img17_ulwi5t.jpg',
                 'https://res.cloudinary.com/dpc4l1hic/image/upload/v1770814179/img16_pg2tn8.jpg',
                 'https://res.cloudinary.com/dpc4l1hic/image/upload/v1770814169/img11_b9cdkk.jpg',
@@ -747,15 +711,55 @@
                 'https://res.cloudinary.com/dpc4l1hic/image/upload/v1771249078/IMG_0317_tuydai.jpg',
                 'https://res.cloudinary.com/dpc4l1hic/image/upload/v1771249102/IMG_0175_w9w61r.jpg',
                 'https://res.cloudinary.com/dpc4l1hic/image/upload/v1771249082/IMG_0216_zbikhb.jpg',
-                'https://res.cloudinary.com/dpc4l1hic/image/upload/v1771249176/IMG_0012_gsxdkc.jpg',
                 'https://res.cloudinary.com/dpc4l1hic/image/upload/v1771249074/IMG_0355_s8d5o9.jpg'
             ];
 
-            // ----- CURSOR ANIMATION -----
+            // ==================== MUCH SLOWER LOADER - ADJUSTED TIMING ====================
+            // Hide loader after 3 seconds (much slower)
+            setTimeout(function() {
+                const loader = document.getElementById('loader');
+                if (loader) {
+                    loader.classList.add('loader-hidden');
+                    // Remove loader from DOM after transition
+                    setTimeout(() => {
+                        if (loader.parentNode) loader.style.display = 'none';
+                    }, 1000);
+                }
+            }, 3000); // Increased from 2000ms to 3000ms
+
+            // Also hide on DOM ready (slower)
+            document.addEventListener('DOMContentLoaded', function() {
+                setTimeout(function() {
+                    const loader = document.getElementById('loader');
+                    if (loader) {
+                        loader.classList.add('loader-hidden');
+                        setTimeout(() => {
+                            if (loader.parentNode) loader.style.display = 'none';
+                        }, 1000);
+                    }
+                }, 2000); // Increased from 1200ms to 2000ms
+            });
+
+            // Fallback - ensure loader hides even if DOMContentLoaded already fired
+            if (document.readyState === 'interactive' || document.readyState === 'complete') {
+                setTimeout(function() {
+                    const loader = document.getElementById('loader');
+                    if (loader) {
+                        loader.classList.add('loader-hidden');
+                        setTimeout(() => {
+                            if (loader.parentNode) loader.style.display = 'none';
+                        }, 1000);
+                    }
+                }, 3000);
+            }
+
+            // ==================== OPTIMIZED CURSOR ANIMATION ====================
             const cursorDot = document.querySelector("[data-cursor-dot]");
             const cursorOutline = document.querySelector("[data-cursor-outline]");
-            if (cursorDot && cursorOutline) {
+            
+            if (cursorDot && cursorOutline && window.innerWidth > 768) {
                 let mouseX = 0, mouseY = 0, cursorX = 0, cursorY = 0;
+                let rafId = null;
                 
                 document.addEventListener("mousemove", (e) => {
                     mouseX = e.clientX;
@@ -769,26 +773,35 @@
                     cursorY += (mouseY - cursorY) * 0.15;
                     cursorOutline.style.left = cursorX + "px";
                     cursorOutline.style.top = cursorY + "px";
-                    requestAnimationFrame(animateCursor);
+                    rafId = requestAnimationFrame(animateCursor);
                 }
                 animateCursor();
 
-                // Hover effect
-                document.querySelectorAll('a, button, .gallery-item').forEach(el => {
-                    el.addEventListener('mouseenter', () => {
+                // Hover effect with event delegation
+                document.addEventListener('mouseover', (e) => {
+                    const target = e.target.closest('a, button, .gallery-item');
+                    if (target && cursorOutline) {
                         cursorOutline.style.width = '50px';
                         cursorOutline.style.height = '50px';
                         cursorOutline.style.borderColor = '#ffcc33';
-                    });
-                    el.addEventListener('mouseleave', () => {
+                    }
+                });
+                
+                document.addEventListener('mouseout', (e) => {
+                    const target = e.target.closest('a, button, .gallery-item');
+                    if (target && cursorOutline) {
                         cursorOutline.style.width = '40px';
                         cursorOutline.style.height = '40px';
                         cursorOutline.style.borderColor = 'rgba(255,71,51,0.8)';
-                    });
+                    }
                 });
+            } else {
+                // Hide cursor on mobile
+                if (cursorDot) cursorDot.style.display = 'none';
+                if (cursorOutline) cursorOutline.style.display = 'none';
             }
 
-            // ----- SET ACTIVE NAVIGATION -----
+            // ==================== SET ACTIVE NAVIGATION ====================
             function setActiveNavItem() {
                 const currentPage = window.location.pathname.split('/').pop() || 'gallery.html';
                 document.querySelectorAll('.nav-link').forEach(link => {
@@ -798,22 +811,30 @@
                 });
             }
 
-            // ----- RENDER GALLERY - SIMPLIFIED -----
+            // ==================== RENDER GALLERY ====================
             function renderGallery() {
                 const galleryGrid = document.getElementById('galleryGrid');
                 if (!galleryGrid) return;
-                galleryGrid.innerHTML = '';
+                
+                // Use document fragment for better performance
+                const fragment = document.createDocumentFragment();
                 
                 galleryImages.forEach((imageUrl, index) => {
                     const galleryItem = document.createElement('div');
                     galleryItem.className = 'gallery-item';
                     galleryItem.dataset.index = index;
                     
-                    galleryItem.innerHTML = `
-                        <img src="${imageUrl}" alt="Gallery Image ${index + 1}" class="gallery-img" loading="lazy">
-                    `;
-                    galleryGrid.appendChild(galleryItem);
+                    const img = document.createElement('img');
+                    img.src = imageUrl;
+                    img.alt = `Gallery Image ${index + 1}`;
+                    img.className = 'gallery-img';
+                    img.loading = 'lazy';
+                    
+                    galleryItem.appendChild(img);
+                    fragment.appendChild(galleryItem);
                 });
+                
+                galleryGrid.appendChild(fragment);
                 
                 // Attach click events to new items
                 document.querySelectorAll('.gallery-item').forEach(item => {
@@ -824,7 +845,7 @@
                 });
             }
 
-            // ----- LIGHTBOX - SIMPLIFIED -----
+            // ==================== LIGHTBOX ====================
             let currentImageIndex = 0;
 
             function openLightbox(index) {
@@ -858,7 +879,35 @@
                 updateLightbox();
             }
 
-            // ----- EVENT LISTENERS SETUP -----
+            // ==================== OPTIMIZED SCROLL HANDLER ====================
+            function initScrollFeatures() {
+                const topBtn = document.getElementById('backToTop');
+                const scrollIndicator = document.querySelector('.scroll-indicator');
+                let ticking = false;
+                
+                window.addEventListener('scroll', () => {
+                    if (!ticking) {
+                        window.requestAnimationFrame(() => {
+                            if (topBtn) {
+                                topBtn.style.display = window.scrollY > 300 ? 'flex' : 'none';
+                            }
+                            if (scrollIndicator) {
+                                const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+                                const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                                scrollIndicator.style.transform = `scaleX(${winScroll / height})`;
+                            }
+                            ticking = false;
+                        });
+                        ticking = true;
+                    }
+                });
+                
+                if (topBtn) {
+                    topBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+                }
+            }
+
+            // ==================== EVENT LISTENERS SETUP ====================
             function setupEventListeners() {
                 // Lightbox controls
                 const closeBtn = document.getElementById('lightboxClose');
@@ -887,30 +936,18 @@
                     }
                 });
 
-                // Back to top
-                const topBtn = document.getElementById('backToTop');
-                if (topBtn) {
-                    window.addEventListener('scroll', () => {
-                        topBtn.style.display = window.scrollY > 300 ? 'flex' : 'none';
-                        
-                        // Scroll indicator
-                        const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-                        const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-                        const indicator = document.querySelector('.scroll-indicator');
-                        if (indicator) indicator.style.transform = `scaleX(${winScroll / height})`;
-                    });
-                    topBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
-                }
-
                 // Video play fallback
                 const video = document.querySelector('video');
-                if (video) video.play().catch(e => console.log("Autoplay blocked"));
+                if (video) {
+                    video.play().catch(e => console.log("Autoplay blocked"));
+                }
             }
 
-            // ----- INITIALIZATION -----
+            // ==================== INITIALIZATION ====================
             document.addEventListener('DOMContentLoaded', function() {
                 renderGallery();
                 setupEventListeners();
+                initScrollFeatures();
                 setActiveNavItem();
             });
         })();
