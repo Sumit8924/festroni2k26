@@ -23,7 +23,7 @@
             background: #0000004e;
             font-family: 'Rajdhani', sans-serif;
             color: white;
-            cursor: none; /* custom cursor */
+            cursor: none;
         }
 
         /* ----- Video Background ----- */
@@ -86,6 +86,22 @@
             height: 40px;
             border: 2px solid rgba(255,71,51,0.8);
         }
+        
+        /* Cursor z-index management for modal */
+        .instruction-modal.active ~ .cursor-dot,
+        .instruction-modal.active ~ .cursor-outline {
+            z-index: 10003 !important;
+        }
+
+        /* Ensure modal doesn't block cursor entirely */
+        .instruction-modal {
+            pointer-events: auto;
+        }
+
+        .instruction-modal * {
+            pointer-events: auto;
+        }
+        
         @media (hover: none) and (pointer: coarse) {
             .cursor-dot, .cursor-outline { display: none; }
             body { cursor: auto; }
@@ -104,7 +120,7 @@
             z-index: 1031;
         }
 
-        /* ===== UPDATED NAVBAR STYLES - MATCHING INDEX.HTML ===== */
+        /* ===== UPDATED NAVBAR STYLES ===== */
         .navbar {
             background: transparent;
             backdrop-filter: blur(15px);
@@ -115,7 +131,6 @@
             padding: 0 1rem;
         }
 
-        /* Desktop: Center Nav Items */
         @media (min-width: 992px) {
             .navbar-nav {
                 width: 100%;
@@ -161,7 +176,6 @@
             margin-left: 20px;
         }
 
-        /* Navbar Toggler Style */
         .navbar-toggler {
             border: 2px solid #ff4733 !important;
             background: rgba(255, 71, 51, 0.2) !important;
@@ -176,7 +190,6 @@
             box-shadow: 0 0 0 0.25rem rgba(255, 71, 51, 0.25);
         }
 
-        /* Mobile menu transparency */
         @media (max-width: 991px) {
             .navbar-collapse {
                 background: rgb(0, 0, 0) !important;
@@ -221,7 +234,6 @@
             }
         }
 
-
         /* ----- Main Content ----- */
         .main-content {
             position: relative;
@@ -258,7 +270,7 @@
             line-height: 1.6;
         }
 
-        /* ----- Filter Buttons (Bootstrap button style) ----- */
+        /* ----- Filter Buttons ----- */
         .filter-btn {
             background: rgba(255,71,51,0.1);
             border: 2px solid rgba(255,71,51,0.3);
@@ -302,7 +314,7 @@
             background: linear-gradient(90deg, transparent, #ff9966, transparent);
         }
 
-        /* ----- Event Cards (Bootstrap card enhanced) ----- */
+        /* ----- Event Cards ----- */
         .event-card {
             background: rgba(0,0,0,0.4);
             backdrop-filter: blur(10px);
@@ -341,7 +353,6 @@
             letter-spacing: 1px;
         }
 
-        /* Event Banner Styles */
         .event-banner {
             width: 100%;
             height: 140px;
@@ -396,7 +407,6 @@
             z-index: 5;
         }
 
-        /* Countdown Timer */
         .event-countdown {
             background: rgba(0,0,0,0.6);
             border-radius: 12px;
@@ -430,7 +440,6 @@
             text-transform: uppercase;
         }
 
-        /* 3D Buttons */
         .event-btn {
             position: relative;
             padding: 12px 25px;
@@ -491,7 +500,7 @@
             margin: 15px 0;
         }
 
-        /* ----- Instruction Modal (Bootstrap modal style) ----- */
+        /* ----- Instruction Modal ----- */
         .instruction-modal {
             display: none;
             position: fixed;
@@ -667,9 +676,7 @@
         @media (max-width: 991px) {
             .scroll-indicator { top: 0; }
             .time-slot { grid-template-columns: 1fr; }
-            .navbar-nav {
-                gap: 0;
-            }
+            .navbar-nav { gap: 0; }
         }
         @media (max-width: 768px) {
             .main-content { margin-top: 70px; }
@@ -685,62 +692,60 @@
         }
 
         /* ----- LOADER ANIMATION ----- */
-            .loader-container {
-                position: fixed;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                background: #000;
-                z-index: 99999;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                transition: opacity 0.5s;
-            }
-            .loader-hidden { opacity: 0; pointer-events: none; visibility: hidden; }
-            .loader-wrapper { display: flex; justify-content: center; align-items: center; flex-wrap: wrap; }
-            .loader-letter {
-                font-family: 'Orbitron', sans-serif;
-                font-size: 4rem;
-                font-weight: 900;
-                color: #ff4733;
-                text-shadow: 0 0 15px rgba(255,71,51,0.7);
-                margin: 0 3px;
-                opacity: 0;
-                animation: letterReveal 0.3s forwards;
-                display: inline-block;
-            }
-            .loader-letter:nth-child(1) { animation-delay: 0.1s; }
-            .loader-letter:nth-child(2) { animation-delay: 0.2s; }
-            .loader-letter:nth-child(3) { animation-delay: 0.3s; }
-            .loader-letter:nth-child(4) { animation-delay: 0.4s; }
-            @keyframes letterReveal { to { opacity: 1; text-shadow: 0 0 20px rgba(255,71,51,1); } }
-            .loader {
-                position: absolute;
-                bottom: -30px;
-                width: 100%;
-                height: 4px;
-                background: linear-gradient(90deg, transparent, #ffcc33, transparent);
-                animation: loadingBar 2.5s ease-in-out forwards;
-            }
-            @keyframes loadingBar { 0% { transform: translateX(-100%); } 100% { transform: translateX(100%); } }
-            .loader-subtitle {
-                font-family: 'Rajdhani', sans-serif;
-                font-size: 1.2rem;
-                color: #ff9966;
-                letter-spacing: 2px;
-                margin-top: 20px;
-                opacity: 0;
-                animation: fadeIn 0.5s ease forwards 1.5s;
-            }
-            @keyframes fadeIn { to { opacity: 1; } }
-
-            
+        .loader-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #000;
+            z-index: 99999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 0.5s;
+        }
+        .loader-hidden { opacity: 0; pointer-events: none; visibility: hidden; }
+        .loader-wrapper { display: flex; justify-content: center; align-items: center; flex-wrap: wrap; }
+        .loader-letter {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 4rem;
+            font-weight: 900;
+            color: #ff4733;
+            text-shadow: 0 0 15px rgba(255,71,51,0.7);
+            margin: 0 3px;
+            opacity: 0;
+            animation: letterReveal 0.3s forwards;
+            display: inline-block;
+        }
+        .loader-letter:nth-child(1) { animation-delay: 0.1s; }
+        .loader-letter:nth-child(2) { animation-delay: 0.2s; }
+        .loader-letter:nth-child(3) { animation-delay: 0.3s; }
+        .loader-letter:nth-child(4) { animation-delay: 0.4s; }
+        @keyframes letterReveal { to { opacity: 1; text-shadow: 0 0 20px rgba(255,71,51,1); } }
+        .loader {
+            position: absolute;
+            bottom: -30px;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, transparent, #ffcc33, transparent);
+            animation: loadingBar 2.5s ease-in-out forwards;
+        }
+        @keyframes loadingBar { 0% { transform: translateX(-100%); } 100% { transform: translateX(100%); } }
+        .loader-subtitle {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 1.2rem;
+            color: #ff9966;
+            letter-spacing: 2px;
+            margin-top: 20px;
+            opacity: 0;
+            animation: fadeIn 0.5s ease forwards 1.5s;
+        }
+        @keyframes fadeIn { to { opacity: 1; } }
     </style>
 </head>
 <body>
-    <!-- LOADER (login page style) -->
+    <!-- LOADER -->
     <div class="loader-container" id="loader">
         <div class="loader-wrapper">
             <span class="loader-letter" style="animation-delay: 0s">E</span>
@@ -752,6 +757,7 @@
             <div class="loader"></div>
         </div>
     </div>
+    
     <!-- VIDEO BACKGROUND -->
     <div class="video-background">
         <video autoplay muted loop playsinline>
@@ -768,7 +774,7 @@
     <!-- SCROLL INDICATOR -->
     <div class="scroll-indicator"></div>
 
-    <!-- ========== UPDATED NAVIGATION - MATCHING INDEX.HTML STYLE ========== -->
+    <!-- ========== NAVIGATION ========== -->
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
         <div class="container-fluid px-lg-4">
             <a class="navbar-brand d-lg-none text-warning fw-bold" href="#"></a>
@@ -791,12 +797,12 @@
         </div>
     </nav>
 
-    <!-- Mobile Auth Extra (will be moved inside collapse via JS) -->
+    <!-- Mobile Auth Extra -->
     <div class="d-lg-none mobile-auth-extra" id="mobileAuthExtra">
         <div class="mobile-auth-buttons" id="mobileAuthButtons"></div>
     </div>
 
-    <!-- INSTRUCTION MODAL (updated to redirect to Google Forms) -->
+    <!-- INSTRUCTION MODAL -->
     <div class="instruction-modal" id="instructionModal">
         <div class="instruction-content">
             <button class="close-modal position-absolute top-0 end-0 m-3 bg-transparent border-0" id="closeInstructionModal" style="color: #ff9966; font-size: 1.5rem;">
@@ -833,7 +839,7 @@
     <!-- MAIN CONTENT -->
     <main class="main-content">
 
-        <!-- HERO SECTION (unchanged) -->
+        <!-- HERO SECTION -->
         <section class="events-hero">
             <div class="container text-center">
                 <h1 class="hero-title">EVENTS & COMPETITIONS</h1>
@@ -848,7 +854,7 @@
             </div>
         </section>
 
-        <!-- EVENT FILTERS (unchanged) -->
+        <!-- EVENT FILTERS -->
         <section class="container my-5">
             <div class="bg-dark bg-opacity-25 backdrop-blur p-4 rounded-4 border border-warning border-opacity-25">
                 <h3 class="text-center" style="color: #ff9966; font-family: 'Orbitron';"> <i class="fas fa-filter"></i> Filter Events by Category</h3>
@@ -862,7 +868,7 @@
             </div>
         </section>
 
-        <!-- EVENTS CONTAINER (exactly same as before, but register buttons have data-event attribute exactly matching keys in formLinks) -->
+        <!-- EVENTS CONTAINER -->
         <section id="events-container" class="container">
 
             <!-- Technical & Coding Events -->
@@ -897,8 +903,8 @@
                         <div class="p-3 flex-grow-1">
                             <p class="text-white-50">24-hour national level hackathon focusing on AI/ML solutions for real-world problems. Build innovative projects and win exciting prizes.</p>
                             <div class="d-flex justify-content-between mt-3">
-                                <div class="text-center"><span class="d-block fs-4 text-warning">₹XX,000</span><span class="text-white-50 small">Prize Pool</span></div>
-                                <div class="text-center"><span class="d-block fs-4 text-warning">6 (1 Girl)</span><span class="text-white-50 small">Team Size</span></div>
+                                <div class="text-center"><span class="d-block fs-4 text-warning">₹50,000</span><span class="text-white-50 small">Prize Pool</span></div>
+                                <div class="text-center"><span class="d-block fs-4 text-warning">4</span><span class="text-white-50 small">Team Size</span></div>
                                 <div class="text-center"><span class="d-block fs-4 text-warning">₹501</span><span class="text-white-50 small">Regn</span></div>
                             </div>
                         </div>
@@ -909,9 +915,9 @@
                     </div>
                 </div>
 
-                <!-- SPECIAL EVENT: Content Creation -->
+                <!-- Content Creation -->
                 <div class="col-lg-6 col-xl-4">
-                    <div class="event-card featured h-100" data-category="technical" data-event-date="2026-02-27T09:00:00" data-event-name="ContentCreation">
+                    <div class="event-card featured h-100" data-category="technical" data-event-date="2026-02-27T09:00:00" data-event-name="Content Creation">
                         <div class="event-banner" style="background-image: url('https://images.unsplash.com/photo-1552664730-d307ca884978?w=400');">
                             <div class="banner-overlay"></div>
                         </div>
@@ -936,9 +942,9 @@
                             </div>
                         </div>
                         <div class="p-3 flex-grow-1">
-                            <p class="text-white-50">Showcase your creativity in digital content creation! Design engaging social media posts, create short videos, and demonstrate your storytelling skills. Perfect for aspiring influencers and digital creators.</p>
+                            <p class="text-white-50">Showcase your creativity in digital content creation! Design engaging social media posts, create short videos, and demonstrate your storytelling skills.</p>
                             <div class="d-flex justify-content-between mt-3">
-                                <div class="text-center"><span class="d-block fs-4 text-warning">₹XX,000</span><span class="text-white-50 small">Prize Pool</span></div>
+                                <div class="text-center"><span class="d-block fs-4 text-warning">₹15,000</span><span class="text-white-50 small">Prize Pool</span></div>
                                 <div class="text-center"><span class="d-block fs-4 text-warning">2</span><span class="text-white-50 small">Team Size</span></div>
                                 <div class="text-center"><span class="d-block fs-4 text-warning">₹201</span><span class="text-white-50 small">Regn</span></div>
                             </div>
@@ -952,7 +958,7 @@
 
                 <!-- AI & ML Model Contest -->
                 <div class="col-lg-6 col-xl-4">
-                    <div class="event-card h-100" data-category="technical" data-event-date="2026-02-26T09:00:00" data-event-name="AIMLContest">
+                    <div class="event-card h-100" data-category="technical" data-event-date="2026-02-26T09:00:00" data-event-name="AI & ML Model Contest">
                         <div class="event-banner" style="background-image: url('https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?w=400');">
                             <div class="banner-overlay"></div>
                         </div>
@@ -977,10 +983,10 @@
                             </div>
                         </div>
                         <div class="p-3 flex-grow-1">
-                            <p class="text-white-50">Showcase your AI/ML expertise by developing innovative models that solve real-world problems.</p>
+                            <p class="text-white-50">Showcase your AI/ML expertise by developing innovative models that solve real-world problems. Present your solution with proper documentation.</p>
                             <div class="d-flex justify-content-between mt-3">
-                                <div class="text-center"><span class="d-block fs-4 text-warning">₹XX,000</span><span class="text-white-50 small">Prize</span></div>
-                                <div class="text-center"><span class="d-block fs-4 text-warning">2-3</span><span class="text-white-50 small">Team</span></div>
+                                <div class="text-center"><span class="d-block fs-4 text-warning">₹30,000</span><span class="text-white-50 small">Prize</span></div>
+                                <div class="text-center"><span class="d-block fs-4 text-warning">3</span><span class="text-white-50 small">Team</span></div>
                                 <div class="text-center"><span class="d-block fs-4 text-warning">₹201</span><span class="text-white-50 small">Regn</span></div>
                             </div>
                         </div>
@@ -993,7 +999,7 @@
 
                 <!-- Mobile App Development -->
                 <div class="col-lg-6 col-xl-4">
-                    <div class="event-card h-100" data-category="technical" data-event-date="2026-02-26T09:00:00" data-event-name="MobileAppDev">
+                    <div class="event-card h-100" data-category="technical" data-event-date="2026-02-26T09:00:00" data-event-name="Mobile App Development">
                         <div class="event-banner" style="background-image: url('https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=400');">
                             <div class="banner-overlay"></div>
                         </div>
@@ -1018,10 +1024,10 @@
                             </div>
                         </div>
                         <div class="p-3 flex-grow-1">
-                            <p class="text-white-50">Build innovative mobile applications for Android or iOS platforms. Create functional, user-friendly apps.</p>
+                            <p class="text-white-50">Build innovative mobile applications for Android or iOS platforms. Create functional, user-friendly apps with proper UI/UX design.</p>
                             <div class="d-flex justify-content-between mt-3">
-                                <div class="text-center"><span class="d-block fs-4 text-warning">₹XX,000</span><span class="text-white-50 small">Prize</span></div>
-                                <div class="text-center"><span class="d-block fs-4 text-warning">1</span><span class="text-white-50 small">Team</span></div>
+                                <div class="text-center"><span class="d-block fs-4 text-warning">₹25,000</span><span class="text-white-50 small">Prize</span></div>
+                                <div class="text-center"><span class="d-block fs-4 text-warning">2</span><span class="text-white-50 small">Team</span></div>
                                 <div class="text-center"><span class="d-block fs-4 text-warning">₹101</span><span class="text-white-50 small">Regn</span></div>
                             </div>
                         </div>
@@ -1034,7 +1040,7 @@
 
                 <!-- Web Development Contest -->
                 <div class="col-lg-6 col-xl-4">
-                    <div class="event-card h-100" data-category="technical" data-event-date="2026-02-27T09:00:00" data-event-name="WebDevelopmentContest">
+                    <div class="event-card h-100" data-category="technical" data-event-date="2026-02-27T09:00:00" data-event-name="Web Development Contest">
                         <div class="event-banner" style="background-image: url('https://images.unsplash.com/photo-1547658719-da2b51169166?w=400');">
                             <div class="banner-overlay"></div>
                         </div>
@@ -1059,10 +1065,10 @@
                             </div>
                         </div>
                         <div class="p-3 flex-grow-1">
-                            <p class="text-white-50">Create stunning, responsive websites from scratch. Showcase your creativity in UI/UX design and front-end development.</p>
+                            <p class="text-white-50">Create stunning, responsive websites from scratch. Showcase your creativity in UI/UX design and front-end development with modern frameworks.</p>
                             <div class="d-flex justify-content-between mt-3">
-                                <div class="text-center"><span class="d-block fs-4 text-warning">₹XX,000</span><span class="text-white-50 small">Prize</span></div>
-                                <div class="text-center"><span class="d-block fs-4 text-warning">1</span><span class="text-white-50 small">Team</span></div>
+                                <div class="text-center"><span class="d-block fs-4 text-warning">₹20,000</span><span class="text-white-50 small">Prize</span></div>
+                                <div class="text-center"><span class="d-block fs-4 text-warning">2</span><span class="text-white-50 small">Team</span></div>
                                 <div class="text-center"><span class="d-block fs-4 text-warning">₹101</span><span class="text-white-50 small">Regn</span></div>
                             </div>
                         </div>
@@ -1075,7 +1081,7 @@
 
                 <!-- IoT Innovation Challenge -->
                 <div class="col-lg-6 col-xl-4">
-                    <div class="event-card h-100" data-category="technical" data-event-date="2026-02-26T09:00:00" data-event-name="IoTInnovation">
+                    <div class="event-card h-100" data-category="technical" data-event-date="2026-02-26T09:00:00" data-event-name="IoT Innovation Challenge">
                         <div class="event-banner" style="background-image: url('https://images.unsplash.com/photo-1518770660439-4636190af475?w=400');">
                             <div class="banner-overlay"></div>
                         </div>
@@ -1100,9 +1106,9 @@
                             </div>
                         </div>
                         <div class="p-3 flex-grow-1">
-                            <p class="text-white-50">Build smart, connected devices combining hardware, software, and cloud integration to solve real-world problems.</p>
+                            <p class="text-white-50">Build smart, connected devices combining hardware, software, and cloud integration to solve real-world problems. Arduino/Raspberry Pi based projects.</p>
                             <div class="d-flex justify-content-between mt-3">
-                                <div class="text-center"><span class="d-block fs-4 text-warning">₹XX,000</span><span class="text-white-50 small">Prize</span></div>
+                                <div class="text-center"><span class="d-block fs-4 text-warning">₹35,000</span><span class="text-white-50 small">Prize</span></div>
                                 <div class="text-center"><span class="d-block fs-4 text-warning">4</span><span class="text-white-50 small">Team</span></div>
                                 <div class="text-center"><span class="d-block fs-4 text-warning">₹501</span><span class="text-white-50 small">Regn</span></div>
                             </div>
@@ -1116,7 +1122,7 @@
 
                 <!-- CAD Designing Contest -->
                 <div class="col-lg-6 col-xl-4">
-                    <div class="event-card h-100" data-category="technical" data-event-date="2026-02-26T09:00:00" data-event-name="CADDesigning">
+                    <div class="event-card h-100" data-category="technical" data-event-date="2026-02-26T09:00:00" data-event-name="CAD Designing Contest">
                         <div class="event-banner" style="background-image: url('https://images.unsplash.com/photo-1581091226033-d5c48150dbaa?w=400');">
                             <div class="banner-overlay"></div>
                         </div>
@@ -1141,10 +1147,10 @@
                             </div>
                         </div>
                         <div class="p-3 flex-grow-1">
-                            <p class="text-white-50">Demonstrate your technical drawing and 3D modeling skills using CAD software. Create precise engineering drawings.</p>
+                            <p class="text-white-50">Demonstrate your technical drawing and 3D modeling skills using CAD software. Create precise engineering drawings and 3D models.</p>
                             <div class="d-flex justify-content-between mt-3">
-                                <div class="text-center"><span class="d-block fs-4 text-warning">₹XX,000</span><span class="text-white-50 small">Prize</span></div>
-                                <div class="text-center"><span class="d-block fs-4 text-warning">1</span><span class="text-white-50 small">Team</span></div>
+                                <div class="text-center"><span class="d-block fs-4 text-warning">₹15,000</span><span class="text-white-50 small">Prize</span></div>
+                                <div class="text-center"><span class="d-block fs-4 text-warning">1</span><span class="text-white-50 small">Individual</span></div>
                                 <div class="text-center"><span class="d-block fs-4 text-warning">₹101</span><span class="text-white-50 small">Regn</span></div>
                             </div>
                         </div>
@@ -1161,7 +1167,7 @@
             <div class="row g-4" id="management-events">
                 <!-- Smart Business -->
                 <div class="col-lg-6 col-xl-4">
-                    <div class="event-card h-100" data-category="management" data-event-date="2026-02-27T09:00:00" data-event-name="SmartBusiness">
+                    <div class="event-card h-100" data-category="management" data-event-date="2026-02-27T09:00:00" data-event-name="Smart Business">
                         <div class="event-banner" style="background-image: url('https://images.unsplash.com/photo-1552664730-d307ca884978?w=400');">
                             <div class="banner-overlay"></div>
                         </div>
@@ -1186,10 +1192,10 @@
                             </div>
                         </div>
                         <div class="p-3 flex-grow-1">
-                            <p class="text-white-50">Pitch your innovative business ideas to a panel of judges! Develop smart business models, create compelling presentations.</p>
+                            <p class="text-white-50">Pitch your innovative business ideas to a panel of judges! Develop smart business models, create compelling presentations and marketing strategies.</p>
                             <div class="d-flex justify-content-between mt-3">
-                                <div class="text-center"><span class="d-block fs-4 text-warning">₹XX,000</span><span class="text-white-50 small">Prize</span></div>
-                                <div class="text-center"><span class="d-block fs-4 text-warning">2</span><span class="text-white-50 small">Team</span></div>
+                                <div class="text-center"><span class="d-block fs-4 text-warning">₹25,000</span><span class="text-white-50 small">Prize</span></div>
+                                <div class="text-center"><span class="d-block fs-4 text-warning">3</span><span class="text-white-50 small">Team</span></div>
                                 <div class="text-center"><span class="d-block fs-4 text-warning">₹201</span><span class="text-white-50 small">Regn</span></div>
                             </div>
                         </div>
@@ -1202,7 +1208,7 @@
 
                 <!-- Flow Chart Design -->
                 <div class="col-lg-6 col-xl-4">
-                    <div class="event-card h-100" data-category="management" data-event-date="2026-02-27T09:00:00" data-event-name="FlowChartDesign">
+                    <div class="event-card h-100" data-category="management" data-event-date="2026-02-27T09:00:00" data-event-name="Flow Chart Design">
                         <div class="event-banner" style="background-image: url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400');">
                             <div class="banner-overlay"></div>
                         </div>
@@ -1227,23 +1233,23 @@
                             </div>
                         </div>
                         <div class="p-3 flex-grow-1">
-                            <p class="text-white-50">Design clear, logical, and visually appealing flow charts for complex processes. Demonstrate your ability to visualize workflows.</p>
+                            <p class="text-white-50">Design clear, logical, and visually appealing flow charts for complex processes. Demonstrate your ability to visualize workflows and algorithms.</p>
                             <div class="d-flex justify-content-between mt-3">
-                                <div class="text-center"><span class="d-block fs-4 text-warning">₹XX,000</span><span class="text-white-50 small">Prize</span></div>
-                                <div class="text-center"><span class="d-block fs-4 text-warning">1</span><span class="text-white-50 small">Team</span></div>
+                                <div class="text-center"><span class="d-block fs-4 text-warning">₹10,000</span><span class="text-white-50 small">Prize</span></div>
+                                <div class="text-center"><span class="d-block fs-4 text-warning">2</span><span class="text-white-50 small">Team</span></div>
                                 <div class="text-center"><span class="d-block fs-4 text-warning">₹101</span><span class="text-white-50 small">Regn</span></div>
                             </div>
                         </div>
                         <div class="p-3 d-flex justify-content-between align-items-center border-top border-warning border-opacity-25">
                             <span class="text-warning"><i class="fas fa-map-marker-alt"></i> Computer Lab 2</span>
-                            <button class="event-btn register-btn" data-event="Flow Chart Design" data-fee="201"><i class="fas fa-user-plus"></i> Register (₹101)</button>
+                            <button class="event-btn register-btn" data-event="Flow Chart Design" data-fee="101"><i class="fas fa-user-plus"></i> Register (₹101)</button>
                         </div>
                     </div>
                 </div>
 
                 <!-- Bridge Building -->
                 <div class="col-lg-6 col-xl-4">
-                    <div class="event-card h-100" data-category="management" data-event-date="2026-02-27T09:00:00" data-event-name="BridgeBuilding">
+                    <div class="event-card h-100" data-category="management" data-event-date="2026-02-27T09:00:00" data-event-name="Bridge Building">
                         <div class="event-banner" style="background-image: url('https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?w=400');">
                             <div class="banner-overlay"></div>
                         </div>
@@ -1268,10 +1274,10 @@
                             </div>
                         </div>
                         <div class="p-3 flex-grow-1">
-                            <p class="text-white-50">Design and construct a bridge using limited materials. Create structures that maximize strength while minimizing weight.</p>
+                            <p class="text-white-50">Design and construct a bridge using limited materials (popsicle sticks, glue, thread). Create structures that maximize strength while minimizing weight.</p>
                             <div class="d-flex justify-content-between mt-3">
-                                <div class="text-center"><span class="d-block fs-4 text-warning">₹XX,000</span><span class="text-white-50 small">Prize</span></div>
-                                <div class="text-center"><span class="d-block fs-4 text-warning">2</span><span class="text-white-50 small">Team</span></div>
+                                <div class="text-center"><span class="d-block fs-4 text-warning">₹20,000</span><span class="text-white-50 small">Prize</span></div>
+                                <div class="text-center"><span class="d-block fs-4 text-warning">3</span><span class="text-white-50 small">Team</span></div>
                                 <div class="text-center"><span class="d-block fs-4 text-warning">₹201</span><span class="text-white-50 small">Regn</span></div>
                             </div>
                         </div>
@@ -1284,7 +1290,7 @@
 
                 <!-- Tech Debate -->
                 <div class="col-lg-6 col-xl-4">
-                    <div class="event-card h-100" data-category="management" data-event-date="2026-02-26T09:00:00" data-event-name="TechDebate">
+                    <div class="event-card h-100" data-category="management" data-event-date="2026-02-26T09:00:00" data-event-name="Tech Debate">
                         <div class="event-banner" style="background-image: url('https://images.unsplash.com/photo-1577962917302-c4a1f59d0e0c?w=400');">
                             <div class="banner-overlay"></div>
                         </div>
@@ -1309,9 +1315,9 @@
                             </div>
                         </div>
                         <div class="p-3 flex-grow-1">
-                            <p class="text-white-50">Engage in intellectual discourse on contemporary technology issues! Debate pressing tech topics, ethical dilemmas.</p>
+                            <p class="text-white-50">Engage in intellectual discourse on contemporary technology issues! Debate pressing tech topics, ethical dilemmas in AI, privacy concerns, etc.</p>
                             <div class="d-flex justify-content-between mt-3">
-                                <div class="text-center"><span class="d-block fs-4 text-warning">₹XX,000</span><span class="text-white-50 small">Prize</span></div>
+                                <div class="text-center"><span class="d-block fs-4 text-warning">₹15,000</span><span class="text-white-50 small">Prize</span></div>
                                 <div class="text-center"><span class="d-block fs-4 text-warning">2</span><span class="text-white-50 small">Team</span></div>
                                 <div class="text-center"><span class="d-block fs-4 text-warning">₹201</span><span class="text-white-50 small">Regn</span></div>
                             </div>
@@ -1325,7 +1331,7 @@
 
                 <!-- Tech Quiz -->
                 <div class="col-lg-6 col-xl-4">
-                    <div class="event-card h-100" data-category="management" data-event-date="2026-02-27T09:00:00" data-event-name="TechQuiz">
+                    <div class="event-card h-100" data-category="management" data-event-date="2026-02-27T09:00:00" data-event-name="Tech Quiz">
                         <div class="event-banner" style="background-image: url('https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=400');">
                             <div class="banner-overlay"></div>
                         </div>
@@ -1350,10 +1356,10 @@
                             </div>
                         </div>
                         <div class="p-3 flex-grow-1">
-                            <p class="text-white-50">Test your knowledge across various technology domains! Compete in this exciting quiz covering programming, CS fundamentals.</p>
+                            <p class="text-white-50">Test your knowledge across various technology domains! Compete in this exciting quiz covering programming, CS fundamentals, current tech trends.</p>
                             <div class="d-flex justify-content-between mt-3">
-                                <div class="text-center"><span class="d-block fs-4 text-warning">₹XX,000</span><span class="text-white-50 small">Prize</span></div>
-                                <div class="text-center"><span class="d-block fs-4 text-warning">1</span><span class="text-white-50 small">Team</span></div>
+                                <div class="text-center"><span class="d-block fs-4 text-warning">₹12,000</span><span class="text-white-50 small">Prize</span></div>
+                                <div class="text-center"><span class="d-block fs-4 text-warning">2</span><span class="text-white-50 small">Team</span></div>
                                 <div class="text-center"><span class="d-block fs-4 text-warning">₹101</span><span class="text-white-50 small">Regn</span></div>
                             </div>
                         </div>
@@ -1370,7 +1376,7 @@
             <div class="row g-4" id="robotics-events">
                 <!-- Robo Race -->
                 <div class="col-lg-6 col-xl-4">
-                    <div class="event-card h-100" data-category="robotics" data-event-date="2026-02-26T09:00:00" data-event-name="RoboRace">
+                    <div class="event-card h-100" data-category="robotics" data-event-date="2026-02-26T09:00:00" data-event-name="Robo Race">
                         <div class="event-banner" style="background-image: url('https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=400');">
                             <div class="banner-overlay"></div>
                         </div>
@@ -1395,10 +1401,10 @@
                             </div>
                         </div>
                         <div class="p-3 flex-grow-1">
-                            <p class="text-white-50">Design and build racing robots to compete on challenging tracks. Test your robotics engineering skills in speed and control.</p>
+                            <p class="text-white-50">Design and build racing robots to compete on challenging tracks. Test your robotics engineering skills in speed, control and obstacle navigation.</p>
                             <div class="d-flex justify-content-between mt-3">
-                                <div class="text-center"><span class="d-block fs-4 text-warning">₹XX,000</span><span class="text-white-50 small">Prize</span></div>
-                                <div class="text-center"><span class="d-block fs-4 text-warning">1-2</span><span class="text-white-50 small">Team</span></div>
+                                <div class="text-center"><span class="d-block fs-4 text-warning">₹30,000</span><span class="text-white-50 small">Prize</span></div>
+                                <div class="text-center"><span class="d-block fs-4 text-warning">3</span><span class="text-white-50 small">Team</span></div>
                                 <div class="text-center"><span class="d-block fs-4 text-warning">₹201</span><span class="text-white-50 small">Regn</span></div>
                             </div>
                         </div>
@@ -1411,7 +1417,7 @@
 
                 <!-- Line Follower Robot -->
                 <div class="col-lg-6 col-xl-4">
-                    <div class="event-card h-100" data-category="robotics" data-event-date="2026-02-26T09:00:00" data-event-name="LineFollowerRobot">
+                    <div class="event-card h-100" data-category="robotics" data-event-date="2026-02-26T09:00:00" data-event-name="Line Follower Robot">
                         <div class="event-banner" style="background-image: url('https://images.unsplash.com/photo-1534723328310-e82dad3ee43f?w=400');">
                             <div class="banner-overlay"></div>
                         </div>
@@ -1436,10 +1442,10 @@
                             </div>
                         </div>
                         <div class="p-3 flex-grow-1">
-                            <p class="text-white-50">Design and program an autonomous robot that can follow a complex line track with precision and speed.</p>
+                            <p class="text-white-50">Design and program an autonomous robot that can follow a complex line track with precision and speed. Multiple difficulty levels and curves.</p>
                             <div class="d-flex justify-content-between mt-3">
-                                <div class="text-center"><span class="d-block fs-4 text-warning">₹XX,000</span><span class="text-white-50 small">Prize</span></div>
-                                <div class="text-center"><span class="d-block fs-4 text-warning">1-2</span><span class="text-white-50 small">Team</span></div>
+                                <div class="text-center"><span class="d-block fs-4 text-warning">₹25,000</span><span class="text-white-50 small">Prize</span></div>
+                                <div class="text-center"><span class="d-block fs-4 text-warning">3</span><span class="text-white-50 small">Team</span></div>
                                 <div class="text-center"><span class="d-block fs-4 text-warning">₹201</span><span class="text-white-50 small">Regn</span></div>
                             </div>
                         </div>
@@ -1452,7 +1458,7 @@
 
                 <!-- Drone Challenge -->
                 <div class="col-lg-6 col-xl-4">
-                    <div class="event-card h-100" data-category="robotics" data-event-date="2026-02-27T09:00:00" data-event-name="DroneChallenge">
+                    <div class="event-card h-100" data-category="robotics" data-event-date="2026-02-27T09:00:00" data-event-name="Drone Challenge">
                         <div class="event-banner" style="background-image: url('https://images.unsplash.com/photo-1508614589041-895b88991e3e?w=400');">
                             <div class="banner-overlay"></div>
                         </div>
@@ -1477,10 +1483,10 @@
                             </div>
                         </div>
                         <div class="p-3 flex-grow-1">
-                            <p class="text-white-50">Master the skies with precision flying and aerial maneuvers! Navigate obstacle courses and demonstrate piloting skills.</p>
+                            <p class="text-white-50">Master the skies with precision flying and aerial maneuvers! Navigate obstacle courses, perform tasks and demonstrate piloting skills.</p>
                             <div class="d-flex justify-content-between mt-3">
-                                <div class="text-center"><span class="d-block fs-4 text-warning">₹XX,000</span><span class="text-white-50 small">Prize</span></div>
-                                <div class="text-center"><span class="d-block fs-4 text-warning">1-2</span><span class="text-white-50 small">Team</span></div>
+                                <div class="text-center"><span class="d-block fs-4 text-warning">₹35,000</span><span class="text-white-50 small">Prize</span></div>
+                                <div class="text-center"><span class="d-block fs-4 text-warning">2</span><span class="text-white-50 small">Team</span></div>
                                 <div class="text-center"><span class="d-block fs-4 text-warning">₹201</span><span class="text-white-50 small">Regn</span></div>
                             </div>
                         </div>
@@ -1497,7 +1503,7 @@
             <div class="row g-4" id="gaming-events">
                 <!-- Treasure Hunt -->
                 <div class="col-lg-6 col-xl-4">
-                    <div class="event-card h-100" data-category="gaming" data-event-date="2026-02-27T09:00:00" data-event-name="TreasureHunt">
+                    <div class="event-card h-100" data-category="gaming" data-event-date="2026-02-27T09:00:00" data-event-name="Treasure Hunt">
                         <div class="event-banner" style="background-image: url('https://images.unsplash.com/photo-1605648916364-1bc19e0a1f8a?w=400');">
                             <div class="banner-overlay"></div>
                         </div>
@@ -1522,9 +1528,9 @@
                             </div>
                         </div>
                         <div class="p-3 flex-grow-1">
-                            <p class="text-white-50">Follow the clues, solve puzzles, and race to find the hidden treasure! A thrilling adventure testing problem-solving and teamwork.</p>
+                            <p class="text-white-50">Follow the clues, solve puzzles, and race to find the hidden treasure! A thrilling adventure testing problem-solving, teamwork and speed.</p>
                             <div class="d-flex justify-content-between mt-3">
-                                <div class="text-center"><span class="d-block fs-4 text-warning">₹XX,000</span><span class="text-white-50 small">Prize</span></div>
+                                <div class="text-center"><span class="d-block fs-4 text-warning">₹20,000</span><span class="text-white-50 small">Prize</span></div>
                                 <div class="text-center"><span class="d-block fs-4 text-warning">4</span><span class="text-white-50 small">Team</span></div>
                                 <div class="text-center"><span class="d-block fs-4 text-warning">₹301</span><span class="text-white-50 small">Regn</span></div>
                             </div>
@@ -1538,7 +1544,7 @@
 
                 <!-- Free Fire Max -->
                 <div class="col-lg-6 col-xl-4">
-                    <div class="event-card h-100" data-category="gaming" data-event-date="2026-02-27T09:00:00" data-event-name="FreeFireMax">
+                    <div class="event-card h-100" data-category="gaming" data-event-date="2026-02-27T09:00:00" data-event-name="Free Fire Max">
                         <div class="event-banner" style="background-image: url('https://images.unsplash.com/photo-1542751371-adc38448a05e?w=400');">
                             <div class="banner-overlay"></div>
                         </div>
@@ -1563,9 +1569,9 @@
                             </div>
                         </div>
                         <div class="p-3 flex-grow-1">
-                            <p class="text-white-50">Battle Royale action at its finest! Compete in the ultimate Free Fire Max tournament with your squad.</p>
+                            <p class="text-white-50">Battle Royale action at its finest! Compete in the ultimate Free Fire Max tournament with your squad. Multiple rounds leading to finals.</p>
                             <div class="d-flex justify-content-between mt-3">
-                                <div class="text-center"><span class="d-block fs-4 text-warning">₹XX,000</span><span class="text-white-50 small">Prize</span></div>
+                                <div class="text-center"><span class="d-block fs-4 text-warning">₹25,000</span><span class="text-white-50 small">Prize</span></div>
                                 <div class="text-center"><span class="d-block fs-4 text-warning">4</span><span class="text-white-50 small">Team</span></div>
                                 <div class="text-center"><span class="d-block fs-4 text-warning">₹301</span><span class="text-white-50 small">Regn</span></div>
                             </div>
@@ -1604,9 +1610,9 @@
                             </div>
                         </div>
                         <div class="p-3 flex-grow-1">
-                            <p class="text-white-50">Step into the battleground and prove your dominance in BGMI. Team up, strategize, and fight for survival.</p>
+                            <p class="text-white-50">Step into the battleground and prove your dominance in BGMI. Team up, strategize, and fight for survival in this intense esports competition.</p>
                             <div class="d-flex justify-content-between mt-3">
-                                <div class="text-center"><span class="d-block fs-4 text-warning">₹XX,000</span><span class="text-white-50 small">Prize</span></div>
+                                <div class="text-center"><span class="d-block fs-4 text-warning">₹25,000</span><span class="text-white-50 small">Prize</span></div>
                                 <div class="text-center"><span class="d-block fs-4 text-warning">4</span><span class="text-white-50 small">Team</span></div>
                                 <div class="text-center"><span class="d-block fs-4 text-warning">₹301</span><span class="text-white-50 small">Regn</span></div>
                             </div>
@@ -1620,10 +1626,10 @@
             </div>
         </section>
 
-        <!-- PRIZE POOL SECTION (unchanged) -->
+        <!-- PRIZE POOL SECTION -->
         <section class="py-5 my-5" style="background: linear-gradient(135deg, rgba(255,153,102,0.1), rgba(0,102,204,0.1)); border-top: 3px solid #ff9966; border-bottom: 3px solid #ff9966;">
             <div class="container">
-                <h2 class="section-title text-center text-warning mb-4" style="font-family: 'Orbitron';">Total Prize Pool: Up to ₹1,00,000</h2>
+                <h2 class="section-title text-center text-warning mb-4" style="font-family: 'Orbitron';">Total Prize Pool: ₹3,50,000+</h2>
                 <p class="text-center text-white-50 mb-5" style="font-family: 'Rajdhani'; font-size: 1.1rem;">
                     Win exciting cash prizes, trophies, certificates, and internship opportunities from our sponsors.
                 </p>
@@ -1631,25 +1637,25 @@
                     <div class="col-md-4">
                         <div class="prize-card gold h-100">
                             <div class="prize-medal"><i class="fas fa-medal"></i></div>
-                            <div class="prize-amount">₹XX,000</div>
+                            <div class="prize-amount">₹1,00,000</div>
                             <div class="prize-title text-warning mb-2">Grand Champion</div>
-                            <p class="text-white-50">For overall best performance across categories</p>
+                            <p class="text-white-50">For overall best performance across categories + Trophy + Certificate</p>
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="prize-card silver h-100">
                             <div class="prize-medal"><i class="fas fa-medal"></i></div>
-                            <div class="prize-amount">₹XX,000</div>
+                            <div class="prize-amount">₹50,000</div>
                             <div class="prize-title text-warning mb-2">Category Winner</div>
-                            <p class="text-white-50">For winners in each main event category</p>
+                            <p class="text-white-50">For winners in each main event category + Certificate + Goodies</p>
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="prize-card bronze h-100">
                             <div class="prize-medal"><i class="fas fa-medal"></i></div>
-                            <div class="prize-amount">₹XX,000</div>
+                            <div class="prize-amount">₹25,000</div>
                             <div class="prize-title text-warning mb-2">Runner Up</div>
-                            <p class="text-white-50">For second place in major competitions</p>
+                            <p class="text-white-50">For second place in major competitions + Certificate + Goodies</p>
                         </div>
                     </div>
                 </div>
@@ -1657,7 +1663,7 @@
         </section>
     </main>
 
-    <!-- FOOTER (unchanged) -->
+    <!-- FOOTER -->
     <footer class="footer-3d">
         <div class="container">
             <div class="row g-4">
@@ -1693,12 +1699,12 @@
     <!-- Bootstrap JS Bundle -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
-    <!-- UPDATED SCRIPT WITH FIXED COUNTDOWN -->
+    <!-- UPDATED SCRIPT WITH FIXED CURSOR -->
     <script>
         (function() {
             'use strict';
 
-            // ==================== GOOGLE FORM LINKS (exactly as provided) ====================
+            // ==================== GOOGLE FORM LINKS ====================
             const formLinks = {
                 'Hackathon': 'https://docs.google.com/forms/d/e/1FAIpQLSehLA5jI8zMI-cQxLo1a53FkMzVQfljQhguLzsh9Ec4frhnNg/viewform?embedded=true',
                 'AI & ML Model Contest': 'https://docs.google.com/forms/d/e/1FAIpQLScVGBoWXZY0Ym-RTzFH03yVXbQPzf6iO0uE4r_mvSPnbl7eng/viewform?embedded=true',
@@ -1720,6 +1726,365 @@
                 'Content Creation': 'https://docs.google.com/forms/d/e/1FAIpQLSdqxewPXAMvAcTW7KUqFugnevb0QT47QMR5bPYeme9mHWp2Uw/viewform?embedded=true'
             };
 
+            // ==================== EVENT INSTRUCTIONS ====================
+            const eventInstructions = {
+                'Hackathon': { 
+                    title: 'Hackathon Instructions', 
+                    rules: [
+                        '24-hour continuous hackathon',
+                        'Team size: 4 members maximum',
+                        'Bring your own laptops and chargers',
+                        'Internet will be provided',
+                        'Food and refreshments will be served',
+                        'Final presentation at 5pm on Day 2',
+                        'Judging criteria: Innovation, Technical Difficulty, Presentation, Usefulness',
+                        'Plagiarism will lead to immediate disqualification'
+                    ], 
+                    requirements: [
+                        'College ID card',
+                        'Team name and logo',
+                        'GitHub repository',
+                        'Problem statement will be given on spot',
+                        'Own laptops and extension cords'
+                    ] 
+                },
+                'AI & ML Model Contest': { 
+                    title: 'AI & ML Model Contest Instructions', 
+                    rules: [
+                        'Duration: 8 hours',
+                        'Team size: 3 members maximum',
+                        'Pre-trained models allowed',
+                        'Must submit code and documentation',
+                        'Presentation: 10 minutes',
+                        'Dataset will be provided',
+                        'Focus on accuracy and innovation'
+                    ], 
+                    requirements: [
+                        'College ID card',
+                        'Laptop with required software',
+                        'Basic understanding of ML frameworks',
+                        'Presentation slides ready'
+                    ] 
+                },
+                'Mobile App Development': { 
+                    title: 'Mobile App Development Instructions', 
+                    rules: [
+                        'Duration: 8 hours',
+                        'Team size: 2 members maximum',
+                        'Can develop for Android or iOS',
+                        'Must submit APK/App bundle',
+                        'Working prototype required',
+                        'UI/UX will be judged',
+                        'Source code submission mandatory'
+                    ], 
+                    requirements: [
+                        'College ID card',
+                        'Development environment ready',
+                        'Own laptop and testing device',
+                        'Basic wireframes prepared'
+                    ] 
+                },
+                'Web Development Contest': { 
+                    title: 'Web Development Contest Instructions', 
+                    rules: [
+                        'Duration: 6 hours',
+                        'Team size: 2 members maximum',
+                        'Responsive design mandatory',
+                        'Modern frameworks allowed',
+                        'Deployment on provided server',
+                        'Cross-browser compatibility required',
+                        'Source code submission mandatory'
+                    ], 
+                    requirements: [
+                        'College ID card',
+                        'Laptop with code editor',
+                        'Basic design ideas',
+                        'Internet will be provided'
+                    ] 
+                },
+                'IoT Innovation Challenge': { 
+                    title: 'IoT Innovation Challenge Instructions', 
+                    rules: [
+                        'Duration: 10 hours',
+                        'Team size: 4 members maximum',
+                        'Hardware components provided',
+                        'Cloud integration required',
+                        'Working prototype mandatory',
+                        'Power supply: 5V max',
+                        'Safety guidelines must be followed'
+                    ], 
+                    requirements: [
+                        'College ID card',
+                        'Basic electronic knowledge',
+                        'Own laptop with Arduino/RPi IDE',
+                        'Components will be provided'
+                    ] 
+                },
+                'CAD Designing Contest': { 
+                    title: 'CAD Designing Contest Instructions', 
+                    rules: [
+                        'Duration: 4 hours',
+                        'Individual participation only',
+                        'Software: AutoCAD/SolidWorks',
+                        'Problem statement on spot',
+                        '2D and 3D models required',
+                        'Precision and creativity judged',
+                        'File formats: .dwg, .stl'
+                    ], 
+                    requirements: [
+                        'College ID card',
+                        'CAD software installed',
+                        'Basic drafting knowledge',
+                        'Own laptop with mouse'
+                    ] 
+                },
+                'Smart Business': { 
+                    title: 'Smart Business Plan Instructions', 
+                    rules: [
+                        'Duration: 6 hours preparation + 10 min pitch',
+                        'Team size: 3 members maximum',
+                        'Business plan submission',
+                        'Pitch deck required',
+                        'Focus on innovation and viability',
+                        'Financial projections needed',
+                        'Market analysis required'
+                    ], 
+                    requirements: [
+                        'College ID card',
+                        'Business plan template',
+                        'Presentation slides',
+                        'Laptop for presentation'
+                    ] 
+                },
+                'Flow Chart Design': { 
+                    title: 'Flow Chart Design Instructions', 
+                    rules: [
+                        'Duration: 3 hours',
+                        'Team size: 2 members maximum',
+                        'Problem statements given',
+                        'Use standard flowchart symbols',
+                        'Clarity and logic judged',
+                        'Digital or hand-drawn accepted',
+                        'Multiple problems to solve'
+                    ], 
+                    requirements: [
+                        'College ID card',
+                        'Drawing tools if hand-drawn',
+                        'Laptop if digital',
+                        'Basic algorithmic thinking'
+                    ] 
+                },
+                'Bridge Building': { 
+                    title: 'Bridge Building Competition Instructions', 
+                    rules: [
+                        'Duration: 4 hours construction',
+                        'Team size: 3 members maximum',
+                        'Materials provided: popsicle sticks, glue, thread',
+                        'Weight limit: 1 kg maximum',
+                        'Load testing at end',
+                        'Efficiency ratio calculated',
+                        'Safety guidelines must be followed'
+                    ], 
+                    requirements: [
+                        'College ID card',
+                        'Basic tools if needed',
+                        'Engineering mindset',
+                        'Safety gear provided'
+                    ] 
+                },
+                'Tech Debate': { 
+                    title: 'Tech Debate Instructions', 
+                    rules: [
+                        'Duration: 45 minutes per debate',
+                        'Team size: 2 members',
+                        'Topics given 30 min before',
+                        'Each speaker: 5-7 minutes',
+                        'Rebuttal rounds included',
+                        'Q&A session with judges',
+                        'No personal attacks'
+                    ], 
+                    requirements: [
+                        'College ID card',
+                        'Note-taking materials',
+                        'Professional attire',
+                        'Strong communication skills'
+                    ] 
+                },
+                'Tech Quiz': { 
+                    title: 'Tech Quiz Instructions', 
+                    rules: [
+                        'Duration: 2 hours',
+                        'Team size: 2 members maximum',
+                        'Multiple rounds',
+                        'Topics: Programming, Current Tech, History, General Knowledge',
+                        'No electronic devices during quiz',
+                        'Rapid fire round',
+                        'Buzzer round included'
+                    ], 
+                    requirements: [
+                        'College ID card',
+                        'Quick thinking',
+                        'Broad tech knowledge',
+                        'No smartphones'
+                    ] 
+                },
+                'Robo Race': { 
+                    title: 'Robo Race Instructions', 
+                    rules: [
+                        'Duration: 4 hours',
+                        'Team size: 3 members maximum',
+                        'Robot size: max 30x30 cm',
+                        'Weight limit: 3 kg',
+                        'Wireless control allowed',
+                        'Track obstacles included',
+                        '3 attempts per team',
+                        'Fastest time wins'
+                    ], 
+                    requirements: [
+                        'College ID card',
+                        'Ready robot',
+                        'Extra batteries',
+                        'Remote controller'
+                    ] 
+                },
+                'Line Follower Robot': { 
+                    title: 'Line Follower Robot Instructions', 
+                    rules: [
+                        'Duration: 4 hours calibration + 2 hours race',
+                        'Team size: 3 members maximum',
+                        'Autonomous only - no remote control',
+                        'Track: black line on white background',
+                        'Multiple difficulty levels',
+                        'Junctions and loops included',
+                        'Fastest completion time wins'
+                    ], 
+                    requirements: [
+                        'College ID card',
+                        'Ready robot',
+                        'Calibration tools',
+                        'Sensor knowledge'
+                    ] 
+                },
+                'Drone Challenge': { 
+                    title: 'Drone Challenge Instructions', 
+                    rules: [
+                        'Duration: 3 hours',
+                        'Team size: 2 members maximum',
+                        'Drone size: max 45 cm diagonal',
+                        'Weight limit: 1.5 kg',
+                        'Safety first - no flyaways',
+                        'Obstacle course navigation',
+                        'Precision tasks included',
+                        'Time penalty for crashes'
+                    ], 
+                    requirements: [
+                        'College ID card',
+                        'Ready drone',
+                        'Extra propellers',
+                        'Fully charged batteries'
+                    ] 
+                },
+                'Treasure Hunt': { 
+                    title: 'Treasure Hunt Instructions', 
+                    rules: [
+                        'Duration: 3 hours',
+                        'Team size: 4 members maximum',
+                        'Clues spread across campus',
+                        'Solve puzzles to get next clue',
+                        'Photographic evidence required',
+                        'No running in buildings',
+                        'First to final treasure wins',
+                        'QR codes will be used'
+                    ], 
+                    requirements: [
+                        'College ID card',
+                        'Smartphone with camera',
+                        'QR code scanner app',
+                        'Comfortable shoes'
+                    ] 
+                },
+                'Free Fire Max': { 
+                    title: 'Free Fire Max Tournament Instructions', 
+                    rules: [
+                        'Duration: 4 hours',
+                        'Team size: 4 members',
+                        'Custom room matches',
+                        'Devices provided or bring own',
+                        'Fair play enforced',
+                        'No cheats/hacks - permanent ban',
+                        'Multiple rounds with points system',
+                        'Spectator mode on'
+                    ], 
+                    requirements: [
+                        'College ID card',
+                        'Free Fire Max ID (Level 40+)',
+                        'Own headphones',
+                        'Team coordination'
+                    ] 
+                },
+                'BGMI': { 
+                    title: 'BGMI Tournament Instructions', 
+                    rules: [
+                        'Duration: 4 hours',
+                        'Team size: 4 members',
+                        'Custom room matches',
+                        'Devices provided',
+                        'No emulators allowed',
+                        'Fair play mandatory',
+                        'Point system for kills and placement',
+                        'Top teams qualify for finals'
+                    ], 
+                    requirements: [
+                        'College ID card',
+                        'BGMI ID (Level 50+)',
+                        'Own headphones',
+                        'Team strategy ready'
+                    ] 
+                },
+                'Content Creation': { 
+                    title: 'Content Creation Instructions', 
+                    rules: [
+                        'Duration: 3 hours',
+                        'Team size: 2 members maximum',
+                        'Create original content',
+                        'Theme will be announced',
+                        'Use provided software',
+                        'No plagiarism',
+                        'Multiple formats accepted: video, graphic, social media posts',
+                        'Must include college hashtag'
+                    ], 
+                    requirements: [
+                        'College ID card',
+                        'Own camera/phone',
+                        'Editing software knowledge',
+                        'Creative portfolio (optional)'
+                    ] 
+                }
+            };
+
+            // Add default instructions for any missing events
+            for (let key in formLinks) {
+                if (!eventInstructions[key]) {
+                    eventInstructions[key] = {
+                        title: key + ' Instructions',
+                        rules: [
+                            'Arrive 30 minutes before event start',
+                            'Bring your college ID card',
+                            'Follow all event guidelines',
+                            'No late entries allowed',
+                            'Maintain discipline during event',
+                            'Decision of judges is final'
+                        ],
+                        requirements: [
+                            'College ID card',
+                            'Registration confirmation email',
+                            'Required equipment (if any)',
+                            'Positive attitude'
+                        ]
+                    };
+                }
+            }
+
             // ==================== LOADER ====================
             window.addEventListener('load', function() {
                 setTimeout(function() {
@@ -1728,64 +2093,147 @@
                 }, 3000);
             });
 
-            // ==================== CURSOR (unchanged) ====================
+            // ==================== IMPROVED CURSOR ====================
             const cursorDot = document.querySelector("[data-cursor-dot]");
             const cursorOutline = document.querySelector("[data-cursor-outline]");
             let mouseX = 0, mouseY = 0, cursorX = 0, cursorY = 0;
             let cursorHidden = false;
+            let rafId = null;
 
             function initCursor() {
                 if (!cursorDot || !cursorOutline) return;
+                
+                // Check if touch device
                 if ('ontouchstart' in window || navigator.maxTouchPoints > 0) {
                     cursorDot.style.display = 'none';
                     cursorOutline.style.display = 'none';
                     cursorHidden = true;
                     return;
                 }
+
+                // Mouse move handler
                 document.addEventListener("mousemove", (e) => {
-                    mouseX = e.clientX; mouseY = e.clientY;
-                    cursorDot.style.left = mouseX + 'px'; cursorDot.style.top = mouseY + 'px';
+                    mouseX = e.clientX;
+                    mouseY = e.clientY;
+                    
+                    // Update dot immediately for smooth feel
+                    cursorDot.style.left = mouseX + 'px';
+                    cursorDot.style.top = mouseY + 'px';
                 });
+
+                // Mouse down effect
                 document.addEventListener("mousedown", () => {
                     if (cursorHidden) return;
                     cursorOutline.style.transform = "translate(-50%, -50%) scale(0.8)";
                     cursorOutline.style.borderColor = "#ffcc33";
                     cursorOutline.style.backgroundColor = "rgba(255,204,51,0.1)";
                 });
+
+                // Mouse up effect
                 document.addEventListener("mouseup", () => {
                     if (cursorHidden) return;
                     cursorOutline.style.transform = "translate(-50%, -50%) scale(1)";
                     cursorOutline.style.borderColor = "rgba(255,71,51,0.8)";
                     cursorOutline.style.backgroundColor = "transparent";
                 });
-                const hoverEls = ['button','a','.event-card','.filter-btn','.schedule-tab','.register-btn','input','select','textarea','.custom-checkbox','.back-btn','.next-btn','.close-modal','.instructions-list li','label','.social-icon','.event-btn','.gallery-btn','.user-auth-btn','.mobile-nav-item'];
+
+                // Interactive elements hover effect - expanded for modal elements
+                const hoverEls = [
+                    'button', 
+                    'a', 
+                    '.event-card', 
+                    '.filter-btn', 
+                    '.schedule-tab', 
+                    '.register-btn', 
+                    'input', 
+                    'select', 
+                    'textarea', 
+                    '.custom-checkbox', 
+                    '.back-btn', 
+                    '.next-btn', 
+                    '.close-modal', 
+                    '.instructions-list li', 
+                    'label', 
+                    '.social-icon', 
+                    '.event-btn', 
+                    '.user-auth-btn', 
+                    '.mobile-nav-item',
+                    '.instruction-modal *',  // All elements in modal
+                    '.instruction-content',
+                    '.instruction-header',
+                    '.instruction-body',
+                    '.important-note',
+                    '#agreeCheckbox',
+                    '.checkmark'
+                ];
+
+                // Mouse over for interactive elements
                 document.addEventListener('mouseover', (e) => {
                     if (cursorHidden) return;
-                    const isInteractive = hoverEls.some(sel => e.target.matches(sel) || e.target.closest(sel));
+                    
+                    const isInteractive = hoverEls.some(sel => {
+                        if (sel === '.instruction-modal *') {
+                            return e.target.closest('.instruction-modal') !== null;
+                        }
+                        return e.target.matches(sel) || e.target.closest(sel);
+                    });
+                    
                     if (isInteractive) {
-                        cursorOutline.style.width = '50px'; cursorOutline.style.height = '50px';
+                        cursorOutline.style.width = '50px';
+                        cursorOutline.style.height = '50px';
                         cursorOutline.style.borderColor = '#ff9966';
                         cursorOutline.style.backgroundColor = 'rgba(255,153,102,0.1)';
-                        cursorDot.style.width = '10px'; cursorDot.style.height = '10px';
+                        cursorDot.style.width = '10px';
+                        cursorDot.style.height = '10px';
                         cursorDot.style.backgroundColor = '#ff9966';
                     } else {
-                        cursorOutline.style.width = '40px'; cursorOutline.style.height = '40px';
+                        cursorOutline.style.width = '40px';
+                        cursorOutline.style.height = '40px';
                         cursorOutline.style.borderColor = 'rgba(255,71,51,0.8)';
                         cursorOutline.style.backgroundColor = 'transparent';
-                        cursorDot.style.width = '8px'; cursorDot.style.height = '8px';
+                        cursorDot.style.width = '8px';
+                        cursorDot.style.height = '8px';
                         cursorDot.style.backgroundColor = '#ffcc33';
                     }
                 });
+
+                // Ensure cursor stays visible when over modal
+                document.addEventListener('mouseenter', (e) => {
+                    if (cursorHidden) return;
+                    if (e.target.closest('.instruction-modal')) {
+                        cursorOutline.style.opacity = '1';
+                        cursorDot.style.opacity = '1';
+                    }
+                });
+
+                // Animation function
                 function animate() {
-                    if (!cursorHidden) {
+                    if (!cursorHidden && cursorOutline) {
+                        // Smooth follow for outline only
                         cursorX += (mouseX - cursorX) * 0.15;
                         cursorY += (mouseY - cursorY) * 0.15;
                         cursorOutline.style.left = cursorX + 'px';
                         cursorOutline.style.top = cursorY + 'px';
                     }
-                    requestAnimationFrame(animate);
+                    rafId = requestAnimationFrame(animate);
                 }
+                
+                // Start animation
+                if (rafId) cancelAnimationFrame(rafId);
                 animate();
+
+                // Handle window blur/focus
+                window.addEventListener('blur', () => {
+                    if (cursorHidden) return;
+                    cursorOutline.style.opacity = '0.3';
+                    cursorDot.style.opacity = '0.3';
+                });
+
+                window.addEventListener('focus', () => {
+                    if (cursorHidden) return;
+                    cursorOutline.style.opacity = '1';
+                    cursorDot.style.opacity = '1';
+                });
             }
 
             // ==================== MOBILE AUTH ====================
@@ -1795,7 +2243,7 @@
                 if (collapse && extra) collapse.appendChild(extra);
             }
 
-            // ==================== FILTER (unchanged) ====================
+            // ==================== FILTER ====================
             function initEventFiltering() {
                 document.querySelectorAll('.filter-btn').forEach(btn => {
                     btn.addEventListener('click', function() {
@@ -1804,22 +2252,36 @@
                         const filter = this.dataset.filter;
                         const sections = ['technical-events', 'management-events', 'robotics-events', 'gaming-events'];
                         const headings = document.querySelectorAll('.category-heading');
+                        
                         if (filter === 'all') {
                             sections.forEach(id => document.getElementById(id).style.display = 'flex');
                             headings.forEach(h => h.style.display = 'block');
                         } else {
                             sections.forEach(id => document.getElementById(id).style.display = 'none');
                             headings.forEach(h => h.style.display = 'none');
-                            if (filter === 'technical') { document.getElementById('technical-events').style.display = 'flex'; headings[0].style.display = 'block'; }
-                            if (filter === 'management') { document.getElementById('management-events').style.display = 'flex'; headings[1].style.display = 'block'; }
-                            if (filter === 'robotics') { document.getElementById('robotics-events').style.display = 'flex'; headings[2].style.display = 'block'; }
-                            if (filter === 'gaming') { document.getElementById('gaming-events').style.display = 'flex'; headings[3].style.display = 'block'; }
+                            
+                            if (filter === 'technical') { 
+                                document.getElementById('technical-events').style.display = 'flex'; 
+                                headings[0].style.display = 'block'; 
+                            }
+                            if (filter === 'management') { 
+                                document.getElementById('management-events').style.display = 'flex'; 
+                                headings[1].style.display = 'block'; 
+                            }
+                            if (filter === 'robotics') { 
+                                document.getElementById('robotics-events').style.display = 'flex'; 
+                                headings[2].style.display = 'block'; 
+                            }
+                            if (filter === 'gaming') { 
+                                document.getElementById('gaming-events').style.display = 'flex'; 
+                                headings[3].style.display = 'block'; 
+                            }
                         }
                     });
                 });
             }
 
-            // ==================== FIXED COUNTDOWN ====================
+            // ==================== COUNTDOWN ====================
             class EventCountdown {
                 constructor() {
                     this.timers = new Map();
@@ -1827,28 +2289,22 @@
                 }
                 
                 init() {
-                    // Find all event cards and extract their dates
                     document.querySelectorAll('.event-card').forEach(card => {
                         const dateAttr = card.dataset.eventDate;
                         const nameAttr = card.dataset.eventName;
                         
                         if (dateAttr && nameAttr) {
                             const eventDate = new Date(dateAttr).getTime();
-                            // Only store if it's a valid date
                             if (!isNaN(eventDate)) {
                                 this.timers.set(nameAttr, { 
                                     date: eventDate, 
                                     name: nameAttr 
                                 });
-                                console.log(`Timer set for ${nameAttr}: ${new Date(eventDate).toLocaleString()}`);
                             }
                         }
                     });
                     
-                    // Initial update immediately
                     this.updateAll();
-                    
-                    // Then update every second
                     setInterval(() => this.updateAll(), 1000);
                 }
                 
@@ -1858,25 +2314,24 @@
                     this.timers.forEach((timer, eventName) => {
                         const dist = timer.date - now;
                         
-                        // Calculate time units
                         const days = Math.floor(dist / (1000 * 60 * 60 * 24));
                         const hours = Math.floor((dist % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
                         const minutes = Math.floor((dist % (1000 * 60 * 60)) / (1000 * 60));
                         const seconds = Math.floor((dist % (1000 * 60)) / 1000);
                         
-                        // Update DOM elements - handle both positive and negative values
-                        const daysEl = document.getElementById(`days-${eventName}`);
-                        const hoursEl = document.getElementById(`hours-${eventName}`);
-                        const minutesEl = document.getElementById(`minutes-${eventName}`);
-                        const secondsEl = document.getElementById(`seconds-${eventName}`);
-                        const statusEl = document.getElementById(`status-${eventName}`);
+                        const safeEventName = eventName.replace(/[^a-zA-Z0-9]/g, '');
+                        
+                        const daysEl = document.getElementById(`days-${safeEventName}`);
+                        const hoursEl = document.getElementById(`hours-${safeEventName}`);
+                        const minutesEl = document.getElementById(`minutes-${safeEventName}`);
+                        const secondsEl = document.getElementById(`seconds-${safeEventName}`);
+                        const statusEl = document.getElementById(`status-${safeEventName}`);
                         
                         if (daysEl) daysEl.textContent = dist < 0 ? "00" : String(days).padStart(2, '0');
                         if (hoursEl) hoursEl.textContent = dist < 0 ? "00" : String(hours).padStart(2, '0');
                         if (minutesEl) minutesEl.textContent = dist < 0 ? "00" : String(minutes).padStart(2, '0');
                         if (secondsEl) secondsEl.textContent = dist < 0 ? "00" : String(seconds).padStart(2, '0');
                         
-                        // Update status message
                         if (statusEl) {
                             if (dist < 0) {
                                 statusEl.textContent = 'Event Started';
@@ -1890,20 +2345,7 @@
                 }
             }
 
-            // ==================== INSTRUCTION MODAL + FORM REDIRECT ====================
-            const eventInstructions = {
-                'Hackathon': { title: 'Hackathon Instructions', rules: ['24-hour hackathon', 'Max 3 members per team', 'Bring your own laptop', 'Internet provided', 'Food served', 'Final presentation at 5pm Day 2'], requirements: ['College ID', 'Team name/logo', 'Problem statement on spot', 'GitHub repo'] },
-                'Robo Race': { title: 'Robo Race Instructions', rules: ['Duration: 7 hours', 'Max 4 members', 'Weight limit: 15kg', 'Safety guidelines', 'No hazardous materials'], requirements: ['College ID', 'Robot specs sheet', 'Safety waiver'] },
-                'BGMI': { title: 'BGMI Instructions', rules: ['Duration: 4 hours', '4 members per team', 'Devices provided', 'Fair play enforced', 'No cheats/hacks'], requirements: ['College ID', 'Team details'] },
-                'Content Creation': { title: 'Content Creation Instructions', rules: ['Duration: 3 hours', '2 members per team', 'Bring your own camera/phone', 'Editing software provided', 'Create original content', 'No plagiarism'], requirements: ['College ID', 'Own device', 'Editing software knowledge', 'Creative portfolio (optional)'] },
-                'Default': { title: 'Event Instructions', rules: ['Arrive 30 min early', 'Bring college ID', 'Follow guidelines', 'No late entries'], requirements: ['Registration confirmation', 'Required equipment'] }
-            };
-            
-            // Add missing events with default instructions
-            for (let key in formLinks) {
-                if (!eventInstructions[key]) eventInstructions[key] = eventInstructions['Default'];
-            }
-
+            // ==================== INSTRUCTION MODAL ====================
             let currentEventData = null;
             
             function initInstructionModal() {
@@ -1937,13 +2379,13 @@
                             if (formUrl) {
                                 window.open(formUrl, '_blank');
                             } else {
-                                alert('Form not available for this event yet.');
+                                alert('Form not available for this event yet. Please contact organizers.');
                             }
                             hideInstructions();
                             agree.checked = false;
                             next.classList.remove('active');
                         } else {
-                            alert('Please agree to the terms.');
+                            alert('Please agree to the terms and conditions.');
                         }
                     });
                 }
@@ -1963,7 +2405,7 @@
 
             function showInstructions(eventName) {
                 const instr = eventInstructions[eventName] || eventInstructions['Default'];
-                currentEventData = { name: eventName, instructions: instr, category: 'general' };
+                currentEventData = { name: eventName, instructions: instr };
                 
                 document.getElementById('instructionEventTitle').textContent = instr.title;
                 document.getElementById('instructionEventSubtitle').textContent = `For ${eventName}`;
@@ -1977,18 +2419,34 @@
                 document.getElementById('eventSpecificInstructions').innerHTML = html;
                 document.getElementById('agreeCheckbox').checked = false;
                 document.getElementById('nextToRegistration').classList.remove('active');
-                document.getElementById('instructionModal').classList.add('active');
+                
+                // Show modal
+                const modal = document.getElementById('instructionModal');
+                modal.classList.add('active');
                 document.body.style.overflow = 'hidden';
+                
+                // Ensure cursor is visible and working
+                if (!cursorHidden && cursorOutline && cursorDot) {
+                    cursorOutline.style.zIndex = '10003'; // Higher than modal's z-index
+                    cursorDot.style.zIndex = '10003';
+                }
             }
 
             function hideInstructions() {
-                document.getElementById('instructionModal').classList.remove('active');
+                const modal = document.getElementById('instructionModal');
+                modal.classList.remove('active');
                 document.body.style.overflow = 'auto';
                 document.getElementById('agreeCheckbox').checked = false;
                 document.getElementById('nextToRegistration').classList.remove('active');
+                
+                // Reset cursor z-index
+                if (!cursorHidden && cursorOutline && cursorDot) {
+                    cursorOutline.style.zIndex = '9999';
+                    cursorDot.style.zIndex = '9999';
+                }
             }
 
-            // ==================== SCROLL (unchanged) ====================
+            // ==================== SCROLL ====================
             function initScroll() {
                 const topBtn = document.getElementById('backToTop');
                 window.addEventListener('scroll', () => {
@@ -2001,7 +2459,7 @@
                 if (topBtn) topBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
             }
 
-            // ==================== SCHEDULE TABS (unchanged) ====================
+            // ==================== SCHEDULE TABS ====================
             function initSchedule() {
                 document.querySelectorAll('.schedule-tab').forEach(tab => {
                     tab.addEventListener('click', function() {
@@ -2063,38 +2521,19 @@
                 }
             }
 
-            // stub for updateUserAuthDisplay (since it was referenced but not defined)
-            function updateUserAuthDisplay() {
-                // placeholder - no change needed
-            }
-
             // ==================== DOM READY ====================
             document.addEventListener('DOMContentLoaded', function() {
                 ensureMobileUserElements();
                 initCursor();
-                updateUserAuthDisplay();
                 arrangeMobileAuth();
                 initInstructionModal();
                 initEventFiltering();
-                
-                // Initialize countdown
                 new EventCountdown();
-                
                 initScroll();
                 initSchedule();
                 initVideo();
                 setActiveNav();
                 initAnimations();
-                
-                // Debug: Log all event dates
-                console.log('=== Event Dates ===');
-                document.querySelectorAll('.event-card').forEach(card => {
-                    const name = card.dataset.eventName;
-                    const date = card.dataset.eventDate;
-                    if (name && date) {
-                        console.log(`${name}: ${date} -> ${new Date(date).toLocaleString()}`);
-                    }
-                });
             });
         })();
     </script>
