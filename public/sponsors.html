@@ -4,11 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
     <title>FESTRONIX 2.0 - Sponsors (Bootstrap)</title>
-    <!-- BOOTSTRAP 5 CORE -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- icons + fonts -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Orbitron:wght@400;600;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- BOOTSTRAP 5 CORE - optimized loading -->
+    <link rel="preconnect" href="https://cdn.jsdelivr.net">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" media="print" onload="this.media='all'">
+    <!-- icons + fonts - optimized loading -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" media="print" onload="this.media='all'">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Orbitron:wght@400;600;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    
+    <!-- Fallback for no js -->
+    <noscript>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+        <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Orbitron:wght@400;600;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    </noscript>
+    
     <!-- custom styles -->
     <style>
         /* ----- bootstrap reset remains, minimal theme overrides ----- */
@@ -59,7 +70,7 @@
             background: linear-gradient(to bottom, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.3) 50%, rgba(0,0,0,0.8) 100%);
         }
 
-        /* ----- LOADER ANIMATION - OPTIMIZED FOR FAST LOADING ----- */
+        /* ----- OPTIMIZED LOADER ANIMATION - REDUCED TIMING ----- */
         .loader-container {
             position: fixed;
             top: 0;
@@ -72,10 +83,10 @@
             justify-content: center;
             align-items: center;
             transition: opacity 0.3s ease;
+            pointer-events: none;
         }
         .loader-hidden { 
             opacity: 0; 
-            pointer-events: none; 
             visibility: hidden; 
         }
         .loader-wrapper { 
@@ -83,6 +94,7 @@
             justify-content: center; 
             align-items: center; 
             flex-wrap: wrap; 
+            position: relative;
         }
         .loader-letter {
             font-family: 'Orbitron', sans-serif;
@@ -95,14 +107,15 @@
             animation: letterReveal 0.2s forwards;
             display: inline-block;
         }
-        .loader-letter:nth-child(1) { animation-delay: 0.1s; }
-        .loader-letter:nth-child(2) { animation-delay: 0.15s; }
-        .loader-letter:nth-child(3) { animation-delay: 0.2s; }
-        .loader-letter:nth-child(4) { animation-delay: 0.25s; }
-        .loader-letter:nth-child(5) { animation-delay: 0.3s; }
-        .loader-letter:nth-child(6) { animation-delay: 0.35s; }
-        .loader-letter:nth-child(7) { animation-delay: 0.4s; }
-        .loader-letter:nth-child(8) { animation-delay: 0.45s; }
+        .loader-letter:nth-child(1) { animation-delay: 0.05s; }
+        .loader-letter:nth-child(2) { animation-delay: 0.08s; }
+        .loader-letter:nth-child(3) { animation-delay: 0.11s; }
+        .loader-letter:nth-child(4) { animation-delay: 0.14s; }
+        .loader-letter:nth-child(5) { animation-delay: 0.17s; }
+        .loader-letter:nth-child(6) { animation-delay: 0.2s; }
+        .loader-letter:nth-child(7) { animation-delay: 0.23s; }
+        .loader-letter:nth-child(8) { animation-delay: 0.26s; }
+        
         @keyframes letterReveal { 
             to { 
                 opacity: 1; 
@@ -111,11 +124,11 @@
         }
         .loader {
             position: absolute;
-            bottom: -30px;
+            bottom: -20px;
             width: 100%;
-            height: 4px;
+            height: 3px;
             background: linear-gradient(90deg, transparent, #ffcc33, transparent);
-            animation: loadingBar 1.5s ease-in-out forwards;
+            animation: loadingBar 1s ease-in-out forwards;
         }
         @keyframes loadingBar { 
             0% { transform: translateX(-100%); } 
@@ -150,6 +163,7 @@
         .cursor-dot, .cursor-outline {
             position: fixed; top: 0; left: 0; transform: translate(-50%, -50%);
             border-radius: 50%; z-index: 9999; pointer-events: none;
+            will-change: left, top, transform;
         }
         .cursor-dot { width: 8px; height: 8px; background: #ffcc33; }
         .cursor-outline {
@@ -184,16 +198,14 @@
             font-weight: 500;
             letter-spacing: 1.5px;
             padding: 1rem 2rem !important;
-            font-size: 1.1rem;   /* Default (mobile) */
+            font-size: 1.1rem;
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             text-transform: uppercase;
             white-space: nowrap;
             border-radius: 10px;
             display: flex;
             align-items: center;
-        
         }
-
 
         .nav-link i {
             margin-right: 8px;
@@ -227,62 +239,6 @@
         .navbar-toggler:focus {
             box-shadow: 0 0 0 0.25rem rgba(255, 71, 51, 0.25);
         }
-
-        @media (max-width: 991px) {
-            .section-title {
-                font-size: 2.2rem;
-                letter-spacing: 2px;
-                line-height: 1.25;
-            }
-        }
-
-        @media (max-width: 576px) {
-            .section-title {
-                font-size: 1.9rem;
-                letter-spacing: 1.5px;
-            }
-        }
-
-        @media (max-width: 360px) {
-            .section-title {
-                font-size: 1.7rem;
-                letter-spacing: 1.2px;
-            }
-        }
-
-        /* ===== OUR SPONSORS TITLE (FINAL FIX) ===== */
-        .section-title {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1.5rem;        /* ✅ smaller & clean */
-            font-weight: 700;
-            color: #ffcc33;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            text-shadow: 0 0 15px rgba(255,204,51,0.4);
-        }
-
-        /* Tablets */
-        @media (max-width: 991px) {
-            .section-title {
-                font-size: 2rem;
-            }
-        }
-
-        /* Mobile */
-        @media (max-width: 576px) {
-            .section-title {
-                font-size: 1rem;
-                letter-spacing: 1.5px;
-            }
-        }
-
-        /* Small phones */
-        @media (max-width: 360px) {
-            .section-title {
-                font-size: 1.5rem;
-            }
-        }
-
 
         /* ----- Scroll Indicator ----- */
         .scroll-indicator {
@@ -318,126 +274,10 @@
             color: #ff9966;
             text-shadow: 0 0 10px rgba(255,153,102,0.5);
         }
+
         /* ----- SPONSOR CARD – bootstrap grid, border, hover ----- */
         .sponsor-card {
             background: rgba(255,255,255,0.05);
-            border: 1px solid rgba(255,255,255,0.1);
-            border-radius: 10px;
-            padding: 1.5rem;
-            text-align: center;
-            transition: all 0.3s;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-        }
-        .sponsor-card:hover {
-            background: rgba(255,153,102,0.1);
-            border-color: rgba(255,153,102,0.5);
-            transform: translateY(-10px);
-            box-shadow: 0 10px 25px rgba(255,153,102,0.2);
-        }
-        .sponsor-logo-container {
-            height: 120px; /* Increased height for bigger logos */
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 1rem;
-        }
-        .sponsor-logo-container img {
-            max-width: 300px; /* Increased max-width for larger logos */
-            max-height: 300px; /* Increased max-height for larger logos */
-            width: auto;
-            object-fit: contain;
-
-            /* 🔥 MAKE LOGO BIGGER */
-            transform: scale(1.6);
-
-            filter: drop-shadow(0 0 18px rgba(255,255,255,0.25));
-            transition: transform 0.3s ease, filter 0.3s ease;
-        }
-
-        .sponsor-card:hover img {
-            transform: scale(1.8);
-            filter: drop-shadow(0 0 30px rgba(255,153,102,0.7));
-        }
-
-        .sponsor-name { font-size: 1.3rem; font-weight: 600; color: #fff; }
-        .sponsor-type { color: #ff9966; text-transform: uppercase; letter-spacing: 1px; }
-
-        /* ----- FEATURED MARKETING SECTION (gradient, border) ----- */
-        .marketing-featured {
-            background: linear-gradient(135deg, rgba(255,153,102,0.1), rgba(0,102,204,0.1));
-            border: 2px solid rgba(0,102,204,0.5);
-            border-radius: 20px;
-            padding: 2.5rem;
-            position: relative;
-        }
-        .marketing-featured::before {
-            content: ''; position: absolute; top: 0; left: 0; right: 0;
-            height: 3px; background: linear-gradient(90deg, #ff9966, #0066cc, #ff9966);
-            animation: shimmer 2s infinite;
-        }
-        @keyframes shimmer { 0% { background-position: -200px 0; } 100% { background-position: 200px 0; } }
-        .featured-sponsor-tag {
-            background: linear-gradient(90deg, #ff9966, #0066cc);
-            color: white; padding: 8px 20px; border-radius: 20px;
-            display: inline-block; font-weight: 600;
-            animation: pulse-glow 2s infinite;
-        }
-        @keyframes pulse-glow { 0% { box-shadow: 0 0 15px rgba(255,153,102,0.5); } 50% { box-shadow: 0 0 25px rgba(255,153,102,0.8); } }
-
-       /* ----- INFINITE SLIDER - UPDATED FOR MUCH BIGGER LOGOS ----- */
-        .slider-section {
-            background: transparent;
-            border-radius: 15px;
-            padding: 4rem 0; /* Increased padding */
-            overflow: hidden;
-        }
-        .slider-track {
-            display: flex;
-            animation: slide 40s linear infinite;
-            width: fit-content;
-        }
-        .slider-track:hover { animation-play-state: paused; }
-        @keyframes slide { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
-        .slider-item {
-            flex: 0 0 auto;
-            width: 400px; /* Significantly increased width */
-            margin: 0 3rem; /* Increased margin */
-            text-align: center;
-        }
-        .slider-logo-box {
-            height: 220px; /* Dramatically increased height */
-            display: flex; 
-            align-items: center; 
-            justify-content: center;
-            background: transparent;
-            border-radius: 15px;
-            padding: 1.5rem;
-            box-shadow: transparent;
-        }
-        .slider-logo-box img { 
-            max-width: 100%; 
-            max-height: 300px; /* Much bigger max-height */
-            width: auto;
-            filter: grayscale(0.2); 
-            transition: all 0.4s ease; 
-            object-fit: contain;
-        }
-        .slider-item:hover img { 
-            filter: grayscale(0); 
-            transform: scale(1.15); 
-        }
-        .slider-item .text-white {
-            font-size: 1.4rem; /* Bigger company name */
-            font-weight: 700;
-            margin-top: 1.2rem !important;
-            letter-spacing: 1px;
-        }
-
-        /* ----- SPONSOR CARD – MUCH BIGGER LOGOS ----- */
-        .sponsor-card {
-            background: transparent;
             border: 1px solid rgba(255,255,255,0.1);
             border-radius: 15px;
             padding: 2rem;
@@ -454,31 +294,29 @@
             box-shadow: 0 10px 25px rgba(255,153,102,0.2);
         }
         .sponsor-logo-container {
-            height: 220px; /* Dramatically increased height */
+            height: 220px;
             display: flex; 
             align-items: center; 
             justify-content: center;
             background: transparent;
             border-radius: 15px;
             padding: 1.5rem;
-            box-shadow: transparent;
+            margin-bottom: 1rem;
         }
         .sponsor-logo-container img {
             max-width: 100%; 
-            max-height: 300px; /* Much bigger max-height */
+            max-height: 300px;
             width: auto;
             filter: grayscale(0.2); 
             transition: all 0.4s ease; 
             object-fit: contain;
         }
-
-
         .sponsor-card:hover img { 
             transform: scale(1.1); 
             filter: drop-shadow(0 0 25px rgba(255,153,102,0.6)); 
         }
         .sponsor-name { 
-            font-size: 1.8rem; /* Bigger company name */
+            font-size: 1.8rem;
             font-weight: 700; 
             color: #fff; 
             margin-bottom: 0.5rem;
@@ -491,8 +329,97 @@
             font-weight: 600;
         }
 
+        /* ----- FEATURED MARKETING SECTION (gradient, border) ----- */
+        .marketing-featured {
+            background: linear-gradient(135deg, rgba(255,153,102,0.1), rgba(0,102,204,0.1));
+            border: 2px solid rgba(0,102,204,0.5);
+            border-radius: 20px;
+            padding: 2.5rem;
+            position: relative;
+        }
+        .marketing-featured::before {
+            content: ''; 
+            position: absolute; 
+            top: 0; 
+            left: 0; 
+            right: 0;
+            height: 3px; 
+            background: linear-gradient(90deg, #ff9966, #0066cc, #ff9966);
+            background-size: 200px 100%;
+            animation: shimmer 2s infinite;
+        }
+        @keyframes shimmer { 
+            0% { background-position: -200px 0; } 
+            100% { background-position: 200px 0; } 
+        }
+        .featured-sponsor-tag {
+            background: linear-gradient(90deg, #ff9966, #0066cc);
+            color: white; 
+            padding: 8px 20px; 
+            border-radius: 20px;
+            display: inline-block; 
+            font-weight: 600;
+            animation: pulse-glow 2s infinite;
+        }
+        @keyframes pulse-glow { 
+            0% { box-shadow: 0 0 15px rgba(255,153,102,0.5); } 
+            50% { box-shadow: 0 0 25px rgba(255,153,102,0.8); } 
+        }
+
+        /* ----- INFINITE SLIDER - UPDATED FOR MUCH BIGGER LOGOS ----- */
+        .slider-section {
+            background: transparent;
+            border-radius: 15px;
+            padding: 4rem 0;
+            overflow: hidden;
+        }
+        .slider-track {
+            display: flex;
+            animation: slide 40s linear infinite;
+            width: fit-content;
+        }
+        .slider-track:hover { animation-play-state: paused; }
+        @keyframes slide { 
+            0% { transform: translateX(0); } 
+            100% { transform: translateX(-50%); } 
+        }
+        .slider-item {
+            flex: 0 0 auto;
+            width: 400px;
+            margin: 0 3rem;
+            text-align: center;
+        }
+        .slider-logo-box {
+            height: 220px;
+            display: flex; 
+            align-items: center; 
+            justify-content: center;
+            background: transparent;
+            border-radius: 15px;
+            padding: 1.5rem;
+        }
+        .slider-logo-box img { 
+            max-width: 100%; 
+            max-height: 300px;
+            width: auto;
+            filter: grayscale(0.2); 
+            transition: all 0.4s ease; 
+            object-fit: contain;
+        }
+        .slider-item:hover img { 
+            filter: grayscale(0); 
+            transform: scale(1.15); 
+        }
+        .slider-item .text-white {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-top: 1.2rem !important;
+            letter-spacing: 1px;
+        }
+
         /* Responsive adjustments for mobile */
         @media (max-width: 991px) {
+            .section-title { font-size: 2.8rem; }
             .slider-item {
                 width: 300px;
                 margin: 0 2rem;
@@ -504,14 +431,16 @@
                 max-height: 160px;
             }
             .sponsor-logo-container {
-                height: 150px;
+                height: 180px;
             }
             .sponsor-logo-container img {
-                max-height: 130px;
+                max-height: 160px;
             }
         }
 
         @media (max-width: 768px) {
+            .section-title { font-size: 2.2rem; }
+            .section-subtitle { font-size: 1.2rem; }
             .slider-item {
                 width: 280px;
                 margin: 0 1.5rem;
@@ -528,9 +457,16 @@
             .sponsor-name {
                 font-size: 1.5rem;
             }
+            .sponsor-logo-container {
+                height: 150px;
+            }
+            .sponsor-logo-container img {
+                max-height: 130px;
+            }
         }
 
         @media (max-width: 576px) {
+            .section-title { font-size: 1.8rem; }
             .slider-item {
                 width: 240px;
                 margin: 0 1rem;
@@ -546,14 +482,15 @@
         /* ----- 3D BUTTONS (effects) ----- */
         .btn-3d-sponsor {
             background: linear-gradient(145deg, #0066cc, #0052a3);
-            border: none; border-radius: 15px;
+            border: none; 
+            border-radius: 15px;
             padding: 15px 35px;
             font-family: 'Orbitron', sans-serif;
             font-weight: 700;
             color: white;
             text-transform: uppercase;
             box-shadow: 0 8px 0 #004080, 0 15px 25px rgba(0,102,204,0.3), inset 0 3px 0 rgba(255,255,255,0.2);
-            transition: 0.2s;
+            transition: all 0.2s;
             cursor: pointer;
             text-decoration: none;
             display: inline-block;
@@ -567,16 +504,28 @@
 
         /* ----- back to top ----- */
         .back-to-top {
-            position: fixed; bottom: 30px; right: 30px;
-            width: 50px; height: 50px; border-radius: 50%;
+            position: fixed; 
+            bottom: 30px; 
+            right: 30px;
+            width: 50px; 
+            height: 50px; 
+            border-radius: 50%;
             background: linear-gradient(135deg, #ff4733, #ff9966);
-            border: none; color: white; font-size: 1.5rem;
-            display: none; align-items: center; justify-content: center;
+            border: none; 
+            color: white; 
+            font-size: 1.5rem;
+            display: none; 
+            align-items: center; 
+            justify-content: center;
             box-shadow: 0 0 20px rgba(255,71,51,0.5);
             z-index: 1000;
             cursor: pointer;
+            transition: all 0.3s;
         }
-        .back-to-top:hover { transform: translateY(-5px); box-shadow: 0 0 30px rgba(255,71,51,0.8); }
+        .back-to-top:hover { 
+            transform: translateY(-5px); 
+            box-shadow: 0 0 30px rgba(255,71,51,0.8); 
+        }
 
         /* footer */
         .footer-3d {
@@ -584,30 +533,28 @@
             background: #000;
             padding: 2.5rem 0 1rem;
         }
-        .college-logo { width: 60px; height: 60px; border-radius: 50%; object-fit: cover; }
+        .college-logo { 
+            width: 60px; 
+            height: 60px; 
+            border-radius: 50%; 
+            object-fit: cover; 
+        }
         .social-icon {
-            width: 45px; height: 45px; border-radius: 50%;
+            width: 45px; 
+            height: 45px; 
+            border-radius: 50%;
             background: rgba(255,71,51,0.2); 
-            display: inline-flex; align-items: center; justify-content: center;
-            color: #ffcc33; font-size: 1.5rem;
-            transition: 0.3s;
+            display: inline-flex; 
+            align-items: center; 
+            justify-content: center;
+            color: #ffcc33; 
+            font-size: 1.5rem;
+            transition: all 0.3s;
             text-decoration: none;
         }
-        .social-icon:hover { background: rgba(255,71,51,0.4); transform: translateY(-5px); }
-
-        /* Responsive adjustments */
-        @media (max-width: 991px) {
-            .scroll-indicator { top: 0; }
-            .slider-item {
-                width: 220px;
-                margin: 0 1.5rem;
-            }
-            .slider-logo-box {
-                height: 120px;
-            }
-            .slider-logo-box img {
-                max-height: 250px;
-            }
+        .social-icon:hover { 
+            background: rgba(255,71,51,0.4); 
+            transform: translateY(-5px); 
         }
 
         /* Card button style */
@@ -623,11 +570,6 @@
             color: #000;
             transform: translateY(-3px);
         }
-
-        /* Add loading="lazy" to all images for faster initial load */
-        img {
-            loading: lazy;
-        }
     </style>
 </head>
 <body>
@@ -635,7 +577,7 @@
     <div class="cursor-dot" data-cursor-dot></div>
     <div class="cursor-outline" data-cursor-outline></div>
 
-        <!-- VIDEO BACKGROUND -->
+    <!-- VIDEO BACKGROUND -->
     <div class="video-background">
         <video autoplay muted loop playsinline id="bgVideo" preload="metadata">
             <source src="https://res.cloudinary.com/dpc4l1hic/video/upload/v1770814312/light_gzuewo.mp4" type="video/mp4">
@@ -643,7 +585,7 @@
         <div class="video-overlay"></div>
     </div>
 
-    <!-- LOADER (sponsors page style) - FIXED TIMING -->
+    <!-- OPTIMIZED LOADER - REDUCED TIMING -->
     <div class="loader-container" id="loader">
         <div class="loader-wrapper">
             <span class="loader-letter">S</span>
@@ -656,7 +598,6 @@
             <span class="loader-letter">S</span>
             <div class="loader"></div>
         </div>
-        
     </div>
 
     <!-- SCROLL INDICATOR -->
@@ -665,11 +606,7 @@
     <!-- ========== UPDATED NAVIGATION - USING ONLY BOOTSTRAP COLLAPSE ========== -->
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
         <div class="container-fluid px-lg-4">
-
-            <!-- Brand spacer (required for proper alignment) -->
             <a class="navbar-brand" href="home.html"></a>
-
-            <!-- Hamburger button (moved to right) -->
             <button class="navbar-toggler ms-auto" type="button"
                 data-bs-toggle="collapse"
                 data-bs-target="#festronixNavbar"
@@ -678,8 +615,6 @@
                 aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-
-            <!-- Menu -->
             <div class="collapse navbar-collapse" id="festronixNavbar">
                 <ul class="navbar-nav mx-auto mb-2 mb-lg-0 w-100 justify-content-center">
                     <li class="nav-item"><a class="nav-link" href="home.html"><i class="fas fa-home"></i> Home</a></li>
@@ -692,10 +627,8 @@
                     <li class="nav-item"><a class="nav-link" href="contact.html"><i class="fas fa-envelope"></i> Contact</a></li>
                 </ul>
             </div>
-
         </div>
     </nav>
-
 
     <!-- MAIN CONTENT – bootstrap grid -->
     <main class="container-fluid px-3 px-md-5" style="margin-top: 90px;">
@@ -717,7 +650,6 @@
                     <div class="featured-sponsor-name fs-2 fw-bold text-white mt-3">BrandZone Media</div>
                     <span class="featured-sponsor-tag mt-3">Official Marketing Partner</span>
                     <p class="text-secondary mt-3 mx-auto" style="max-width: 600px;">Leading the digital marketing revolution with innovative campaigns and strategic brand partnerships.</p>
-                    
                 </div>
             </div>
         </div>
@@ -799,11 +731,10 @@
                 <div class="col-sm-6 col-lg-4">
                     <div class="sponsor-card">
                         <div class="sponsor-logo-container">
-                            <img src="https://res.cloudinary.com/dpc4l1hic/image/upload/v1771330700/4_1_veygb3.png" alt="Webbucket" loading="lazy" style="max-height: 300px;">
+                            <img src="https://res.cloudinary.com/dpc4l1hic/image/upload/v1771330700/4_1_veygb3.png" alt="Webbucket" loading="lazy">
                         </div>
                         <div class="sponsor-name">Webbucket</div>
                         <div class="sponsor-type">Technical Partner</div>
-                        
                     </div>
                 </div>
             </div>
@@ -819,37 +750,34 @@
                 <div class="col-sm-6 col-lg-4">
                     <div class="sponsor-card">
                         <div class="sponsor-logo-container">
-                            <img src="https://res.cloudinary.com/dpc4l1hic/image/upload/v1771330698/3_1_fatgqq.png" alt="LIT" loading="lazy" style="max-height: 300px;">
+                            <img src="https://res.cloudinary.com/dpc4l1hic/image/upload/v1771330698/3_1_fatgqq.png" alt="LIT" loading="lazy">
                         </div>
                         <div class="sponsor-name">LIT</div>
                         <div class="sponsor-type">Events Partner</div>
-                        
                     </div>
                 </div>
                 <div class="col-sm-6 col-lg-4">
                     <div class="sponsor-card">
                         <div class="sponsor-logo-container">
-                            <img src="https://res.cloudinary.com/dpc4l1hic/image/upload/v1771330697/2_1_g2dtuz.png" alt="IIG Varsity" loading="lazy" style="max-height: 300px;">
+                            <img src="https://res.cloudinary.com/dpc4l1hic/image/upload/v1771330697/2_1_g2dtuz.png" alt="IIG Varsity" loading="lazy">
                         </div>
                         <div class="sponsor-name">IIG Varsity</div>
                         <div class="sponsor-type">Events Partner</div>
-                        
                     </div>
                 </div>
                 <div class="col-sm-6 col-lg-4">
                     <div class="sponsor-card">
                         <div class="sponsor-logo-container">
-                            <img src="https://res.cloudinary.com/dpc4l1hic/image/upload/v1771330695/1_1_iismhq.png" alt="Pythonsoft LLP" loading="lazy" style="max-height: 300px;">
+                            <img src="https://res.cloudinary.com/dpc4l1hic/image/upload/v1771330695/1_1_iismhq.png" alt="Pythonsoft LLP" loading="lazy">
                         </div>
                         <div class="sponsor-name">Pythonsoft LLP</div>
                         <div class="sponsor-type">Events Partner</div>
-                        
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- Media Partners - REMOVED OTHER COMPANIES, KEPT EMPTY BUT STRUCTURE -->
+        <!-- Media Partners - hidden but structure kept -->
         <div class="sponsor-category my-5 p-4" style="background: rgba(0,0,0,0.4); backdrop-filter: blur(10px); border-radius: 15px; display: none;">
             <div class="category-header text-center mb-4">
                 <h2 class="category-title">Media Partners</h2>
@@ -870,21 +798,24 @@
         </div>
     </main>
 
-    <!-- FOOTER bootstrap grid -->
+    <!-- FOOTER -->
     <footer class="footer-3d">
         <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-lg-4 col-md-6 col-sm-10 d-flex justify-content-center">
-                    <div class="d-flex align-items-center gap-3">
+            <div class="row justify-content-center">
+                <div class="col-lg-4 col-md-6 col-sm-10 text-center text-md-start">
+                    <div class="d-flex align-items-center gap-3 justify-content-center justify-content-md-start">
                         <img src="https://res.cloudinary.com/dpc4l1hic/image/upload/v1770814304/gift_logo_rzl4tf.png" alt="GIFT" class="college-logo" loading="lazy">
-                        <div><span class="fw-bold fs-3" style="color:#ffcc33; font-family:Orbitron;">GIFT AUTONOMOUS</span><br><span class="text-white-50">BHUBANESWAR</span></div>
+                        <div>
+                            <span class="fw-bold fs-3" style="color:#ffcc33; font-family:Orbitron;">GIFT AUTONOMOUS</span>
+                            <br><span class="text-white-50">BHUBANESWAR</span>
+                        </div>
                     </div>
                     <p class="text-warning mt-3">Igniting Minds, Empowering Futures</p>
                     <p class="text-secondary">GIFT Autonomous, Bhubaneswar is committed to providing quality education and fostering innovation through events like FESTRONIX.</p>
                 </div>
-                <div class="col-md-6 text-md-end">
+                <div class="col-md-6 text-md-end text-center mt-4 mt-md-0">
                     <h4 class="text-white mb-3">Connect With Us</h4>
-                    <div class="d-flex gap-3 justify-content-md-end">
+                    <div class="d-flex gap-3 justify-content-center justify-content-md-end">
                         <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
                         <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
                         <a href="#" class="social-icon"><i class="fab fa-youtube"></i></a>
@@ -905,93 +836,128 @@
     <!-- Back to Top Button -->
     <button class="back-to-top" id="backToTop"><i class="fas fa-chevron-up"></i></button>
 
-    <!-- Bootstrap JS Bundle -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Bootstrap JS Bundle - deferred -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" defer></script>
     
-    <!-- UPDATED SCRIPT - REMOVED CUSTOM MOBILE MENU -->
+    <!-- OPTIMIZED SCRIPT -->
     <script>
         (function() {
             "use strict";
             
-            // ==================== LOADER - FIXED FOR FAST LOADING ====================
-            setTimeout(function() {
-                const loader = document.getElementById('loader');
-                if (loader) {
-                    loader.classList.add('loader-hidden');
-                }
-            }, 1500);
-
+            // ==================== OPTIMIZED LOADER - REDUCED TIMING ====================
+            // Hide loader as soon as DOM is ready
             document.addEventListener('DOMContentLoaded', function() {
                 setTimeout(function() {
                     const loader = document.getElementById('loader');
                     if (loader) {
                         loader.classList.add('loader-hidden');
+                        // Remove loader from DOM after transition
+                        setTimeout(() => {
+                            if (loader.parentNode) loader.style.display = 'none';
+                        }, 300);
                     }
-                }, 800);
+                }, 800); // Reduced from 1500ms to 800ms
             });
 
-            // ---------- CURSOR ANIMATION ----------
+            // Fallback - ensure loader hides even if DOMContentLoaded already fired
+            if (document.readyState === 'interactive' || document.readyState === 'complete') {
+                setTimeout(function() {
+                    const loader = document.getElementById('loader');
+                    if (loader) {
+                        loader.classList.add('loader-hidden');
+                        setTimeout(() => {
+                            if (loader.parentNode) loader.style.display = 'none';
+                        }, 300);
+                    }
+                }, 800);
+            }
+
+            // ---------- OPTIMIZED CURSOR ANIMATION ----------
             const cursorDot = document.querySelector("[data-cursor-dot]");
             const cursorOutline = document.querySelector("[data-cursor-outline]");
-            if (cursorDot && cursorOutline) {
+            
+            if (cursorDot && cursorOutline && window.innerWidth > 768) {
                 let mouseX = 0, mouseY = 0, cursorX = 0, cursorY = 0;
+                let rafId = null;
+                
                 document.addEventListener("mousemove", (e) => { 
-                    mouseX = e.clientX; mouseY = e.clientY; 
-                    cursorDot.style.left = mouseX + "px"; cursorDot.style.top = mouseY + "px"; 
+                    mouseX = e.clientX; 
+                    mouseY = e.clientY; 
+                    cursorDot.style.left = mouseX + "px"; 
+                    cursorDot.style.top = mouseY + "px"; 
                 });
+                
                 document.addEventListener("mousedown", () => { 
                     if(cursorOutline) { 
                         cursorOutline.style.transform = "translate(-50%, -50%) scale(0.8)"; 
                         cursorOutline.style.borderColor = "#ffcc33"; 
                     } 
                 });
+                
                 document.addEventListener("mouseup", () => { 
                     if(cursorOutline) { 
                         cursorOutline.style.transform = "translate(-50%, -50%) scale(1)"; 
                         cursorOutline.style.borderColor = "rgba(255,71,51,0.8)"; 
                     } 
                 });
+                
                 function animateCursor() { 
                     cursorX += (mouseX - cursorX) * 0.15; 
                     cursorY += (mouseY - cursorY) * 0.15; 
                     cursorOutline.style.left = cursorX + "px"; 
                     cursorOutline.style.top = cursorY + "px"; 
-                    requestAnimationFrame(animateCursor); 
+                    rafId = requestAnimationFrame(animateCursor); 
                 }
                 animateCursor();
 
-                // Hover effect for interactive elements
-                document.querySelectorAll('a, button, .btn-3d-sponsor, .card-btn, .social-icon, .back-to-top').forEach(el => {
-                    el.addEventListener('mouseenter', () => {
+                // Hover effect for interactive elements - using event delegation
+                document.addEventListener('mouseover', (e) => {
+                    const target = e.target.closest('a, button, .btn-3d-sponsor, .card-btn, .social-icon, .back-to-top');
+                    if (target && cursorOutline) {
                         cursorOutline.style.width = '50px';
                         cursorOutline.style.height = '50px';
                         cursorOutline.style.borderColor = '#ffcc33';
-                    });
-                    el.addEventListener('mouseleave', () => {
+                    }
+                });
+                
+                document.addEventListener('mouseout', (e) => {
+                    const target = e.target.closest('a, button, .btn-3d-sponsor, .card-btn, .social-icon, .back-to-top');
+                    if (target && cursorOutline) {
                         cursorOutline.style.width = '40px';
                         cursorOutline.style.height = '40px';
                         cursorOutline.style.borderColor = 'rgba(255,71,51,0.8)';
-                    });
+                    }
                 });
+            } else {
+                // Hide cursor on mobile
+                if (cursorDot) cursorDot.style.display = 'none';
+                if (cursorOutline) cursorOutline.style.display = 'none';
             }
 
-            // ---------- SCROLL INDICATOR & BACK TO TOP ----------
-            function initScrollFeatures() {
-                const topBtn = document.getElementById('backToTop');
-                const scrollIndicator = document.querySelector('.scroll-indicator');
-                window.addEventListener('scroll', () => {
-                    if (topBtn) {
-                        topBtn.style.display = window.scrollY > 300 ? 'flex' : 'none';
-                    }
-                    if (scrollIndicator) {
-                        const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-                        const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-                        scrollIndicator.style.transform = `scaleX(${winScroll / height})`;
-                    }
-                });
-                if (topBtn) {
-                    topBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+            // ---------- OPTIMIZED SCROLL INDICATOR & BACK TO TOP (throttled) ----------
+            const topBtn = document.getElementById('backToTop');
+            const scrollIndicator = document.querySelector('.scroll-indicator');
+            let ticking = false;
+            
+            window.addEventListener('scroll', () => {
+                if (!ticking) {
+                    window.requestAnimationFrame(() => {
+                        if (topBtn) {
+                            topBtn.style.display = window.scrollY > 300 ? 'flex' : 'none';
+                        }
+                        if (scrollIndicator) {
+                            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+                            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                            scrollIndicator.style.transform = `scaleX(${winScroll / height})`;
+                        }
+                        ticking = false;
+                    });
+                    ticking = true;
                 }
+            });
+            
+            if (topBtn) {
+                topBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
             }
 
             // ---------- SET ACTIVE NAVIGATION ----------
@@ -1004,9 +970,6 @@
                 });
             }
 
-            // ---------- SLIDER DUPLICATE - ALREADY DUPLICATED IN HTML ----------
-            // No need to duplicate via JS as we've manually duplicated in HTML
-
             // ---------- SPONSOR BUTTONS ----------
             const becomeBtn = document.getElementById('becomeSponsorBtn');
             if (becomeBtn) {
@@ -1015,11 +978,23 @@
 
             // ---------- VIDEO AUTOPLAY FALLBACK ----------
             const video = document.querySelector('video');
-            if (video) video.play().catch(e => console.log("Autoplay blocked"));
+            if (video) {
+                video.play().catch(e => console.log("Autoplay blocked"));
+            }
+
+            // ---------- SLIDER ANIMATION PAUSE ON HOVER ----------
+            const sliderTrack = document.querySelector('.slider-track');
+            if (sliderTrack) {
+                sliderTrack.addEventListener('mouseenter', () => {
+                    sliderTrack.style.animationPlayState = 'paused';
+                });
+                sliderTrack.addEventListener('mouseleave', () => {
+                    sliderTrack.style.animationPlayState = 'running';
+                });
+            }
 
             // ---------- INITIALIZATION ----------
             document.addEventListener('DOMContentLoaded', function() {
-                initScrollFeatures();
                 setActiveNavItem();
             });
         })();

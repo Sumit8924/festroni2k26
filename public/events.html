@@ -5,13 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
     <title>FESTRONIX 2.0 - Events & Registration (Forms integrated)</title>
     
-    <!-- Bootstrap 5 + Icons -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <!-- Bootstrap 5 + Icons - optimized loading -->
+    <link rel="preconnect" href="https://cdn.jsdelivr.net">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" media="print" onload="this.media='all'">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" media="print" onload="this.media='all'">
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Orbitron:wght@400;600;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Orbitron:wght@400;600;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
     <!-- Font Awesome 6 -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" media="print" onload="this.media='all'">
+    
+    <!-- Fallback for no js -->
+    <noscript>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+        <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Orbitron:wght@400;600;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    </noscript>
     
     <style>
         /* ===== BOOTSTRAP THEME OVERRIDES & CUSTOM STYLES ===== */
@@ -65,7 +76,7 @@
             z-index: -1;
         }
 
-        /* ----- Custom Cursor ----- */
+        /* ----- Custom Cursor (optimized) ----- */
         .cursor-dot, .cursor-outline {
             position: fixed;
             top: 0;
@@ -75,6 +86,7 @@
             z-index: 9999;
             pointer-events: none;
             transition: width 0.2s, height 0.2s, background 0.2s, border 0.2s;
+            will-change: left, top, transform;
         }
         .cursor-dot {
             width: 8px;
@@ -669,6 +681,7 @@
             justify-content: center;
             z-index: 999;
             box-shadow: 0 0 20px rgba(255,71,51,0.5);
+            transition: all 0.3s;
         }
         .back-to-top:hover { transform: translateY(-5px); box-shadow: 0 0 30px rgba(255,71,51,0.8); }
 
@@ -691,7 +704,7 @@
             .countdown-display { grid-template-columns: repeat(2, 1fr); }
         }
 
-        /* ----- LOADER ANIMATION ----- */
+        /* ----- OPTIMIZED LOADER ANIMATION - REDUCED TIMING ----- */
         .loader-container {
             position: fixed;
             top: 0;
@@ -703,10 +716,20 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            transition: opacity 0.5s;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
         }
-        .loader-hidden { opacity: 0; pointer-events: none; visibility: hidden; }
-        .loader-wrapper { display: flex; justify-content: center; align-items: center; flex-wrap: wrap; }
+        .loader-hidden { 
+            opacity: 0; 
+            visibility: hidden; 
+        }
+        .loader-wrapper { 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            flex-wrap: wrap; 
+            position: relative;
+        }
         .loader-letter {
             font-family: 'Orbitron', sans-serif;
             font-size: 4rem;
@@ -715,52 +738,66 @@
             text-shadow: 0 0 15px rgba(255,71,51,0.7);
             margin: 0 3px;
             opacity: 0;
-            animation: letterReveal 0.3s forwards;
+            animation: letterReveal 0.2s forwards;
             display: inline-block;
         }
-        .loader-letter:nth-child(1) { animation-delay: 0.1s; }
-        .loader-letter:nth-child(2) { animation-delay: 0.2s; }
-        .loader-letter:nth-child(3) { animation-delay: 0.3s; }
-        .loader-letter:nth-child(4) { animation-delay: 0.4s; }
-        @keyframes letterReveal { to { opacity: 1; text-shadow: 0 0 20px rgba(255,71,51,1); } }
+        .loader-letter:nth-child(1) { animation-delay: 0.05s; }
+        .loader-letter:nth-child(2) { animation-delay: 0.08s; }
+        .loader-letter:nth-child(3) { animation-delay: 0.11s; }
+        .loader-letter:nth-child(4) { animation-delay: 0.14s; }
+        .loader-letter:nth-child(5) { animation-delay: 0.17s; }
+        .loader-letter:nth-child(6) { animation-delay: 0.2s; }
+        
+        @keyframes letterReveal { 
+            to { 
+                opacity: 1; 
+                text-shadow: 0 0 20px rgba(255,71,51,1); 
+            } 
+        }
         .loader {
             position: absolute;
-            bottom: -30px;
+            bottom: -20px;
             width: 100%;
-            height: 4px;
+            height: 3px;
             background: linear-gradient(90deg, transparent, #ffcc33, transparent);
-            animation: loadingBar 2.5s ease-in-out forwards;
+            animation: loadingBar 1s ease-in-out forwards;
         }
-        @keyframes loadingBar { 0% { transform: translateX(-100%); } 100% { transform: translateX(100%); } }
-        .loader-subtitle {
-            font-family: 'Rajdhani', sans-serif;
-            font-size: 1.2rem;
-            color: #ff9966;
-            letter-spacing: 2px;
-            margin-top: 20px;
-            opacity: 0;
-            animation: fadeIn 0.5s ease forwards 1.5s;
+        @keyframes loadingBar { 
+            0% { transform: translateX(-100%); } 
+            100% { transform: translateX(100%); } 
         }
-        @keyframes fadeIn { to { opacity: 1; } }
+
+        @media (max-width: 991px) {
+            .loader-letter { font-size: 3rem; }
+        }
+        @media (max-width: 767px) {
+            .loader-letter { font-size: 2.5rem; }
+        }
+        @media (max-width: 599px) {
+            .loader-letter { font-size: 2rem; }
+        }
+        @media (max-width: 380px) {
+            .loader-letter { font-size: 1.5rem; }
+        }
     </style>
 </head>
 <body>
-    <!-- LOADER -->
+    <!-- OPTIMIZED LOADER - REDUCED TIMING -->
     <div class="loader-container" id="loader">
         <div class="loader-wrapper">
-            <span class="loader-letter" style="animation-delay: 0s">E</span>
-            <span class="loader-letter" style="animation-delay: 0.1s">V</span>
-            <span class="loader-letter" style="animation-delay: 0.2s">E</span>
-            <span class="loader-letter" style="animation-delay: 0.3s">N</span>
-            <span class="loader-letter" style="animation-delay: 0.4s">T</span>
-            <span class="loader-letter" style="animation-delay: 0.5s">S</span>            
+            <span class="loader-letter">E</span>
+            <span class="loader-letter">V</span>
+            <span class="loader-letter">E</span>
+            <span class="loader-letter">N</span>
+            <span class="loader-letter">T</span>
+            <span class="loader-letter">S</span>
             <div class="loader"></div>
         </div>
     </div>
     
     <!-- VIDEO BACKGROUND -->
     <div class="video-background">
-        <video autoplay muted loop playsinline>
+        <video autoplay muted loop playsinline preload="metadata">
             <source src="https://res.cloudinary.com/dpc4l1hic/video/upload/v1770814312/light_gzuewo.mp4" type="video/mp4">
         </video>
         <div class="video-overlay"></div>
@@ -1669,7 +1706,7 @@
             <div class="row g-4">
                 <div class="col-lg-6">
                     <div class="d-flex align-items-center gap-3 mb-3">
-                        <img src="https://res.cloudinary.com/dpc4l1hic/image/upload/v1770814304/gift_logo_rzl4tf.png" alt="GIFT Autonomous College Logo" class="college-logo">
+                        <img src="https://res.cloudinary.com/dpc4l1hic/image/upload/v1770814304/gift_logo_rzl4tf.png" alt="GIFT Autonomous College Logo" class="college-logo" loading="lazy">
                         <div class="college-name">GIFT AUTONOMOUS<br><span class="fs-6">BHUBANESWAR</span></div>
                     </div>
                     <p class="footer-tagline">Igniting Minds, Empowering Futures</p>
@@ -1696,10 +1733,10 @@
     <!-- BACK TO TOP -->
     <button class="back-to-top" id="backToTop"><i class="fas fa-chevron-up"></i></button>
 
-    <!-- Bootstrap JS Bundle -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Bootstrap JS Bundle - deferred -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" defer></script>
 
-    <!-- UPDATED SCRIPT WITH FIXED CURSOR -->
+    <!-- OPTIMIZED SCRIPT -->
     <script>
         (function() {
             'use strict';
@@ -2085,15 +2122,35 @@
                 }
             }
 
-            // ==================== LOADER ====================
-            window.addEventListener('load', function() {
+            // ==================== OPTIMIZED LOADER - REDUCED TIMING ====================
+            // Hide loader as soon as DOM is ready
+            document.addEventListener('DOMContentLoaded', function() {
                 setTimeout(function() {
                     const loader = document.getElementById('loader');
-                    if (loader) loader.classList.add('loader-hidden');
-                }, 3000);
+                    if (loader) {
+                        loader.classList.add('loader-hidden');
+                        // Remove loader from DOM after transition
+                        setTimeout(() => {
+                            if (loader.parentNode) loader.style.display = 'none';
+                        }, 300);
+                    }
+                }, 800); // Reduced from 3000ms to 800ms
             });
 
-            // ==================== IMPROVED CURSOR ====================
+            // Fallback - ensure loader hides even if DOMContentLoaded already fired
+            if (document.readyState === 'interactive' || document.readyState === 'complete') {
+                setTimeout(function() {
+                    const loader = document.getElementById('loader');
+                    if (loader) {
+                        loader.classList.add('loader-hidden');
+                        setTimeout(() => {
+                            if (loader.parentNode) loader.style.display = 'none';
+                        }, 300);
+                    }
+                }, 800);
+            }
+
+            // ==================== OPTIMIZED CURSOR ====================
             const cursorDot = document.querySelector("[data-cursor-dot]");
             const cursorOutline = document.querySelector("[data-cursor-outline]");
             let mouseX = 0, mouseY = 0, cursorX = 0, cursorY = 0;
@@ -2104,7 +2161,7 @@
                 if (!cursorDot || !cursorOutline) return;
                 
                 // Check if touch device
-                if ('ontouchstart' in window || navigator.maxTouchPoints > 0) {
+                if ('ontouchstart' in window || navigator.maxTouchPoints > 0 || window.innerWidth <= 768) {
                     cursorDot.style.display = 'none';
                     cursorOutline.style.display = 'none';
                     cursorHidden = true;
@@ -2158,7 +2215,7 @@
                     '.event-btn', 
                     '.user-auth-btn', 
                     '.mobile-nav-item',
-                    '.instruction-modal *',  // All elements in modal
+                    '.instruction-modal *',
                     '.instruction-content',
                     '.instruction-header',
                     '.instruction-body',
@@ -2167,7 +2224,7 @@
                     '.checkmark'
                 ];
 
-                // Mouse over for interactive elements
+                // Mouse over for interactive elements - using event delegation
                 document.addEventListener('mouseover', (e) => {
                     if (cursorHidden) return;
                     
@@ -2209,7 +2266,6 @@
                 // Animation function
                 function animate() {
                     if (!cursorHidden && cursorOutline) {
-                        // Smooth follow for outline only
                         cursorX += (mouseX - cursorX) * 0.15;
                         cursorY += (mouseY - cursorY) * 0.15;
                         cursorOutline.style.left = cursorX + 'px';
@@ -2254,34 +2310,44 @@
                         const headings = document.querySelectorAll('.category-heading');
                         
                         if (filter === 'all') {
-                            sections.forEach(id => document.getElementById(id).style.display = 'flex');
+                            sections.forEach(id => {
+                                const el = document.getElementById(id);
+                                if (el) el.style.display = 'flex';
+                            });
                             headings.forEach(h => h.style.display = 'block');
                         } else {
-                            sections.forEach(id => document.getElementById(id).style.display = 'none');
+                            sections.forEach(id => {
+                                const el = document.getElementById(id);
+                                if (el) el.style.display = 'none';
+                            });
                             headings.forEach(h => h.style.display = 'none');
                             
                             if (filter === 'technical') { 
-                                document.getElementById('technical-events').style.display = 'flex'; 
-                                headings[0].style.display = 'block'; 
+                                const el = document.getElementById('technical-events');
+                                if (el) el.style.display = 'flex'; 
+                                if (headings[0]) headings[0].style.display = 'block'; 
                             }
                             if (filter === 'management') { 
-                                document.getElementById('management-events').style.display = 'flex'; 
-                                headings[1].style.display = 'block'; 
+                                const el = document.getElementById('management-events');
+                                if (el) el.style.display = 'flex'; 
+                                if (headings[1]) headings[1].style.display = 'block'; 
                             }
                             if (filter === 'robotics') { 
-                                document.getElementById('robotics-events').style.display = 'flex'; 
-                                headings[2].style.display = 'block'; 
+                                const el = document.getElementById('robotics-events');
+                                if (el) el.style.display = 'flex'; 
+                                if (headings[2]) headings[2].style.display = 'block'; 
                             }
                             if (filter === 'gaming') { 
-                                document.getElementById('gaming-events').style.display = 'flex'; 
-                                headings[3].style.display = 'block'; 
+                                const el = document.getElementById('gaming-events');
+                                if (el) el.style.display = 'flex'; 
+                                if (headings[3]) headings[3].style.display = 'block'; 
                             }
                         }
                     });
                 });
             }
 
-            // ==================== COUNTDOWN ====================
+            // ==================== OPTIMIZED COUNTDOWN ====================
             class EventCountdown {
                 constructor() {
                     this.timers = new Map();
@@ -2427,7 +2493,7 @@
                 
                 // Ensure cursor is visible and working
                 if (!cursorHidden && cursorOutline && cursorDot) {
-                    cursorOutline.style.zIndex = '10003'; // Higher than modal's z-index
+                    cursorOutline.style.zIndex = '10003';
                     cursorDot.style.zIndex = '10003';
                 }
             }
@@ -2446,17 +2512,32 @@
                 }
             }
 
-            // ==================== SCROLL ====================
+            // ==================== OPTIMIZED SCROLL (throttled) ====================
             function initScroll() {
                 const topBtn = document.getElementById('backToTop');
+                const scrollIndicator = document.querySelector('.scroll-indicator');
+                let ticking = false;
+                
                 window.addEventListener('scroll', () => {
-                    if (topBtn) topBtn.style.display = window.scrollY > 300 ? 'flex' : 'none';
-                    const win = document.body.scrollTop || document.documentElement.scrollTop;
-                    const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-                    const ind = document.querySelector('.scroll-indicator');
-                    if (ind) ind.style.transform = `scaleX(${win / height})`;
+                    if (!ticking) {
+                        window.requestAnimationFrame(() => {
+                            if (topBtn) {
+                                topBtn.style.display = window.scrollY > 300 ? 'flex' : 'none';
+                            }
+                            if (scrollIndicator) {
+                                const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+                                const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                                scrollIndicator.style.transform = `scaleX(${winScroll / height})`;
+                            }
+                            ticking = false;
+                        });
+                        ticking = true;
+                    }
                 });
-                if (topBtn) topBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+                
+                if (topBtn) {
+                    topBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+                }
             }
 
             // ==================== SCHEDULE TABS ====================
@@ -2475,7 +2556,9 @@
             // ==================== VIDEO PLAY ====================
             function initVideo() {
                 const video = document.querySelector('video');
-                if (video) video.play().catch(e => console.log('Autoplay blocked'));
+                if (video) {
+                    video.play().catch(e => console.log('Autoplay blocked'));
+                }
             }
 
             // ==================== SET ACTIVE NAV ====================
@@ -2487,9 +2570,9 @@
                 });
             }
 
-            // ==================== ANIMATIONS ====================
+            // ==================== ANIMATIONS (throttled) ====================
             function initAnimations() {
-                const observer = new IntersectionObserver(entries => {
+                const observer = new IntersectionObserver((entries) => {
                     entries.forEach(e => { 
                         if (e.isIntersecting) { 
                             e.target.style.opacity = '1'; 

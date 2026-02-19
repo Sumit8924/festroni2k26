@@ -4,13 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
     <title>FESTRONIX 2.0 - Previous Years (Bootstrap)</title>
-    <!-- Bootstrap 5 + Icons + Fonts -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <!-- Bootstrap 5 + Icons + Fonts - optimized loading -->
+    <link rel="preconnect" href="https://cdn.jsdelivr.net">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" media="print" onload="this.media='all'">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" media="print" onload="this.media='all'">
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Orbitron:wght@400;600;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <!-- Font Awesome 6 (optional, but keep for consistency) -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Orbitron:wght@400;600;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <!-- Font Awesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" media="print" onload="this.media='all'">
+    
+    <!-- Fallback for no js -->
+    <noscript>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+        <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Orbitron:wght@400;600;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    </noscript>
     
     <style>
         /* ===== BOOTSTRAP THEME OVERRIDES & CUSTOM STYLES ===== */
@@ -26,7 +37,7 @@
             font-family: 'Rajdhani', sans-serif;
             overflow-x: hidden;
             color: white;
-            cursor: none; /* custom cursor active */
+            cursor: none;
             font-size: 0.95rem;
         }
 
@@ -71,10 +82,11 @@
             z-index: -1;
         }
 
-        /* ----- Custom Cursor (unchanged) ----- */
+        /* ----- Custom Cursor (optimized) ----- */
         .cursor-dot, .cursor-outline {
             position: fixed; top: 0; left: 0; transform: translate(-50%, -50%);
             border-radius: 50%; z-index: 9999; pointer-events: none;
+            will-change: left, top, transform;
         }
         .cursor-dot { width: 8px; height: 8px; background-color: #ffcc33; }
         .cursor-outline {
@@ -86,7 +98,7 @@
             body { cursor: auto; }
         }
 
-        /* ===== UPDATED NAVBAR STYLES - MATCHING INDEX.HTML ===== */
+        /* ===== UPDATED NAVBAR STYLES ===== */
         .navbar {
             background: transparent;
             backdrop-filter: blur(15px);
@@ -97,7 +109,6 @@
             padding: 0 1rem;
         }
 
-        /* Desktop: Center Nav Items */
         @media (min-width: 992px) {
             .navbar-nav {
                 width: 100%;
@@ -143,7 +154,6 @@
             margin-left: 20px;
         }
 
-        /* Navbar Toggler Style */
         .navbar-toggler {
             border: 2px solid #ff4733 !important;
             background: rgba(255, 71, 51, 0.2) !important;
@@ -158,7 +168,6 @@
             box-shadow: 0 0 0 0.25rem rgba(255, 71, 51, 0.25);
         }
 
-        /* Mobile menu transparency */
         @media (max-width: 991px) {
             .navbar-collapse {
                 background: transparent !important;
@@ -226,17 +235,6 @@
         }
         .user-auth-btn i { margin-right: 8px; }
 
-
-
-        .mobile-login-btn:hover { background: rgba(255,71,51,0.3); color: #ffcc33; border-color: #ff4733; transform: translateY(-2px); }
-        .mobile-signup-btn {
-            border: 2px solid transparent;
-            background: linear-gradient(135deg, #ff4733, #ff9966);
-            color: white;
-            box-shadow: 0 4px 15px rgba(255,71,51,0.3);
-        }
-        .mobile-signup-btn:hover { background: linear-gradient(135deg, #ff3366, #ffcc33); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(255,71,51,0.5); }
-
         /* ----- Scroll Indicator ----- */
         .scroll-indicator {
             position: fixed;
@@ -248,6 +246,71 @@
             transform-origin: left;
             transform: scaleX(0);
             z-index: 1031;
+        }
+
+        /* ----- OPTIMIZED LOADER ANIMATION - REDUCED TIMING ----- */
+        .loader-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #000;
+            z-index: 99999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+        }
+        .loader-hidden { 
+            opacity: 0; 
+            visibility: hidden; 
+        }
+        .loader-wrapper { 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            flex-wrap: wrap; 
+            position: relative;
+        }
+        .loader-letter {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 4rem;
+            font-weight: 900;
+            color: #ff4733;
+            text-shadow: 0 0 15px rgba(255,71,51,0.7);
+            margin: 0 3px;
+            opacity: 0;
+            animation: letterReveal 0.2s forwards;
+            display: inline-block;
+        }
+        .loader-letter:nth-child(1) { animation-delay: 0.05s; }
+        .loader-letter:nth-child(2) { animation-delay: 0.08s; }
+        .loader-letter:nth-child(3) { animation-delay: 0.11s; }
+        .loader-letter:nth-child(4) { animation-delay: 0.14s; }
+        .loader-letter:nth-child(5) { animation-delay: 0.17s; }
+        .loader-letter:nth-child(6) { animation-delay: 0.2s; }
+        .loader-letter:nth-child(7) { animation-delay: 0.23s; }
+        .loader-letter:nth-child(8) { animation-delay: 0.26s; }
+        
+        @keyframes letterReveal { 
+            to { 
+                opacity: 1; 
+                text-shadow: 0 0 20px rgba(255,71,51,1); 
+            } 
+        }
+        .loader {
+            position: absolute;
+            bottom: -20px;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #ffcc33, transparent);
+            animation: loadingBar 1s ease-in-out forwards;
+        }
+        @keyframes loadingBar { 
+            0% { transform: translateX(-100%); } 
+            100% { transform: translateX(100%); } 
         }
 
         /* ----- Hero Section ----- */
@@ -278,7 +341,6 @@
             margin: 0 auto 30px;
             line-height: 1.5;
         }
-        /* 3D Gallery Buttons */
         .gallery-btn {
             position: relative;
             padding: 10px 20px;
@@ -420,7 +482,7 @@
         .media-item:hover .media-overlay { opacity: 1; }
         .view-more { color: #ffcc33; cursor: pointer; font-weight: bold; font-size: 0.9rem; margin-top: 10px; }
 
-        /* ----- Milestones & Legacy (Bootstrap cards enhanced) ----- */
+        /* ----- Milestones & Legacy ----- */
         .milestones-section {
             padding: 50px 20px;
             background: linear-gradient(135deg, rgba(255,153,102,0.1), rgba(0,102,204,0.1));
@@ -469,7 +531,7 @@
         .legacy-number { font-size: 2rem; font-weight: bold; color: #ffcc33; font-family: 'Orbitron'; margin-bottom: 5px; }
         .legacy-label { color: #ff9966; font-size: 0.9rem; font-weight: 600; }
 
-        /* ----- Footer (Bootstrap grid) ----- */
+        /* ----- Footer ----- */
         .footer-3d {
             background: rgba(0,0,0,0.9);
             padding: 40px 20px 20px;
@@ -496,7 +558,7 @@
             box-shadow: 0 5px 15px rgba(255,71,51,0.3);
         }
 
-        /* ----- Lightbox (Bootstrap modal integration) ----- */
+        /* ----- Lightbox ----- */
         .lightbox-modal {
             display: none;
             position: fixed;
@@ -566,131 +628,61 @@
             transition: all 0.3s;
         }
         .back-to-top:hover { transform: translateY(-3px); box-shadow: 0 0 30px rgba(255,71,51,0.8); }
-        /* ----- LOADER ANIMATION ----- */
-        .loader-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: #000;
-            z-index: 99999;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            transition: opacity 0.5s;
-        }
-        .loader-hidden { opacity: 0; pointer-events: none; visibility: hidden; }
-        .loader-wrapper { display: flex; justify-content: center; align-items: center; flex-wrap: wrap; }
-        .loader-letter {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 4rem;
-            font-weight: 900;
-            color: #ff4733;
-            text-shadow: 0 0 15px rgba(255,71,51,0.7);
-            margin: 0 3px;
-            opacity: 0;
-            animation: letterReveal 0.3s forwards;
-            display: inline-block;
-        }
-        .loader-letter:nth-child(1) { animation-delay: 0.1s; }
-        .loader-letter:nth-child(2) { animation-delay: 0.2s; }
-        .loader-letter:nth-child(3) { animation-delay: 0.3s; }
-        .loader-letter:nth-child(4) { animation-delay: 0.4s; }
-        @keyframes letterReveal { to { opacity: 1; text-shadow: 0 0 20px rgba(255,71,51,1); } }
-        .loader {
-            position: absolute;
-            bottom: -30px;
-            width: 100%;
-            height: 4px;
-            background: linear-gradient(90deg, transparent, #ffcc33, transparent);
-            animation: loadingBar 2.5s ease-in-out forwards;
-        }
-        @keyframes loadingBar { 0% { transform: translateX(-100%); } 100% { transform: translateX(100%); } }
-        .loader-subtitle {
-            font-family: 'Rajdhani', sans-serif;
-            font-size: 1.2rem;
-            color: #ff9966;
-            letter-spacing: 2px;
-            margin-top: 20px;
-            opacity: 0;
-            animation: fadeIn 0.5s ease forwards 1.5s;
-        }
-        @keyframes fadeIn { to { opacity: 1; } }        
 
-@media (max-width: 991px) {
-            .scroll-indicator { top: 0; }
-            .loader-letter { font-size: 3rem; }
-            .route-input-group { flex-direction: column; }
-            .route-btn { width: 100%; justify-content: center; }
-            .navbar-nav {
-                gap: 0;
-            }
-        }
-        @media (max-width: 767px) {
-            .hero-title { font-size: 2.5rem; }
-            .route-planner-wrapper { padding: 30px 20px; }
-            .loader-letter { font-size: 2.5rem; }
-            .map-container { height: 400px; }
-        }
-        @media (max-width: 599px) {
-            .hero-title { font-size: 2rem; }
-            .hero-subtitle { font-size: 1.2rem; }
-            .loader-letter { font-size: 2rem; }
-            .map-container { height: 350px; }
-        }
-        @media (max-width: 380px) {
-            .loader-letter { font-size: 1.5rem; }
-            .map-container { height: 300px; }
-        }
-
-        /* ----- Responsive Timeline (Bootstrap breakpoints) ----- */
+        /* ----- Responsive ----- */
         @media (max-width: 991px) {
             .scroll-indicator { top: 0; }
+            .loader-letter { font-size: 3rem; }
             .timeline::after { left: 30px; }
             .timeline-year { width: 100%; padding-left: 70px; padding-right: 0; text-align: left; }
             .timeline-year:nth-child(even) { left: 0; }
             .timeline-year::after { left: 21px !important; right: auto !important; }
             .lightbox-prev { left: 10px; }
             .lightbox-next { right: 10px; }
-            .navbar-nav {
-                gap: 0;
-            }
+            .navbar-nav { gap: 0; }
         }
         @media (max-width: 768px) {
             .hero-title { font-size: 2rem; }
             .hero-subtitle { font-size: 1rem; }
             .year-header { font-size: 1.5rem; }
             .year-media { grid-template-columns: repeat(2, 1fr); }
+            .loader-letter { font-size: 2.5rem; }
+        }
+        @media (max-width: 599px) {
+            .hero-title { font-size: 1.8rem; }
+            .loader-letter { font-size: 2rem; }
         }
         @media (max-width: 480px) {
-            .hero-title { font-size: 1.8rem; }
+            .hero-title { font-size: 1.6rem; }
             .year-media { grid-template-columns: 1fr; }
             .legacy-stats .legacy-stat { margin-bottom: 15px; }
+        }
+        @media (max-width: 380px) {
+            .loader-letter { font-size: 1.5rem; }
         }
     </style>
 </head>
 <body>
-
- 
-    <!-- LOADER (login page style) -->
+    <!-- OPTIMIZED LOADER - REDUCED TIMING -->
     <div class="loader-container" id="loader">
         <div class="loader-wrapper">
-            <span class="loader-letter" style="animation-delay: 0s">P</span>
-            <span class="loader-letter" style="animation-delay: 0.1s">R</span>
-            <span class="loader-letter" style="animation-delay: 0.2s">E</span>
-            <span class="loader-letter" style="animation-delay: 0.3s">V</span>
-            <span class="loader-letter" style="animation-delay: 0.3s">I</span>
-            <span class="loader-letter" style="animation-delay: 0.3s">O</span>
-            <span class="loader-letter" style="animation-delay: 0.3s">U</span>
-            <span class="loader-letter" style="animation-delay: 0.3s">S</span>
+            <span class="loader-letter">P</span>
+            <span class="loader-letter">R</span>
+            <span class="loader-letter">E</span>
+            <span class="loader-letter">V</span>
+            <span class="loader-letter">I</span>
+            <span class="loader-letter">O</span>
+            <span class="loader-letter">U</span>
+            <span class="loader-letter">S</span>
             <div class="loader"></div>
         </div>
     </div>
 
     <!-- VIDEO BACKGROUND -->
     <div class="video-background">
-        <video autoplay muted loop playsinline><source src="https://res.cloudinary.com/dpc4l1hic/video/upload/v1770814312/light_gzuewo.mp4" type="video/mp4"></video>
+        <video autoplay muted loop playsinline preload="metadata">
+            <source src="https://res.cloudinary.com/dpc4l1hic/video/upload/v1770814312/light_gzuewo.mp4" type="video/mp4">
+        </video>
         <div class="video-overlay"></div>
     </div>
     <div class="glass-overlay"></div>
@@ -702,7 +694,7 @@
     <!-- SCROLL INDICATOR -->
     <div class="scroll-indicator"></div>
 
-    <!-- ========== UPDATED NAVIGATION - MATCHING INDEX.HTML STYLE ========== -->
+    <!-- ========== UPDATED NAVIGATION ========== -->
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
         <div class="container-fluid px-lg-4">
             <a class="navbar-brand d-lg-none text-warning fw-bold" href="#"></a>
@@ -724,7 +716,7 @@
         </div>
     </nav>
 
-    <!-- Mobile Auth Extra (will be moved inside collapse via JS) -->
+    <!-- Mobile Auth Extra -->
     <div class="d-lg-none mobile-auth-extra" id="mobileAuthExtra">
         <div class="mobile-auth-buttons" id="mobileAuthButtons"></div>
     </div>
@@ -767,15 +759,15 @@
                             </ul>
                             <div class="year-media">
                                 <div class="media-item" data-year="2025" data-index="0">
-                                    <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=500" alt="2025 Inauguration">
+                                    <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=500" alt="2025 Inauguration" loading="lazy">
                                     <div class="media-overlay"><i class="fas fa-expand" style="color: #ff9966; font-size: 1.2rem;"></i></div>
                                 </div>
                                 <div class="media-item" data-year="2025" data-index="1">
-                                    <img src="https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=500" alt="2025 Workshop">
+                                    <img src="https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=500" alt="2025 Workshop" loading="lazy">
                                     <div class="media-overlay"><i class="fas fa-expand" style="color: #ff9966; font-size: 1.2rem;"></i></div>
                                 </div>
                                 <div class="media-item" data-year="2025" data-index="2">
-                                    <img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=500" alt="2025 Cultural">
+                                    <img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=500" alt="2025 Cultural" loading="lazy">
                                     <div class="media-overlay"><i class="fas fa-expand" style="color: #ff9966; font-size: 1.2rem;"></i></div>
                                 </div>
                             </div>
@@ -866,7 +858,7 @@
             <div class="row g-4">
                 <div class="col-lg-6">
                     <div class="d-flex align-items-center gap-3 mb-3">
-                        <img src="https://res.cloudinary.com/dpc4l1hic/image/upload/v1770814304/gift_logo_rzl4tf.png" alt="GIFT Autonomous College Logo" class="college-logo">
+                        <img src="https://res.cloudinary.com/dpc4l1hic/image/upload/v1770814304/gift_logo_rzl4tf.png" alt="GIFT Autonomous College Logo" class="college-logo" loading="lazy">
                         <div class="college-name">GIFT AUTONOMOUS<br><span style="font-size: 0.9rem;">BHUBANESWAR</span></div>
                     </div>
                     <p class="footer-tagline">Igniting Minds, Empowering Futures</p>
@@ -894,7 +886,7 @@
     <div class="lightbox-modal" id="lightboxModal">
         <div class="lightbox-content">
             <button class="lightbox-close" id="lightboxClose"><i class="fas fa-times"></i></button>
-            <img class="lightbox-image" id="lightboxImage" src="" alt="">
+            <img class="lightbox-image" id="lightboxImage" src="" alt="" loading="lazy">
             <div class="lightbox-info mt-3">
                 <h3 class="lightbox-title" id="lightboxTitle" style="font-family: 'Orbitron'; color: #ff9966;"></h3>
                 <p class="lightbox-description" id="lightboxDescription" style="color: #ccc;"></p>
@@ -911,21 +903,41 @@
     <!-- BACK TO TOP -->
     <button class="back-to-top" id="backToTop"><i class="fas fa-chevron-up"></i></button>
 
-    <!-- Bootstrap JS Bundle -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- jQuery (optional, for smoothness) -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Bootstrap JS Bundle - deferred -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" defer></script>
     
-    <!-- UPDATED SCRIPT - MATCHING INDEX.HTML STYLE -->
+    <!-- OPTIMIZED SCRIPT -->
     <script>
         (function() {
             'use strict';
 
-            // ----- LOADER -----
-            window.addEventListener('load', () => {
-                setTimeout(() => document.getElementById('loader').classList.add('loader-hidden'), 1000);
+            // ==================== OPTIMIZED LOADER - REDUCED TIMING ====================
+            // Hide loader as soon as DOM is ready
+            document.addEventListener('DOMContentLoaded', function() {
+                setTimeout(function() {
+                    const loader = document.getElementById('loader');
+                    if (loader) {
+                        loader.classList.add('loader-hidden');
+                        // Remove loader from DOM after transition
+                        setTimeout(() => {
+                            if (loader.parentNode) loader.style.display = 'none';
+                        }, 300);
+                    }
+                }, 800); // Reduced from 1000ms to 800ms
             });
 
+            // Fallback - ensure loader hides even if DOMContentLoaded already fired
+            if (document.readyState === 'interactive' || document.readyState === 'complete') {
+                setTimeout(function() {
+                    const loader = document.getElementById('loader');
+                    if (loader) {
+                        loader.classList.add('loader-hidden');
+                        setTimeout(() => {
+                            if (loader.parentNode) loader.style.display = 'none';
+                        }, 300);
+                    }
+                }, 800);
+            }
 
             // ----- MOBILE MENU (Bootstrap handled) but we need to move mobileAuthExtra into collapse -----
             function arrangeMobileAuth() {
@@ -936,50 +948,87 @@
                 }
             }
 
-            // ----- SCROLL INDICATOR & BACK TO TOP -----
+            // ----- OPTIMIZED SCROLL INDICATOR & BACK TO TOP (throttled) -----
             function initScrollFeatures() {
                 const topBtn = document.getElementById('backToTop');
                 const scrollIndicator = document.querySelector('.scroll-indicator');
+                let ticking = false;
+                
                 window.addEventListener('scroll', () => {
-                    if (topBtn) {
-                        topBtn.style.display = window.scrollY > 300 ? 'flex' : 'none';
-                    }
-                    if (scrollIndicator) {
-                        const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-                        const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-                        scrollIndicator.style.transform = `scaleX(${winScroll / height})`;
+                    if (!ticking) {
+                        window.requestAnimationFrame(() => {
+                            if (topBtn) {
+                                topBtn.style.display = window.scrollY > 300 ? 'flex' : 'none';
+                            }
+                            if (scrollIndicator) {
+                                const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+                                const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                                scrollIndicator.style.transform = `scaleX(${winScroll / height})`;
+                            }
+                            ticking = false;
+                        });
+                        ticking = true;
                     }
                 });
+                
                 if (topBtn) {
                     topBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
                 }
             }
 
-            // ----- CURSOR ANIMATION -----
+            // ----- OPTIMIZED CURSOR ANIMATION -----
             const cursorDot = document.querySelector("[data-cursor-dot]");
             const cursorOutline = document.querySelector("[data-cursor-outline]");
             let mouseX = 0, mouseY = 0, cursorX = 0, cursorY = 0;
-            if (cursorDot && cursorOutline) {
+            let rafId = null;
+            
+            if (cursorDot && cursorOutline && window.innerWidth > 768) {
                 document.addEventListener("mousemove", (e) => {
                     mouseX = e.clientX; mouseY = e.clientY;
                     cursorDot.style.left = `${mouseX}px`; cursorDot.style.top = `${mouseY}px`;
                 });
+                
                 document.addEventListener("mousedown", () => {
                     cursorOutline.style.transform = "translate(-50%, -50%) scale(0.8)";
                     cursorOutline.style.borderColor = "#ffcc33";
                 });
+                
                 document.addEventListener("mouseup", () => {
                     cursorOutline.style.transform = "translate(-50%, -50%) scale(1)";
                     cursorOutline.style.borderColor = "rgba(255,71,51,0.8)";
                 });
+                
                 function animateCursor() {
                     cursorX += (mouseX - cursorX) * 0.15;
                     cursorY += (mouseY - cursorY) * 0.15;
                     cursorOutline.style.left = `${cursorX}px`;
                     cursorOutline.style.top = `${cursorY}px`;
-                    requestAnimationFrame(animateCursor);
+                    rafId = requestAnimationFrame(animateCursor);
                 }
                 animateCursor();
+
+                // Hover effect for interactive elements - using event delegation
+                document.addEventListener('mouseover', (e) => {
+                    const target = e.target.closest('a, button, .gallery-btn, .media-item, .view-more, .social-icon, .back-to-top');
+                    if (target && cursorOutline) {
+                        cursorOutline.style.width = '50px';
+                        cursorOutline.style.height = '50px';
+                        cursorOutline.style.borderColor = '#ffcc33';
+                    }
+                });
+                
+                document.addEventListener('mouseout', (e) => {
+                    const target = e.target.closest('a, button, .gallery-btn, .media-item, .view-more, .social-icon, .back-to-top');
+                    if (target && cursorOutline) {
+                        cursorOutline.style.width = '40px';
+                        cursorOutline.style.height = '40px';
+                        cursorOutline.style.borderColor = 'rgba(255,71,51,0.8)';
+                    }
+                });
+            } else {
+                // Hide cursor on mobile
+                if (cursorDot) cursorDot.style.display = 'none';
+                if (cursorOutline) cursorOutline.style.display = 'none';
             }
 
             // ----- LIGHTBOX -----
@@ -997,33 +1046,40 @@
                     { src: 'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=800', title: 'Cultural Night 2025', desc: 'Memorable cultural performances showcasing talent from various colleges.' }
                 ]
             };
+            
             function openLightbox(year, index) {
                 currentYear = year; currentIndex = index;
                 updateLightbox();
                 lightbox.style.display = 'block';
                 document.body.style.overflow = 'hidden';
             }
+            
             function updateLightbox() {
                 const item = galleryData[currentYear][currentIndex];
                 const total = galleryData[currentYear].length;
                 lbImg.src = item.src;
+                lbImg.alt = item.title;
                 lbTitle.innerText = item.title;
                 lbDesc.innerText = item.desc;
                 lbDate.innerHTML = `<i class="far fa-calendar"></i> FESTRONIX ${currentYear}`;
                 lbCount.textContent = `${currentIndex + 1}/${total}`;
             }
+            
             document.getElementById('lightboxClose').onclick = () => {
                 lightbox.style.display = 'none';
                 document.body.style.overflow = 'auto';
             };
+            
             document.getElementById('lightboxNext').onclick = () => {
                 currentIndex = (currentIndex + 1) % galleryData[currentYear].length;
                 updateLightbox();
             };
+            
             document.getElementById('lightboxPrev').onclick = () => {
                 currentIndex = (currentIndex - 1 + galleryData[currentYear].length) % galleryData[currentYear].length;
                 updateLightbox();
             };
+            
             // Event listeners for media items
             document.querySelectorAll('.media-item').forEach(item => {
                 item.addEventListener('click', (e) => {
@@ -1032,37 +1088,25 @@
                     openLightbox(year, index);
                 });
             });
+            
             document.querySelectorAll('.view-more').forEach(btn => {
                 btn.addEventListener('click', (e) => {
                     const year = e.currentTarget.getAttribute('data-year');
                     openLightbox(year, 0);
                 });
             });
+            
             // Keyboard navigation
             document.addEventListener('keydown', (e) => {
                 if (lightbox.style.display === 'block') {
-                    if (e.key === 'Escape') { lightbox.style.display = 'none'; document.body.style.overflow = 'auto'; }
+                    if (e.key === 'Escape') { 
+                        lightbox.style.display = 'none'; 
+                        document.body.style.overflow = 'auto'; 
+                    }
                     if (e.key === 'ArrowLeft') document.getElementById('lightboxPrev').click();
                     if (e.key === 'ArrowRight') document.getElementById('lightboxNext').click();
                 }
             });
-
-            // ----- DOWNLOAD LEGACY REPORT -----
-            const downloadBtn = document.getElementById('downloadLegacy');
-            if (downloadBtn) {
-                downloadBtn.addEventListener('click', () => {
-                    const notification = document.createElement('div');
-                    notification.style.cssText = `
-                        position: fixed; top: 100px; right: 20px; background: linear-gradient(145deg, #009933, #006622);
-                        color: white; padding: 15px 20px; border-radius: 10px; font-family: 'Rajdhani', sans-serif;
-                        font-weight: 600; z-index: 10001; box-shadow: 0 5px 20px rgba(0,153,51,0.4);
-                        animation: slideInNotification 0.3s ease, fadeOutNotification 0.3s ease 2.7s;
-                    `;
-                    notification.textContent = `Preparing FESTRONIX 2025 Legacy Report...`;
-                    document.body.appendChild(notification);
-                    setTimeout(() => notification.remove(), 3000);
-                });
-            }
 
             // ----- SMOOTH SCROLL FOR ANCHOR LINKS -----
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -1079,7 +1123,9 @@
 
             // ----- VIDEO AUTOPLAY FALLBACK -----
             const video = document.querySelector('video');
-            if (video) video.play().catch(e => console.log("Autoplay blocked"));
+            if (video) {
+                video.play().catch(e => console.log("Autoplay blocked"));
+            }
 
             // ----- INTERSECTION OBSERVER (fade-in animations) -----
             const observer = new IntersectionObserver((entries) => {
@@ -1090,6 +1136,7 @@
                     }
                 });
             }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+            
             document.querySelectorAll('.year-card, .milestone-card, .legacy-stat').forEach(item => {
                 item.style.opacity = '0';
                 item.style.transform = 'translateY(20px)';
@@ -1109,19 +1156,19 @@
 
             // ----- INITIALIZATION -----
             document.addEventListener('DOMContentLoaded', function() {
-                // Create mobile user info placeholders if not exist (for mobile details)
+                // Create mobile user info placeholders if not exist
                 if (!document.getElementById('mobileUserName')) {
                     const nameSpan = document.createElement('span');
                     nameSpan.id = 'mobileUserName';
                     nameSpan.style.display = 'none';
                     document.body.appendChild(nameSpan);
+                    
                     const emailSpan = document.createElement('span');
                     emailSpan.id = 'mobileUserEmail';
                     emailSpan.style.display = 'none';
                     document.body.appendChild(emailSpan);
                 }
                 
-                updateUserAuthDisplay();
                 arrangeMobileAuth();
                 initScrollFeatures();
                 setActiveNavItem();

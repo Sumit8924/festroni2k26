@@ -5,12 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
     <title>FESTRONIX 2.0 – Team</title>
     
-    <!-- BOOTSTRAP 5 + ICONS + FONTS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Orbitron:wght@400;600;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- BOOTSTRAP 5 + ICONS + FONTS - moved to async loading for better performance -->
+    <link rel="preconnect" href="https://cdn.jsdelivr.net">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" media="print" onload="this.media='all'">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" media="print" onload="this.media='all'">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Orbitron:wght@400;600;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" media="print" onload="this.media='all'">
+    
+    <!-- Fallback for no js -->
+    <noscript>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+        <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Orbitron:wght@400;600;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    </noscript>
     
     <style>
         :root {
@@ -22,6 +33,7 @@
             --dark-bg: #0a0000;
         }
 
+        /* Critical CSS - inlined for faster rendering */
         * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
         
         body {
@@ -30,13 +42,24 @@
             color: #e0e0e0;
             overflow-x: hidden;
             cursor: none;
+            opacity: 1;
+            transition: opacity 0.3s ease;
         }
-        @media (max-width: 768px) { body { cursor: auto; } .cursor, .cursor-dot { display: none !important; } }
+        
+        body.loaded {
+            opacity: 1;
+        }
+        
+        @media (max-width: 768px) { 
+            body { cursor: auto; } 
+            .cursor, .cursor-dot { display: none !important; } 
+        }
 
         /* ----- CURSOR – O(1) direct update ----- */
         .cursor, .cursor-dot {
             position: fixed; pointer-events: none; z-index: 10000;
             transform: translate(-50%, -50%);
+            will-change: left, top, transform; /* Optimize for animations */
         }
         .cursor {
             width: 40px; height: 40px; border: 2px solid #ff2a00;
@@ -45,7 +68,7 @@
         }
         .cursor-dot { width: 8px; height: 8px; background: #ffcc33; border-radius: 50%; }
 
-        /* ----- VIDEO BACKGROUND ----- */
+        /* ----- VIDEO BACKGROUND - optimized ----- */
         .video-background {
             position: fixed; top: 0; left: 0; width: 100%; height: 100vh; z-index: -1; overflow: hidden;
         }
@@ -57,7 +80,7 @@
             position: absolute; inset: 0; background: rgba(10, 0, 0, 0.862); mix-blend-mode: multiply;
         }
 
-        /* ===== UPDATED NAVBAR STYLES - MATCHING INDEX.HTML ===== */
+        /* ===== UPDATED NAVBAR STYLES ===== */
         .navbar {
             background: transparent;
             backdrop-filter: blur(15px);
@@ -68,7 +91,6 @@
             padding: 0 1rem;
         }
 
-        /* Desktop: Center Nav Items */
         @media (min-width: 992px) {
             .navbar-nav {
                 width: 100%;
@@ -114,7 +136,6 @@
             margin-left: 20px;
         }
 
-        /* Navbar Toggler Style */
         .navbar-toggler {
             border: 2px solid #ff4733 !important;
             background: rgba(255, 71, 51, 0.2) !important;
@@ -129,7 +150,6 @@
             box-shadow: 0 0 0 0.25rem rgba(255, 71, 51, 0.25);
         }
 
-        /* Mobile menu transparency */
         @media (max-width: 991px) {
             .navbar-collapse {
                 background: transparent !important;
@@ -174,8 +194,6 @@
             }
         }
 
-
-
         /* ----- Scroll Indicator ----- */
         .scroll-indicator {
             position: fixed;
@@ -189,7 +207,7 @@
             z-index: 1031;
         }
 
-        /* ----- MOBILE MENU BOOTSTRAP OFFCANVAS STYLE (quick overlay) ----- */
+        /* ----- MOBILE MENU BOOTSTRAP OFFCANVAS STYLE ----- */
         .mobile-nav-overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(0,0,0,0.95); backdrop-filter: blur(10px);
@@ -202,47 +220,45 @@
             padding: 2rem 1.5rem;
         }
 
-        /* ----- 3D TEAM CARDS – ADJUSTED SIZE FOR DESKTOP (SMALLER) ----- */
+        /* ----- 3D TEAM CARDS – OPTIMIZED ----- */
         .team-card-parent {
             width: 100%; 
-            max-width: 380px; /* Limit maximum width on desktop */
+            max-width: 380px;
             margin-left: auto;
             margin-right: auto;
-            height: 480px; /* Reduced from 560px */
+            height: 480px;
             perspective: 1000px; 
             margin-bottom: 30px;
         }
         
-        /* Desktop specific adjustments - even smaller on large screens */
         @media (min-width: 1400px) {
             .team-card-parent {
-                max-width: 360px; /* Smaller on large desktops */
+                max-width: 360px;
                 height: 450px;
             }
         }
         
         @media (max-width: 1200px) and (min-width: 992px) {
             .team-card-parent {
-                max-width: 340px; /* Even smaller on medium-large screens */
+                max-width: 340px;
                 height: 460px;
             }
         }
         
         @media (max-width: 992px) { 
             .team-card-parent { 
-                max-width: 400px; /* Slightly larger on tablets */
+                max-width: 400px;
                 height: 500px;
             } 
         }
         
         @media (max-width: 768px) { 
             .team-card-parent { 
-                max-width: 100%; /* Full width on mobile */
-                height: 520px; /* Original size on mobile for better readability */ 
+                max-width: 100%;
+                height: 520px;
             } 
         }
 
-        /* Center the cards in their columns */
         .col-xl-4, .col-lg-6, .col-md-6 {
             display: flex;
             justify-content: center;
@@ -251,31 +267,31 @@
         .team-card-3d {
             height: 100%; 
             width: 100%;
-            border-radius: 20px; /* Slightly smaller radius */
+            border-radius: 20px;
             position: relative;
             background: linear-gradient(135deg, #0a0000 0%, #1a0a0a 100%);
             transform-style: preserve-3d; 
-            box-shadow: rgba(179,0,0,0.2) 0px 20px 20px -5px; /* Reduced shadow */
+            box-shadow: rgba(179,0,0,0.2) 0px 20px 20px -5px;
             border: 1px solid rgba(255,42,0,0.2); 
             transition: all 0.5s ease-in-out;
         }
         
         .team-card-glass {
             position: absolute; 
-            inset: 8px; /* Reduced from 10px */
-            border-radius: 20px; /* Matching card radius */
+            inset: 8px;
+            border-radius: 20px;
             background: linear-gradient(0deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.15) 100%);
-            transform: translate3d(0,0,20px); /* Reduced from 25px */
+            transform: translate3d(0,0,20px);
             border-left: 1px solid rgba(255,255,255,0.2);
             border-bottom: 1px solid rgba(255,255,255,0.2); 
-            backdrop-filter: blur(8px); /* Slightly less blur */
+            backdrop-filter: blur(8px);
         }
         
         .team-card-content {
             position: relative; 
             z-index: 3; 
-            padding: 50px 25px 25px; /* Reduced top padding from 70px */
-            transform: translate3d(0,0,21px); /* Adjusted */
+            padding: 50px 25px 25px;
+            transform: translate3d(0,0,21px);
             text-align: center; 
             display: flex;
             flex-direction: column; 
@@ -284,15 +300,15 @@
         }
         
         .team-image {
-            width: 130px; /* Reduced from 150px */
-            height: 130px; /* Reduced from 150px */
+            width: 130px;
+            height: 130px;
             border-radius: 50%; 
             overflow: hidden;
             border: 3px solid rgba(255,204,51,0.3); 
-            box-shadow: 0 0 25px rgba(255,204,51,0.2); /* Reduced shadow */
-            transform: translateZ(25px); /* Reduced from 30px */
+            box-shadow: 0 0 25px rgba(255,204,51,0.2);
+            transform: translateZ(25px);
             transition: all 0.5s; 
-            margin-bottom: 20px; /* Reduced from 25px */
+            margin-bottom: 20px;
         }
         
         .team-image img { 
@@ -304,65 +320,65 @@
         
         .team-card-3d h3 {
             font-family: 'Orbitron', sans-serif; 
-            font-size: 1.8rem; /* Reduced from 2rem */
+            font-size: 1.8rem;
             color: var(--yellow-gold);
             text-shadow: 0 0 8px rgba(255,204,51,0.3); 
-            transform: translateZ(18px); /* Reduced from 20px */
+            transform: translateZ(18px);
             font-weight: 700;
             margin-bottom: 5px;
         }
         
         .team-role {
             color: var(--fire); 
-            font-weight: 800; /* Slightly lighter */
-            font-size: 1.1rem; /* Reduced from 1.3rem */
+            font-weight: 800;
+            font-size: 1.1rem;
             text-transform: uppercase;
-            letter-spacing: 1.5px; /* Reduced from 2px */
-            transform: translateZ(14px); /* Reduced from 15px */
-            margin-bottom: 15px; /* Reduced from 20px */
+            letter-spacing: 1.5px;
+            transform: translateZ(14px);
+            margin-bottom: 15px;
         }
         
         .team-description {
             color: rgba(255,255,255,0.95); 
-            font-size: 1rem; /* Reduced from 1.1rem */
-            line-height: 1.6; /* Slightly tighter */
+            font-size: 1rem;
+            line-height: 1.6;
             transform: translateZ(10px); 
-            max-height: 120px; /* Reduced from 140px */
+            max-height: 120px;
             overflow-y: auto;
             padding: 0 5px; 
-            margin-bottom: 15px; /* Reduced from 20px */
+            margin-bottom: 15px;
             flex-grow: 1;
         }
         
         .team-card-bottom {
             background: rgba(10,0,0,0.5); 
             backdrop-filter: blur(5px); 
-            border-radius: 12px; /* Reduced from 15px */
-            padding: 12px 20px; /* Reduced from 15px 25px */
-            width: calc(100% - 30px); /* Reduced from 40px */
+            border-radius: 12px;
+            padding: 12px 20px;
+            width: calc(100% - 30px);
             margin: 0 auto;
             display: flex; 
             align-items: center; 
             justify-content: space-between;
-            transform: translate3d(0,0,21px); /* Adjusted */
+            transform: translate3d(0,0,21px);
             border: 1px solid rgba(255,42,0,0.2);
         }
         
         @media (max-width: 768px) { 
             .team-card-bottom { 
                 flex-direction: column; 
-                gap: 12px; /* Reduced from 15px */
+                gap: 12px;
             } 
         }
 
         .team-social { 
             display: flex; 
-            gap: 12px; /* Reduced from 15px */
+            gap: 12px;
         }
         
         .social-link {
-            width: 36px; /* Reduced from 40px */
-            height: 36px; /* Reduced from 40px */
+            width: 36px;
+            height: 36px;
             background: rgba(255,255,255,0.1);
             border-radius: 50%; 
             display: flex; 
@@ -373,22 +389,22 @@
             transition: all 0.3s;
             border: 1px solid rgba(255,204,51,0.3); 
             backdrop-filter: blur(5px);
-            font-size: 1rem; /* Added to scale icons */
+            font-size: 1rem;
         }
         
         .social-link:hover { 
             background: var(--ember); 
             color: white; 
-            transform: translateZ(25px); /* Reduced from 30px */
+            transform: translateZ(25px);
         }
 
         .team-view-more .view-more-button {
             background: none; 
             border: none; 
             color: var(--yellow-gold); 
-            font-weight: 600; /* Reduced from bolder */
-            letter-spacing: 0.5px; /* Reduced from 1px */
-            font-size: 0.95rem; /* Added */
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            font-size: 0.95rem;
             transition: 0.3s;
         }
         
@@ -396,7 +412,7 @@
             color: var(--fire); 
         }
 
-        /* circles logo - scaled down proportionally */
+        /* circles logo */
         .team-card-logo { 
             position: absolute; 
             right: 0; 
@@ -410,41 +426,41 @@
             aspect-ratio: 1; 
             border-radius: 50%; 
             background: rgba(255,42,0,0.1);
-            backdrop-filter: blur(4px); /* Reduced from 5px */
+            backdrop-filter: blur(4px);
             border: 1px solid rgba(255,42,0,0.2);
         }
         
         .circle1 { 
-            width: 180px; /* Reduced from 220px */
-            transform: translate3d(0,0,18px); /* Reduced from 20px */
+            width: 180px;
+            transform: translate3d(0,0,18px);
             top: 8px; 
             right: 8px; 
         }
         
         .circle2 { 
-            width: 150px; /* Reduced from 180px */
-            transform: translate3d(0,0,35px); /* Reduced from 40px */
+            width: 150px;
+            transform: translate3d(0,0,35px);
             top: 12px; 
             right: 12px; 
         }
         
         .circle3 { 
-            width: 120px; /* Reduced from 140px */
-            transform: translate3d(0,0,52px); /* Reduced from 60px */
+            width: 120px;
+            transform: translate3d(0,0,52px);
             top: 16px; 
             right: 16px; 
         }
         
         .circle4 { 
-            width: 95px; /* Reduced from 110px */
-            transform: translate3d(0,0,70px); /* Reduced from 80px */
+            width: 95px;
+            transform: translate3d(0,0,70px);
             top: 20px; 
             right: 20px; 
         }
         
         .circle5 {
-            width: 60px; /* Reduced from 70px */
-            transform: translate3d(0,0,88px); /* Reduced from 100px */
+            width: 60px;
+            transform: translate3d(0,0,88px);
             top: 28px; 
             right: 28px;
             display: grid; 
@@ -453,13 +469,13 @@
         }
         
         .circle5 svg { 
-            width: 24px; /* Reduced from 28px */
+            width: 24px;
             fill: var(--yellow-gold); 
         }
 
-        /* HOVER 3D EFFECT - adjusted for smaller cards */
+        /* HOVER 3D EFFECT */
         .team-card-parent:hover .team-card-3d { 
-            transform: rotate3d(1,1,0,20deg); /* Slightly less rotation */
+            transform: rotate3d(1,1,0,20deg);
             border-color: rgba(255,42,0,0.4); 
         }
         
@@ -469,14 +485,14 @@
         
         .team-card-parent:hover .team-image { 
             border-color: rgba(255,204,51,0.6); 
-            box-shadow: 0 0 30px rgba(255,204,51,0.4); /* Reduced from 40px */
+            box-shadow: 0 0 30px rgba(255,204,51,0.4);
         }
         
         .team-card-parent:hover .team-image img { 
-            transform: scale(1.08); /* Slightly less zoom */
+            transform: scale(1.08);
         }
 
-        /* ----- SECTION STYLES (bootstrap friendly) ----- */
+        /* ----- SECTION STYLES ----- */
         .section-title {
             font-family: 'Cinzel', serif; 
             font-size: 3rem; 
@@ -588,12 +604,6 @@
             } 
         }
         
-        /* bootstrap grid overrides - removed min-width constraint */
-        .team-container .col { 
-            /* Remove min-width constraint to allow natural sizing */
-        }
-        
-        /* Responsive adjustments */
         @media (max-width: 991px) {
             .scroll-indicator { 
                 top: 0; 
@@ -603,7 +613,6 @@
             }
         }
 
-        /* Additional spacing adjustments for better desktop layout */
         @media (min-width: 1200px) {
             .container-fluid.px-md-5 {
                 padding-left: 3rem !important;
@@ -616,12 +625,12 @@
             }
         }
 
-        /* Center the row content */
         .row.justify-content-center {
             margin-left: auto;
             margin-right: auto;
         }
-        /* ----- LOADER ANIMATION ----- */
+        
+        /* ----- OPTIMIZED LOADER ANIMATION - REDUCED TIMING ----- */
         .loader-container {
             position: fixed;
             top: 0;
@@ -633,10 +642,23 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            transition: opacity 0.5s;
+            transition: opacity 0.3s ease; /* Faster transition */
+            pointer-events: none;
         }
-        .loader-hidden { opacity: 0; pointer-events: none; visibility: hidden; }
-        .loader-wrapper { display: flex; justify-content: center; align-items: center; flex-wrap: wrap; }
+        
+        .loader-hidden { 
+            opacity: 0; 
+            visibility: hidden; 
+        }
+        
+        .loader-wrapper { 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            flex-wrap: wrap; 
+            position: relative;
+        }
+        
         .loader-letter {
             font-family: 'Orbitron', sans-serif;
             font-size: 4rem;
@@ -645,61 +667,37 @@
             text-shadow: 0 0 15px rgba(255,71,51,0.7);
             margin: 0 3px;
             opacity: 0;
-            animation: letterReveal 0.3s forwards;
+            animation: letterReveal 0.2s forwards; /* Faster animation */
             display: inline-block;
         }
-        .loader-letter:nth-child(1) { animation-delay: 0.1s; }
-        .loader-letter:nth-child(2) { animation-delay: 0.2s; }
-        .loader-letter:nth-child(3) { animation-delay: 0.3s; }
-        .loader-letter:nth-child(4) { animation-delay: 0.4s; }
-        @keyframes letterReveal { to { opacity: 1; text-shadow: 0 0 20px rgba(255,71,51,1); } }
+        
+        .loader-letter:nth-child(1) { animation-delay: 0.05s; }
+        .loader-letter:nth-child(2) { animation-delay: 0.1s; }
+        .loader-letter:nth-child(3) { animation-delay: 0.15s; }
+        .loader-letter:nth-child(4) { animation-delay: 0.2s; }
+        
+        @keyframes letterReveal { 
+            to { 
+                opacity: 1; 
+                text-shadow: 0 0 20px rgba(255,71,51,1); 
+            } 
+        }
+        
         .loader {
             position: absolute;
-            bottom: -30px;
+            bottom: -20px; /* Adjusted position */
             width: 100%;
-            height: 4px;
+            height: 3px; /* Slightly thinner */
             background: linear-gradient(90deg, transparent, #ffcc33, transparent);
-            animation: loadingBar 2.5s ease-in-out forwards;
+            animation: loadingBar 1s ease-in-out forwards; /* Faster animation */
         }
-        @keyframes loadingBar { 0% { transform: translateX(-100%); } 100% { transform: translateX(100%); } }
-        .loader-subtitle {
-            font-family: 'Rajdhani', sans-serif;
-            font-size: 1.2rem;
-            color: #ff9966;
-            letter-spacing: 2px;
-            margin-top: 20px;
-            opacity: 0;
-            animation: fadeIn 0.5s ease forwards 1.5s;
+        
+        @keyframes loadingBar { 
+            0% { transform: translateX(-100%); } 
+            100% { transform: translateX(100%); } 
         }
-        @keyframes fadeIn { to { opacity: 1; } }        
 
-        @media (max-width: 991px) {
-                    .scroll-indicator { top: 0; }
-                    .loader-letter { font-size: 3rem; }
-                    .route-input-group { flex-direction: column; }
-                    .route-btn { width: 100%; justify-content: center; }
-                    .navbar-nav {
-                        gap: 0;
-                    }
-                }
-                @media (max-width: 767px) {
-                    .hero-title { font-size: 2.5rem; }
-                    .route-planner-wrapper { padding: 30px 20px; }
-                    .loader-letter { font-size: 2.5rem; }
-                    .map-container { height: 400px; }
-                }
-                @media (max-width: 599px) {
-                    .hero-title { font-size: 2rem; }
-                    .hero-subtitle { font-size: 1.2rem; }
-                    .loader-letter { font-size: 2rem; }
-                    .map-container { height: 350px; }
-                }
-                @media (max-width: 380px) {
-                    .loader-letter { font-size: 1.5rem; }
-                    .map-container { height: 300px; }
-                }
-
-/* Sub-team headers styling - UPDATED FOR MOBILE RESPONSIVE */
+/* Sub-team headers styling */
 .sub-team-header {
     font-family: 'Orbitron', sans-serif;
     color: #ffcc33;
@@ -721,26 +719,24 @@
     display: inline-block;
 }
 
-/* Mobile responsive adjustments */
 @media (max-width: 768px) {
     .sub-team-header {
-        font-size: 1.5rem; /* Smaller font on mobile */
+        font-size: 1.5rem;
         margin: 30px 0 15px;
         padding-bottom: 8px;
         letter-spacing: 1px;
-        padding-left: 10px; /* Add some padding on mobile */
+        padding-left: 10px;
         padding-right: 10px;
     }
     
     .sub-team-header small {
-        font-size: 0.85rem; /* Smaller small text on mobile */
+        font-size: 0.85rem;
         margin-left: 5px;
-        display: block; /* Stack on mobile for better readability */
+        display: block;
         margin-top: 5px;
     }
 }
 
-/* Extra small devices */
 @media (max-width: 480px) {
     .sub-team-header {
         font-size: 1.3rem;
@@ -752,7 +748,6 @@
     }
 }
 
-/* Landscape mode adjustments */
 @media (max-width: 768px) and (orientation: landscape) {
     .sub-team-header {
         font-size: 1.4rem;
@@ -762,21 +757,25 @@
     </style>
 </head>
 <body>
-    <!-- VIDEO BACKGROUND -->
+    <!-- VIDEO BACKGROUND - optimized with preload -->
     <div class="video-background">
-        <video autoplay muted loop playsinline><source src="https://res.cloudinary.com/dpc4l1hic/video/upload/v1770814312/light_gzuewo.mp4" type="video/mp4"></video>
+        <video autoplay muted loop playsinline preload="metadata">
+            <source src="https://res.cloudinary.com/dpc4l1hic/video/upload/v1770814312/light_gzuewo.mp4" type="video/mp4">
+        </video>
         <div class="video-overlay"></div>
     </div>
-    <!-- LOADER (login page style) -->
+    
+    <!-- OPTIMIZED LOADER - faster timing -->
     <div class="loader-container" id="loader">
         <div class="loader-wrapper">
             <span class="loader-letter" style="animation-delay: 0s">T</span>
-            <span class="loader-letter" style="animation-delay: 0.1s">E</span>
-            <span class="loader-letter" style="animation-delay: 0.2s">A</span>
-            <span class="loader-letter" style="animation-delay: 0.3s">M</span>
+            <span class="loader-letter" style="animation-delay: 0.05s">E</span>
+            <span class="loader-letter" style="animation-delay: 0.1s">A</span>
+            <span class="loader-letter" style="animation-delay: 0.15s">M</span>
             <div class="loader"></div>
         </div>
     </div>
+    
     <!-- CUSTOM CURSOR -->
     <div class="cursor"></div>
     <div class="cursor-dot"></div>
@@ -798,7 +797,7 @@
         </div>
     </div>
 
-    <!-- ========== UPDATED NAVIGATION - MATCHING INDEX.HTML STYLE ========== -->
+    <!-- ========== NAVIGATION ========== -->
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
         <div class="container-fluid px-lg-4">
             <a class="navbar-brand d-lg-none text-warning fw-bold" href="#"></a>
@@ -820,12 +819,12 @@
         </div>
     </nav>
 
-    <!-- Mobile Auth Extra (will be moved inside collapse via JS) -->
+    <!-- Mobile Auth Extra -->
     <div class="d-lg-none mobile-auth-extra" id="mobileAuthExtra">
         <div class="mobile-auth-buttons" id="mobileAuthButtons"></div>
     </div>
 
-    <!-- MOBILE OVERLAY (offcanvas style) -->
+    <!-- MOBILE OVERLAY -->
     <div class="mobile-nav-overlay" id="mobileNavOverlay">
         <div class="mobile-nav-container">
             <div class="d-flex justify-content-between align-items-center text-white mb-4">
@@ -850,16 +849,15 @@
         </div>
     </div>
 
-    <!-- MAIN – BOOTSTRAP GRID -->
+    <!-- MAIN CONTENT -->
     <main class="container-fluid px-3 px-md-5" style="margin-top: 90px;">
 
-        <!-- LEADERSHIP TEAM (2 members - UNCHANGED) -->
+        <!-- LEADERSHIP TEAM -->
         <div class="team-category mb-5">
             <div class="section-header text-center mb-4">
                 <h2 class="section-title" style="font-size:2.4rem;">Faculty Lead Co-ordinator</h2>
                 <p class="section-subtitle">The Visionaries Behind FESTRONIX 2.0</p>
             </div>
-            <!-- bootstrap row with cols (automatic grid) -->
             <div class="row g-4 team-container justify-content-center">
                 <!-- Member 1 -->
                 <div class="col-xl-4 col-lg-6 col-md-6">
@@ -873,7 +871,7 @@
                             </div>
                             <div class="team-card-glass"></div>
                             <div class="team-card-content">
-                                <div class="team-image"><img src="https://res.cloudinary.com/dpc4l1hic/image/upload/v1771315014/7beaec65-27a2-4e64-bdf2-fb66adde0368.png" alt="Satya"></div>
+                                <div class="team-image"><img src="https://res.cloudinary.com/dpc4l1hic/image/upload/v1771315014/7beaec65-27a2-4e64-bdf2-fb66adde0368.png" alt="Satya" loading="lazy"></div>
                                 <h3>Dr. Satya Ranjan Pattanaik</h3>
                                 <span class="team-role">Events SPOC</span>
                                 <span class="team-role">Contact:- +91 6372745082</span>
@@ -887,7 +885,6 @@
                     <div class="team-card-parent" data-member="2">
                         <div class="team-card-3d">
                             <div class="team-card-logo">
-                                
                                 <span class="circle circle3"></span><span class="circle circle4"></span>
                                 <span class="circle circle5">
                                     <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/></svg>
@@ -895,7 +892,7 @@
                             </div>
                             <div class="team-card-glass"></div>
                             <div class="team-card-content">
-                                <div class="team-image"><img src="" alt="Jaga"></div>
+                                <div class="team-image"><img src="" alt="Jaga" loading="lazy"></div>
                                 <h3>Prof. Jagannath Ray</h3>
                                 <span class="team-role">Co-SPOC</span>
                                 <span class="team-role">Contact:- +91 7008831596</span>
@@ -907,14 +904,14 @@
             </div>
         </div>
 
-        <!-- STUDENT CORE MEMBERS - REORGANIZED INTO SUB-TEAMS AS REQUESTED -->
+        <!-- STUDENT CORE MEMBERS -->
         <div class="team-category mb-5">
             <div class="section-header text-center mb-4">
                 <h2 class="section-title" style="font-size:2.4rem;">STUDENTS CORE MEMBERS</h2>
                 <p class="section-subtitle">The dedicated sub-teams making FESTRONIX happen</p>
             </div>
 
-            <!-- 1. Website Development (Sumit Kumar Rout and Ronit Kumar Mishra) -->
+            <!-- 1. Website Development -->
             <h3 class="sub-team-header">Website Development</h3>
             <div class="row g-4 team-container justify-content-center">
                 <!-- Sumit Kumar Rout -->
@@ -929,7 +926,7 @@
                             </div>
                             <div class="team-card-glass"></div>
                             <div class="team-card-content">
-                                <div class="team-image"><img src="https://res.cloudinary.com/dpc4l1hic/image/upload/v1771317381/e29e83bc-bd7f-468b-b7b6-cbd18f550c64.png" alt="Sumit"></div>
+                                <div class="team-image"><img src="https://res.cloudinary.com/dpc4l1hic/image/upload/v1771317381/e29e83bc-bd7f-468b-b7b6-cbd18f550c64.png" alt="Sumit" loading="lazy"></div>
                                 <h3>Sumit Kumar Rout</h3>
                                 <span class="team-role">Website Development</span>
                                 <span class="team-role">Contact:- +91 9337901038</span>
@@ -950,7 +947,7 @@
                             </div>
                             <div class="team-card-glass"></div>
                             <div class="team-card-content">
-                                <div class="team-image"><img src="" alt="Ronit Kumar Mishra"></div>
+                                <div class="team-image"><img src="" alt="Ronit Kumar Mishra" loading="lazy"></div>
                                 <h3>Ronit Kumar Mishra</h3>
                                 <span class="team-role">Website Developer</span>
                                 <span class="team-role">Contact:- +91 8249482728</span>
@@ -961,7 +958,7 @@
                 </div>
             </div>
 
-            <!-- 2. Student SPOCs (Somen Pradhan and SK Saiful Adil Qadir) -->
+            <!-- 2. Student SPOCs -->
             <h3 class="sub-team-header">Student SPOCs</h3>
             <div class="row g-4 team-container justify-content-center">
                 <!-- Somen Pradhan -->
@@ -976,7 +973,7 @@
                             </div>
                             <div class="team-card-glass"></div>
                             <div class="team-card-content">
-                                <div class="team-image"><img src="https://res.cloudinary.com/dpc4l1hic/image/upload/v1771329395/20260121_094336.jpg_uttxgq.jpg" alt="Somen Pradhan"></div>
+                                <div class="team-image"><img src="https://res.cloudinary.com/dpc4l1hic/image/upload/v1771329395/20260121_094336.jpg_uttxgq.jpg" alt="Somen Pradhan" loading="lazy"></div>
                                 <h3>Somen Pradhan</h3>
                                 <span class="team-role">Student SPOC</span>
                                 <span class="team-role">Contact:- +91 7978103026</span>
@@ -990,7 +987,6 @@
                     <div class="team-card-parent" data-member="6">
                         <div class="team-card-3d">
                             <div class="team-card-logo">
-                                
                                 <span class="circle circle3"></span><span class="circle circle4"></span>
                                 <span class="circle circle5">
                                     <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/></svg>
@@ -998,7 +994,7 @@
                             </div>
                             <div class="team-card-glass"></div>
                             <div class="team-card-content">
-                                <div class="team-image"><img src="https://res.cloudinary.com/dpc4l1hic/image/upload/v1771477126/Adil_igzhsa.png" alt="SK Saiful Adil Qadir"></div>
+                                <div class="team-image"><img src="https://res.cloudinary.com/dpc4l1hic/image/upload/v1771477126/Adil_igzhsa.png" alt="SK Saiful Adil Qadir" loading="lazy"></div>
                                 <h3>SK Saiful Adil Qadir</h3>
                                 <span class="team-role">Student SPOC</span>
                                 <span class="team-role">Contact:- +91 6370799765</span>
@@ -1009,7 +1005,7 @@
                 </div>
             </div>
 
-            <!-- 3. Sponsor's Team (with new member Om Prakash Choudhary) -->
+            <!-- 3. Sponsor's Team -->
             <h3 class="sub-team-header">Sponsor's Team</h3>
             <div class="row g-4 team-container justify-content-center">
                 <!-- Deba Prasad Sutar -->
@@ -1024,7 +1020,7 @@
                             </div>
                             <div class="team-card-glass"></div>
                             <div class="team-card-content">
-                                <div class="team-image"><img src="https://res.cloudinary.com/dpc4l1hic/image/upload/v1771329604/IMG_20260217_172318154.jpg_bwdgsz.jpg" alt="Deba Prasad Sutar"></div>
+                                <div class="team-image"><img src="https://res.cloudinary.com/dpc4l1hic/image/upload/v1771329604/IMG_20260217_172318154.jpg_bwdgsz.jpg" alt="Deba Prasad Sutar" loading="lazy"></div>
                                 <h3>Deba Prasad Sutar</h3>
                                 <span class="team-role">Sponsorship Executive</span>
                                 <span class="team-role">Contact:- +91 8658900524</span>
@@ -1033,7 +1029,7 @@
                         </div>
                     </div>
                 </div>
-                <!-- NEW MEMBER: Om Prakash Choudhary -->
+                <!-- Om Prakash Choudhary -->
                 <div class="col-xl-4 col-lg-6 col-md-6">
                     <div class="team-card-parent" data-member="21">
                         <div class="team-card-3d">
@@ -1045,7 +1041,7 @@
                             </div>
                             <div class="team-card-glass"></div>
                             <div class="team-card-content">
-                                <div class="team-image"><img src="https://res.cloudinary.com/dpc4l1hic/image/upload/v1771477053/a5c215bc-10b2-4515-af02-8a758cd76195.png" alt="Om Prakash Choudhary"></div>
+                                <div class="team-image"><img src="https://res.cloudinary.com/dpc4l1hic/image/upload/v1771477053/a5c215bc-10b2-4515-af02-8a758cd76195.png" alt="Om Prakash Choudhary" loading="lazy"></div>
                                 <h3>Om Prakash Choudhary</h3>
                                 <span class="team-role">Sponsorship Coordinator</span>
                                 <span class="team-role">Contact:- +91 9337155808</span>
@@ -1055,10 +1051,10 @@
                     </div>
                 </div>
 
-            <!-- 4. Content Team (all content creation members - unchanged) -->
+            <!-- 4. Content Team -->
             <h3 class="sub-team-header">Content Creation & Promotion</h3>
             <div class="row g-4 team-container justify-content-center">
-                <!-- Member 3 (Shakti Prasad Sahoo) -->
+                <!-- Member 3 -->
                 <div class="col-xl-2 col-lg-3 col-md-4 col-6">
                     <div class="team-card-parent" data-member="3">
                         <div class="team-card-3d">
@@ -1070,10 +1066,10 @@
                             </div>
                             <div class="team-card-glass"></div>
                             <div class="team-card-content" style="padding: 30px 15px 15px;">
-                                <div class="team-image" style="width: 100px; height: 100px;"><img src="https://res.cloudinary.com/dpc4l1hic/image/upload/v1771318072/2bce0020-1985-459b-b278-a7970a9955a5.png" alt="Vikram"></div>
+                                <div class="team-image" style="width: 100px; height: 100px;"><img src="https://res.cloudinary.com/dpc4l1hic/image/upload/v1771318072/2bce0020-1985-459b-b278-a7970a9955a5.png" alt="Shakti" loading="lazy"></div>
                                 <h3 style="font-size: 1.4rem;">Shakti Prasad Sahoo</h3>
                                 <span class="team-role" style="font-size: 0.9rem;">Content Strategist</span>
-                                <p class="team-description" style="font-size: 0.85rem; max-height: 80px;">Leads content strategy, blog posts, and promotional materials.</p>
+                                <p class="team-description" style="font-size: 0.85rem;">Leads content strategy, blog posts, and promotional materials.</p>
                             </div>
                         </div>
                     </div>
@@ -1084,7 +1080,7 @@
                         <div class="team-card-3d">
                             <div class="team-card-glass"></div>
                             <div class="team-card-content" style="padding: 30px 15px 15px;">
-                                <div class="team-image" style="width: 100px; height: 100px;"><img src="https://res.cloudinary.com/dpc4l1hic/image/upload/v1771317397/9e4f6da9-ae79-4f5b-9786-fcb1565bf33a.png" alt="Arjun"></div>
+                                <div class="team-image" style="width: 100px; height: 100px;"><img src="https://res.cloudinary.com/dpc4l1hic/image/upload/v1771317397/9e4f6da9-ae79-4f5b-9786-fcb1565bf33a.png" alt="Ashutosh" loading="lazy"></div>
                                 <h3 style="font-size: 1.4rem;">Ashutosh Parthasarathi</h3>
                                 <span class="team-role" style="font-size: 0.9rem;">Content Writer</span>
                                 <p class="team-description" style="font-size: 0.85rem;">Creates engaging content for social media and website.</p>
@@ -1098,7 +1094,7 @@
                         <div class="team-card-3d">
                             <div class="team-card-glass"></div>
                             <div class="team-card-content" style="padding: 30px 15px 15px;">
-                                <div class="team-image" style="width: 100px; height: 100px;"><img src="https://res.cloudinary.com/dpc4l1hic/image/upload/v1771318227/e52e9af4-197b-480c-9e82-2ed5e16b37da.png" alt="Meera"></div>
+                                <div class="team-image" style="width: 100px; height: 100px;"><img src="https://res.cloudinary.com/dpc4l1hic/image/upload/v1771318227/e52e9af4-197b-480c-9e82-2ed5e16b37da.png" alt="Ayush" loading="lazy"></div>
                                 <h3 style="font-size: 1.4rem;">Ayush Kumar Nath</h3>
                                 <span class="team-role" style="font-size: 0.9rem;">Social Media</span>
                                 <p class="team-description" style="font-size: 0.85rem;">Manages social media accounts and engagement.</p>
@@ -1112,7 +1108,7 @@
                         <div class="team-card-3d">
                             <div class="team-card-glass"></div>
                             <div class="team-card-content" style="padding: 30px 15px 15px;">
-                                <div class="team-image" style="width: 100px; height: 100px;"><img src="https://res.cloudinary.com/dpc4l1hic/image/upload/v1771477610/Piyush_lydlhc.jpg" alt="Vivek"></div>
+                                <div class="team-image" style="width: 100px; height: 100px;"><img src="https://res.cloudinary.com/dpc4l1hic/image/upload/v1771477610/Piyush_lydlhc.jpg" alt="Piyush" loading="lazy"></div>
                                 <h3 style="font-size: 1.4rem;">Piyush Nayak</h3>
                                 <span class="team-role" style="font-size: 0.9rem;">Video Editor</span>
                                 <p class="team-description" style="font-size: 0.85rem;">Creates promotional videos and recap reels.</p>
@@ -1126,7 +1122,7 @@
                         <div class="team-card-3d">
                             <div class="team-card-glass"></div>
                             <div class="team-card-content" style="padding: 30px 15px 15px;">
-                                <div class="team-image" style="width: 100px; height: 100px;"><img src="https://res.cloudinary.com/dpc4l1hic/image/upload/v1771319012/Screenshot_2026-02-17_143319_bqcmwg.png" alt="Zayn"></div>
+                                <div class="team-image" style="width: 100px; height: 100px;"><img src="https://res.cloudinary.com/dpc4l1hic/image/upload/v1771319012/Screenshot_2026-02-17_143319_bqcmwg.png" alt="Priyansu" loading="lazy"></div>
                                 <h3 style="font-size: 1.4rem;">Priyansu Rout</h3>
                                 <span class="team-role" style="font-size: 0.9rem;">Graphic Designer</span>
                                 <p class="team-description" style="font-size: 0.85rem;">Designs posters, banners, and digital assets.</p>
@@ -1140,7 +1136,7 @@
                         <div class="team-card-3d">
                             <div class="team-card-glass"></div>
                             <div class="team-card-content" style="padding: 30px 15px 15px;">
-                                <div class="team-image" style="width: 100px; height: 100px;"><img src="https://res.cloudinary.com/dpc4l1hic/image/upload/v1771318561/8d59567d-36f9-4336-95fb-5a1aa0708d90.png" alt="Zayn"></div>
+                                <div class="team-image" style="width: 100px; height: 100px;"><img src="https://res.cloudinary.com/dpc4l1hic/image/upload/v1771318561/8d59567d-36f9-4336-95fb-5a1aa0708d90.png" alt="Suraj" loading="lazy"></div>
                                 <h3 style="font-size: 1.4rem;">Suraj Jena</h3>
                                 <span class="team-role" style="font-size: 0.9rem;">Head Graphic Designer</span>
                                 <p class="team-description" style="font-size: 0.85rem;">Designs posters, banners, and digital assets.</p>
@@ -1154,7 +1150,7 @@
                         <div class="team-card-3d">
                             <div class="team-card-glass"></div>
                             <div class="team-card-content" style="padding: 30px 15px 15px;">
-                                <div class="team-image" style="width: 100px; height: 100px;"><img src="https://res.cloudinary.com/dpc4l1hic/image/upload/v1771318486/c58df1ef-de2d-46bf-81ed-204e5659bd78.png" alt="Rahul"></div>
+                                <div class="team-image" style="width: 100px; height: 100px;"><img src="https://res.cloudinary.com/dpc4l1hic/image/upload/v1771318486/c58df1ef-de2d-46bf-81ed-204e5659bd78.png" alt="Sohan" loading="lazy"></div>
                                 <h3 style="font-size: 1.4rem;">Sohan Kumar Pradhan</h3>
                                 <span class="team-role" style="font-size: 0.9rem;">Promotions Lead</span>
                                 <p class="team-description" style="font-size: 0.85rem;">Coordinates on-ground promotions and campaigns.</p>
@@ -1164,14 +1160,13 @@
                 </div>
             </div>
 
-            <!-- Ceremony & Closing Team (keeping as is) -->
+            <!-- Ceremony & Closing Team -->
             <h3 class="sub-team-header">Ceremony & Closing</h3>
             <div class="row g-4 team-container justify-content-center">
                 <div class="col-xl-3 col-lg-4 col-md-6">
                     <div class="team-card-parent" data-member="7">
                         <div class="team-card-3d">
                             <div class="team-card-logo">
-                            
                                 <span class="circle circle4"></span>
                                 <span class="circle circle5">
                                     <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/></svg>
@@ -1179,7 +1174,7 @@
                             </div>
                             <div class="team-card-glass"></div>
                             <div class="team-card-content">
-                                <div class="team-image"><img src="https://res.cloudinary.com/dpc4l1hic/image/upload/v1771319207/Screenshot_2026-02-17_143624_pljod7.png" alt="Priya Sharma"></div>
+                                <div class="team-image"><img src="https://res.cloudinary.com/dpc4l1hic/image/upload/v1771319207/Screenshot_2026-02-17_143624_pljod7.png" alt="Sraddhananda" loading="lazy"></div>
                                 <h3>Sraddhananda Rath</h3>
                                 <span class="team-role">Ceremony Coordinator</span>
                                 <p class="team-description">Manages opening and closing ceremonies, stage setup, and event flow.</p>
@@ -1198,7 +1193,7 @@
                             </div>
                             <div class="team-card-glass"></div>
                             <div class="team-card-content">
-                                <div class="team-image"><img src="https://res.cloudinary.com/dpc4l1hic/image/upload/v1771477085/517a71c9-6c03-478c-b3cd-dbdac6b896ea.png" alt="Dibyaranjan Jena"></div>
+                                <div class="team-image"><img src="https://res.cloudinary.com/dpc4l1hic/image/upload/v1771477085/517a71c9-6c03-478c-b3cd-dbdac6b896ea.png" alt="Dibyaranjan" loading="lazy"></div>
                                 <h3>Dibyaranjan Jena</h3>
                                 <span class="team-role">Event Management Head</span>
                                 <p class="team-description">Manages all cultural events, logistics, scheduling, and venue coordination.</p>
@@ -1217,7 +1212,7 @@
                             </div>
                             <div class="team-card-glass"></div>
                             <div class="team-card-content">
-                                <div class="team-image"><img src="https://res.cloudinary.com/dpc4l1hic/image/upload/v1771477272/6cc86055-f9f6-4813-967e-74e583524729.png" alt="Nafeesha Alam "></div>
+                                <div class="team-image"><img src="https://res.cloudinary.com/dpc4l1hic/image/upload/v1771477272/6cc86055-f9f6-4813-967e-74e583524729.png" alt="Nafeesha" loading="lazy"></div>
                                 <h3>Nafeesha Alam</h3>
                                 <span class="team-role">Stage Management</span>
                                 <p class="team-description">Handles stage setup, audio-visual coordination, and backstage management.</p>
@@ -1236,7 +1231,7 @@
                             </div>
                             <div class="team-card-glass"></div>
                             <div class="team-card-content">
-                                <div class="team-image"><img src="https://res.cloudinary.com/dpc4l1hic/image/upload/v1771329673/5c76839b-1ad8-483d-ab0d-9f3305471762.png" alt="Pragyanshree Samal"></div>
+                                <div class="team-image"><img src="https://res.cloudinary.com/dpc4l1hic/image/upload/v1771329673/5c76839b-1ad8-483d-ab0d-9f3305471762.png" alt="Pragyanshree" loading="lazy"></div>
                                 <h3>Pragyanshree Samal</h3>
                                 <span class="team-role">Hospitality</span>
                                 <p class="team-description">Manages guest hospitality, green room, and VIP coordination during ceremonies.</p>
@@ -1246,14 +1241,13 @@
                 </div>
             </div>
 
-            <!-- Technical & Control Team (keeping as is) -->
+            <!-- Technical & Control Team -->
             <h3 class="sub-team-header">Technical & Control</h3>
             <div class="row g-4 team-container justify-content-center">
                 <div class="col-xl-4 col-lg-6 col-md-6">
                     <div class="team-card-parent" data-member="14">
                         <div class="team-card-3d">
                             <div class="team-card-logo">
-                                
                                 <span class="circle circle3"></span><span class="circle circle4"></span>
                                 <span class="circle circle5">
                                     <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/></svg>
@@ -1261,7 +1255,7 @@
                             </div>
                             <div class="team-card-glass"></div>
                             <div class="team-card-content">
-                                <div class="team-image"><img src="https://res.cloudinary.com/dpc4l1hic/image/upload/v1771318848/Screenshot_2026-02-17_143033_pqakf8.png" alt="Arjun Mehta"></div>
+                                <div class="team-image"><img src="https://res.cloudinary.com/dpc4l1hic/image/upload/v1771318848/Screenshot_2026-02-17_143033_pqakf8.png" alt="Trilochan" loading="lazy"></div>
                                 <h3>Trilochan Chakaraborty</h3>
                                 <span class="team-role">Technical Lead</span>
                                 <span class="team-role">Contact:- +91 7488334018</span>
@@ -1273,7 +1267,7 @@
             </div>
         </div>
 
-        <!-- STATS + JOIN (bootstrap grid) - UPDATED STATS -->
+        <!-- STATS -->
         <div class="team-stats">
             <div class="row text-center">
                 <div class="col-12"><h2 class="section-title">Team Statistics</h2><p class="section-subtitle">Behind the Scenes</p></div>
@@ -1293,7 +1287,7 @@
             <div class="row align-items-center">
                 <div class="col-md-6 mb-4">
                     <div class="d-flex gap-3">
-                        <img src="https://res.cloudinary.com/dpc4l1hic/image/upload/v1770814304/gift_logo_rzl4tf.png" alt="GIFT" class="college-logo" style="width:60px; height:60px; border-radius:50%;">
+                        <img src="https://res.cloudinary.com/dpc4l1hic/image/upload/v1770814304/gift_logo_rzl4tf.png" alt="GIFT" class="college-logo" style="width:60px; height:60px; border-radius:50%;" loading="lazy">
                         <div><span class="fs-2" style="color:var(--ember); font-family:Cinzel;">GIFT AUTONOMOUS</span><br><span class="text-secondary">BHUBANESWAR</span></div>
                     </div>
                     <p class="text-warning mt-3">Igniting Minds, Empowering Futures</p>
@@ -1308,97 +1302,197 @@
     <!-- BACK TO TOP -->
     <button class="back-to-top" id="backToTop"><i class="fas fa-chevron-up"></i></button>
 
-    <!-- Bootstrap JS Bundle -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Bootstrap JS Bundle - deferred for performance -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" defer></script>
     
-    <!-- UPDATED SCRIPT - MATCHING INDEX.HTML STYLE -->
+    <!-- OPTIMIZED SCRIPT -->
     <script>
         (function(){
             "use strict";
 
-            // ----- CURSOR -----
-            const cursor = document.querySelector('.cursor'), cursorDot = document.querySelector('.cursor-dot');
-            if (cursor && cursorDot) {
-                let mx = 0, my = 0, cx = 0, cy = 0;
-                document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; cursorDot.style.left = mx+'px'; cursorDot.style.top = my+'px'; });
-                function animate() { cx += (mx - cx) * 0.15; cy += (my - cy) * 0.15; if (cursor) { cursor.style.left = cx+'px'; cursor.style.top = cy+'px'; } requestAnimationFrame(animate); }
-                animate();
-                // hover effect
-                document.querySelectorAll('a, button, .team-card-parent').forEach(el => {
-                    el.addEventListener('mouseenter', () => { if (cursor) { cursor.style.transform = 'translate(-50%, -50%) scale(1.5)'; cursor.style.background = 'rgba(255,71,51,0.2)'; cursor.style.borderColor = '#ff5500'; } });
-                    el.addEventListener('mouseleave', () => { if (cursor) { cursor.style.transform = 'translate(-50%, -50%) scale(1)'; cursor.style.background = 'transparent'; cursor.style.borderColor = '#ff2a00'; } });
-                });
-            }
+            // Performance optimization - use requestIdleCallback for non-critical tasks
+            const queueTask = window.requestIdleCallback || ((cb) => setTimeout(cb, 1));
 
-            // ==================== LOADER ====================
-            window.addEventListener('load', function() {
+            // ==================== LOADER - REDUCED TIMING ====================
+            // Hide loader as soon as DOM is interactive
+            document.addEventListener('DOMContentLoaded', function() {
                 setTimeout(function() {
                     const loader = document.getElementById('loader');
-                    if (loader) loader.classList.add('loader-hidden');
-                }, 3000);
+                    if (loader) {
+                        loader.classList.add('loader-hidden');
+                        // Remove loader from DOM after transition
+                        setTimeout(() => {
+                            if (loader.parentNode) loader.style.display = 'none';
+                        }, 300);
+                    }
+                }, 800); // Reduced from 3000ms to 800ms
             });
 
-            // ----- TEAM MEMBER DATA -----
+            // Fallback - ensure loader hides even if DOMContentLoaded already fired
+            if (document.readyState === 'interactive' || document.readyState === 'complete') {
+                setTimeout(function() {
+                    const loader = document.getElementById('loader');
+                    if (loader) {
+                        loader.classList.add('loader-hidden');
+                        setTimeout(() => {
+                            if (loader.parentNode) loader.style.display = 'none';
+                        }, 300);
+                    }
+                }, 800);
+            }
+
+            // ----- CURSOR (optimized animation) -----
+            const cursor = document.querySelector('.cursor');
+            const cursorDot = document.querySelector('.cursor-dot');
+            
+            if (cursor && cursorDot && window.innerWidth > 768) {
+                let mx = 0, my = 0, cx = 0, cy = 0;
+                let rafId = null;
+                
+                document.addEventListener('mousemove', e => { 
+                    mx = e.clientX; 
+                    my = e.clientY; 
+                    cursorDot.style.left = mx + 'px'; 
+                    cursorDot.style.top = my + 'px';
+                });
+                
+                function animate() { 
+                    cx += (mx - cx) * 0.15; 
+                    cy += (my - cy) * 0.15; 
+                    if (cursor) { 
+                        cursor.style.left = cx + 'px'; 
+                        cursor.style.top = cy + 'px'; 
+                    } 
+                    rafId = requestAnimationFrame(animate); 
+                }
+                
+                animate();
+                
+                // hover effect - optimized with event delegation
+                document.addEventListener('mouseover', (e) => {
+                    const target = e.target.closest('a, button, .team-card-parent');
+                    if (target && cursor) {
+                        cursor.style.transform = 'translate(-50%, -50%) scale(1.5)';
+                        cursor.style.background = 'rgba(255,71,51,0.2)';
+                        cursor.style.borderColor = '#ff5500';
+                    }
+                });
+                
+                document.addEventListener('mouseout', (e) => {
+                    const target = e.target.closest('a, button, .team-card-parent');
+                    if (target && cursor) {
+                        cursor.style.transform = 'translate(-50%, -50%) scale(1)';
+                        cursor.style.background = 'transparent';
+                        cursor.style.borderColor = '#ff2a00';
+                    }
+                });
+            } else {
+                // Hide cursor on mobile
+                if (cursor) cursor.style.display = 'none';
+                if (cursorDot) cursorDot.style.display = 'none';
+            }
+
+            // ----- TEAM MEMBER DATA (moved to separate object for better organization) -----
             const teamMembers = {
                 '1': { name: 'Dr. Satya Ranjan Pattanaik', role: 'Events SPOC', image: 'https://res.cloudinary.com/dpc4l1hic/image/upload/v1771315014/7beaec65-27a2-4e64-bdf2-fb66adde0368.png', desc: 'Overall coordination and strategic planning. Leads core team, manages departments, and coordinates with administration. Exceptional leadership.' },
                 '2': { name: 'Prof. Jagannath Ray', role: 'Co-SPOC', image: '', desc: 'Manages PR, marketing, social media, sponsors. Digital marketing expert, boosts fest reach.' },
                 '3': { name: 'Shakti Prasad Sahoo', role: 'Content Strategist', image: 'https://res.cloudinary.com/dpc4l1hic/image/upload/v1771318072/2bce0020-1985-459b-b278-a7970a9955a5.png', desc: 'Leads content strategy, blog posts, and promotional materials.' },
                 '4': { name: 'Sumit Kumar Rout', role: 'Website Development', image: 'https://res.cloudinary.com/dpc4l1hic/image/upload/v1771317381/e29e83bc-bd7f-468b-b7b6-cbd18f550c64.png', desc: 'Develops website, registration portal, full-stack expert. Seamless UX.' },
                 '5': { name: 'Somen Pradhan', role: 'Student SPOC', image: 'https://res.cloudinary.com/dpc4l1hic/image/upload/v1771329395/20260121_094336.jpg_uttxgq.jpg', desc: 'Student coordinator managing sponsor relationships, partnerships, and funding acquisition. Expert in corporate communications.' },
-                '6': { name: 'SK Saiful Adil Qadir', role: 'Student SPOC - AI/ML', image: 'https://res.cloudinary.com/dpc4l1hic/image/upload/v1771318655/Screenshot_2026-02-17_141510_nbr1jb.png', desc: 'Student coordinator handling AI/ML initiatives and technical workshops. Manages any technical issues.' },
+                '6': { name: 'SK Saiful Adil Qadir', role: 'Student SPOC - AI/ML', image: 'https://res.cloudinary.com/dpc4l1hic/image/upload/v1771477126/Adil_igzhsa.png', desc: 'Student coordinator handling AI/ML initiatives and technical workshops. Manages any technical issues.' },
                 '7': { name: 'Sraddhananda Rath', role: 'Ceremony Coordinator', image: 'https://res.cloudinary.com/dpc4l1hic/image/upload/v1771319207/Screenshot_2026-02-17_143624_pljod7.png', desc: 'Manages opening and closing ceremonies, stage setup, and event flow.' },
-                '8': { name: 'Dibya Ranjan Jena', role: 'Event Management Head', image: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=400', desc: 'Manages all cultural events, logistics, scheduling, and venue coordination.' },
+                '8': { name: 'Dibyaranjan Jena', role: 'Event Management Head', image: 'https://res.cloudinary.com/dpc4l1hic/image/upload/v1771477085/517a71c9-6c03-478c-b3cd-dbdac6b896ea.png', desc: 'Manages all cultural events, logistics, scheduling, and venue coordination.' },
                 '9': { name: 'Vikash Adhikari', role: 'Sponsorship Coordinator', image: 'https://res.cloudinary.com/dpc4l1hic/image/upload/v1771319206/Screenshot_2026-02-17_143542_u8832k.png', desc: 'Coordinates sponsor meetings, manages sponsorship deliverables and communications.' },
                 '10': { name: 'Deba Prasad Sutar', role: 'Sponsorship Executive', image: 'https://res.cloudinary.com/dpc4l1hic/image/upload/v1771329604/IMG_20260217_172318154.jpg_bwdgsz.jpg', desc: 'Handles sponsor outreach, proposals, and maintaining sponsor databases.' },
-                '11': { name: 'Nafeesha Alam', role: 'Stage Management', image: '', desc: 'Handles stage setup, audio-visual coordination, and backstage management.' },
+                '11': { name: 'Nafeesha Alam', role: 'Stage Management', image: 'https://res.cloudinary.com/dpc4l1hic/image/upload/v1771477272/6cc86055-f9f6-4813-967e-74e583524729.png', desc: 'Handles stage setup, audio-visual coordination, and backstage management.' },
                 '12': { name: 'Pragyanshree Samal', role: 'Hospitality', image: 'https://res.cloudinary.com/dpc4l1hic/image/upload/v1771329673/5c76839b-1ad8-483d-ab0d-9f3305471762.png', desc: 'Manages guest hospitality, green room, and VIP coordination during ceremonies.' },
-                '13': { name: 'Ronit Kumar Mishra', role: 'Website Developer', image: '', desc: 'Frontend development and UI/UX design for the fest website.' },
+                '13': { name: 'Ronit Kumar Mishra', role: 'Website Developer', image: '', desc: 'Backend development for the fest website.' },
                 '14': { name: 'Trilochan Chakaraborty', role: 'Technical Lead', image: 'https://res.cloudinary.com/dpc4l1hic/image/upload/v1771318848/Screenshot_2026-02-17_143033_pqakf8.png', desc: 'Oversees technical infrastructure, hardware setup, and technical support.' },
                 '15': { name: 'Ashutosh Parthasarathi', role: 'Content Writer', image: 'https://res.cloudinary.com/dpc4l1hic/image/upload/v1771317397/9e4f6da9-ae79-4f5b-9786-fcb1565bf33a.png', desc: 'Creates engaging content for social media and website.' },
                 '16': { name: 'Ayush Kumar Nath', role: 'Social Media', image: 'https://res.cloudinary.com/dpc4l1hic/image/upload/v1771318227/e52e9af4-197b-480c-9e82-2ed5e16b37da.png', desc: 'Manages social media accounts and engagement.' },
-                '17': { name: 'Piyush Nayak', role: 'Video Editor', image: 'https://images.unsplash.com/photo-1531427186003-8f7a13b8e7b6?w=400', desc: 'Creates promotional videos and recap reels.' },
+                '17': { name: 'Piyush Nayak', role: 'Video Editor', image: 'https://res.cloudinary.com/dpc4l1hic/image/upload/v1771477610/Piyush_lydlhc.jpg', desc: 'Creates promotional videos and recap reels.' },
                 '18': { name: 'Priyansu Rout', role: 'Graphic Designer', image: 'https://res.cloudinary.com/dpc4l1hic/image/upload/v1771319012/Screenshot_2026-02-17_143319_bqcmwg.png', desc: 'Designs posters, banners, and digital assets.' },
                 '19': { name: 'Suraj Jena', role: 'Head Graphic Designer', image: 'https://res.cloudinary.com/dpc4l1hic/image/upload/v1771318561/8d59567d-36f9-4336-95fb-5a1aa0708d90.png', desc: 'Designs posters, banners, and digital assets.' },
                 '20': { name: 'Sohan Kumar Pradhan', role: 'Promotions Lead', image: 'https://res.cloudinary.com/dpc4l1hic/image/upload/v1771318486/c58df1ef-de2d-46bf-81ed-204e5659bd78.png', desc: 'Coordinates on-ground promotions and campaigns.' },
-                '21': { name: 'Om Prakash Choudhary', role: 'Sponsorship Coordinator', image: 'https://res.cloudinary.com/dpc4l1hic/image/upload/v1771318655/Screenshot_2026-02-17_141510_nbr1jb.png', desc: 'Manages sponsor relationships, coordinates sponsorship activities, and ensures smooth communication with partners.' }
+                '21': { name: 'Om Prakash Choudhary', role: 'Sponsorship Coordinator', image: 'https://res.cloudinary.com/dpc4l1hic/image/upload/v1771477053/a5c215bc-10b2-4515-af02-8a758cd76195.png', desc: 'Manages sponsor relationships, coordinates sponsorship activities, and ensures smooth communication with partners.' }
             };
 
-            // ----- MODAL -----
+            // ----- MODAL (optimized) -----
             const modal = document.getElementById('teamModal');
-            const modalImg = document.getElementById('modalImage'), modalName = document.getElementById('modalName'), modalRole = document.getElementById('modalRole'), modalDesc = document.getElementById('modalDescription');
+            const modalImg = document.getElementById('modalImage');
+            const modalName = document.getElementById('modalName');
+            const modalRole = document.getElementById('modalRole');
+            const modalDesc = document.getElementById('modalDescription');
+            
             function showTeamMember(id) {
-                const m = teamMembers[id]; if (!m) return;
+                const m = teamMembers[id]; 
+                if (!m) return;
+                
                 modalImg.innerHTML = `<img src="${m.image}" alt="${m.name}" style="width:100%; height:100%; object-fit:cover;">`;
-                modalName.textContent = m.name; modalRole.textContent = m.role; modalDesc.textContent = m.desc;
-                modal.classList.add('active'); document.body.style.overflow = 'hidden';
+                modalName.textContent = m.name; 
+                modalRole.textContent = m.role; 
+                modalDesc.textContent = m.desc;
+                modal.classList.add('active'); 
+                document.body.style.overflow = 'hidden';
             }
-            window.showTeamMember = showTeamMember; // global for onclick
-            // attach click events to cards
-            document.querySelectorAll('.team-card-parent').forEach(card => {
-                const id = card.getAttribute('data-member');
-                card.addEventListener('click', (e) => { if (!e.target.closest('.team-social') && !e.target.closest('.view-more-button')) showTeamMember(id); });
-                const btn = card.querySelector('.view-more-button');
-                if (btn) btn.addEventListener('click', (e) => { e.stopPropagation(); showTeamMember(id); });
+            
+            window.showTeamMember = showTeamMember;
+            
+            // Attach click events to cards - use event delegation for better performance
+            document.addEventListener('click', (e) => {
+                const card = e.target.closest('.team-card-parent');
+                if (card && !e.target.closest('.team-social') && !e.target.closest('.view-more-button')) {
+                    const id = card.getAttribute('data-member');
+                    showTeamMember(id);
+                }
+                
+                const viewMore = e.target.closest('.view-more-button');
+                if (viewMore) {
+                    e.stopPropagation();
+                    const card = viewMore.closest('.team-card-parent');
+                    if (card) {
+                        const id = card.getAttribute('data-member');
+                        showTeamMember(id);
+                    }
+                }
             });
-            // close modal
-            document.getElementById('closeModal').addEventListener('click', function(){ modal.classList.remove('active'); document.body.style.overflow = 'auto'; });
-            modal.addEventListener('click', (e) => { if(e.target === modal) { modal.classList.remove('active'); document.body.style.overflow = 'auto'; } });
+            
+            // Close modal
+            document.getElementById('closeModal').addEventListener('click', function(){ 
+                modal.classList.remove('active'); 
+                document.body.style.overflow = 'auto'; 
+            });
+            
+            modal.addEventListener('click', (e) => { 
+                if(e.target === modal) { 
+                    modal.classList.remove('active'); 
+                    document.body.style.overflow = 'auto'; 
+                } 
+            });
 
-            // ----- SCROLL INDICATOR & BACK TO TOP -----
+            // ----- SCROLL INDICATOR & BACK TO TOP (throttled) -----
             function initScrollFeatures() {
                 const topBtn = document.getElementById('backToTop');
                 const scrollIndicator = document.querySelector('.scroll-indicator');
+                let ticking = false;
+                
                 window.addEventListener('scroll', () => {
-                    if (topBtn) {
-                        topBtn.style.display = window.scrollY > 300 ? 'flex' : 'none';
-                    }
-                    if (scrollIndicator) {
-                        const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-                        const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-                        scrollIndicator.style.transform = `scaleX(${winScroll / height})`;
+                    if (!ticking) {
+                        window.requestAnimationFrame(() => {
+                            if (topBtn) {
+                                topBtn.style.display = window.scrollY > 300 ? 'flex' : 'none';
+                            }
+                            if (scrollIndicator) {
+                                const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+                                const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                                scrollIndicator.style.transform = `scaleX(${winScroll / height})`;
+                            }
+                            ticking = false;
+                        });
+                        ticking = true;
                     }
                 });
+                
                 if (topBtn) {
                     topBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
                 }
@@ -1414,40 +1508,29 @@
                 });
             }
 
-            // ----- MOBILE MENU TOGGLE -----
-            const mobBtn = document.getElementById('mobileMenuBtn'), overlay = document.getElementById('mobileNavOverlay'), closeBtn = document.getElementById('mobileCloseBtn');
-            if(mobBtn && overlay && closeBtn) {
-                const toggle = () => { overlay.classList.toggle('show'); document.body.style.overflow = overlay.classList.contains('show') ? 'hidden' : ''; };
-                mobBtn.addEventListener('click', toggle); closeBtn.addEventListener('click', toggle);
-                overlay.addEventListener('click', (e) => { if(e.target === overlay) toggle(); });
-            }
-
-            // ----- VIDEO AUTOPLAY FALLBACK -----
+            // ----- VIDEO AUTOPLAY -----
             const video = document.querySelector('video');
-            if (video) video.play().catch(e => console.log("Autoplay blocked"));
-
-            // ----- ENSURE MOBILE USER ELEMENTS -----
-            function ensureMobileUserElements() {
-                if (!document.getElementById('mobileUserName')) {
-                    const nameSpan = document.createElement('span');
-                    nameSpan.id = 'mobileUserName';
-                    nameSpan.style.display = 'none';
-                    document.body.appendChild(nameSpan);
-                    const emailSpan = document.createElement('span');
-                    emailSpan.id = 'mobileUserEmail';
-                    emailSpan.style.display = 'none';
-                    document.body.appendChild(emailSpan);
-                }
+            if (video) {
+                video.play().catch(e => console.log("Autoplay blocked"));
             }
 
-            // ----- INITIALIZATION -----
+            // ----- INITIALIZATION (defer non-critical tasks) -----
             document.addEventListener('DOMContentLoaded', function() {
-                ensureMobileUserElements();
-                updateUserAuthDisplay();
-                arrangeMobileAuth();
-                initScrollFeatures();
+                // Critical tasks first
                 setActiveNavItem();
+                
+                // Defer non-critical tasks
+                queueTask(() => {
+                    initScrollFeatures();
+                }, { timeout: 1000 });
             });
+
+            // Fallback for older browsers
+            if (!window.requestIdleCallback) {
+                window.requestIdleCallback = function(callback) {
+                    return setTimeout(callback, 1);
+                };
+            }
         })();
     </script>
 </body>

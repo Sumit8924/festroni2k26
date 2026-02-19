@@ -4,11 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
     <title>FESTRONIX 2.0 - Sponsorship Team</title>
-    <!-- BOOTSTRAP 5 CORE -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- icons + fonts -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Orbitron:wght@400;600;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- BOOTSTRAP 5 CORE - optimized loading -->
+    <link rel="preconnect" href="https://cdn.jsdelivr.net">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" media="print" onload="this.media='all'">
+    <!-- icons + fonts - optimized loading -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" media="print" onload="this.media='all'">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Orbitron:wght@400;600;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    
+    <!-- Fallback for no js -->
+    <noscript>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+        <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Orbitron:wght@400;600;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    </noscript>
+    
     <!-- custom styles -->
     <style>
         /* ----- bootstrap reset remains, minimal theme overrides ----- */
@@ -59,7 +70,7 @@
             background: linear-gradient(to bottom, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.3) 50%, rgba(0,0,0,0.8) 100%);
         }
 
-        /* ----- LOADER ANIMATION - OPTIMIZED FOR FAST LOADING ----- */
+        /* ----- OPTIMIZED LOADER ANIMATION - REDUCED TIMING ----- */
         .loader-container {
             position: fixed;
             top: 0;
@@ -72,10 +83,10 @@
             justify-content: center;
             align-items: center;
             transition: opacity 0.3s ease;
+            pointer-events: none;
         }
         .loader-hidden { 
             opacity: 0; 
-            pointer-events: none; 
             visibility: hidden; 
         }
         .loader-wrapper { 
@@ -83,6 +94,7 @@
             justify-content: center; 
             align-items: center; 
             flex-wrap: wrap; 
+            position: relative;
         }
         .loader-letter {
             font-family: 'Orbitron', sans-serif;
@@ -95,24 +107,25 @@
             animation: letterReveal 0.2s forwards;
             display: inline-block;
         }
-        .loader-letter:nth-child(1) { animation-delay: 0.1s; }
-        .loader-letter:nth-child(2) { animation-delay: 0.15s; }
-        .loader-letter:nth-child(3) { animation-delay: 0.2s; }
-        .loader-letter:nth-child(4) { animation-delay: 0.25s; }
-        .loader-letter:nth-child(5) { animation-delay: 0.3s; }
-        .loader-letter:nth-child(6) { animation-delay: 0.35s; }
-        .loader-letter:nth-child(7) { animation-delay: 0.4s; }
-        .loader-letter:nth-child(8) { animation-delay: 0.45s; }
-        .loader-letter:nth-child(9) { animation-delay: 0.5s; }
-        .loader-letter:nth-child(10) { animation-delay: 0.55s; }
-        .loader-letter:nth-child(11) { animation-delay: 0.6s; }
-        .loader-letter:nth-child(12) { animation-delay: 0.65s; }
-        .loader-letter:nth-child(13) { animation-delay: 0.7s; }
-        .loader-letter:nth-child(14) { animation-delay: 0.75s; }
-        .loader-letter:nth-child(15) { animation-delay: 0.8s; }
-        .loader-letter:nth-child(16) { animation-delay: 0.85s; }
-        .loader-letter:nth-child(17) { animation-delay: 0.9s; }
-        .loader-letter:nth-child(18) { animation-delay: 0.95s; }
+        .loader-letter:nth-child(1) { animation-delay: 0.05s; }
+        .loader-letter:nth-child(2) { animation-delay: 0.08s; }
+        .loader-letter:nth-child(3) { animation-delay: 0.11s; }
+        .loader-letter:nth-child(4) { animation-delay: 0.14s; }
+        .loader-letter:nth-child(5) { animation-delay: 0.17s; }
+        .loader-letter:nth-child(6) { animation-delay: 0.2s; }
+        .loader-letter:nth-child(7) { animation-delay: 0.23s; }
+        .loader-letter:nth-child(8) { animation-delay: 0.26s; }
+        .loader-letter:nth-child(9) { animation-delay: 0.29s; }
+        .loader-letter:nth-child(10) { animation-delay: 0.32s; }
+        .loader-letter:nth-child(11) { animation-delay: 0.35s; }
+        .loader-letter:nth-child(12) { animation-delay: 0.38s; }
+        .loader-letter:nth-child(13) { animation-delay: 0.41s; }
+        .loader-letter:nth-child(14) { animation-delay: 0.44s; }
+        .loader-letter:nth-child(15) { animation-delay: 0.47s; }
+        .loader-letter:nth-child(16) { animation-delay: 0.5s; }
+        .loader-letter:nth-child(17) { animation-delay: 0.53s; }
+        .loader-letter:nth-child(18) { animation-delay: 0.56s; }
+        
         @keyframes letterReveal { 
             to { 
                 opacity: 1; 
@@ -121,11 +134,11 @@
         }
         .loader {
             position: absolute;
-            bottom: -30px;
+            bottom: -20px;
             width: 100%;
-            height: 4px;
+            height: 3px;
             background: linear-gradient(90deg, transparent, #ffcc33, transparent);
-            animation: loadingBar 1.5s ease-in-out forwards;
+            animation: loadingBar 1s ease-in-out forwards;
         }
         @keyframes loadingBar { 
             0% { transform: translateX(-100%); } 
@@ -149,6 +162,7 @@
         .cursor-dot, .cursor-outline {
             position: fixed; top: 0; left: 0; transform: translate(-50%, -50%);
             border-radius: 50%; z-index: 9999; pointer-events: none;
+            will-change: left, top, transform;
         }
         .cursor-dot { width: 8px; height: 8px; background: #ffcc33; }
         .cursor-outline {
@@ -417,6 +431,23 @@
             color: white;
         }
 
+        .btn-3d-sponsor {
+            padding: 15px 40px;
+            border-radius: 10px;
+            color: white;
+            font-weight: 600;
+            text-transform: uppercase;
+            text-decoration: none;
+            box-shadow: 0 4px 0 #993d00, 0 10px 20px rgba(255,102,0,0.3);
+            transition: 0.2s;
+        }
+        
+        .btn-3d-sponsor:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 0 #993d00, 0 15px 25px rgba(255,102,0,0.4);
+            color: white;
+        }
+
         /* ----- RESPONSIVE ADJUSTMENTS ----- */
         @media (max-width: 991px) {
             .page-title { font-size: 2.8rem; }
@@ -445,6 +476,7 @@
             box-shadow: 0 0 20px rgba(255,71,51,0.5);
             z-index: 1000;
             cursor: pointer;
+            transition: all 0.3s;
         }
         .back-to-top:hover { transform: translateY(-5px); box-shadow: 0 0 30px rgba(255,71,51,0.8); }
 
@@ -480,7 +512,7 @@
         <div class="video-overlay"></div>
     </div>
 
-    <!-- LOADER -->
+    <!-- OPTIMIZED LOADER - REDUCED TIMING -->
     <div class="loader-container" id="loader">
         <div class="loader-wrapper">
             <span class="loader-letter">S</span>
@@ -561,7 +593,7 @@
             <div class="col-lg-4 col-md-6">
                 <div class="team-card">
                     <div class="team-image">
-                        <img src="https://res.cloudinary.com/dpc4l1hic/image/upload/v1771329395/20260121_094336.jpg_uttxgq.jpg" alt="Somen Pradhan">
+                        <img src="https://res.cloudinary.com/dpc4l1hic/image/upload/v1771329395/20260121_094336.jpg_uttxgq.jpg" alt="Somen Pradhan" loading="lazy">
                     </div>
                     <h2 class="team-name">Somen Pradhan</h2>
                     <div class="team-role">Student SPOC - Sponsorship</div>
@@ -586,7 +618,7 @@
             <div class="col-lg-4 col-md-6">
                 <div class="team-card">
                     <div class="team-image">
-                        <img src="https://res.cloudinary.com/dpc4l1hic/image/upload/v1771329604/IMG_20260217_172318154.jpg_bwdgsz.jpg" alt="Deba Prasad Sutar">
+                        <img src="https://res.cloudinary.com/dpc4l1hic/image/upload/v1771329604/IMG_20260217_172318154.jpg_bwdgsz.jpg" alt="Deba Prasad Sutar" loading="lazy">
                     </div>
                     <h2 class="team-name">Deba Prasad Sutar</h2>
                     <div class="team-role">Sponsorship Executive</div>
@@ -596,7 +628,7 @@
                             <i class="fas fa-phone-alt"></i>
                             <span>+91 86589 00524</span>
                         </a>
-                        <a href="mailto:deba.sutar@gift.edu.in" class="contact-item">
+                        <a href="mailto:debaprasad2023@gift.edu.in" class="contact-item">
                             <i class="fas fa-envelope"></i>
                             <span>debaprasad2023@gift.edu.in</span>
                         </a>
@@ -605,11 +637,11 @@
                 </div>
             </div>
 
-            <!-- Member 3: Deba Prasad Sutar -->
+            <!-- Member 3: Om Prakash Choudhary (FIXED: Corrected name and email) -->
             <div class="col-lg-4 col-md-6">
                 <div class="team-card">
                     <div class="team-image">
-                        <img src="https://res.cloudinary.com/dpc4l1hic/image/upload/v1771477053/a5c215bc-10b2-4515-af02-8a758cd76195.png" alt="Om Prakash Choudhary">
+                        <img src="https://res.cloudinary.com/dpc4l1hic/image/upload/v1771477053/a5c215bc-10b2-4515-af02-8a758cd76195.png" alt="Om Prakash Choudhary" loading="lazy">
                     </div>
                     <h2 class="team-name">Om Prakash Choudhary</h2>
                     <div class="team-role">Sponsorship Executive</div>
@@ -619,21 +651,20 @@
                             <i class="fas fa-phone-alt"></i>
                             <span>+91 93371 55808</span>
                         </a>
-                        <a href="mailto:ochoudhury2023@gift.edu.in" class="contact-item">
+                        <a href="mailto:omchoudhary2023@gift.edu.in" class="contact-item">
                             <i class="fas fa-envelope"></i>
-                            <span>ochoudhury2023@gift.edu.in</span>
+                            <span>omchoudhary2023@gift.edu.in</span>
                         </a>
                     </div>
                     <p class="text-white-50 small">Handles sponsor outreach, proposals, and maintaining sponsor databases. Coordinates all sponsorship communications.</p>
                 </div>
             </div>
             
-            
-            <!-- Member 4: Faculty Coordinator (optional) -->
+            <!-- Member 4: Faculty Coordinator -->
             <div class="col-lg-4 col-md-6">
                 <div class="team-card">
                     <div class="team-image">
-                        <img src="https://res.cloudinary.com/dpc4l1hic/image/upload/v1771315014/7beaec65-27a2-4e64-bdf2-fb66adde0368.png" alt="Dr. Satya Ranjan Pattanaik">
+                        <img src="https://res.cloudinary.com/dpc4l1hic/image/upload/v1771315014/7beaec65-27a2-4e64-bdf2-fb66adde0368.png" alt="Dr. Satya Ranjan Pattanaik" loading="lazy">
                     </div>
                     <h2 class="team-name">Dr. Satya Ranjan Pattanaik</h2>
                     <div class="team-role">Faculty Coordinator - Sponsorship</div>
@@ -643,7 +674,7 @@
                             <i class="fas fa-phone-alt"></i>
                             <span>+91 63727 45082</span>
                         </a>
-                        <a href="mailto:satya.pattanaik@gift.edu.in" class="contact-item">
+                        <a href="mailto:drsatyaranjank@gift.edu.in" class="contact-item">
                             <i class="fas fa-envelope"></i>
                             <span>drsatyaranjank@gift.edu.in</span>
                         </a>
@@ -675,8 +706,8 @@
                             <div class="d-flex flex-column align-items-center">
                                 <i class="fas fa-envelope fa-3x mb-3" style="color: #ff9966;"></i>
                                 <h4 class="text-white">Email Us</h4>
-                                <a href="mailto:sponsorship@festronix.in" class="text-white-50 text-decoration-none">debaprasad2023@gift.edu.in</a>
-                                <a href="mailto:partnerships@gift.edu.in" class="text-white-50 text-decoration-none">drsatyaranjank@gift.edu.in</a>
+                                <a href="mailto:debaprasad2023@gift.edu.in" class="text-white-50 text-decoration-none">debaprasad2023@gift.edu.in</a>
+                                <a href="mailto:drsatyaranjank@gift.edu.in" class="text-white-50 text-decoration-none">drsatyaranjank@gift.edu.in</a>
                             </div>
                         </div>
                         <div class="col-md-4">
@@ -696,7 +727,7 @@
             </div>
         </div>
 
-        <!-- SPONSORSHIP BENEFITS CARD (Optional) -->
+        <!-- SPONSORSHIP BENEFITS CARD -->
         <div class="row my-4">
             <div class="col-12">
                 <div class="text-center">
@@ -746,39 +777,55 @@
     <!-- Back to Top Button -->
     <button class="back-to-top" id="backToTop"><i class="fas fa-chevron-up"></i></button>
 
-    <!-- Bootstrap JS Bundle -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Bootstrap JS Bundle - deferred -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" defer></script>
     
-    <!-- UPDATED SCRIPT -->
+    <!-- OPTIMIZED SCRIPT -->
     <script>
         (function() {
             "use strict";
             
-            // ==================== LOADER ====================
-            setTimeout(function() {
-                const loader = document.getElementById('loader');
-                if (loader) {
-                    loader.classList.add('loader-hidden');
-                }
-            }, 2000);
-
+            // ==================== OPTIMIZED LOADER - REDUCED TIMING ====================
+            // Hide loader as soon as DOM is ready
             document.addEventListener('DOMContentLoaded', function() {
                 setTimeout(function() {
                     const loader = document.getElementById('loader');
                     if (loader) {
                         loader.classList.add('loader-hidden');
+                        // Remove loader from DOM after transition
+                        setTimeout(() => {
+                            if (loader.parentNode) loader.style.display = 'none';
+                        }, 300);
                     }
-                }, 1500);
+                }, 800); // Reduced from 2000ms to 800ms
             });
 
-            // ---------- CURSOR ANIMATION ----------
+            // Fallback - ensure loader hides even if DOMContentLoaded already fired
+            if (document.readyState === 'interactive' || document.readyState === 'complete') {
+                setTimeout(function() {
+                    const loader = document.getElementById('loader');
+                    if (loader) {
+                        loader.classList.add('loader-hidden');
+                        setTimeout(() => {
+                            if (loader.parentNode) loader.style.display = 'none';
+                        }, 300);
+                    }
+                }, 800);
+            }
+
+            // ---------- OPTIMIZED CURSOR ANIMATION ----------
             const cursorDot = document.querySelector("[data-cursor-dot]");
             const cursorOutline = document.querySelector("[data-cursor-outline]");
-            if (cursorDot && cursorOutline) {
+            
+            if (cursorDot && cursorOutline && window.innerWidth > 768) {
                 let mouseX = 0, mouseY = 0, cursorX = 0, cursorY = 0;
+                let rafId = null;
+                
                 document.addEventListener("mousemove", (e) => { 
-                    mouseX = e.clientX; mouseY = e.clientY; 
-                    cursorDot.style.left = mouseX + "px"; cursorDot.style.top = mouseY + "px"; 
+                    mouseX = e.clientX; 
+                    mouseY = e.clientY; 
+                    cursorDot.style.left = mouseX + "px"; 
+                    cursorDot.style.top = mouseY + "px"; 
                 });
                 
                 document.addEventListener("mousedown", () => { 
@@ -800,37 +847,53 @@
                     cursorY += (mouseY - cursorY) * 0.15; 
                     cursorOutline.style.left = cursorX + "px"; 
                     cursorOutline.style.top = cursorY + "px"; 
-                    requestAnimationFrame(animateCursor); 
+                    rafId = requestAnimationFrame(animateCursor); 
                 }
                 animateCursor();
 
-                // Hover effect for interactive elements
-                document.querySelectorAll('a, button, .btn-3d-sponsor, .team-card, .social-icon, .back-to-top').forEach(el => {
-                    el.addEventListener('mouseenter', () => {
+                // Hover effect for interactive elements - using event delegation
+                document.addEventListener('mouseover', (e) => {
+                    const target = e.target.closest('a, button, .btn-3d-sponsor, .team-card, .social-icon, .back-to-top');
+                    if (target && cursorOutline) {
                         cursorOutline.style.width = '50px';
                         cursorOutline.style.height = '50px';
                         cursorOutline.style.borderColor = '#ffcc33';
-                    });
-                    el.addEventListener('mouseleave', () => {
+                    }
+                });
+                
+                document.addEventListener('mouseout', (e) => {
+                    const target = e.target.closest('a, button, .btn-3d-sponsor, .team-card, .social-icon, .back-to-top');
+                    if (target && cursorOutline) {
                         cursorOutline.style.width = '40px';
                         cursorOutline.style.height = '40px';
                         cursorOutline.style.borderColor = 'rgba(255,71,51,0.8)';
-                    });
+                    }
                 });
+            } else {
+                // Hide cursor on mobile
+                if (cursorDot) cursorDot.style.display = 'none';
+                if (cursorOutline) cursorOutline.style.display = 'none';
             }
 
-            // ---------- SCROLL INDICATOR & BACK TO TOP ----------
+            // ---------- OPTIMIZED SCROLL INDICATOR & BACK TO TOP (throttled) ----------
             const topBtn = document.getElementById('backToTop');
             const scrollIndicator = document.querySelector('.scroll-indicator');
+            let ticking = false;
             
             window.addEventListener('scroll', () => {
-                if (topBtn) {
-                    topBtn.style.display = window.scrollY > 300 ? 'flex' : 'none';
-                }
-                if (scrollIndicator) {
-                    const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-                    const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-                    scrollIndicator.style.transform = `scaleX(${winScroll / height})`;
+                if (!ticking) {
+                    window.requestAnimationFrame(() => {
+                        if (topBtn) {
+                            topBtn.style.display = window.scrollY > 300 ? 'flex' : 'none';
+                        }
+                        if (scrollIndicator) {
+                            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+                            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                            scrollIndicator.style.transform = `scaleX(${winScroll / height})`;
+                        }
+                        ticking = false;
+                    });
+                    ticking = true;
                 }
             });
             
@@ -840,7 +903,21 @@
 
             // ---------- VIDEO AUTOPLAY ----------
             const video = document.querySelector('video');
-            if (video) video.play().catch(e => console.log("Autoplay blocked"));
+            if (video) {
+                video.play().catch(e => console.log("Autoplay blocked"));
+            }
+
+            // ---------- SET ACTIVE NAVIGATION ----------
+            function setActiveNavItem() {
+                const currentPage = window.location.pathname.split('/').pop() || 'sponsors.html';
+                document.querySelectorAll('.nav-link').forEach(link => {
+                    const href = link.getAttribute('href');
+                    if (href === currentPage) link.classList.add('active');
+                    else link.classList.remove('active');
+                });
+            }
+            
+            document.addEventListener('DOMContentLoaded', setActiveNavItem);
 
         })();
     </script>
