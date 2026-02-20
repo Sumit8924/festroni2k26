@@ -486,6 +486,8 @@
             border-color: transparent;
         }
 
+
+
         /* ----- Prize Cards ----- */
         .prize-card {
             background: rgba(0,0,0,0.5);
@@ -512,7 +514,7 @@
             margin: 15px 0;
         }
 
-        /* ----- Instruction Modal ----- */
+        /* ----- Instruction Modal - UPDATED WITH PDF BUTTON ----- */
         .instruction-modal {
             display: none;
             position: fixed;
@@ -568,6 +570,52 @@
             border-radius: 10px;
             padding: 15px;
         }
+        
+        /* PDF Button Styles */
+        .pdf-download-container {
+            background: rgba(0,102,204,0.15);
+            border: 1px solid #0066cc;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            text-align: center;
+        }
+        
+        .pdf-download-btn {
+            background: linear-gradient(145deg, #0066cc, #004080);
+            border: none;
+            border-radius: 8px;
+            padding: 15px 30px;
+            color: white;
+            font-weight: 600;
+            font-family: 'Rajdhani', sans-serif;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 0 #003366, 0 5px 15px rgba(0,102,204,0.4);
+            margin: 10px 0;
+            cursor: pointer;
+        }
+        
+        .pdf-download-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 0 #003366, 0 8px 20px rgba(0,102,204,0.6);
+            color: white;
+        }
+        
+        .pdf-note {
+            color: #ffcc33;
+            font-size: 0.9rem;
+            margin-top: 10px;
+        }
+        
+        .pdf-note i {
+            color: #ff9966;
+            margin-right: 5px;
+        }
+        
         .custom-checkbox {
             display: flex;
             align-items: center;
@@ -839,7 +887,7 @@
         <div class="mobile-auth-buttons" id="mobileAuthButtons"></div>
     </div>
 
-    <!-- INSTRUCTION MODAL -->
+    <!-- INSTRUCTION MODAL - UPDATED WITH PDF SECTION -->
     <div class="instruction-modal" id="instructionModal">
         <div class="instruction-content">
             <button class="close-modal position-absolute top-0 end-0 m-3 bg-transparent border-0" id="closeInstructionModal" style="color: #ff9966; font-size: 1.5rem;">
@@ -853,16 +901,31 @@
                 </div>
             </div>
             <div class="instruction-body p-4">
+                <!-- PDF Download Section -->
+                <div class="pdf-download-container" id="pdfDownloadSection">
+                    <i class="fas fa-file-pdf" style="color: #ff4733; font-size: 3rem; margin-bottom: 10px;"></i>
+                    <h4 style="color: #ffcc33; font-family: 'Orbitron'; margin-bottom: 15px;">Official Rulebook</h4>
+                    <a href="#" class="pdf-download-btn" id="pdfDownloadBtn" target="_blank">
+                        <i class="fas fa-download"></i> Download PDF Instructions
+                    </a>
+                    <p class="pdf-note">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        Please read the complete rulebook carefully before proceeding with registration
+                    </p>
+                </div>
+                
                 <div id="eventSpecificInstructions"></div>
+                
                 <div class="important-note mt-4">
                     <h4 style="color: #ff3366;"><i class="fas fa-exclamation-triangle"></i> Important Note</h4>
                     <p style="color: #fff;">Registration fee is non-refundable. Once registered, you'll receive a confirmation email with further details. Ensure all information provided is accurate.</p>
                 </div>
+                
                 <div class="checkbox-container mt-4 p-3" style="background: rgba(255,153,102,0.05); border-radius: 8px;">
                     <label class="custom-checkbox">
                         <input type="checkbox" id="agreeCheckbox">
                         <span class="checkmark"></span>
-                        <span style="color: #fff;">I have read and understood all the instructions, terms, and conditions for this event. I agree to abide by all the rules and regulations of FESTRONIX 2.0.</span>
+                        <span style="color: #fff;">I have read and understood all the instructions, rulebook, terms, and conditions for this event. I agree to abide by all the rules and regulations of FESTRONIX 2.0.</span>
                     </label>
                 </div>
             </div>
@@ -941,7 +1004,7 @@
                             <p class="text-white-50">24-hour national level hackathon focusing on AI/ML solutions for real-world problems. Build innovative projects and win exciting prizes.</p>
                             <div class="d-flex justify-content-between mt-3">
                                 <div class="text-center"><span class="d-block fs-4 text-warning">₹XX,000</span><span class="text-white-50 small">Prize Pool</span></div>
-                                <div class="text-center"><span class="d-block fs-4 text-warning">4</span><span class="text-white-50 small">Team Size</span></div>
+                                <div class="text-center"><span class="d-block fs-4 text-warning">6(1 Girl)</span><span class="text-white-50 small">Member</span></div>
                                 <div class="text-center"><span class="d-block fs-4 text-warning">₹501</span><span class="text-white-50 small">Regn</span></div>
                             </div>
                         </div>
@@ -982,7 +1045,7 @@
                             <p class="text-white-50">Showcase your creativity in digital content creation! Design engaging social media posts, create short videos, and demonstrate your storytelling skills.</p>
                             <div class="d-flex justify-content-between mt-3">
                                 <div class="text-center"><span class="d-block fs-4 text-warning">₹XX,000</span><span class="text-white-50 small">Prize Pool</span></div>
-                                <div class="text-center"><span class="d-block fs-4 text-warning">2</span><span class="text-white-50 small">Team Size</span></div>
+                                <div class="text-center"><span class="d-block fs-4 text-warning">2</span><span class="text-white-50 small">Member</span></div>
                                 <div class="text-center"><span class="d-block fs-4 text-warning">₹201</span><span class="text-white-50 small">Regn</span></div>
                             </div>
                         </div>
@@ -1003,27 +1066,27 @@
                             <span class="event-category technical">AI/ML</span>
                             <h3 class="event-title">AI & ML Model Contest</h3>
                             <div class="d-flex flex-wrap gap-3 mb-3">
-                                <span class="text-warning"><i class="far fa-calendar"></i> 26 Feb 2026</span>
+                                <span class="text-warning"><i class="far fa-calendar"></i> 2 Feb 2026</span>
                                 <span class="text-warning"><i class="far fa-clock"></i> 09:00 AM</span>
                             </div>
                         </div>
-                        <div class="event-countdown mx-3" id="timer-AIMLContest">
+                        <div class="event-countdown mx-3" id="timer-AIMLModelContest">
                             <div class="d-flex justify-content-between">
                                 <span class="text-warning"><i class="fas fa-clock"></i> Event Starts In</span>
-                                <span class="text-white-50" id="status-AIMLContest">Counting down...</span>
+                                <span class="text-white-50" id="status-AIMLModelContest">Counting down...</span>
                             </div>
                             <div class="countdown-display mt-2">
-                                <div class="countdown-unit"><span class="countdown-value" id="days-AIMLContest">00</span><span class="countdown-label-small">Days</span></div>
-                                <div class="countdown-unit"><span class="countdown-value" id="hours-AIMLContest">00</span><span class="countdown-label-small">Hr</span></div>
-                                <div class="countdown-unit"><span class="countdown-value" id="minutes-AIMLContest">00</span><span class="countdown-label-small">Min</span></div>
-                                <div class="countdown-unit"><span class="countdown-value" id="seconds-AIMLContest">00</span><span class="countdown-label-small">Sec</span></div>
+                                <div class="countdown-unit"><span class="countdown-value" id="days-AIMLModelContest">00</span><span class="countdown-label-small">Days</span></div>
+                                <div class="countdown-unit"><span class="countdown-value" id="hours-AIMLModelContest">00</span><span class="countdown-label-small">Hr</span></div>
+                                <div class="countdown-unit"><span class="countdown-value" id="minutes-AIMLModelContest">00</span><span class="countdown-label-small">Min</span></div>
+                                <div class="countdown-unit"><span class="countdown-value" id="seconds-AIMLModelContest">00</span><span class="countdown-label-small">Sec</span></div>
                             </div>
                         </div>
                         <div class="p-3 flex-grow-1">
                             <p class="text-white-50">Showcase your AI/ML expertise by developing innovative models that solve real-world problems. Present your solution with proper documentation.</p>
                             <div class="d-flex justify-content-between mt-3">
                                 <div class="text-center"><span class="d-block fs-4 text-warning">₹XX,000</span><span class="text-white-50 small">Prize</span></div>
-                                <div class="text-center"><span class="d-block fs-4 text-warning">3</span><span class="text-white-50 small">Team</span></div>
+                                <div class="text-center"><span class="d-block fs-4 text-warning">2-3</span><span class="text-white-50 small">Member</span></div>
                                 <div class="text-center"><span class="d-block fs-4 text-warning">₹201</span><span class="text-white-50 small">Regn</span></div>
                             </div>
                         </div>
@@ -1048,23 +1111,23 @@
                                 <span class="text-warning"><i class="far fa-clock"></i> 9:00 AM</span>
                             </div>
                         </div>
-                        <div class="event-countdown mx-3" id="timer-MobileAppDev">
+                        <div class="event-countdown mx-3" id="timer-MobileAppDevelopment">
                             <div class="d-flex justify-content-between">
                                 <span class="text-warning"><i class="fas fa-clock"></i> Event Starts In</span>
-                                <span class="text-white-50" id="status-MobileAppDev">Counting down...</span>
+                                <span class="text-white-50" id="status-MobileAppDevelopment">Counting down...</span>
                             </div>
                             <div class="countdown-display mt-2">
-                                <div class="countdown-unit"><span class="countdown-value" id="days-MobileAppDev">00</span><span class="countdown-label-small">Days</span></div>
-                                <div class="countdown-unit"><span class="countdown-value" id="hours-MobileAppDev">00</span><span class="countdown-label-small">Hr</span></div>
-                                <div class="countdown-unit"><span class="countdown-value" id="minutes-MobileAppDev">00</span><span class="countdown-label-small">Min</span></div>
-                                <div class="countdown-unit"><span class="countdown-value" id="seconds-MobileAppDev">00</span><span class="countdown-label-small">Sec</span></div>
+                                <div class="countdown-unit"><span class="countdown-value" id="days-MobileAppDevelopment">00</span><span class="countdown-label-small">Days</span></div>
+                                <div class="countdown-unit"><span class="countdown-value" id="hours-MobileAppDevelopment">00</span><span class="countdown-label-small">Hr</span></div>
+                                <div class="countdown-unit"><span class="countdown-value" id="minutes-MobileAppDevelopment">00</span><span class="countdown-label-small">Min</span></div>
+                                <div class="countdown-unit"><span class="countdown-value" id="seconds-MobileAppDevelopment">00</span><span class="countdown-label-small">Sec</span></div>
                             </div>
                         </div>
                         <div class="p-3 flex-grow-1">
                             <p class="text-white-50">Build innovative mobile applications for Android or iOS platforms. Create functional, user-friendly apps with proper UI/UX design.</p>
                             <div class="d-flex justify-content-between mt-3">
                                 <div class="text-center"><span class="d-block fs-4 text-warning">₹XX,000</span><span class="text-white-50 small">Prize</span></div>
-                                <div class="text-center"><span class="d-block fs-4 text-warning">2</span><span class="text-white-50 small">Team</span></div>
+                                <div class="text-center"><span class="d-block fs-4 text-warning">1</span><span class="text-white-50 small">Member</span></div>
                                 <div class="text-center"><span class="d-block fs-4 text-warning">₹101</span><span class="text-white-50 small">Regn</span></div>
                             </div>
                         </div>
@@ -1105,7 +1168,7 @@
                             <p class="text-white-50">Create stunning, responsive websites from scratch. Showcase your creativity in UI/UX design and front-end development with modern frameworks.</p>
                             <div class="d-flex justify-content-between mt-3">
                                 <div class="text-center"><span class="d-block fs-4 text-warning">₹XX,000</span><span class="text-white-50 small">Prize</span></div>
-                                <div class="text-center"><span class="d-block fs-4 text-warning">2</span><span class="text-white-50 small">Team</span></div>
+                                <div class="text-center"><span class="d-block fs-4 text-warning">1</span><span class="text-white-50 small">Member</span></div>
                                 <div class="text-center"><span class="d-block fs-4 text-warning">₹101</span><span class="text-white-50 small">Regn</span></div>
                             </div>
                         </div>
@@ -1130,23 +1193,23 @@
                                 <span class="text-warning"><i class="far fa-clock"></i> 09:00 AM</span>
                             </div>
                         </div>
-                        <div class="event-countdown mx-3" id="timer-IoTInnovation">
+                        <div class="event-countdown mx-3" id="timer-IoTInnovationChallenge">
                             <div class="d-flex justify-content-between">
                                 <span class="text-warning"><i class="fas fa-clock"></i> Event Starts In</span>
-                                <span class="text-white-50" id="status-IoTInnovation">Counting down...</span>
+                                <span class="text-white-50" id="status-IoTInnovationChallenge">Counting down...</span>
                             </div>
                             <div class="countdown-display mt-2">
-                                <div class="countdown-unit"><span class="countdown-value" id="days-IoTInnovation">00</span><span class="countdown-label-small">Days</span></div>
-                                <div class="countdown-unit"><span class="countdown-value" id="hours-IoTInnovation">00</span><span class="countdown-label-small">Hr</span></div>
-                                <div class="countdown-unit"><span class="countdown-value" id="minutes-IoTInnovation">00</span><span class="countdown-label-small">Min</span></div>
-                                <div class="countdown-unit"><span class="countdown-value" id="seconds-IoTInnovation">00</span><span class="countdown-label-small">Sec</span></div>
+                                <div class="countdown-unit"><span class="countdown-value" id="days-IoTInnovationChallenge">00</span><span class="countdown-label-small">Days</span></div>
+                                <div class="countdown-unit"><span class="countdown-value" id="hours-IoTInnovationChallenge">00</span><span class="countdown-label-small">Hr</span></div>
+                                <div class="countdown-unit"><span class="countdown-value" id="minutes-IoTInnovationChallenge">00</span><span class="countdown-label-small">Min</span></div>
+                                <div class="countdown-unit"><span class="countdown-value" id="seconds-IoTInnovationChallenge">00</span><span class="countdown-label-small">Sec</span></div>
                             </div>
                         </div>
                         <div class="p-3 flex-grow-1">
                             <p class="text-white-50">Build smart, connected devices combining hardware, software, and cloud integration to solve real-world problems. Arduino/Raspberry Pi based projects.</p>
                             <div class="d-flex justify-content-between mt-3">
                                 <div class="text-center"><span class="d-block fs-4 text-warning">₹XX,000</span><span class="text-white-50 small">Prize</span></div>
-                                <div class="text-center"><span class="d-block fs-4 text-warning">4</span><span class="text-white-50 small">Team</span></div>
+                                <div class="text-center"><span class="d-block fs-4 text-warning">4</span><span class="text-white-50 small">Member</span></div>
                                 <div class="text-center"><span class="d-block fs-4 text-warning">₹501</span><span class="text-white-50 small">Regn</span></div>
                             </div>
                         </div>
@@ -1171,16 +1234,16 @@
                                 <span class="text-warning"><i class="far fa-clock"></i> 9:00 AM</span>
                             </div>
                         </div>
-                        <div class="event-countdown mx-3" id="timer-CADDesigning">
+                        <div class="event-countdown mx-3" id="timer-CADDesigningContest">
                             <div class="d-flex justify-content-between">
                                 <span class="text-warning"><i class="fas fa-clock"></i> Event Starts In</span>
-                                <span class="text-white-50" id="status-CADDesigning">Counting down...</span>
+                                <span class="text-white-50" id="status-CADDesigningContest">Counting down...</span>
                             </div>
                             <div class="countdown-display mt-2">
-                                <div class="countdown-unit"><span class="countdown-value" id="days-CADDesigning">00</span><span class="countdown-label-small">Days</span></div>
-                                <div class="countdown-unit"><span class="countdown-value" id="hours-CADDesigning">00</span><span class="countdown-label-small">Hr</span></div>
-                                <div class="countdown-unit"><span class="countdown-value" id="minutes-CADDesigning">00</span><span class="countdown-label-small">Min</span></div>
-                                <div class="countdown-unit"><span class="countdown-value" id="seconds-CADDesigning">00</span><span class="countdown-label-small">Sec</span></div>
+                                <div class="countdown-unit"><span class="countdown-value" id="days-CADDesigningContest">00</span><span class="countdown-label-small">Days</span></div>
+                                <div class="countdown-unit"><span class="countdown-value" id="hours-CADDesigningContest">00</span><span class="countdown-label-small">Hr</span></div>
+                                <div class="countdown-unit"><span class="countdown-value" id="minutes-CADDesigningContest">00</span><span class="countdown-label-small">Min</span></div>
+                                <div class="countdown-unit"><span class="countdown-value" id="seconds-CADDesigningContest">00</span><span class="countdown-label-small">Sec</span></div>
                             </div>
                         </div>
                         <div class="p-3 flex-grow-1">
@@ -1232,7 +1295,7 @@
                             <p class="text-white-50">Pitch your innovative business ideas to a panel of judges! Develop smart business models, create compelling presentations and marketing strategies.</p>
                             <div class="d-flex justify-content-between mt-3">
                                 <div class="text-center"><span class="d-block fs-4 text-warning">₹XX,000</span><span class="text-white-50 small">Prize</span></div>
-                                <div class="text-center"><span class="d-block fs-4 text-warning">3</span><span class="text-white-50 small">Team</span></div>
+                                <div class="text-center"><span class="d-block fs-4 text-warning">2</span><span class="text-white-50 small">Member</span></div>
                                 <div class="text-center"><span class="d-block fs-4 text-warning">₹201</span><span class="text-white-50 small">Regn</span></div>
                             </div>
                         </div>
@@ -1273,7 +1336,7 @@
                             <p class="text-white-50">Design clear, logical, and visually appealing flow charts for complex processes. Demonstrate your ability to visualize workflows and algorithms.</p>
                             <div class="d-flex justify-content-between mt-3">
                                 <div class="text-center"><span class="d-block fs-4 text-warning">₹XX,000</span><span class="text-white-50 small">Prize</span></div>
-                                <div class="text-center"><span class="d-block fs-4 text-warning">2</span><span class="text-white-50 small">Team</span></div>
+                                <div class="text-center"><span class="d-block fs-4 text-warning">1</span><span class="text-white-50 small">Member</span></div>
                                 <div class="text-center"><span class="d-block fs-4 text-warning">₹101</span><span class="text-white-50 small">Regn</span></div>
                             </div>
                         </div>
@@ -1314,13 +1377,13 @@
                             <p class="text-white-50">Design and construct a bridge using limited materials (popsicle sticks, glue, thread). Create structures that maximize strength while minimizing weight.</p>
                             <div class="d-flex justify-content-between mt-3">
                                 <div class="text-center"><span class="d-block fs-4 text-warning">₹XX,000</span><span class="text-white-50 small">Prize</span></div>
-                                <div class="text-center"><span class="d-block fs-4 text-warning">3</span><span class="text-white-50 small">Team</span></div>
-                                <div class="text-center"><span class="d-block fs-4 text-warning">₹201</span><span class="text-white-50 small">Regn</span></div>
+                                <div class="text-center"><span class="d-block fs-4 text-warning">2</span><span class="text-white-50 small">Member</span></div>
+                                <div class="text-center"><span class="d-block fs-4 text-warning">₹101</span><span class="text-white-50 small">Regn</span></div>
                             </div>
                         </div>
                         <div class="p-3 d-flex justify-content-between align-items-center border-top border-warning border-opacity-25">
                             <span class="text-warning"><i class="fas fa-map-marker-alt"></i> Engineering Workshop</span>
-                            <button class="event-btn register-btn" data-event="Bridge Building" data-fee="201"><i class="fas fa-user-plus"></i> Register (₹201)</button>
+                            <button class="event-btn register-btn" data-event="Bridge Building" data-fee="101"><i class="fas fa-user-plus"></i> Register (₹101)</button>
                         </div>
                     </div>
                 </div>
@@ -1355,13 +1418,13 @@
                             <p class="text-white-50">Engage in intellectual discourse on contemporary technology issues! Debate pressing tech topics, ethical dilemmas in AI, privacy concerns, etc.</p>
                             <div class="d-flex justify-content-between mt-3">
                                 <div class="text-center"><span class="d-block fs-4 text-warning">₹XX,000</span><span class="text-white-50 small">Prize</span></div>
-                                <div class="text-center"><span class="d-block fs-4 text-warning">2</span><span class="text-white-50 small">Team</span></div>
-                                <div class="text-center"><span class="d-block fs-4 text-warning">₹201</span><span class="text-white-50 small">Regn</span></div>
+                                <div class="text-center"><span class="d-block fs-4 text-warning">2</span><span class="text-white-50 small">Member</span></div>
+                                <div class="text-center"><span class="d-block fs-4 text-warning">₹101</span><span class="text-white-50 small">Regn</span></div>
                             </div>
                         </div>
                         <div class="p-3 d-flex justify-content-between align-items-center border-top border-warning border-opacity-25">
                             <span class="text-warning"><i class="fas fa-map-marker-alt"></i> Auditorium</span>
-                            <button class="event-btn register-btn" data-event="Tech Debate" data-fee="201"><i class="fas fa-user-plus"></i> Register (₹201)</button>
+                            <button class="event-btn register-btn" data-event="Tech Debate" data-fee="101"><i class="fas fa-user-plus"></i> Register (₹101)</button>
                         </div>
                     </div>
                 </div>
@@ -1396,7 +1459,7 @@
                             <p class="text-white-50">Test your knowledge across various technology domains! Compete in this exciting quiz covering programming, CS fundamentals, current tech trends.</p>
                             <div class="d-flex justify-content-between mt-3">
                                 <div class="text-center"><span class="d-block fs-4 text-warning">₹XX,000</span><span class="text-white-50 small">Prize</span></div>
-                                <div class="text-center"><span class="d-block fs-4 text-warning">2</span><span class="text-white-50 small">Team</span></div>
+                                <div class="text-center"><span class="d-block fs-4 text-warning">1</span><span class="text-white-50 small">Member</span></div>
                                 <div class="text-center"><span class="d-block fs-4 text-warning">₹101</span><span class="text-white-50 small">Regn</span></div>
                             </div>
                         </div>
@@ -1441,7 +1504,7 @@
                             <p class="text-white-50">Design and build racing robots to compete on challenging tracks. Test your robotics engineering skills in speed, control and obstacle navigation.</p>
                             <div class="d-flex justify-content-between mt-3">
                                 <div class="text-center"><span class="d-block fs-4 text-warning">₹XX,000</span><span class="text-white-50 small">Prize</span></div>
-                                <div class="text-center"><span class="d-block fs-4 text-warning">3</span><span class="text-white-50 small">Team</span></div>
+                                <div class="text-center"><span class="d-block fs-4 text-warning">1-2</span><span class="text-white-50 small">Member</span></div>
                                 <div class="text-center"><span class="d-block fs-4 text-warning">₹201</span><span class="text-white-50 small">Regn</span></div>
                             </div>
                         </div>
@@ -1482,7 +1545,7 @@
                             <p class="text-white-50">Design and program an autonomous robot that can follow a complex line track with precision and speed. Multiple difficulty levels and curves.</p>
                             <div class="d-flex justify-content-between mt-3">
                                 <div class="text-center"><span class="d-block fs-4 text-warning">₹XX,000</span><span class="text-white-50 small">Prize</span></div>
-                                <div class="text-center"><span class="d-block fs-4 text-warning">3</span><span class="text-white-50 small">Team</span></div>
+                                <div class="text-center"><span class="d-block fs-4 text-warning">1-2</span><span class="text-white-50 small">Member</span></div>
                                 <div class="text-center"><span class="d-block fs-4 text-warning">₹201</span><span class="text-white-50 small">Regn</span></div>
                             </div>
                         </div>
@@ -1523,7 +1586,7 @@
                             <p class="text-white-50">Master the skies with precision flying and aerial maneuvers! Navigate obstacle courses, perform tasks and demonstrate piloting skills.</p>
                             <div class="d-flex justify-content-between mt-3">
                                 <div class="text-center"><span class="d-block fs-4 text-warning">₹XX,000</span><span class="text-white-50 small">Prize</span></div>
-                                <div class="text-center"><span class="d-block fs-4 text-warning">2</span><span class="text-white-50 small">Team</span></div>
+                                <div class="text-center"><span class="d-block fs-4 text-warning">1-2</span><span class="text-white-50 small">Member</span></div>
                                 <div class="text-center"><span class="d-block fs-4 text-warning">₹201</span><span class="text-white-50 small">Regn</span></div>
                             </div>
                         </div>
@@ -1568,13 +1631,13 @@
                             <p class="text-white-50">Follow the clues, solve puzzles, and race to find the hidden treasure! A thrilling adventure testing problem-solving, teamwork and speed.</p>
                             <div class="d-flex justify-content-between mt-3">
                                 <div class="text-center"><span class="d-block fs-4 text-warning">₹XX,000</span><span class="text-white-50 small">Prize</span></div>
-                                <div class="text-center"><span class="d-block fs-4 text-warning">4</span><span class="text-white-50 small">Team</span></div>
-                                <div class="text-center"><span class="d-block fs-4 text-warning">₹301</span><span class="text-white-50 small">Regn</span></div>
+                                <div class="text-center"><span class="d-block fs-4 text-warning">2</span><span class="text-white-50 small">Team</span></div>
+                                <div class="text-center"><span class="d-block fs-4 text-warning">₹201</span><span class="text-white-50 small">Regn</span></div>
                             </div>
                         </div>
                         <div class="p-3 d-flex justify-content-between align-items-center border-top border-warning border-opacity-25">
                             <span class="text-warning"><i class="fas fa-map-marker-alt"></i> Campus Wide</span>
-                            <button class="event-btn register-btn" data-event="Treasure Hunt" data-fee="301"><i class="fas fa-user-plus"></i> Register (₹301)</button>
+                            <button class="event-btn register-btn" data-event="Treasure Hunt" data-fee="201"><i class="fas fa-user-plus"></i> Register (₹201)</button>
                         </div>
                     </div>
                 </div>
@@ -1609,7 +1672,7 @@
                             <p class="text-white-50">Battle Royale action at its finest! Compete in the ultimate Free Fire Max tournament with your squad. Multiple rounds leading to finals.</p>
                             <div class="d-flex justify-content-between mt-3">
                                 <div class="text-center"><span class="d-block fs-4 text-warning">₹XX,000</span><span class="text-white-50 small">Prize</span></div>
-                                <div class="text-center"><span class="d-block fs-4 text-warning">4</span><span class="text-white-50 small">Team</span></div>
+                                <div class="text-center"><span class="d-block fs-4 text-warning">4</span><span class="text-white-50 small">Member</span></div>
                                 <div class="text-center"><span class="d-block fs-4 text-warning">₹301</span><span class="text-white-50 small">Regn</span></div>
                             </div>
                         </div>
@@ -1650,7 +1713,7 @@
                             <p class="text-white-50">Step into the battleground and prove your dominance in BGMI. Team up, strategize, and fight for survival in this intense esports competition.</p>
                             <div class="d-flex justify-content-between mt-3">
                                 <div class="text-center"><span class="d-block fs-4 text-warning">₹XX,000</span><span class="text-white-50 small">Prize</span></div>
-                                <div class="text-center"><span class="d-block fs-4 text-warning">4</span><span class="text-white-50 small">Team</span></div>
+                                <div class="text-center"><span class="d-block fs-4 text-warning">4</span><span class="text-white-50 small">Member</span></div>
                                 <div class="text-center"><span class="d-block fs-4 text-warning">₹301</span><span class="text-white-50 small">Regn</span></div>
                             </div>
                         </div>
@@ -1736,7 +1799,7 @@
     <!-- Bootstrap JS Bundle - deferred -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" defer></script>
 
-    <!-- OPTIMIZED SCRIPT -->
+    <!-- OPTIMIZED SCRIPT WITH PDF LINKS -->
     <script>
         (function() {
             'use strict';
@@ -1763,340 +1826,30 @@
                 'Content Creation': 'https://docs.google.com/forms/d/e/1FAIpQLSdqxewPXAMvAcTW7KUqFugnevb0QT47QMR5bPYeme9mHWp2Uw/viewform?embedded=true'
             };
 
+            // ==================== PDF LINKS FOR EACH EVENT (Upload to Cloudinary) ====================
+            const pdfLinks = {
+                'Hackathon': 'https://drive.google.com/file/d/14F8jdYIWdFJFmXZcxxCQBV86HlyDttG_/view?usp=drive_link',
+                'AI & ML Model Contest': 'https://drive.google.com/file/d/1RDp7BKtqLl59pAfIvSlUaeCbEyZ_nWdG/view?usp=drive_link',
+                'Mobile App Development': 'https://drive.google.com/file/d/1PeX2XUBC8bKxV1RQgDmj9NkAxxp73Bmf/view?usp=drive_link',
+                'Web Development Contest': 'https://drive.google.com/file/d/1XqJaAsQllaAbuG3dFZk1sJh9gK5kf3Eg/view?usp=drive_link',
+                'IoT Innovation Challenge': 'https://drive.google.com/file/d/1a-a1lttwr36ammnR3nehHTbpi783FDUw/view?usp=drive_link',
+                'CAD Designing Contest': 'https://drive.google.com/file/d/1kpFY1hLyvCEGeUibJfZckyF5oSUZ39w3/view?usp=drive_link',
+                'Smart Business': 'https://drive.google.com/file/d/1Kf3UhiuIYQdweVOb4JDGco3PAMKDXktB/view?usp=drive_link',
+                'Flow Chart Design': 'https://drive.google.com/file/d/1658TzZuFfus9z3aUdA1cYK-fyFl-qsld/view?usp=drive_link',
+                'Bridge Building': 'https://drive.google.com/file/d/1_zWq_WIs_VmkWN4tv3HWAwx-UoxC08-d/view?usp=drive_link',
+                'Tech Debate': 'https://drive.google.com/file/d/1KmqQQoPJd3QD5WyENnE3C94XIppF1aC7/view?usp=drive_link',
+                'Tech Quiz': 'https://drive.google.com/file/d/1LYu4RrR-K-GA2YQtY2VFtXWC1-jCKK-t/view?usp=drive_link',
+                'Robo Race': 'https://drive.google.com/file/d/1PXZ76QNqAbb-vyFLLgF5N2yScgHu6ND7/view?usp=drive_link',
+                'Line Follower Robot': 'https://drive.google.com/file/d/1DQ-bhtT-pn_EKhYYYiML_peJDburojaJ/view?usp=drive_link',
+                'Drone Challenge': '',
+                'Treasure Hunt': 'https://drive.google.com/file/d/1dnQNIRHshlUG9nVMr6HeW4P1myouE6oZ/view?usp=drive_link',
+                'Free Fire Max': 'https://drive.google.com/file/d/1k01tn8sHzDYiIELwFC0YifZC3WxWd-zv/view?usp=drive_link',
+                'BGMI': 'https://drive.google.com/file/d/1N03AKVjSRiokbnkKzIrvOElxNBJQbfRA/view?usp=drive_link',
+                'Content Creation': 'https://drive.google.com/file/d/1JnI4ceDPx0cB_XCOQpn8O2QPeromAgZP/view?usp=drive_link'
+            };
+
             // ==================== EVENT INSTRUCTIONS ====================
             const eventInstructions = {
-                'Hackathon': { 
-                    title: 'Hackathon Instructions', 
-                    rules: [
-                        '24-hour continuous hackathon',
-                        'Team size: 4 members maximum',
-                        'Bring your own laptops and chargers',
-                        'Internet will be provided',
-                        'Food and refreshments will be served',
-                        'Final presentation at 5pm on Day 2',
-                        'Judging criteria: Innovation, Technical Difficulty, Presentation, Usefulness',
-                        'Plagiarism will lead to immediate disqualification'
-                    ], 
-                    requirements: [
-                        'College ID card',
-                        'Team name and logo',
-                        'GitHub repository',
-                        'Problem statement will be given on spot',
-                        'Own laptops and extension cords'
-                    ] 
-                },
-                'AI & ML Model Contest': { 
-                    title: 'AI & ML Model Contest Instructions', 
-                    rules: [
-                        'Duration: 8 hours',
-                        'Team size: 3 members maximum',
-                        'Pre-trained models allowed',
-                        'Must submit code and documentation',
-                        'Presentation: 10 minutes',
-                        'Dataset will be provided',
-                        'Focus on accuracy and innovation'
-                    ], 
-                    requirements: [
-                        'College ID card',
-                        'Laptop with required software',
-                        'Basic understanding of ML frameworks',
-                        'Presentation slides ready'
-                    ] 
-                },
-                'Mobile App Development': { 
-                    title: 'Mobile App Development Instructions', 
-                    rules: [
-                        'Duration: 8 hours',
-                        'Team size: 2 members maximum',
-                        'Can develop for Android or iOS',
-                        'Must submit APK/App bundle',
-                        'Working prototype required',
-                        'UI/UX will be judged',
-                        'Source code submission mandatory'
-                    ], 
-                    requirements: [
-                        'College ID card',
-                        'Development environment ready',
-                        'Own laptop and testing device',
-                        'Basic wireframes prepared'
-                    ] 
-                },
-                'Web Development Contest': { 
-                    title: 'Web Development Contest Instructions', 
-                    rules: [
-                        'Duration: 6 hours',
-                        'Team size: 2 members maximum',
-                        'Responsive design mandatory',
-                        'Modern frameworks allowed',
-                        'Deployment on provided server',
-                        'Cross-browser compatibility required',
-                        'Source code submission mandatory'
-                    ], 
-                    requirements: [
-                        'College ID card',
-                        'Laptop with code editor',
-                        'Basic design ideas',
-                        'Internet will be provided'
-                    ] 
-                },
-                'IoT Innovation Challenge': { 
-                    title: 'IoT Innovation Challenge Instructions', 
-                    rules: [
-                        'Duration: 10 hours',
-                        'Team size: 4 members maximum',
-                        'Hardware components provided',
-                        'Cloud integration required',
-                        'Working prototype mandatory',
-                        'Power supply: 5V max',
-                        'Safety guidelines must be followed'
-                    ], 
-                    requirements: [
-                        'College ID card',
-                        'Basic electronic knowledge',
-                        'Own laptop with Arduino/RPi IDE',
-                        'Components will be provided'
-                    ] 
-                },
-                'CAD Designing Contest': { 
-                    title: 'CAD Designing Contest Instructions', 
-                    rules: [
-                        'Duration: 4 hours',
-                        'Individual participation only',
-                        'Software: AutoCAD/SolidWorks',
-                        'Problem statement on spot',
-                        '2D and 3D models required',
-                        'Precision and creativity judged',
-                        'File formats: .dwg, .stl'
-                    ], 
-                    requirements: [
-                        'College ID card',
-                        'CAD software installed',
-                        'Basic drafting knowledge',
-                        'Own laptop with mouse'
-                    ] 
-                },
-                'Smart Business': { 
-                    title: 'Smart Business Plan Instructions', 
-                    rules: [
-                        'Duration: 6 hours preparation + 10 min pitch',
-                        'Team size: 3 members maximum',
-                        'Business plan submission',
-                        'Pitch deck required',
-                        'Focus on innovation and viability',
-                        'Financial projections needed',
-                        'Market analysis required'
-                    ], 
-                    requirements: [
-                        'College ID card',
-                        'Business plan template',
-                        'Presentation slides',
-                        'Laptop for presentation'
-                    ] 
-                },
-                'Flow Chart Design': { 
-                    title: 'Flow Chart Design Instructions', 
-                    rules: [
-                        'Duration: 3 hours',
-                        'Team size: 2 members maximum',
-                        'Problem statements given',
-                        'Use standard flowchart symbols',
-                        'Clarity and logic judged',
-                        'Digital or hand-drawn accepted',
-                        'Multiple problems to solve'
-                    ], 
-                    requirements: [
-                        'College ID card',
-                        'Drawing tools if hand-drawn',
-                        'Laptop if digital',
-                        'Basic algorithmic thinking'
-                    ] 
-                },
-                'Bridge Building': { 
-                    title: 'Bridge Building Competition Instructions', 
-                    rules: [
-                        'Duration: 4 hours construction',
-                        'Team size: 3 members maximum',
-                        'Materials provided: popsicle sticks, glue, thread',
-                        'Weight limit: 1 kg maximum',
-                        'Load testing at end',
-                        'Efficiency ratio calculated',
-                        'Safety guidelines must be followed'
-                    ], 
-                    requirements: [
-                        'College ID card',
-                        'Basic tools if needed',
-                        'Engineering mindset',
-                        'Safety gear provided'
-                    ] 
-                },
-                'Tech Debate': { 
-                    title: 'Tech Debate Instructions', 
-                    rules: [
-                        'Duration: 45 minutes per debate',
-                        'Team size: 2 members',
-                        'Topics given 30 min before',
-                        'Each speaker: 5-7 minutes',
-                        'Rebuttal rounds included',
-                        'Q&A session with judges',
-                        'No personal attacks'
-                    ], 
-                    requirements: [
-                        'College ID card',
-                        'Note-taking materials',
-                        'Professional attire',
-                        'Strong communication skills'
-                    ] 
-                },
-                'Tech Quiz': { 
-                    title: 'Tech Quiz Instructions', 
-                    rules: [
-                        'Duration: 2 hours',
-                        'Team size: 2 members maximum',
-                        'Multiple rounds',
-                        'Topics: Programming, Current Tech, History, General Knowledge',
-                        'No electronic devices during quiz',
-                        'Rapid fire round',
-                        'Buzzer round included'
-                    ], 
-                    requirements: [
-                        'College ID card',
-                        'Quick thinking',
-                        'Broad tech knowledge',
-                        'No smartphones'
-                    ] 
-                },
-                'Robo Race': { 
-                    title: 'Robo Race Instructions', 
-                    rules: [
-                        'Duration: 4 hours',
-                        'Team size: 3 members maximum',
-                        'Robot size: max 30x30 cm',
-                        'Weight limit: 3 kg',
-                        'Wireless control allowed',
-                        'Track obstacles included',
-                        '3 attempts per team',
-                        'Fastest time wins'
-                    ], 
-                    requirements: [
-                        'College ID card',
-                        'Ready robot',
-                        'Extra batteries',
-                        'Remote controller'
-                    ] 
-                },
-                'Line Follower Robot': { 
-                    title: 'Line Follower Robot Instructions', 
-                    rules: [
-                        'Duration: 4 hours calibration + 2 hours race',
-                        'Team size: 3 members maximum',
-                        'Autonomous only - no remote control',
-                        'Track: black line on white background',
-                        'Multiple difficulty levels',
-                        'Junctions and loops included',
-                        'Fastest completion time wins'
-                    ], 
-                    requirements: [
-                        'College ID card',
-                        'Ready robot',
-                        'Calibration tools',
-                        'Sensor knowledge'
-                    ] 
-                },
-                'Drone Challenge': { 
-                    title: 'Drone Challenge Instructions', 
-                    rules: [
-                        'Duration: 3 hours',
-                        'Team size: 2 members maximum',
-                        'Drone size: max 45 cm diagonal',
-                        'Weight limit: 1.5 kg',
-                        'Safety first - no flyaways',
-                        'Obstacle course navigation',
-                        'Precision tasks included',
-                        'Time penalty for crashes'
-                    ], 
-                    requirements: [
-                        'College ID card',
-                        'Ready drone',
-                        'Extra propellers',
-                        'Fully charged batteries'
-                    ] 
-                },
-                'Treasure Hunt': { 
-                    title: 'Treasure Hunt Instructions', 
-                    rules: [
-                        'Duration: 3 hours',
-                        'Team size: 4 members maximum',
-                        'Clues spread across campus',
-                        'Solve puzzles to get next clue',
-                        'Photographic evidence required',
-                        'No running in buildings',
-                        'First to final treasure wins',
-                        'QR codes will be used'
-                    ], 
-                    requirements: [
-                        'College ID card',
-                        'Smartphone with camera',
-                        'QR code scanner app',
-                        'Comfortable shoes'
-                    ] 
-                },
-                'Free Fire Max': { 
-                    title: 'Free Fire Max Tournament Instructions', 
-                    rules: [
-                        'Duration: 4 hours',
-                        'Team size: 4 members',
-                        'Custom room matches',
-                        'Devices provided or bring own',
-                        'Fair play enforced',
-                        'No cheats/hacks - permanent ban',
-                        'Multiple rounds with points system',
-                        'Spectator mode on'
-                    ], 
-                    requirements: [
-                        'College ID card',
-                        'Free Fire Max ID (Level 40+)',
-                        'Own headphones',
-                        'Team coordination'
-                    ] 
-                },
-                'BGMI': { 
-                    title: 'BGMI Tournament Instructions', 
-                    rules: [
-                        'Duration: 4 hours',
-                        'Team size: 4 members',
-                        'Custom room matches',
-                        'Devices provided',
-                        'No emulators allowed',
-                        'Fair play mandatory',
-                        'Point system for kills and placement',
-                        'Top teams qualify for finals'
-                    ], 
-                    requirements: [
-                        'College ID card',
-                        'BGMI ID (Level 50+)',
-                        'Own headphones',
-                        'Team strategy ready'
-                    ] 
-                },
-                'Content Creation': { 
-                    title: 'Content Creation Instructions', 
-                    rules: [
-                        'Duration: 3 hours',
-                        'Team size: 2 members maximum',
-                        'Create original content',
-                        'Theme will be announced',
-                        'Use provided software',
-                        'No plagiarism',
-                        'Multiple formats accepted: video, graphic, social media posts',
-                        'Must include college hashtag'
-                    ], 
-                    requirements: [
-                        'College ID card',
-                        'Own camera/phone',
-                        'Editing software knowledge',
-                        'Creative portfolio (optional)'
-                    ] 
-                }
             };
 
             // Add default instructions for any missing events
@@ -2411,7 +2164,7 @@
                 }
             }
 
-            // ==================== INSTRUCTION MODAL ====================
+            // ==================== INSTRUCTION MODAL WITH PDF ====================
             let currentEventData = null;
             
             function initInstructionModal() {
@@ -2476,6 +2229,7 @@
                 document.getElementById('instructionEventTitle').textContent = instr.title;
                 document.getElementById('instructionEventSubtitle').textContent = `For ${eventName}`;
                 
+                // Clear any existing instructions and show PDF download button
                 let html = `<div><h3 class="text-warning mb-3" style="font-family: Rajdhani;"><i class="fas fa-list-check"></i> Event Rules & Guidelines</h3><ul class="instructions-list">`;
                 instr.rules.forEach(r => html += `<li><i class="fas fa-check-circle text-warning me-2"></i> ${r}</li>`);
                 html += `</ul></div><div class="mt-4"><h3 class="text-warning mb-3"><i class="fas fa-clipboard-check"></i> Requirements</h3><ul class="instructions-list">`;
@@ -2483,6 +2237,23 @@
                 html += `</ul></div>`;
                 
                 document.getElementById('eventSpecificInstructions').innerHTML = html;
+                
+                // Update PDF download button
+                const pdfBtn = document.getElementById('pdfDownloadBtn');
+                const pdfUrl = pdfLinks[eventName] || '#';
+                pdfBtn.href = pdfUrl;
+                
+                // If PDF link is available, enable button, otherwise disable
+                if (pdfUrl && pdfUrl !== '#') {
+                    pdfBtn.classList.remove('disabled');
+                    pdfBtn.style.opacity = '1';
+                    pdfBtn.style.pointerEvents = 'auto';
+                } else {
+                    pdfBtn.classList.add('disabled');
+                    pdfBtn.style.opacity = '0.5';
+                    pdfBtn.style.pointerEvents = 'none';
+                }
+                
                 document.getElementById('agreeCheckbox').checked = false;
                 document.getElementById('nextToRegistration').classList.remove('active');
                 
